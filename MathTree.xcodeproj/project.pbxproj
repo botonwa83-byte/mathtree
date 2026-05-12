@@ -1,0 +1,485 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10001 /* MathTreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001 /* MathTreeApp.swift */; };
+		A10002 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002 /* SampleData.swift */; };
+		A10003 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003 /* Formula.swift */; };
+		A10004 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004 /* Hero.swift */; };
+		A10005 /* Mystery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005 /* Mystery.swift */; };
+		A10006 /* Problem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10006 /* Problem.swift */; };
+		A10007 /* StudentProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007 /* StudentProfile.swift */; };
+		A10008 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008 /* Weapon.swift */; };
+		A10009 /* FormulaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009 /* FormulaView.swift */; };
+		A10010 /* ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10010 /* ThemeColors.swift */; };
+		A10011 /* BattlefieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011 /* BattlefieldView.swift */; };
+		A10012 /* CommandCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012 /* CommandCenterView.swift */; };
+		A10013 /* WeaponsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10013 /* WeaponsView.swift */; };
+		A10014 /* DailyStrikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10014 /* DailyStrikeView.swift */; };
+		A10015 /* FormulaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10015 /* FormulaDetailView.swift */; };
+		A10016 /* FormulaUniverseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016 /* FormulaUniverseView.swift */; };
+		A10017 /* HeroesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017 /* HeroesView.swift */; };
+		A10018 /* MysteryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10018 /* MysteryDetailView.swift */; };
+		A10019 /* MysteryRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10019 /* MysteryRoomView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B10001 /* MathTreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTreeApp.swift; sourceTree = "<group>"; };
+		B10002 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		B10003 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
+		B10004 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
+		B10005 /* Mystery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mystery.swift; sourceTree = "<group>"; };
+		B10006 /* Problem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Problem.swift; sourceTree = "<group>"; };
+		B10007 /* StudentProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProfile.swift; sourceTree = "<group>"; };
+		B10008 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
+		B10009 /* FormulaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaView.swift; sourceTree = "<group>"; };
+		B10010 /* ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColors.swift; sourceTree = "<group>"; };
+		B10011 /* BattlefieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattlefieldView.swift; sourceTree = "<group>"; };
+		B10012 /* CommandCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCenterView.swift; sourceTree = "<group>"; };
+		B10013 /* WeaponsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponsView.swift; sourceTree = "<group>"; };
+		B10014 /* DailyStrikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStrikeView.swift; sourceTree = "<group>"; };
+		B10015 /* FormulaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaDetailView.swift; sourceTree = "<group>"; };
+		B10016 /* FormulaUniverseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaUniverseView.swift; sourceTree = "<group>"; };
+		B10017 /* HeroesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesView.swift; sourceTree = "<group>"; };
+		B10018 /* MysteryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MysteryDetailView.swift; sourceTree = "<group>"; };
+		B10019 /* MysteryRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MysteryRoomView.swift; sourceTree = "<group>"; };
+		C10001 /* MathTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D10001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E10001 = {
+			isa = PBXGroup;
+			children = (
+				E10002 /* MathTree */,
+				E10020 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E10002 /* MathTree */ = {
+			isa = PBXGroup;
+			children = (
+				E10003 /* App */,
+				E10004 /* Core */,
+				E10010 /* Features */,
+			);
+			path = MathTree;
+			sourceTree = "<group>";
+		};
+		E10003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B10001 /* MathTreeApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		E10004 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E10005 /* Models */,
+				E10006 /* Engine */,
+				E10007 /* Renderer */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		E10005 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B10003 /* Formula.swift */,
+				B10004 /* Hero.swift */,
+				B10005 /* Mystery.swift */,
+				B10006 /* Problem.swift */,
+				B10007 /* StudentProfile.swift */,
+				B10008 /* Weapon.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E10006 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				B10002 /* SampleData.swift */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		E10007 /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				B10009 /* FormulaView.swift */,
+				B10010 /* ThemeColors.swift */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
+		E10010 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				E10011 /* Battlefield */,
+				E10012 /* CommandCenter */,
+				E10013 /* DailyStrike */,
+				E10014 /* FormulaUniverse */,
+				E10015 /* Heroes */,
+				E10016 /* MysteryRoom */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		E10011 /* Battlefield */ = {
+			isa = PBXGroup;
+			children = (
+				B10011 /* BattlefieldView.swift */,
+			);
+			path = Battlefield;
+			sourceTree = "<group>";
+		};
+		E10012 /* CommandCenter */ = {
+			isa = PBXGroup;
+			children = (
+				B10012 /* CommandCenterView.swift */,
+				B10013 /* WeaponsView.swift */,
+			);
+			path = CommandCenter;
+			sourceTree = "<group>";
+		};
+		E10013 /* DailyStrike */ = {
+			isa = PBXGroup;
+			children = (
+				B10014 /* DailyStrikeView.swift */,
+			);
+			path = DailyStrike;
+			sourceTree = "<group>";
+		};
+		E10014 /* FormulaUniverse */ = {
+			isa = PBXGroup;
+			children = (
+				B10015 /* FormulaDetailView.swift */,
+				B10016 /* FormulaUniverseView.swift */,
+			);
+			path = FormulaUniverse;
+			sourceTree = "<group>";
+		};
+		E10015 /* Heroes */ = {
+			isa = PBXGroup;
+			children = (
+				B10017 /* HeroesView.swift */,
+			);
+			path = Heroes;
+			sourceTree = "<group>";
+		};
+		E10016 /* MysteryRoom */ = {
+			isa = PBXGroup;
+			children = (
+				B10018 /* MysteryDetailView.swift */,
+				B10019 /* MysteryRoomView.swift */,
+			);
+			path = MysteryRoom;
+			sourceTree = "<group>";
+		};
+		E10020 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C10001 /* MathTree.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F10001 /* MathTree */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = G10003 /* Build configuration list for PBXNativeTarget "MathTree" */;
+			buildPhases = (
+				F10002 /* Sources */,
+				D10001 /* Frameworks */,
+				F10003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MathTree;
+			productName = MathTree;
+			productReference = C10001 /* MathTree.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		H10001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					F10001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = G10001 /* Build configuration list for PBXProject "MathTree" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = "zh-Hans";
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				"zh-Hans",
+				Base,
+			);
+			mainGroup = E10001;
+			productRefGroup = E10020 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F10001 /* MathTree */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F10003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F10002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10001 /* MathTreeApp.swift in Sources */,
+				A10002 /* SampleData.swift in Sources */,
+				A10003 /* Formula.swift in Sources */,
+				A10004 /* Hero.swift in Sources */,
+				A10005 /* Mystery.swift in Sources */,
+				A10006 /* Problem.swift in Sources */,
+				A10007 /* StudentProfile.swift in Sources */,
+				A10008 /* Weapon.swift in Sources */,
+				A10009 /* FormulaView.swift in Sources */,
+				A10010 /* ThemeColors.swift in Sources */,
+				A10011 /* BattlefieldView.swift in Sources */,
+				A10012 /* CommandCenterView.swift in Sources */,
+				A10013 /* WeaponsView.swift in Sources */,
+				A10014 /* DailyStrikeView.swift in Sources */,
+				A10015 /* FormulaDetailView.swift in Sources */,
+				A10016 /* FormulaUniverseView.swift in Sources */,
+				A10017 /* HeroesView.swift in Sources */,
+				A10018 /* MysteryDetailView.swift in Sources */,
+				A10019 /* MysteryRoomView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		G10004 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		G10005 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		G10006 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z7F8BY55DS;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MathTree;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mathtree.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		G10007 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z7F8BY55DS;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MathTree;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mathtree.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		G10001 /* Build configuration list for PBXProject "MathTree" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G10004 /* Debug */,
+				G10005 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		G10003 /* Build configuration list for PBXNativeTarget "MathTree" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G10006 /* Debug */,
+				G10007 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = H10001 /* Project object */;
+}
