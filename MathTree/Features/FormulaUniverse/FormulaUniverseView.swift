@@ -111,11 +111,11 @@ struct FormulaUniverseView: View {
 
     private func levelColor(_ level: FormulaLevel) -> Color {
         switch level {
-        case .elementary: return .orange
-        case .middle: return .green
-        case .high: return .purple
-        case .university: return .apexGold
-        case .advanced: return .red
+        case .elementary: return .levelElementary
+        case .middle: return .levelMiddle
+        case .high: return .levelHigh
+        case .university: return .levelUniversity
+        case .advanced: return .levelAdvanced
         }
     }
 }
@@ -210,11 +210,11 @@ struct FormulaCard: View {
 
     private var levelColor: Color {
         switch formula.level {
-        case .elementary: return .orange
-        case .middle: return .green
-        case .high: return .purple
-        case .university: return .apexGold
-        case .advanced: return .red
+        case .elementary: return .levelElementary
+        case .middle: return .levelMiddle
+        case .high: return .levelHigh
+        case .university: return .levelUniversity
+        case .advanced: return .levelAdvanced
         }
     }
 }

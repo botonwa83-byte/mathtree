@@ -29,8 +29,8 @@ struct BattlefieldView: View {
                     .padding(.horizontal, 20)
                     .padding(.top, 12)
                 }
-                .background(Color.apexDeepBackground)
-                .navigationTitle("练习")
+                .background(Color.apexBackground)
+                .navigationTitle("战场")
                 
                 if showDescendAnimation {
                     DescendAnimationView(
@@ -51,7 +51,7 @@ struct BattlefieldView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("今日高考题")
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                 Text("用降维工具秒杀高考题")
                     .font(.caption)
                     .foregroundColor(.secondary)
@@ -61,16 +61,16 @@ struct BattlefieldView: View {
                 Text("\(currentIndex + 1)")
                     .font(.title3)
                     .fontWeight(.bold)
-                    .foregroundColor(.apexDeepActive)
+                    .foregroundColor(.apexLava)
                 Text("/ \(problems.count)")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
         }
         .padding(20)
-        .background(Color.apexDeepSurface)
+        .background(Color.apexCardSurface)
         .cornerRadius(20)
-        .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
     private var problemCard: some View {
@@ -85,17 +85,17 @@ struct BattlefieldView: View {
                 if let year = problem.gaokaoYear {
                     Text("\(year)年高考")
                         .font(.caption)
-                        .foregroundColor(.apexDeepActive)
+                        .foregroundColor(.apexLava)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
-                        .background(Color.apexDeepActive.opacity(0.1))
+                        .background(Color.apexLava.opacity(0.1))
                         .cornerRadius(8)
                 }
             }
 
             Text(problem.content)
                 .font(.body)
-                .foregroundColor(.white.opacity(0.9))
+                .foregroundColor(.primary)
                 .lineSpacing(6)
 
             if let latex = problem.contentLatex {
@@ -128,7 +128,7 @@ struct BattlefieldView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
-                        .background(Color.apexDeepStar)
+                        .background(Color.apexStarBlue)
                         .cornerRadius(14)
                 }
 
@@ -146,10 +146,10 @@ struct BattlefieldView: View {
                     }
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(.apexDeepActive)
+                    .foregroundColor(.apexLava)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)
-                    .background(Color.apexDeepActive.opacity(0.1))
+                    .background(Color.apexLava.opacity(0.1))
                     .cornerRadius(14)
                 }
             }
@@ -159,14 +159,14 @@ struct BattlefieldView: View {
             }
         }
         .padding(20)
-        .background(Color.apexDeepSurface)
+        .background(Color.apexCardSurface)
         .cornerRadius(20)
-        .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
     private func solutionView(_ solution: SolutionPath) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Divider().background(Color.white.opacity(0.1))
+            Divider().background(Color.gray.opacity(0.1))
 
             HStack {
                 Image(systemName: "lightbulb.fill")
@@ -179,7 +179,7 @@ struct BattlefieldView: View {
 
             Text(solution.keyInsight)
                 .font(.subheadline)
-                .foregroundColor(.white.opacity(0.8))
+                .foregroundColor(.primary)
 
             ForEach(solution.steps) { step in
                 HStack(alignment: .top, spacing: 12) {
@@ -188,13 +188,13 @@ struct BattlefieldView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .frame(width: 24, height: 24)
-                        .background(Color.apexDeepStar)
+                        .background(Color.apexStarBlue)
                         .cornerRadius(12)
 
                     VStack(alignment: .leading, spacing: 4) {
                         Text(step.description)
                             .font(.subheadline)
-                            .foregroundColor(.white)
+                            .foregroundColor(.primary)
                         FormulaView(latex: step.latex, fontSize: 16)
                             .frame(height: 40)
                         Text(step.annotation)
@@ -217,47 +217,47 @@ struct BattlefieldView: View {
                     Text("高中标准做法")
                         .font(.caption2)
                         .foregroundColor(.secondary.opacity(0.7))
-                    Divider().background(Color.white.opacity(0.1))
+                    Divider().background(Color.gray.opacity(0.1))
                     Text("步骤：\(dual.standardMethod.steps.count)步")
                         .font(.caption)
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                     Text("风险：易出错")
                         .font(.caption)
-                        .foregroundColor(.apexDeepDanger)
+                        .foregroundColor(.apexDanger)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(16)
 
                 Rectangle()
-                    .fill(Color.white.opacity(0.1))
+                    .fill(Color.gray.opacity(0.1))
                     .frame(width: 1)
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text("降维解法")
                         .font(.caption)
                         .fontWeight(.bold)
-                        .foregroundColor(.apexDeepActive)
+                        .foregroundColor(.apexLava)
                     Text("高阶工具秒杀")
                         .font(.caption2)
-                        .foregroundColor(.apexDeepActive.opacity(0.7))
-                    Divider().background(Color.white.opacity(0.1))
+                        .foregroundColor(.apexLava.opacity(0.7))
+                    Divider().background(Color.gray.opacity(0.1))
                     Text("步骤：\(dual.descentMethod.steps.count)步")
                         .font(.caption)
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                     Text("风险：几乎为零")
                         .font(.caption)
-                        .foregroundColor(.apexDeepBrand)
+                        .foregroundColor(.apexEmerald)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(16)
             }
-            .background(Color.apexDeepSurface)
+            .background(Color.apexCardSurface)
             .cornerRadius(20)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.apexDeepActive.opacity(0.2), lineWidth: 1)
+                    .stroke(Color.apexLava.opacity(0.2), lineWidth: 1)
             )
-            .shadow(color: .black.opacity(0.1), radius: 6, y: 3)
+            .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
         }
     }
 
@@ -265,7 +265,7 @@ struct BattlefieldView: View {
         VStack(spacing: 16) {
             Image(systemName: "sparkles")
                 .font(.system(size: 48))
-                .foregroundColor(.apexDeepBrand)
+                .foregroundColor(.apexEmerald)
             Text("正在加载题目...")
                 .font(.headline)
                 .foregroundColor(.secondary)

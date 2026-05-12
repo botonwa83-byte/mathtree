@@ -16,18 +16,18 @@ struct MainTabView: View {
     @State private var selectedTab = 0
 
     init() {
-        // Customize TabBar appearance for Deep Space theme
+        // Customize TabBar appearance for Rainbow Fresh theme
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(Color.apexDeepSurface)
+        appearance.backgroundColor = UIColor(Color.apexCardSurface)
         
         // Unselected items
-        appearance.stackedLayoutAppearance.normal.iconColor = UIColor.secondaryLabel
-        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.secondaryLabel]
+        appearance.stackedLayoutAppearance.normal.iconColor = UIColor.systemGray2
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.systemGray2]
         
         // Selected items
-        appearance.stackedLayoutAppearance.selected.iconColor = UIColor(Color.apexDeepActive)
-        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor(Color.apexDeepActive)]
+        appearance.stackedLayoutAppearance.selected.iconColor = UIColor(Color.apexLava)
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor(Color.apexLava)]
         
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
@@ -37,34 +37,34 @@ struct MainTabView: View {
         TabView(selection: $selectedTab) {
             CommandCenterView()
                 .tabItem {
-                    Label("指挥台", systemImage: "terminal.fill")
+                    Label("探索", systemImage: "leaf.fill")
                 }
                 .tag(0)
 
             BattlefieldView()
                 .tabItem {
-                    Label("战场", systemImage: "target")
+                    Label("练习", systemImage: "target")
                 }
                 .tag(1)
 
             MysteryRoomView()
                 .tabItem {
-                    Label("悬案室", systemImage: "magnifyingglass.circle.fill")
+                    Label("发现", systemImage: "magnifyingglass")
                 }
                 .tag(2)
 
             FormulaUniverseView()
                 .tabItem {
-                    Label("宇宙", systemImage: "aqi.medium")
+                    Label("公式", systemImage: "aqi.medium")
                 }
                 .tag(3)
 
             HeroesView()
                 .tabItem {
-                    Label("英雄录", systemImage: "shield.fill")
+                    Label("人物", systemImage: "star.fill")
                 }
                 .tag(4)
         }
-        .tint(.apexDeepActive)
+        .tint(.apexLava)
     }
 }

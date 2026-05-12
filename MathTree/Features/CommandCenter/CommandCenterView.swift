@@ -17,8 +17,8 @@ struct CommandCenterView: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 12)
             }
-            .background(Color.apexDeepBackground)
-            .navigationTitle("APEX")
+            .background(Color.apexBackground)
+            .navigationTitle("MathTree")
             .sheet(isPresented: $showDailyStrike) {
                 DailyStrikeView()
             }
@@ -36,7 +36,7 @@ struct CommandCenterView: View {
                         .font(.title2)
                     Text("每日一击")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                     Spacer()
                     Text("点击查看")
                         .font(.caption)
@@ -47,65 +47,65 @@ struct CommandCenterView: View {
 
                 Text("如果将一张纸对折42次，它的厚度是否能到达月球？")
                     .font(.subheadline)
-                    .foregroundColor(.white.opacity(0.8))
+                    .foregroundColor(.secondary)
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)
             }
             .padding(20)
             .background(
                 LinearGradient(
-                    colors: [Color.apexGold.opacity(0.2), Color.apexDeepSurface],
+                    colors: [Color.apexGold.opacity(0.15), Color.apexCardSurface],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
             )
             .cornerRadius(20)
-            .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+            .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
         }
     }
 
     private var streakCard: some View {
         HStack(spacing: 20) {
-            StatBubble(value: "\(profile.streak)", unit: "天", label: "连续打击", color: .apexDeepBrand)
-            StatBubble(value: "\(profile.totalProblems)", unit: "道", label: "已歼灭", color: .apexDeepStar)
-            StatBubble(value: "\(Int(profile.accuracy * 100))%", unit: "", label: "精准度", color: .apexDeepActive)
+            StatBubble(value: "\(profile.streak)", unit: "天", label: "连续打击", color: .levelElementary)
+            StatBubble(value: "\(profile.totalProblems)", unit: "道", label: "已歼灭", color: .levelMiddle)
+            StatBubble(value: "\(Int(profile.accuracy * 100))%", unit: "", label: "精准度", color: .levelHigh)
         }
         .padding(20)
-        .background(Color.apexDeepSurface)
+        .background(Color.apexCardSurface)
         .cornerRadius(20)
-        .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
     private var weaponRecommendation: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "wand.and.stars")
-                    .foregroundColor(.apexDeepMystery)
+                    .foregroundColor(.apexMystery)
                 Text("推荐武器")
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
             }
 
             HStack(spacing: 16) {
                 ZStack {
                     Circle()
                         .fill(
-                            LinearGradient(colors: [.apexDeepActive.opacity(0.3), .apexGold.opacity(0.3)],
+                            LinearGradient(colors: [.apexLava.opacity(0.3), .apexGold.opacity(0.3)],
                                            startPoint: .topLeading, endPoint: .bottomTrailing)
                         )
                         .frame(width: 56, height: 56)
                     Image(systemName: "function")
                         .font(.title2)
-                        .foregroundColor(.apexDeepActive)
+                        .foregroundColor(.apexLava)
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("求导刃")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                     Text("第二阶 · 快刀")
                         .font(.caption)
-                        .foregroundColor(.apexDeepActive)
+                        .foregroundColor(.apexLava)
                     Text("可秒杀：函数极值、切线方程等")
                         .font(.caption)
                         .foregroundColor(.secondary)
@@ -118,16 +118,16 @@ struct CommandCenterView: View {
             }
         }
         .padding(20)
-        .background(Color.apexDeepSurface)
+        .background(Color.apexCardSurface)
         .cornerRadius(20)
-        .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
     private var quickActions: some View {
         HStack(spacing: 12) {
-            QuickActionButton(icon: "target", title: "战场", subtitle: "高考实战", color: .apexDeepActive)
-            QuickActionButton(icon: "magnifyingglass.circle.fill", title: "悬案室", subtitle: "数学争议", color: .apexDeepMystery)
-            QuickActionButton(icon: "aqi.medium", title: "宇宙", subtitle: "知识图谱", color: .apexDeepStar)
+            QuickActionButton(icon: "target", title: "战场", subtitle: "高考实战", color: .levelHigh)
+            QuickActionButton(icon: "magnifyingglass.circle.fill", title: "悬案室", subtitle: "数学争议", color: .levelUniversity)
+            QuickActionButton(icon: "aqi.medium", title: "宇宙", subtitle: "知识图谱", color: .levelMiddle)
         }
     }
 
@@ -136,7 +136,7 @@ struct CommandCenterView: View {
             HStack {
                 Text("高考预测得分")
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                 Spacer()
                 Text("目标：150分")
                     .font(.caption)
@@ -147,7 +147,7 @@ struct CommandCenterView: View {
                 Text("\(Int(profile.predictedGaokaoScore))")
                     .font(.system(size: 48, weight: .bold, design: .rounded))
                     .foregroundStyle(
-                        LinearGradient(colors: [.apexDeepBrand, .apexDeepStar],
+                        LinearGradient(colors: [.levelElementary, .levelMiddle],
                                        startPoint: .leading, endPoint: .trailing)
                     )
                 Text("/ 150 分")
@@ -156,12 +156,12 @@ struct CommandCenterView: View {
             }
 
             ProgressView(value: profile.predictedGaokaoScore / 150)
-                .tint(.apexDeepBrand)
+                .tint(.levelElementary)
         }
         .padding(20)
-        .background(Color.apexDeepSurface)
+        .background(Color.apexCardSurface)
         .cornerRadius(20)
-        .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 }
 

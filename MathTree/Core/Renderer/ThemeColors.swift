@@ -1,17 +1,7 @@
 import SwiftUI
 
 extension Color {
-    // Deep Space Theme (APEX v2.0)
-    static let apexDeepBackground = Color(hex: "070C1D")    // Darkest blue
-    static let apexDeepSurface = Color(hex: "0E1628")       // Card surface
-    static let apexDeepActive = Color(hex: "FF6B35")        // Lava orange
-    static let apexDeepBrand = Color(hex: "0EC9A0")         // Emerald green
-    static let apexDeepStar = Color(hex: "3B8DE0")          // Star blue
-    static let apexDeepDanger = Color(hex: "E8445A")        // Danger red
-    static let apexDeepMystery = Color(hex: "7B5EA7")       // Mystery purple
-    static let apexDeepPaper = Color(hex: "1A1408")         // Mystery paper (dark)
-
-    // Legacy / Warm Theme (Rainbow Fresh)
+    // Rainbow Fresh Theme (Primary)
     static let apexBackground = Color(hex: "F5F0EB")       // warm cream
     static let apexCardSurface = Color.white
     static let apexLava = Color(hex: "FF7043")             // warm coral
@@ -22,6 +12,20 @@ extension Color {
     static let apexGold = Color(hex: "FFA726")              // warm amber
     static let mysteryBackground = Color(hex: "F3EEFF")     // light lavender
     static let mysteryPaper = Color(hex: "FFF8E1")          // parchment cream
+
+    // Rainbow Levels Palette
+    static let levelElementary = Color(hex: "66BB6A")       // Fresh Green
+    static let levelMiddle = Color(hex: "42A5F5")           // Sky Blue
+    static let levelHigh = Color(hex: "FF7043")             // Lava Orange
+    static let levelUniversity = Color(hex: "7E57C2")       // Mystery Purple
+    static let levelAdvanced = Color(hex: "26A69A")         // Emerald Teal
+
+    // Legacy / Deep Space Theme (Optional / Utility)
+    static let apexDeepBackground = Color(hex: "070C1D")
+    static let apexDeepSurface = Color(hex: "0E1628")
+    static let apexDeepActive = Color(hex: "FF6B35")
+    static let apexDeepBrand = Color(hex: "0EC9A0")
+    static let apexDeepStar = Color(hex: "3B8DE0")
 
     // Rainbow accent palette for tags / chips
     static let rainbowRed = Color(hex: "FF7043")
@@ -67,7 +71,9 @@ struct DescendAnimationView: View {
 
     var body: some View {
         ZStack {
-            Color.apexDeepBackground.ignoresSafeArea()
+            // Updated to be more "Light Space" / Sky like for Rainbow theme
+            LinearGradient(colors: [Color.apexStarBlue.opacity(0.8), Color.apexBackground], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
             
             // Background Stars / Particles
             ForEach(0..<20) { _ in
@@ -76,18 +82,18 @@ struct DescendAnimationView: View {
                     .frame(width: CGFloat.random(in: 1...3))
                     .position(x: CGFloat.random(in: 0...UIScreen.main.bounds.width),
                               y: CGFloat.random(in: 0...UIScreen.main.bounds.height))
-                    .opacity(Double.random(in: 0.1...0.5))
+                    .opacity(Double.random(in: 0.3...0.7))
             }
 
             VStack(spacing: 30) {
                 // The problem "shrinking" as we move up
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.apexDeepActive, lineWidth: 2)
+                        .stroke(Color.apexLava, lineWidth: 2)
                         .frame(width: 100, height: 60)
                     Text("题目")
                         .font(.caption)
-                        .foregroundColor(.apexDeepActive)
+                        .foregroundColor(.apexLava)
                 }
                 .scaleEffect(scale)
                 .opacity(opacity)
@@ -97,15 +103,15 @@ struct DescendAnimationView: View {
                     VStack(spacing: 12) {
                         Text(title)
                             .font(.system(size: 28, weight: .bold, design: .rounded))
-                            .foregroundColor(.white)
+                            .foregroundColor(.apexLava)
                         
                         Text(subtitle)
                             .font(.headline)
-                            .foregroundColor(.apexDeepBrand)
+                            .foregroundColor(.apexEmerald)
                         
                         Text("— 从高维度俯瞰，此题显然 —")
                             .font(.caption)
-                            .foregroundColor(.apexDeepStar)
+                            .foregroundColor(.apexStarBlue)
                             .padding(.top, 10)
                     }
                     .transition(.move(edge: .bottom).combined(with: .opacity))

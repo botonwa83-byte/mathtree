@@ -20,7 +20,7 @@ struct HeroesView: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 12)
             }
-            .background(Color.apexDeepBackground)
+            .background(Color.apexBackground)
             .navigationTitle("人物")
         }
     }
@@ -29,12 +29,12 @@ struct HeroesView: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Image(systemName: "person.crop.circle.badge.checkmark")
-                    .foregroundColor(.apexDeepActive)
+                    .foregroundColor(.apexGold)
                     .font(.title2)
                 Text("数学家殿堂")
                     .font(.title3)
                     .fontWeight(.bold)
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
             }
             Text("每一位改变了数学历史的传奇人物")
                 .font(.caption)
@@ -44,7 +44,7 @@ struct HeroesView: View {
         .padding(20)
         .background(
             LinearGradient(
-                colors: [Color.apexDeepActive.opacity(0.15), Color.apexDeepBackground],
+                colors: [Color.apexGold.opacity(0.15), Color.apexBackground],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -60,7 +60,7 @@ struct HeroCard: View {
         HStack(spacing: 16) {
             ZStack {
                 Circle()
-                    .fill(Color.apexDeepActive.opacity(0.15))
+                    .fill(Color.apexGold.opacity(0.15))
                     .frame(width: 64, height: 64)
                 Text(hero.portraitEmoji)
                     .font(.system(size: 32))
@@ -70,14 +70,14 @@ struct HeroCard: View {
                 HStack {
                     Text(hero.name)
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                     Text(hero.nameEN)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
                 Text(hero.era)
                     .font(.caption)
-                    .foregroundColor(.apexDeepActive)
+                    .foregroundColor(.apexGold)
 
                 attributeBar(hero.attributes)
             }
@@ -88,9 +88,9 @@ struct HeroCard: View {
                 .foregroundColor(.secondary)
         }
         .padding(20)
-        .background(Color.apexDeepSurface)
+        .background(Color.apexCardSurface)
         .cornerRadius(20)
-        .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
     private func attributeBar(_ attrs: HeroAttributes) -> some View {
@@ -112,7 +112,7 @@ struct AttributeMini: View {
             Text("\(value)")
                 .font(.caption2)
                 .fontWeight(.bold)
-                .foregroundColor(.apexDeepBrand)
+                .foregroundColor(.apexEmerald)
             Text(label)
                 .font(.system(size: 8))
                 .foregroundColor(.secondary)
@@ -135,7 +135,7 @@ struct HeroDetailView: View {
             .padding(.top, 12)
             .padding(.bottom, 40)
         }
-        .background(Color.apexDeepBackground)
+        .background(Color.apexBackground)
         .navigationBarTitleDisplayMode(.inline)
     }
 
@@ -143,7 +143,7 @@ struct HeroDetailView: View {
         VStack(spacing: 16) {
             ZStack {
                 Circle()
-                    .fill(Color.apexDeepActive.opacity(0.15))
+                    .fill(Color.apexGold.opacity(0.15))
                     .frame(width: 100, height: 100)
                 Text(hero.portraitEmoji)
                     .font(.system(size: 56))
@@ -152,24 +152,24 @@ struct HeroDetailView: View {
             Text(hero.name)
                 .font(.title)
                 .fontWeight(.bold)
-                .foregroundColor(.white)
+                .foregroundColor(.primary)
             Text(hero.nameEN)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             Text(hero.era)
                 .font(.caption)
-                .foregroundColor(.apexDeepActive)
+                .foregroundColor(.apexGold)
 
             HStack(spacing: 24) {
-                AttributeView(label: "洞察力", value: hero.attributes.insight, color: .apexDeepStar)
-                AttributeView(label: "创造力", value: hero.attributes.creativity, color: .apexDeepBrand)
-                AttributeView(label: "毅力", value: hero.attributes.perseverance, color: .apexDeepActive)
+                AttributeView(label: "洞察力", value: hero.attributes.insight, color: .apexStarBlue)
+                AttributeView(label: "创造力", value: hero.attributes.creativity, color: .apexEmerald)
+                AttributeView(label: "毅力", value: hero.attributes.perseverance, color: .apexLava)
                 AttributeView(label: "影响力", value: hero.attributes.influence, color: .apexGold)
             }
         }
         .frame(maxWidth: .infinity)
         .padding(24)
-        .background(Color.apexDeepSurface)
+        .background(Color.apexCardSurface)
         .cornerRadius(20)
     }
 
@@ -177,15 +177,15 @@ struct HeroDetailView: View {
         VStack(alignment: .leading, spacing: 12) {
             Label("传奇故事", systemImage: "book.fill")
                 .font(.headline)
-                .foregroundColor(.apexDeepBrand)
+                .foregroundColor(.apexEmerald)
 
             Text(hero.legendStory)
                 .font(.body)
-                .foregroundColor(.white.opacity(0.9))
+                .foregroundColor(.primary.opacity(0.9))
                 .lineSpacing(6)
         }
         .padding(20)
-        .background(Color.apexDeepSurface)
+        .background(Color.apexCardSurface)
         .cornerRadius(20)
     }
 
@@ -193,12 +193,12 @@ struct HeroDetailView: View {
         VStack(spacing: 12) {
             Image(systemName: "quote.opening")
                 .font(.title2)
-                .foregroundColor(.apexDeepBrand.opacity(0.5))
+                .foregroundColor(.apexEmerald.opacity(0.5))
 
             Text(hero.famousQuote)
                 .font(.body)
                 .italic()
-                .foregroundColor(.white)
+                .foregroundColor(.primary)
                 .multilineTextAlignment(.center)
                 .lineSpacing(6)
 
@@ -210,7 +210,7 @@ struct HeroDetailView: View {
         .padding(24)
         .background(
             LinearGradient(
-                colors: [Color.apexDeepBrand.opacity(0.1), Color.apexDeepSurface],
+                colors: [Color.apexEmerald.opacity(0.1), Color.apexCardSurface],
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -222,25 +222,25 @@ struct HeroDetailView: View {
         VStack(alignment: .leading, spacing: 12) {
             Label("武器技能", systemImage: "sparkles")
                 .font(.headline)
-                .foregroundColor(.apexDeepActive)
+                .foregroundColor(.apexLava)
 
             ForEach(hero.weaponSkills, id: \.self) { skill in
                 HStack(spacing: 12) {
                     Image(systemName: "bolt.fill")
-                        .foregroundColor(.apexDeepActive)
+                        .foregroundColor(.apexLava)
                         .font(.caption)
                     Text(skill)
                         .font(.subheadline)
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                     Spacer()
                 }
                 .padding(12)
-                .background(Color.apexDeepActive.opacity(0.1))
+                .background(Color.apexLava.opacity(0.1))
                 .cornerRadius(10)
             }
         }
         .padding(20)
-        .background(Color.apexDeepSurface)
+        .background(Color.apexCardSurface)
         .cornerRadius(20)
     }
 }

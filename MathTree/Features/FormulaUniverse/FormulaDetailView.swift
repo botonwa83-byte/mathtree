@@ -15,7 +15,7 @@ struct FormulaDetailView: View {
             .padding(.top, 12)
             .padding(.bottom, 40)
         }
-        .background(Color.apexDeepBackground)
+        .background(Color.apexBackground)
         .navigationBarTitleDisplayMode(.inline)
     }
 
@@ -25,10 +25,10 @@ struct FormulaDetailView: View {
                 Text(formula.level.displayName)
                     .font(.caption)
                     .fontWeight(.bold)
-                    .foregroundColor(.apexDeepStar)
+                    .foregroundColor(levelColor)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 4)
-                    .background(Color.apexDeepStar.opacity(0.1))
+                    .background(levelColor.opacity(0.1))
                     .cornerRadius(8)
 
                 Text(formula.category.displayName)
@@ -42,19 +42,19 @@ struct FormulaDetailView: View {
                     Text("高考相关度 \(Int(formula.gaokaoRelevance * 100))%")
                 }
                 .font(.caption)
-                .foregroundColor(.apexDeepActive)
+                .foregroundColor(.apexLava)
             }
 
             Text(formula.name)
                 .font(.title)
                 .fontWeight(.bold)
-                .foregroundColor(.white)
+                .foregroundColor(.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             FormulaView(latex: formula.latex, fontSize: 28)
                 .frame(height: 80)
                 .frame(maxWidth: .infinity)
-                .background(Color.white.opacity(0.05))
+                .background(Color.apexBackground.opacity(0.5))
                 .cornerRadius(12)
 
             if !formula.tags.isEmpty {
@@ -63,10 +63,10 @@ struct FormulaDetailView: View {
                         ForEach(formula.tags, id: \.self) { tag in
                             Text(tag)
                                 .font(.caption)
-                                .foregroundColor(.apexDeepStar)
+                                .foregroundColor(.apexStarBlue)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 5)
-                                .background(Color.apexDeepStar.opacity(0.1))
+                                .background(Color.apexStarBlue.opacity(0.1))
                                 .cornerRadius(8)
                         }
                     }
@@ -74,8 +74,19 @@ struct FormulaDetailView: View {
             }
         }
         .padding(20)
-        .background(Color.apexDeepSurface)
+        .background(Color.apexCardSurface)
         .cornerRadius(20)
+        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+    }
+
+    private var levelColor: Color {
+        switch formula.level {
+        case .elementary: return .levelElementary
+        case .middle: return .levelMiddle
+        case .high: return .levelHigh
+        case .university: return .levelUniversity
+        case .advanced: return .levelAdvanced
+        }
     }
 
     private var intuitionSection: some View {
@@ -86,7 +97,7 @@ struct FormulaDetailView: View {
 
             Text(formula.intuition)
                 .font(.body)
-                .foregroundColor(.white.opacity(0.9))
+                .foregroundColor(.primary.opacity(0.9))
                 .lineSpacing(6)
 
             Text("不需要数学语言，用直觉感受这个公式的含义")
@@ -95,15 +106,16 @@ struct FormulaDetailView: View {
                 .italic()
         }
         .padding(20)
-        .background(Color.apexDeepSurface)
+        .background(Color.apexCardSurface)
         .cornerRadius(20)
+        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
     private var dnaChainSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             Label("公式 DNA 链", systemImage: "waveform.path.ecg")
                 .font(.headline)
-                .foregroundColor(.apexDeepBrand)
+                .foregroundColor(.apexEmerald)
 
             HStack(alignment: .top, spacing: 0) {
                 // Prereqs
@@ -116,7 +128,7 @@ struct FormulaDetailView: View {
                         DnaNode(title: "公理", color: .gray)
                     } else {
                         ForEach(formula.prerequisites, id: \.self) { prereq in
-                            DnaNode(title: prereq, color: .apexDeepStar)
+                            DnaNode(title: prereq, color: .apexStarBlue)
                         }
                     }
                 }
@@ -126,7 +138,7 @@ struct FormulaDetailView: View {
                 VStack(spacing: 0) {
                     Spacer().frame(height: 40)
                     Image(systemName: "chevron.right.2")
-                        .foregroundColor(.apexDeepBrand.opacity(0.5))
+                        .foregroundColor(.apexEmerald.opacity(0.5))
                 }
                 .frame(width: 30)
 
@@ -135,7 +147,7 @@ struct FormulaDetailView: View {
                     Text("当前")
                         .font(.caption2)
                         .foregroundColor(.secondary)
-                    DnaNode(title: formula.name, color: .apexDeepBrand, isCurrent: true)
+                    DnaNode(title: formula.name, color: .apexEmerald, isCurrent: true)
                 }
                 .frame(maxWidth: .infinity)
 
@@ -143,7 +155,7 @@ struct FormulaDetailView: View {
                 VStack(spacing: 0) {
                     Spacer().frame(height: 40)
                     Image(systemName: "chevron.right.2")
-                        .foregroundColor(.apexDeepBrand.opacity(0.5))
+                        .foregroundColor(.apexEmerald.opacity(0.5))
                 }
                 .frame(width: 30)
 
@@ -157,7 +169,7 @@ struct FormulaDetailView: View {
                         DnaNode(title: "未知领域", color: .gray)
                     } else {
                         ForEach(formula.derivations.prefix(2), id: \.self) { deriv in
-                            DnaNode(title: deriv, color: .apexDeepActive)
+                            DnaNode(title: deriv, color: .apexLava)
                         }
                     }
                 }
@@ -166,8 +178,9 @@ struct FormulaDetailView: View {
             .padding(.vertical, 10)
         }
         .padding(20)
-        .background(Color.apexDeepSurface)
+        .background(Color.apexCardSurface)
         .cornerRadius(20)
+        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
     private var advancedSection: some View {
@@ -196,7 +209,7 @@ struct FormulaDetailView: View {
                 .padding(20)
                 .background(
                     LinearGradient(
-                        colors: [Color.apexGold.opacity(0.1), Color.apexDeepSurface],
+                        colors: [Color.apexGold.opacity(0.1), Color.apexCardSurface],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
