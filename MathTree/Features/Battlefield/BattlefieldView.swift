@@ -268,51 +268,102 @@ struct BattlefieldView: View {
     }
 
     private func dualSolutionView(_ dual: DualSolution) -> some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 16) {
+            HStack {
+                Image(systemName: "zap")
+                    .foregroundColor(.apexLava)
+                Text("降维打击")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.apexLava)
+                Spacer()
+                Text("\(dual.timeRatio)x 加速")
+                    .font(.caption)
+                    .fontWeight(.bold)
+                    .foregroundColor(.apexEmerald)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(Color.apexEmerald.opacity(0.1))
+                    .cornerRadius(8)
+            }
+
             HStack(spacing: 0) {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("常规解法")
-                        .font(.caption)
-                        .fontWeight(.bold)
-                        .foregroundColor(.secondary)
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Image(systemName: "mountain")
+                            .foregroundColor(.secondary)
+                        Text("常规解法")
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .foregroundColor(.secondary)
+                    }
                     Divider().background(Color.gray.opacity(0.1))
-                    Text("步骤：\(dual.standardMethod.steps.count)步")
+                    Text("高中知识")
                         .font(.caption2)
+                        .foregroundColor(.apexStarBlue)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.apexStarBlue.opacity(0.1))
+                        .cornerRadius(6)
+                    Text("思路：\(dual.standardMethod.keyInsight)")
+                        .font(.caption)
                         .foregroundColor(.primary)
-                    Text("风险：极高")
+                        .lineLimit(2)
+                    Text("风险：易错")
                         .font(.caption2)
                         .foregroundColor(.apexDanger)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(16)
+                .background(Color.white)
+                .cornerRadius(16)
 
-                Rectangle()
-                    .fill(Color.gray.opacity(0.1))
-                    .frame(width: 1)
+                Image(systemName: "arrow.right")
+                    .foregroundColor(.apexLava)
+                    .padding(.horizontal, 8)
 
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("降维解法")
-                        .font(.caption)
-                        .fontWeight(.bold)
-                        .foregroundColor(.apexLava)
-                    Divider().background(Color.gray.opacity(0.1))
-                    Text("步骤：\(dual.descentMethod.steps.count)步")
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Image(systemName: "bolt.fill")
+                            .foregroundColor(.apexLava)
+                        Text("高阶秒杀")
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .foregroundColor(.apexLava)
+                    }
+                    Divider().background(Color.apexLava.opacity(0.2))
+                    Text("高等数学")
                         .font(.caption2)
+                        .foregroundColor(.apexLava)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.apexLava.opacity(0.1))
+                        .cornerRadius(6)
+                    Text("思路：\(dual.descentMethod.keyInsight)")
+                        .font(.caption)
                         .foregroundColor(.primary)
-                    Text("效率：\(dual.timeRatio)x 提升")
+                        .lineLimit(2)
+                    Text("武器：\(dual.weaponUsed)")
                         .font(.caption2)
                         .foregroundColor(.apexEmerald)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(16)
+                .background(Color.apexCardSurface)
+                .cornerRadius(16)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.apexLava.opacity(0.3), lineWidth: 1)
+                )
             }
-            .background(Color.apexCardSurface)
-            .cornerRadius(20)
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.apexLava.opacity(0.3), lineWidth: 1)
-            )
-            .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
+
+            Text("💡 掌握高等数学思维，可以让你以更高的维度审视问题，实现真正的秒杀！")
+                .font(.caption)
+                .foregroundColor(.secondary)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 12)
+                .background(Color.apexGold.opacity(0.05))
+                .cornerRadius(12)
         }
         .padding(.top, 10)
     }

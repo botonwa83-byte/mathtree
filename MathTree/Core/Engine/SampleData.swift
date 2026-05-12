@@ -28,7 +28,6 @@ enum SampleData {
     // MARK: - Mysteries (RESTORED & EXHAUSTIVE)
 
     static let mysteries: [MathMystery] = [
-        // CASE 1: 0.999... vs 1 (RESTORED)
         MathMystery(
             id: "099_equals_1",
             title: "0.999... 到底等不等于 1？",
@@ -52,7 +51,6 @@ enum SampleData {
             openQuestion: "如果是非标准分析会怎样？"
         ),
 
-        // CASE 2: MONTY HALL PROBLEM (RESTORED)
         MathMystery(
             id: "monty_hall",
             title: "三门问题：换还是不换？",
@@ -75,7 +73,6 @@ enum SampleData {
             openQuestion: "100扇门会怎样？"
         ),
 
-        // CASE 3: BANACH-TARSKI PARADOX (RESTORED)
         MathMystery(
             id: "banach_tarski",
             title: "分球怪论：点石成金？",
@@ -98,7 +95,6 @@ enum SampleData {
             openQuestion: "原子也有体积吗？"
         ),
 
-        // CASE 4: RUSSELL'S PARADOX (RESTORED)
         MathMystery(
             id: "russell_paradox",
             title: "理发师悖论：数学的大地震",
@@ -121,7 +117,6 @@ enum SampleData {
             openQuestion: "地基真的彻底安全了吗？"
         ),
 
-        // CASE 5: GABRIEL'S HORN (RESTORED)
         MathMystery(
             id: "gabriel_horn",
             title: "加百列号角：有限与无限",
@@ -146,35 +141,406 @@ enum SampleData {
     ]
 
     // MARK: - Problems (Strike Pack)
-
+    
     static let problems: [Problem] = [
+        // ============ 小学题目 (5%) ============
         Problem(
-            id: "strike_limit_001",
+            id: "elem_001",
+            type: .multipleChoice,
+            tier: 1,
+            formulaIds: ["add_commute"],
+            content: "计算：3 + 5 + 7 = ？",
+            contentLatex: "3 + 5 + 7 = ?",
+            options: ["12", "15", "18", "20"],
+            answer: "15",
+            difficulty: 0.1,
+            averageTime: 10,
+            hints: ["加法交换律", "凑十法"],
+            solution: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "使用加法交换律", latex: "3 + 7 + 5 = 10 + 5", annotation: "先算 3+7")
+                ],
+                keyInsight: "交换顺序让计算更简单。",
+                commonMistakes: ["忘记进位"]
+            ),
+            dualSolution: DualSolution(
+                standardMethod: SolutionPath(steps: [], keyInsight: "按顺序计算", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "加法交换律优化", commonMistakes: []),
+                weaponUsed: "加法交换律",
+                timeRatio: 2.0
+            ),
+            gaokaoYear: nil,
+            tags: ["算术", "小学"]
+        ),
+
+        // ============ 初中题目 (15%) ============
+        Problem(
+            id: "middle_001",
+            type: .multipleChoice,
+            tier: 2,
+            formulaIds: ["pythagorean"],
+            content: "直角三角形两直角边分别为3和4，斜边长为？",
+            contentLatex: "a=3, b=4, c=?",
+            options: ["5", "6", "7", "12"],
+            answer: "5",
+            difficulty: 0.2,
+            averageTime: 20,
+            hints: ["勾股定理"],
+            solution: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "应用勾股定理", latex: "c^2 = 3^2 + 4^2 = 25", annotation: "计算平方和"),
+                    SolutionStep(order: 2, description: "开方", latex: "c = \\sqrt{25} = 5", annotation: "取正值")
+                ],
+                keyInsight: "识别直角三角形，直接应用公式。",
+                commonMistakes: ["忘记开方", "搞混斜边和直角边"]
+            ),
+            dualSolution: DualSolution(
+                standardMethod: SolutionPath(steps: [], keyInsight: "直接应用勾股定理", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "记住3-4-5勾股数，秒答", commonMistakes: []),
+                weaponUsed: "勾股数记忆",
+                timeRatio: 5.0
+            ),
+            gaokaoYear: nil,
+            tags: ["几何", "初中"]
+        ),
+
+        Problem(
+            id: "middle_002",
+            type: .multipleChoice,
+            tier: 2,
+            formulaIds: ["quad_root"],
+            content: "方程 x² - 5x + 6 = 0 的两根之和是？",
+            contentLatex: "x^2 - 5x + 6 = 0",
+            options: ["5", "-5", "6", "-6"],
+            answer: "5",
+            difficulty: 0.35,
+            averageTime: 30,
+            hints: ["韦达定理"],
+            solution: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "应用韦达定理", latex: "x_1 + x_2 = -\\frac{b}{a} = 5", annotation: "直接套用公式")
+                ],
+                keyInsight: "不求根直接用韦达定理。",
+                commonMistakes: ["记错符号"]
+            ),
+            dualSolution: DualSolution(
+                standardMethod: SolutionPath(steps: [], keyInsight: "求根公式", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "韦达定理直接秒杀", commonMistakes: []),
+                weaponUsed: "韦达定理",
+                timeRatio: 3.0
+            ),
+            gaokaoYear: nil,
+            tags: ["方程", "初中"]
+        ),
+
+        // ============ 高中题目 (80%) ============
+        
+        Problem(
+            id: "high_001",
+            type: .multipleChoice,
+            tier: 3,
+            formulaIds: ["sin_add"],
+            content: "已知 sin α = 3/5，cos β = 4/5，α, β 均为锐角，则 sin(α+β) = ？",
+            contentLatex: "\\sin\\alpha=3/5, \\cos\\beta=4/5, \\sin(\\alpha+\\beta)=?",
+            options: ["24/25", "7/25", "1", "0"],
+            answer: "24/25",
+            difficulty: 0.5,
+            averageTime: 60,
+            hints: ["和角公式"],
+            solution: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "求 cos α 和 sin β", latex: "\\cos\\alpha=4/5, \\sin\\beta=3/5", annotation: "勾股定理"),
+                    SolutionStep(order: 2, description: "应用和角公式", latex: "\\sin(\\alpha+\\beta)=\\frac{3}{5}\\cdot\\frac{4}{5}+\\frac{4}{5}\\cdot\\frac{3}{5}", annotation: "sin(α+β)=sinαcosβ+cosαsinβ"),
+                    SolutionStep(order: 3, description: "计算", latex: "\\frac{12}{25}+\\frac{12}{25}=\\frac{24}{25}", annotation: "结果")
+                ],
+                keyInsight: "和角公式是三角函数的核心工具。",
+                commonMistakes: ["记错和角公式", "符号错误"]
+            ),
+            dualSolution: DualSolution(
+                standardMethod: SolutionPath(steps: [], keyInsight: "和角公式展开", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "欧拉公式：e^(i(α+β))=e^(iα)·e^(iβ)", commonMistakes: []),
+                weaponUsed: "欧拉棱镜",
+                timeRatio: 4.0
+            ),
+            gaokaoYear: 2020,
+            tags: ["三角函数", "高中"]
+        ),
+
+        Problem(
+            id: "high_002",
+            type: .multipleChoice,
+            tier: 4,
+            formulaIds: ["ellipse_eq"],
+            content: "椭圆 x²/25 + y²/9 = 1 的离心率是？",
+            contentLatex: "\\frac{x^2}{25} + \\frac{y^2}{9} = 1",
+            options: ["3/5", "4/5", "5/3", "5/4"],
+            answer: "4/5",
+            difficulty: 0.6,
+            averageTime: 45,
+            hints: ["椭圆离心率公式"],
+            solution: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "确定 a, b", latex: "a^2=25, b^2=9", annotation: "a=5, b=3"),
+                    SolutionStep(order: 2, description: "计算 c", latex: "c^2 = a^2 - b^2 = 16", annotation: "c=4"),
+                    SolutionStep(order: 3, description: "计算离心率", latex: "e = c/a = 4/5", annotation: "结果")
+                ],
+                keyInsight: "离心率 e = c/a 是椭圆扁平程度的度量。",
+                commonMistakes: ["搞混 a 和 b", "忘记开方"]
+            ),
+            dualSolution: DualSolution(
+                standardMethod: SolutionPath(steps: [], keyInsight: "椭圆基本性质", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "极坐标统一方程", commonMistakes: []),
+                weaponUsed: "圆锥曲线统一方程",
+                timeRatio: 3.0
+            ),
+            gaokaoYear: 2021,
+            tags: ["圆锥曲线", "高中"]
+        ),
+
+        Problem(
+            id: "high_003",
+            type: .multipleChoice,
+            tier: 4,
+            formulaIds: ["deriv_power"],
+            content: "函数 f(x) = x³ - 3x 在 x = 1 处的切线斜率是？",
+            contentLatex: "f(x) = x^3 - 3x, f'(1) = ?",
+            options: ["0", "1", "-2", "3"],
+            answer: "0",
+            difficulty: 0.55,
+            averageTime: 40,
+            hints: ["导数的几何意义"],
+            solution: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "求导", latex: "f'(x) = 3x^2 - 3", annotation: "幂函数求导"),
+                    SolutionStep(order: 2, description: "代入 x=1", latex: "f'(1) = 3(1)^2 - 3 = 0", annotation: "切线斜率")
+                ],
+                keyInsight: "导数就是切线斜率，直接求导代入即可。",
+                commonMistakes: ["求导错误", "忘记代入"]
+            ),
+            dualSolution: DualSolution(
+                standardMethod: SolutionPath(steps: [], keyInsight: "导数定义求极限", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "幂函数求导公式直接秒杀", commonMistakes: []),
+                weaponUsed: "求导刃",
+                timeRatio: 6.0
+            ),
+            gaokaoYear: 2022,
+            tags: ["导数", "高中"]
+        ),
+
+        Problem(
+            id: "high_004",
             type: .multipleChoice,
             tier: 4,
             formulaIds: ["lopital_rule"],
-            content: "求极限：当 x 趋于 0 时，(sin x - x) / x³ 的值是多少？",
+            content: "求极限：当 x→0 时，(sin x - x)/x³ = ？",
             contentLatex: "\\lim_{x \\to 0} \\frac{\\sin x - x}{x^3}",
             options: ["0", "1/6", "-1/6", "1/3"],
             answer: "-1/6",
             difficulty: 0.85,
             averageTime: 300,
-            hints: ["洛必达法则"],
+            hints: ["洛必达法则", "泰勒展开"],
             solution: SolutionPath(
                 steps: [
-                    SolutionStep(order: 1, description: "求导三次", latex: "\\lim \\frac{-\\cos x}{6}", annotation: "结果 -1/6")
+                    SolutionStep(order: 1, description: "检查形式", latex: "\\frac{0}{0}", annotation: "满足洛必达条件"),
+                    SolutionStep(order: 2, description: "第一次求导", latex: "\\lim \\frac{\\cos x - 1}{3x^2}", annotation: "仍为 0/0"),
+                    SolutionStep(order: 3, description: "第二次求导", latex: "\\lim \\frac{-\\sin x}{6x}", annotation: "仍为 0/0"),
+                    SolutionStep(order: 4, description: "第三次求导", latex: "\\lim \\frac{-\\cos x}{6} = -\\frac{1}{6}", annotation: "结果")
                 ],
-                keyInsight: "高阶思维降维打击。",
-                commonMistakes: []
+                keyInsight: "高阶思维降维打击，连续应用洛必达。",
+                commonMistakes: ["求导错误", "忘记检查条件"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "等价无穷小", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "洛必达三次求导", commonMistakes: []),
+                standardMethod: SolutionPath(steps: [], keyInsight: "等价无穷小替换", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "泰勒展开直接写出答案", commonMistakes: []),
                 weaponUsed: "洛必达之锤",
                 timeRatio: 5.0
             ),
             gaokaoYear: 2022,
             tags: ["极限", "压轴"]
+        ),
+
+        Problem(
+            id: "high_005",
+            type: .multipleChoice,
+            tier: 3,
+            formulaIds: ["cosine_rule"],
+            content: "在△ABC中，a=3, b=4, C=60°，则 c = ？",
+            contentLatex: "a=3, b=4, C=60°, c=?",
+            options: ["\\sqrt{13}", "5", "\\sqrt{37}", "7"],
+            answer: "\\sqrt{13}",
+            difficulty: 0.5,
+            averageTime: 50,
+            hints: ["余弦定理"],
+            solution: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "应用余弦定理", latex: "c^2 = 3^2 + 4^2 - 2\\cdot3\\cdot4\\cdot\\cos60°", annotation: "代入已知"),
+                    SolutionStep(order: 2, description: "计算", latex: "c^2 = 9 + 16 - 12 = 13", annotation: "cos60°=0.5"),
+                    SolutionStep(order: 3, description: "开方", latex: "c = \\sqrt{13}", annotation: "结果")
+                ],
+                keyInsight: "已知两边夹一角，余弦定理直接求解。",
+                commonMistakes: ["记错余弦定理公式", "角度单位错误"]
+            ),
+            dualSolution: DualSolution(
+                standardMethod: SolutionPath(steps: [], keyInsight: "余弦定理", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "向量点积公式", commonMistakes: []),
+                weaponUsed: "向量武器",
+                timeRatio: 3.0
+            ),
+            gaokaoYear: 2019,
+            tags: ["解三角形", "高中"]
+        ),
+
+        Problem(
+            id: "high_006",
+            type: .multipleChoice,
+            tier: 4,
+            formulaIds: ["deriv_power"],
+            content: "函数 f(x) = x³ - 3x² + 1 的单调递减区间是？",
+            contentLatex: "f(x) = x^3 - 3x^2 + 1",
+            options: ["(-∞,0)", "(0,2)", "(2,+∞)", "(-∞,0)∪(2,+∞)"],
+            answer: "(0,2)",
+            difficulty: 0.7,
+            averageTime: 80,
+            hints: ["导数判断单调性"],
+            solution: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "求导", latex: "f'(x) = 3x^2 - 6x", annotation: "幂函数求导"),
+                    SolutionStep(order: 2, description: "求临界点", latex: "3x(x-2)=0 \\implies x=0,2", annotation: "解方程"),
+                    SolutionStep(order: 3, description: "判断符号", latex: "f'(x) < 0 \\implies 0 < x < 2", annotation: "二次函数开口向上")
+                ],
+                keyInsight: "导数小于0时函数递减，转化为解不等式。",
+                commonMistakes: ["求导错误", "区间开闭判断错误"]
+            ),
+            dualSolution: DualSolution(
+                standardMethod: SolutionPath(steps: [], keyInsight: "定义法比较", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "导数直接秒杀", commonMistakes: []),
+                weaponUsed: "求导刃",
+                timeRatio: 4.0
+            ),
+            gaokaoYear: 2021,
+            tags: ["导数", "单调性", "高中"]
+        ),
+
+        Problem(
+            id: "high_007",
+            type: .multipleChoice,
+            tier: 3,
+            formulaIds: ["add_commute"],
+            content: "等差数列 {aₙ} 中，a₁=2，d=3，则前10项和 S₁₀ = ？",
+            contentLatex: "a_1=2, d=3, S_{10}=?",
+            options: ["155", "150", "160", "145"],
+            answer: "155",
+            difficulty: 0.4,
+            averageTime: 35,
+            hints: ["等差数列求和公式"],
+            solution: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "求第10项", latex: "a_{10} = 2 + 9\\times3 = 29", annotation: "通项公式"),
+                    SolutionStep(order: 2, description: "求和", latex: "S_{10} = \\frac{10}{2}(2+29) = 5\\times31", annotation: "等差数列求和"),
+                    SolutionStep(order: 3, description: "计算", latex: "S_{10} = 155", annotation: "结果")
+                ],
+                keyInsight: "等差数列求和 = 项数 × (首项+末项)/2。",
+                commonMistakes: ["项数计算错误", "公式记错"]
+            ),
+            dualSolution: DualSolution(
+                standardMethod: SolutionPath(steps: [], keyInsight: "逐项相加", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "高斯配对法", commonMistakes: []),
+                weaponUsed: "高斯求和",
+                timeRatio: 10.0
+            ),
+            gaokaoYear: 2020,
+            tags: ["数列", "高中"]
+        ),
+
+        Problem(
+            id: "high_008",
+            type: .multipleChoice,
+            tier: 3,
+            formulaIds: [],
+            content: "从1到10的整数中随机取一个数，取到偶数的概率是？",
+            contentLatex: "P(\\text{even}) = ?",
+            options: ["1/2", "2/5", "3/5", "1/10"],
+            answer: "1/2",
+            difficulty: 0.25,
+            averageTime: 25,
+            hints: ["古典概型"],
+            solution: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "计算基本事件数", latex: "n(Ω) = 10", annotation: "总共有10个数"),
+                    SolutionStep(order: 2, description: "计算有利事件数", latex: "n(A) = 5", annotation: "偶数：2,4,6,8,10"),
+                    SolutionStep(order: 3, description: "计算概率", latex: "P = 5/10 = 1/2", annotation: "结果")
+                ],
+                keyInsight: "古典概型：概率 = 有利事件数 / 总事件数。",
+                commonMistakes: ["计数错误"]
+            ),
+            dualSolution: DualSolution(
+                standardMethod: SolutionPath(steps: [], keyInsight: "直接计数", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "对称性：奇偶各半", commonMistakes: []),
+                weaponUsed: "对称性思维",
+                timeRatio: 3.0
+            ),
+            gaokaoYear: 2019,
+            tags: ["概率", "高中"]
+        ),
+
+        Problem(
+            id: "high_009",
+            type: .multipleChoice,
+            tier: 3,
+            formulaIds: [],
+            content: "向量 a=(1,2)，b=(3,4)，则 a·b = ？",
+            contentLatex: "\\vec{a}=(1,2), \\vec{b}=(3,4), \\vec{a}\\cdot\\vec{b}=?",
+            options: ["11", "10", "5", "14"],
+            answer: "11",
+            difficulty: 0.3,
+            averageTime: 20,
+            hints: ["向量点积"],
+            solution: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "应用点积公式", latex: "a\\cdot b = 1\\times3 + 2\\times4", annotation: "对应分量相乘相加"),
+                    SolutionStep(order: 2, description: "计算", latex: "3 + 8 = 11", annotation: "结果")
+                ],
+                keyInsight: "向量点积是对应分量乘积之和。",
+                commonMistakes: ["搞混点积和叉积", "符号错误"]
+            ),
+            dualSolution: DualSolution(
+                standardMethod: SolutionPath(steps: [], keyInsight: "定义计算", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "内积空间性质", commonMistakes: []),
+                weaponUsed: "线性代数",
+                timeRatio: 2.0
+            ),
+            gaokaoYear: 2021,
+            tags: ["向量", "高中"]
+        ),
+
+        Problem(
+            id: "high_010",
+            type: .multipleChoice,
+            tier: 4,
+            formulaIds: [],
+            content: "已知 x > 0，则 x + 4/x 的最小值是？",
+            contentLatex: "x > 0, \\min(x + 4/x) = ?",
+            options: ["4", "2", "5", "1"],
+            answer: "4",
+            difficulty: 0.6,
+            averageTime: 50,
+            hints: ["基本不等式"],
+            solution: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "应用基本不等式", latex: "x + \\frac{4}{x} \\geq 2\\sqrt{x \\cdot \\frac{4}{x}}", annotation: "a+b≥2√(ab)"),
+                    SolutionStep(order: 2, description: "计算", latex: "2\\sqrt{4} = 4", annotation: "等号成立当x=2")
+                ],
+                keyInsight: "基本不等式是求最值的利器。",
+                commonMistakes: ["忘记等号成立条件", "不满足正数条件"]
+            ),
+            dualSolution: DualSolution(
+                standardMethod: SolutionPath(steps: [], keyInsight: "基本不等式", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "求导找极值点", commonMistakes: []),
+                weaponUsed: "求导刃",
+                timeRatio: 3.0
+            ),
+            gaokaoYear: 2022,
+            tags: ["不等式", "高中"]
         )
     ]
 
