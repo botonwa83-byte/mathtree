@@ -5,7 +5,6 @@ struct BattlefieldView: View {
     @State private var currentIndex = 0
     @State private var showSolution = false
     @State private var selectedAnswer: String?
-    @State private var showDualView = false
 
     @State private var showDualView = false
     @State private var showDescendAnimation = false
@@ -274,11 +273,6 @@ struct BattlefieldView: View {
         .frame(maxWidth: .infinity)
         .padding(40)
     }
-
-    private func loadProblems() {
-        problems = SampleData.problems
-    }
-}
 
     private func loadProblems() {
         problems = SampleData.problems
