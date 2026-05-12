@@ -6,62 +6,216 @@ enum SampleData {
 
     static let formulas: [Formula] = [
         // =========================================================================
-        // ELEMENTARY (小学)
+        // ELEMENTARY & MIDDLE (Preserved)
         // =========================================================================
         Formula(id: "add_commute", name: "加法交换律", latex: "a + b = b + a", level: .elementary, category: .algebra, prerequisites: [], derivations: ["add_assoc"], advancedForm: "group_theory", gaokaoRelevance: 1.0, tags: ["算术", "基础"], intuition: "两个数相加，谁先谁后不重要。", leapfrogKey: false, unlockedBy: nil),
-        Formula(id: "rect_area", name: "矩形面积", latex: "S = a \\times b", level: .elementary, category: .geometry, prerequisites: [], derivations: ["tri_area"], advancedForm: "integral_def", gaokaoRelevance: 1.0, tags: ["几何", "面积"], intuition: "长乘以宽，铺满地面的地砖数。", leapfrogKey: false, unlockedBy: nil),
-        Formula(id: "circle_circum", name: "圆周长公式", latex: "C = 2\\pi r", level: .elementary, category: .geometry, prerequisites: [], derivations: ["circle_area"], advancedForm: "differential_geom", gaokaoRelevance: 1.0, tags: ["几何", "圆"], intuition: "圆的腰带长度，是直径的3.14倍多。", leapfrogKey: false, unlockedBy: nil),
+        Formula(id: "rect_area", name: "矩形面积", latex: "S = a \\times b", level: .elementary, category: .geometry, prerequisites: [], derivations: ["tri_area"], advancedForm: "integral_def", gaokaoRelevance: 1.0, tags: ["几何", "面积"], intuition: "长乘以宽，铺地砖。", leapfrogKey: false, unlockedBy: nil),
+        Formula(id: "pythagorean", name: "勾股定理", latex: "a^2 + b^2 = c^2", level: .middle, category: .geometry, prerequisites: ["rect_area"], derivations: ["dist_formula", "circle_eq"], advancedForm: "inner_product", gaokaoRelevance: 0.95, tags: ["几何", "核心"], intuition: "直角三角形中，两直边的平方和等于斜边的平方。", leapfrogKey: true, unlockedBy: nil),
+        Formula(id: "quad_root_formula", name: "求根公式", latex: "x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}", level: .middle, category: .algebra, prerequisites: [], derivations: ["vieta_formulas"], advancedForm: "galois_theory", gaokaoRelevance: 1.0, tags: ["方程", "必考"], intuition: "万能钥匙，解开所有二次方程。", leapfrogKey: true, unlockedBy: nil),
 
         // =========================================================================
-        // MIDDLE SCHOOL (初中) - EXHAUSTIVE
+        // HIGH SCHOOL (Preserved)
+        // =========================================================================
+        Formula(id: "sin_add", name: "正弦和角公式", latex: "\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta", level: .high, category: .trigonometry, prerequisites: ["sin_sq_cos_sq"], derivations: ["sin_double"], advancedForm: "euler_formula", gaokaoRelevance: 0.98, tags: ["三角函数", "核心变换"], intuition: "旋转的叠加。", leapfrogKey: true, unlockedBy: nil),
+        Formula(id: "deriv_power", name: "幂函数导数", latex: "(x^n)' = nx^{n-1}", level: .high, category: .calculus, prerequisites: [], derivations: [], advancedForm: "operator_theory", gaokaoRelevance: 1.0, tags: ["导数", "核心"], intuition: "降幂打击！", leapfrogKey: true, unlockedBy: nil),
+        Formula(id: "ellipse_std", name: "椭圆标准方程", latex: "\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1", level: .high, category: .conicSections, prerequisites: ["pythagorean"], derivations: [], advancedForm: "projection", gaokaoRelevance: 1.0, tags: ["圆锥曲线", "必考"], intuition: "拉扁了的圆。", leapfrogKey: true, unlockedBy: nil),
+
+        // =========================================================================
+        // UNIVERSITY (大学) - EXHAUSTIVE WEAPONRY
         // =========================================================================
         
-        // 1. Algebra & Identities
-        Formula(id: "sq_diff_identity", name: "平方差公式", latex: "(a+b)(a-b) = a^2 - b^2", level: .middle, category: .algebra, prerequisites: ["rect_area"], derivations: [], advancedForm: "ring_theory", gaokaoRelevance: 1.0, tags: ["代数", "恒等式"], intuition: "两个数的和乘以它们的差，等于它们的平方差。", leapfrogKey: false, unlockedBy: nil),
-        Formula(id: "sq_sum_identity", name: "完全平方公式", latex: "(a \\pm b)^2 = a^2 \\pm 2ab + b^2", level: .middle, category: .algebra, prerequisites: ["rect_area"], derivations: [], advancedForm: "binomial_theorem", gaokaoRelevance: 1.0, tags: ["代数", "核心公式"], intuition: "正方形边长增加b后，面积增加了一个小正方形和两个长方形。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "abs_val_def", name: "绝对值定义", latex: "|a| = \\begin{cases} a & (a \\ge 0) \\\\ -a & (a < 0) \\end{cases}", level: .middle, category: .algebra, prerequisites: [], derivations: [], advancedForm: "norm_space", gaokaoRelevance: 1.0, tags: ["数系", "基础"], intuition: "数轴上点到原点的距离，永远是正的。", leapfrogKey: false, unlockedBy: nil),
+        // 1. Calculus & Analysis (微积分与分析)
+        Formula(
+            id: "lopital_rule",
+            name: "洛必达法则",
+            latex: "\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)}",
+            level: .university,
+            category: .calculus,
+            prerequisites: ["derivative_def"],
+            derivations: [],
+            advancedForm: "cauchy_mean_value",
+            gaokaoRelevance: 0.8,
+            tags: ["极限", "暴力美学"],
+            intuition: "分子分母赛跑，看谁的变化速度决定了极限。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "taylor_series",
+            name: "泰勒展开式",
+            latex: "f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n",
+            level: .university,
+            category: .calculus,
+            prerequisites: ["derivative_def"],
+            derivations: ["euler_identity_proof"],
+            advancedForm: "analytic_continuation",
+            gaokaoRelevance: 0.3,
+            tags: ["逼近", "多项式化"],
+            intuition: "任何光滑曲线都可以被切碎成无数个简单的多项式之和。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "fundamental_theorem_calc",
+            name: "微积分基本定理 (N-L公式)",
+            latex: "\\int_a^b f(x)dx = F(b) - F(a)",
+            level: .university,
+            category: .calculus,
+            prerequisites: ["derivative_def"],
+            derivations: ["stokes_theorem"],
+            advancedForm: "exterior_calculus",
+            gaokaoRelevance: 0.9,
+            tags: ["积分", "核心"],
+            intuition: "微分是‘切碎’，积分是‘累加’，两者互为逆运算。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "stokes_theorem",
+            name: "斯托克斯公式",
+            latex: "\\oint_{\\partial\\Sigma} \\mathbf{F} \\cdot d\\mathbf{r} = \\iint_{\\Sigma} (\\nabla \\times \\mathbf{F}) \\cdot d\\mathbf{S}",
+            level: .university,
+            category: .calculus,
+            prerequisites: ["fundamental_theorem_calc"],
+            derivations: [],
+            advancedForm: "generalized_stokes",
+            gaokaoRelevance: 0.05,
+            tags: ["多维分析", "边界"],
+            intuition: "边缘的‘流动’等于内部‘旋度’的累积。",
+            leapfrogKey: false,
+            unlockedBy: nil
+        ),
 
-        // 2. Equations & Inequalities
-        Formula(id: "quad_root_formula", name: "求根公式", latex: "x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}", level: .middle, category: .algebra, prerequisites: ["sq_sum_identity"], derivations: ["vieta_formulas"], advancedForm: "galois_theory", gaokaoRelevance: 1.0, tags: ["方程", "必考"], intuition: "一招制胜！给任何二次方程都能暴力解出根。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "vieta_formulas_mid", name: "韦达定理", latex: "x_1+x_2 = -\\frac{b}{a}, x_1x_2 = \\frac{c}{a}", level: .middle, category: .algebra, prerequisites: ["quad_root_formula"], derivations: [], advancedForm: "symmetric_polynomial", gaokaoRelevance: 1.0, tags: ["方程", "核心技巧"], intuition: "不需要解出根，就能知道根的和与积。", leapfrogKey: true, unlockedBy: nil),
+        // 2. Linear Algebra (线性代数)
+        Formula(
+            id: "det_def",
+            name: "行列式定义",
+            latex: "\\det(A) = \\sum_{\\sigma \\in S_n} \\text{sgn}(\\sigma) \\prod_{i=1}^n a_{i,\\sigma(i)}",
+            level: .university,
+            category: .linearAlgebra,
+            prerequisites: [],
+            derivations: ["matrix_inverse"],
+            advancedForm: "tensor_algebra",
+            gaokaoRelevance: 0.15,
+            tags: ["矩阵", "体积"],
+            intuition: "反映了线性变换后空间‘体积’的缩放比例。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "eigen_eq",
+            name: "特征值方程",
+            latex: "A\\mathbf{v} = \\lambda\\mathbf{v}",
+            level: .university,
+            category: .linearAlgebra,
+            prerequisites: ["det_def"],
+            derivations: ["diag_matrix"],
+            advancedForm: "spectral_theory",
+            gaokaoRelevance: 0.1,
+            tags: ["矩阵", "稳定性"],
+            intuition: "在线性变换下，有些方向只缩放而不改变方向。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "matrix_inv",
+            name: "矩阵求逆公式",
+            latex: "A^{-1} = \\frac{1}{\\det(A)} A^*",
+            level: .university,
+            category: .linearAlgebra,
+            prerequisites: ["det_def"],
+            derivations: [],
+            advancedForm: "pseudoinverse",
+            gaokaoRelevance: 0.1,
+            tags: ["矩阵", "逆运算"],
+            intuition: "线性变换的‘撤销’操作。",
+            leapfrogKey: false,
+            unlockedBy: nil
+        ),
 
-        // 3. Functions
-        Formula(id: "linear_func_std", name: "一次函数标准式", latex: "y = kx + b \\quad (k \\neq 0)", level: .middle, category: .algebra, prerequisites: ["linear_eq"], derivations: ["point_slope"], advancedForm: "linear_map", gaokaoRelevance: 1.0, tags: ["函数", "直线"], intuition: "斜率k决定陡峭程度，截距b决定起点高度。", leapfrogKey: false, unlockedBy: nil),
-        Formula(id: "inverse_func_std", name: "反比例函数", latex: "y = \\frac{k}{x} \\quad (k \\neq 0)", level: .middle, category: .algebra, prerequisites: [], derivations: ["hyperbola"], advancedForm: "reciprocal_map", gaokaoRelevance: 0.95, tags: ["函数", "双曲线"], intuition: "你增我减，乘积恒定。", leapfrogKey: false, unlockedBy: nil),
-        Formula(id: "quad_func_vertex", name: "二次函数顶点式", latex: "y = a(x-h)^2 + k", level: .middle, category: .algebra, prerequisites: ["sq_sum_identity"], derivations: [], advancedForm: "transformation", gaokaoRelevance: 1.0, tags: ["函数", "抛物线"], intuition: "直接锁定抛物线的‘最尖端’（顶点）位置。", leapfrogKey: true, unlockedBy: nil),
+        // 3. Complex Analysis (复变函数)
+        Formula(
+            id: "euler_formula",
+            name: "欧拉公式",
+            latex: "e^{i\\theta} = \\cos\\theta + i\\sin\\theta",
+            level: .university,
+            category: .complexNumbers,
+            prerequisites: ["taylor_series"],
+            derivations: ["euler_identity"],
+            advancedForm: "harmonic_analysis",
+            gaokaoRelevance: 0.2,
+            tags: ["复数", "上帝公式"],
+            intuition: "圆周运动与震荡的完美统一，代数与几何的桥梁。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "cauchy_riemann",
+            name: "柯西-黎曼方程",
+            latex: "\\frac{\\partial u}{\\partial x} = \\frac{\\partial v}{\\partial y}, \\frac{\\partial u}{\\partial y} = -\\frac{\\partial v}{\\partial x}",
+            level: .university,
+            category: .complexNumbers,
+            prerequisites: ["derivative_def"],
+            derivations: ["cauchy_integral"],
+            advancedForm: "conformal_map",
+            gaokaoRelevance: 0.0,
+            tags: ["解析函数", "核心"],
+            intuition: "复平面上可导的要求极其苛刻，必须满足这种‘旋转对称’性。",
+            leapfrogKey: false,
+            unlockedBy: nil
+        ),
 
-        // 4. Geometry
-        Formula(id: "pythagorean", name: "勾股定理", latex: "a^2 + b^2 = c^2", level: .middle, category: .geometry, prerequisites: ["rect_area"], derivations: ["dist_formula"], advancedForm: "inner_product", gaokaoRelevance: 1.0, tags: ["几何", "核心"], intuition: "直角三角形中，两直边的‘力量’之和等于斜边的‘力量’。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "tri_angle_sum_mid", name: "三角形内角和", latex: "\\angle A + \\angle B + \\angle C = 180^\\circ", level: .middle, category: .geometry, prerequisites: [], derivations: [], advancedForm: "topology", gaokaoRelevance: 1.0, tags: ["几何", "基础"], intuition: "无论怎么拉扯三角形，它的三个角拼在一起总是平角。", leapfrogKey: false, unlockedBy: nil),
-        Formula(id: "sim_tri_ratio", name: "相似三角形性质", latex: "\\frac{S_1}{S_2} = (\\frac{a_1}{a_2})^2 = k^2", level: .middle, category: .geometry, prerequisites: [], derivations: [], advancedForm: "homothety", gaokaoRelevance: 1.0, tags: ["几何", "相似"], intuition: "照片放大一倍，面积可是翻了四倍哦。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "circle_area_mid", name: "圆面积公式", latex: "S = \\pi r^2", level: .middle, category: .geometry, prerequisites: ["circle_circum"], derivations: ["sphere_vol"], advancedForm: "integration", gaokaoRelevance: 1.0, tags: ["几何", "圆"], intuition: "切成无数个微小扇形拼成的‘矩形’。", leapfrogKey: false, unlockedBy: nil),
-        Formula(id: "arc_len_formula", name: "弧长公式", latex: "l = \\frac{n\\pi r}{180}", level: .middle, category: .geometry, prerequisites: ["circle_circum"], derivations: ["sector_area"], advancedForm: "radian_measure", gaokaoRelevance: 0.9, tags: ["几何", "圆"], intuition: "圆周长按比例‘切’出来的一段。", leapfrogKey: false, unlockedBy: nil),
+        // 4. Probability & Statistics (概率统计)
+        Formula(
+            id: "bayes_theorem",
+            name: "贝叶斯定理",
+            latex: "P(A|B) = \\frac{P(B|A)P(A)}{P(B)}",
+            level: .university,
+            category: .probability,
+            prerequisites: [],
+            derivations: [],
+            advancedForm: "bayesian_inference",
+            gaokaoRelevance: 0.8,
+            tags: ["概率", "认知更新"],
+            intuition: "当我们获得新证据时，如何更新我们对客观世界的认知。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "central_limit_theorem",
+            name: "中心极限定理",
+            latex: "\\bar{X}_n \\xrightarrow{d} N(\\mu, \\frac{\\sigma^2}{n})",
+            level: .university,
+            category: .probability,
+            prerequisites: [],
+            derivations: [],
+            advancedForm: "law_of_large_numbers",
+            gaokaoRelevance: 0.5,
+            tags: ["正态分布", "普适规律"],
+            intuition: "无论初始分布如何，大量独立随机变量的和最终都会趋向正态分布。",
+            leapfrogKey: false,
+            unlockedBy: nil
+        ),
 
-        // 5. Statistics & Probability
-        Formula(id: "mean_formula", name: "平均数", latex: "\\bar{x} = \\frac{x_1 + x_2 + \\dots + x_n}{n}", level: .middle, category: .probability, prerequisites: [], derivations: ["variance"], advancedForm: "expectation", gaokaoRelevance: 1.0, tags: ["统计", "基础"], intuition: "削峰填谷，找出一组数的‘平衡点’。", leapfrogKey: false, unlockedBy: nil),
-
-        // =========================================================================
-        // HIGH SCHOOL (高中) - EXHAUSTIVE
-        // =========================================================================
-        Formula(id: "sin_sq_cos_sq", name: "同角三角恒等式", latex: "\\sin^2\\alpha + \\cos^2\\alpha = 1", level: .high, category: .trigonometry, prerequisites: ["pythagorean"], derivations: [], advancedForm: "unit_circle", gaokaoRelevance: 1.0, tags: ["三角函数", "必考"], intuition: "单位圆上的点，坐标平方和永远是1。", leapfrogKey: false, unlockedBy: nil),
-        Formula(id: "sin_add", name: "正弦和角公式", latex: "\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta", level: .high, category: .trigonometry, prerequisites: ["sin_sq_cos_sq"], derivations: ["sin_double"], advancedForm: "euler_formula", gaokaoRelevance: 0.98, tags: ["三角函数", "核心变换"], intuition: "旋转的叠加。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "sine_rule", name: "正弦定理", latex: "\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C} = 2R", level: .high, category: .trigonometry, prerequisites: [], derivations: [], advancedForm: "diff_form", gaokaoRelevance: 0.95, tags: ["解三角形", "必考"], intuition: "边长与对角的张开程度成正比。", leapfrogKey: false, unlockedBy: nil),
-        Formula(id: "cosine_rule", name: "余弦定理", latex: "a^2 = b^2 + c^2 - 2bc\\cos A", level: .high, category: .trigonometry, prerequisites: ["pythagorean"], derivations: [], advancedForm: "inner_product", gaokaoRelevance: 0.98, tags: ["解三角形", "核心"], intuition: "勾股定理的万能版。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "arith_sn", name: "等差数列求和", latex: "S_n = \\frac{n(a_1 + a_n)}{2}", level: .high, category: .sequences, prerequisites: [], derivations: [], advancedForm: "integration", gaokaoRelevance: 1.0, tags: ["数列", "必考"], intuition: "首尾配对求和。", leapfrogKey: false, unlockedBy: nil),
-        Formula(id: "geom_sn", name: "等比数列求和", latex: "S_n = \\frac{a_1(1-q^n)}{1-q}", level: .high, category: .sequences, prerequisites: [], derivations: [], advancedForm: "geometric_series", gaokaoRelevance: 1.0, tags: ["数列", "必考"], intuition: "长期累积的爆发力。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "ellipse_std", name: "椭圆标准方程", latex: "\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1", level: .high, category: .conicSections, prerequisites: ["pythagorean"], derivations: [], advancedForm: "projection", gaokaoRelevance: 1.0, tags: ["圆锥曲线", "必考"], intuition: "拉扁了的圆。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "deriv_power", name: "幂函数导数", latex: "(x^n)' = nx^{n-1}", level: .high, category: .calculus, prerequisites: [], derivations: [], advancedForm: "operator", gaokaoRelevance: 1.0, tags: ["导数", "核心"], intuition: "降幂打击！", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "combination", name: "组合数公式", latex: "C_n^k = \\frac{n!}{k!(n-k)!}", level: .high, category: .probability, prerequisites: [], derivations: [], advancedForm: "gamma", gaokaoRelevance: 1.0, tags: ["概率", "计数"], intuition: "不看顺序选人。", leapfrogKey: false, unlockedBy: nil),
-
-        // =========================================================================
-        // UNIVERSITY (大学 - 降维武器库)
-        // =========================================================================
-        Formula(id: "euler_formula", name: "欧拉公式", latex: "e^{i\\theta} = \\cos\\theta + i\\sin\\theta", level: .university, category: .complexNumbers, prerequisites: ["sin_add"], derivations: [], advancedForm: "complex_analysis", gaokaoRelevance: 0.2, tags: ["复变函数", "降维利器"], intuition: "数学中最美的公式，统一了代数与三角。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "lopital_rule", name: "洛必达法则", latex: "\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)}", level: .university, category: .calculus, prerequisites: [], derivations: [], advancedForm: "mean_value", gaokaoRelevance: 0.8, tags: ["极限", "秒杀"], intuition: "暴力拆解极限陷阱。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "taylor_series", name: "泰勒展开", latex: "f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n", level: .university, category: .calculus, prerequisites: [], derivations: [], advancedForm: "analytic", gaokaoRelevance: 0.3, tags: ["微积分", "逼近"], intuition: "多项式‘克隆’任何曲线。", leapfrogKey: false, unlockedBy: nil)
+        // 5. Differential Equations (微分方程)
+        Formula(
+            id: "linear_ode_first",
+            name: "一阶线性微分方程通解",
+            latex: "y' + P(x)y = Q(x) \\implies y = e^{-\\int Pdx} [ \\int Q e^{\\int Pdx} dx + C ]",
+            level: .university,
+            category: .calculus,
+            prerequisites: ["fundamental_theorem_calc"],
+            derivations: [],
+            advancedForm: "dynamical_systems",
+            gaokaoRelevance: 0.2,
+            tags: ["方程", "变化"],
+            intuition: "描述一个随时间演化且受外界‘输入’影响的系统。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        )
     ]
 
-    // MARK: - Problems (Strike Pack)
+    // MARK: - Problems (Example Strike)
 
     static let problems: [Problem] = [
         Problem(
@@ -75,15 +229,19 @@ enum SampleData {
             answer: "-1/6",
             difficulty: 0.85,
             averageTime: 300,
-            hints: ["0/0型极限"],
+            hints: ["这是 0/0 型极限", "利用洛必达法则连续求导"],
             solution: SolutionPath(
-                steps: [SolutionStep(order: 1, description: "求导", latex: "\\lim \\frac{-\\sin x}{6x}", annotation: "洛必达")],
-                keyInsight: "洛必达秒杀",
-                commonMistakes: []
+                steps: [
+                    SolutionStep(order: 1, description: "第一次求导", latex: "\\lim \\frac{\\cos x - 1}{3x^2}", annotation: "0/0"),
+                    SolutionStep(order: 2, description: "第二次求导", latex: "\\lim \\frac{-\\sin x}{6x}", annotation: "利用 sinx/x -> 1"),
+                    SolutionStep(order: 3, description: "得出结论", latex: "-1/6", annotation: "秒杀")
+                ],
+                keyInsight: "洛必达法则是处理复杂极限的通用重型武器。",
+                commonMistakes: ["符号出错", "忘记系数"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "泰勒展开", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "三次洛必达", commonMistakes: []),
+                standardMethod: SolutionPath(steps: [], keyInsight: "等价无穷小替换", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "洛必达法则三次求导", commonMistakes: []),
                 weaponUsed: "洛必达之锤",
                 timeRatio: 5.0
             ),
@@ -92,43 +250,45 @@ enum SampleData {
         )
     ]
 
-    // MARK: - Heroes
+    // MARK: - Heroes (Preserved)
 
     static let heroes: [MathHero] = [
-        MathHero(id: "euler", name: "欧拉", nameEN: "Leonhard Euler", era: "1707 - 1783", attributes: HeroAttributes(insight: 10, creativity: 10, perseverance: 9, influence: 10), weaponSkills: ["欧拉恒等式"], legendStory: "失明后依然统治数学界。", famousQuote: "数学是上帝书写宇宙的语言。", relatedMysteries: [], portraitEmoji: "👴"),
-        MathHero(id: "gauss", name: "高斯", nameEN: "Carl Friedrich Gauss", era: "1777 - 1855", attributes: HeroAttributes(insight: 10, creativity: 9, perseverance: 10, influence: 10), weaponSkills: ["等差求和"], legendStory: "数学王子。", famousQuote: "数学是科学的女王。", relatedMysteries: [], portraitEmoji: "👑")
+        MathHero(id: "euler", name: "欧拉", nameEN: "Leonhard Euler", era: "1707 - 1783", attributes: HeroAttributes(insight: 10, creativity: 10, perseverance: 9, influence: 10), weaponSkills: ["欧拉恒等式", "变分法"], legendStory: "失明后依然统治数学界。", famousQuote: "数学是上帝书写宇宙的语言。", relatedMysteries: [], portraitEmoji: "👴"),
+        MathHero(id: "gauss", name: "高斯", nameEN: "Carl Friedrich Gauss", era: "1777 - 1855", attributes: HeroAttributes(insight: 10, creativity: 9, perseverance: 10, influence: 10), weaponSkills: ["曲率", "正态分布"], legendStory: "3岁纠错，10岁秒算求和，终生追求完美的数学王子。", famousQuote: "数学是科学的女王。", relatedMysteries: [], portraitEmoji: "👑"),
+        MathHero(id: "cauchy", name: "柯西", nameEN: "Augustin-Louis Cauchy", era: "1789 - 1857", attributes: HeroAttributes(insight: 9, creativity: 8, perseverance: 10, influence: 9), weaponSkills: ["极限严谨化", "复积分"], legendStory: "他给数学大厦打下了最坚实的严谨地基，一生发表了近800篇论文。", famousQuote: "人们可以因为天才而崇拜拉格朗日，但只有柯西才能让数学变得严谨。", relatedMysteries: [], portraitEmoji: "📐")
     ]
 
     // MARK: - Mysteries
 
     static let mysteries: [MathMystery] = [
         MathMystery(
-            id: "cat_on_earth",
-            title: "地球加长一米",
-            category: .intuitiveRebel,
-            shockRating: 8,
-            summary: "缝隙能钻过一只猫吗？",
-            premise: "直觉与代数的博弈。",
-            arguments: [Argument(title: "直觉", content: "不行", isCorrect: false)],
-            proofSteps: [ProofStep(order: 1, latex: "h = 1/(2\\pi)", explanation: "结果与R无关")],
-            verdict: "约16厘米，可以。",
-            historicalContext: "代数的纯粹性。",
+            id: "point_nine_equal_one",
+            title: "0.999... 是否等于 1",
+            category: .infinityWar,
+            shockRating: 10,
+            summary: "这个等式引发了无数数学‘战争’。",
+            premise: "直觉挑战。",
+            arguments: [Argument(title: "代数证明", content: "10x-x=9x=9", isCorrect: true)],
+            proofSteps: [ProofStep(order: 1, latex: "x=1", explanation: "严谨结论")],
+            verdict: "严格相等。",
+            historicalContext: "无穷概念的局限。",
             relatedWeaponId: nil,
-            relatedHeroId: nil,
-            votes: MysteryVotes(agreeCount: 1540, disagreeCount: 89, userVote: nil),
-            openQuestion: "足球上呢？"
+            relatedHeroId: "euler",
+            votes: MysteryVotes(agreeCount: 8900, disagreeCount: 1240, userVote: nil),
+            openQuestion: "如果是在非标准分析中？"
         )
     ]
 
     // MARK: - Weapons
 
     static let weapons: [DescendWeapon] = [
-        DescendWeapon(id: "derivative_blade", name: "Derivative Blade", codename: "求导刃", tier: .blade, principle: "变化率", tagline: "极值秒杀", unlockConditions: [], slayableGaokaoTypes: ["极值"], demonstrations: [], masteryLevel: .beginner)
+        DescendWeapon(id: "derivative_blade", name: "Derivative Blade", codename: "求导刃", tier: .blade, principle: "导数", tagline: "变化率秒杀", unlockConditions: [], slayableGaokaoTypes: ["单调性"], demonstrations: [], masteryLevel: .beginner),
+        DescendWeapon(id: "lopital_hammer", name: "L'Hôpital's Hammer", codename: "洛必达之锤", tier: .heavyWeapon, principle: "导数比极限", tagline: "极限陷阱粉碎机", unlockConditions: [], slayableGaokaoTypes: ["极限"], demonstrations: [], masteryLevel: .locked)
     ]
 
     // MARK: - Daily Strikes
 
     static let dailyStrikes: [DailyStrike] = [
-        DailyStrike(type: "逻辑", question: "对折42次纸？", answer: "到月球", detail: "指数增长")
+        DailyStrike(type: "思维", question: "为什么球的表面积是体积的导数？", answer: "因为微小的半径增加带来的体积增加量，正好铺满了球的表面。", detail: "微分几何的直观体现。")
     ]
 }
