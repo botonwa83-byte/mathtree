@@ -72,26 +72,32 @@ struct Formula: Identifiable, Codable {
     let unlockedBy: String?
     let detailedExplanation: String?
     let proofSteps: [String]?
+    let detailedProof: [ProofStep]?
     let applications: [String]?
     let history: String?
-
-    static let example = Formula(
-        id: "pythagorean",
-        name: "勾股定理",
-        latex: "a^2 + b^2 = c^2",
-        level: .middle,
-        category: .geometry,
-        prerequisites: ["rectangle_area"],
-        derivations: ["distance_formula", "circle_equation"],
-        advancedForm: "inner_product",
-        gaokaoRelevance: 0.85,
-        tags: ["几何", "基础", "必考"],
-        intuition: "直角三角形两条直角边的平方和等于斜边的平方",
-        leapfrogKey: false,
-        unlockedBy: nil,
-        detailedExplanation: nil,
-        proofSteps: nil,
-        applications: nil,
-        history: nil
-    )
+    let visualHint: String?
+    let keyInsights: [String]?
+    
+    init(id: String, name: String, latex: String, level: FormulaLevel, category: FormulaCategory, prerequisites: [String], derivations: [String], advancedForm: String?, gaokaoRelevance: Double, tags: [String], intuition: String, leapfrogKey: Bool, unlockedBy: String? = nil, detailedExplanation: String? = nil, proofSteps: [String]? = nil, detailedProof: [ProofStep]? = nil, applications: [String]? = nil, history: String? = nil, visualHint: String? = nil, keyInsights: [String]? = nil) {
+        self.id = id
+        self.name = name
+        self.latex = latex
+        self.level = level
+        self.category = category
+        self.prerequisites = prerequisites
+        self.derivations = derivations
+        self.advancedForm = advancedForm
+        self.gaokaoRelevance = gaokaoRelevance
+        self.tags = tags
+        self.intuition = intuition
+        self.leapfrogKey = leapfrogKey
+        self.unlockedBy = unlockedBy
+        self.detailedExplanation = detailedExplanation
+        self.proofSteps = proofSteps
+        self.detailedProof = detailedProof
+        self.applications = applications
+        self.history = history
+        self.visualHint = visualHint
+        self.keyInsights = keyInsights
+    }
 }

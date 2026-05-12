@@ -37,6 +37,20 @@ struct ProofStep: Codable, Identifiable {
     let order: Int
     let latex: String
     let explanation: String
+    let title: String?
+    let content: String?
+    let visualHint: String?
+    let keyInsight: String?
+    
+    init(order: Int, latex: String, explanation: String, title: String? = nil, content: String? = nil, visualHint: String? = nil, keyInsight: String? = nil) {
+        self.order = order
+        self.latex = latex
+        self.explanation = explanation
+        self.title = title
+        self.content = content
+        self.visualHint = visualHint
+        self.keyInsight = keyInsight
+    }
 }
 
 struct MysteryVotes: Codable {

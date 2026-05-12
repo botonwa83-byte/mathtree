@@ -2,6 +2,9 @@ import SwiftUI
 
 struct FormulaDetailView: View {
     let formula: Formula
+    @State private var expandedSteps: Set<Int> = []
+    @State private var currentStepIndex: Int = 0
+    @State private var showProofSummary: Bool = false
 
     var body: some View {
         ScrollView {
@@ -187,28 +190,220 @@ struct FormulaDetailView: View {
 
     private var proofStepsSection: some View {
         Group {
-            if let steps = formula.proofSteps, !steps.isEmpty {
+            if let detailedProof = formula.detailedProof, !detailedProof.isEmpty {
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack(alignment: .center, spacing: 16) {
+                        Label("证明步骤", systemImage: "checkmark.seal.fill")
+                            .font(.headline)
+                            .foregroundColor(.apexEmerald)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            showProofSummary.toggle()
+                        }) {
+                            HStack(spacing: 4) {
+                                Image(systemName: showProofSummary ? "chevron.down" : "chevron.up")
+                                    .font(.caption)
+                                Text("摘要")
+                                    .font(.caption)
+                            }
+                            .foregroundColor(.apexStarBlue)
+                        }
+                    }
+                    
+                    if showProofSummary {
+                        proofSummaryCard(detailedProof: detailedProof)
+                            .transition(.opacity.combined(with: .scale))
+                    }
+                    
+                    HStack(spacing: 8) {
+                        Button(action: {
+                            if currentStepIndex > 0 {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    currentStepIndex -= 1
+                                }
+                            }
+                        }) {
+                            Image(systemName: "chevron.left")
+                                .font(.title)
+                        }
+                        .disabled(currentStepIndex == 0)
+                        .opacity(currentStepIndex == 0 ? 0.3 : 1)
+                        
+                        Text("\(currentStepIndex + 1) / \(detailedProof.count)")
+                            .font(.caption)
+                            .fontWeight(.medium)
+                            .foregroundColor(.secondary)
+                        
+                        Button(action: {
+                            if currentStepIndex < detailedProof.count - 1 {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    currentStepIndex += 1
+                                }
+                            }
+                        }) {
+                            Image(systemName: "chevron.right")
+                                .font(.title)
+                        }
+                        .disabled(currentStepIndex == detailedProof.count - 1)
+                        .opacity(currentStepIndex == detailedProof.count - 1 ? 0.3 : 1)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            expandedSteps = expandedSteps.isEmpty ? Set(detailedProof.map { $0.order }) : []
+                        }) {
+                            HStack(spacing: 4) {
+                                Image(systemName: expandedSteps.isEmpty ? "chevron.down.circle" : "chevron.up.circle")
+                                    .font(.caption)
+                                Text(expandedSteps.isEmpty ? "展开全部" : "折叠全部")
+                                    .font(.caption)
+                            }
+                            .foregroundColor(.apexMystery)
+                        }
+                    }
+                    .padding(.horizontal, 8)
+                    
+                    VStack(alignment: .leading, spacing: 16) {
+                        ForEach(Array(detailedProof.enumerated()), id: \.element.id) { index, step in
+                            let isActive = index == currentStepIndex
+                            let isExpanded = expandedSteps.contains(step.order) || isActive
+                            
+                            VStack(alignment: .leading, spacing: 8) {
+                                Button(action: {
+                                    withAnimation(.easeInOut(duration: 0.3)) {
+                                        if expandedSteps.contains(step.order) {
+                                            expandedSteps.remove(step.order)
+                                        } else {
+                                            expandedSteps.insert(step.order)
+                                        }
+                                    }
+                                }) {
+                                    HStack(alignment: .top, spacing: 12) {
+                                        ZStack {
+                                            Circle()
+                                                .fill(isActive ? Color.apexEmerald : Color.apexEmerald.opacity(0.1))
+                                                .frame(width: 36, height: 36)
+                                            Text("\(step.order)")
+                                                .font(.caption)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(isActive ? .white : .apexEmerald)
+                                        }
+                                        .padding(.top, 4)
+                                        .scaleEffect(isActive ? 1.1 : 1.0)
+                                        .animation(.spring(), value: isActive)
+                                        
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            if let title = step.title {
+                                                Text(title)
+                                                    .font(.subheadline)
+                                                    .fontWeight(.bold)
+                                                    .foregroundColor(.primary)
+                                            }
+                                            if !isExpanded {
+                                                Text(step.explanation)
+                                                    .font(.caption)
+                                                    .foregroundColor(.secondary)
+                                            }
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                                
+                                if isExpanded {
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        if let content = step.content {
+                                            Text(content)
+                                                .font(.body)
+                                                .foregroundColor(.primary.opacity(0.85))
+                                                .lineSpacing(4)
+                                                .transition(.opacity.combined(with: .slide))
+                                        } else {
+                                            Text(step.explanation)
+                                                .font(.body)
+                                                .foregroundColor(.primary.opacity(0.85))
+                                                .lineSpacing(4)
+                                                .transition(.opacity.combined(with: .slide))
+                                        }
+                                        
+                                        if !step.latex.isEmpty {
+                                            FormulaView(latex: step.latex, fontSize: 18)
+                                                .frame(height: 40)
+                                                .frame(maxWidth: .infinity)
+                                                .background(Color.apexBackground.opacity(0.5))
+                                                .cornerRadius(8)
+                                                .transition(.opacity.combined(with: .scale))
+                                        }
+                                        
+                                        HStack(spacing: 16) {
+                                            if let visualHint = step.visualHint {
+                                                HStack(spacing: 6) {
+                                                    Image(systemName: "eye")
+                                                        .font(.caption)
+                                                        .foregroundColor(.apexStarBlue)
+                                                    Text(visualHint)
+                                                        .font(.caption)
+                                                        .foregroundColor(.apexStarBlue)
+                                                }
+                                                .transition(.opacity)
+                                            }
+                                            
+                                            if let keyInsight = step.keyInsight {
+                                                HStack(spacing: 6) {
+                                                    Image(systemName: "lightbulb")
+                                                        .font(.caption)
+                                                        .foregroundColor(.apexGold)
+                                                    Text(keyInsight)
+                                                        .font(.caption)
+                                                        .foregroundColor(.apexGold)
+                                                }
+                                                .transition(.opacity)
+                                            }
+                                        }
+                                    }
+                                    .padding(.leading, 48)
+                                }
+                                
+                                if step.order < detailedProof.count {
+                                    Divider()
+                                        .background(Color.apexEmerald.opacity(0.2))
+                                        .padding(.leading, 18)
+                                }
+                            }
+                        }
+                    }
+                }
+                .padding(20)
+                .background(Color.apexCardSurface)
+                .cornerRadius(20)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+            } else if let steps = formula.proofSteps, !steps.isEmpty {
                 VStack(alignment: .leading, spacing: 16) {
                     Label("证明步骤", systemImage: "checkmark.seal.fill")
                         .font(.headline)
                         .foregroundColor(.apexEmerald)
-
+                    
                     VStack(alignment: .leading, spacing: 12) {
-                        ForEach(Array(steps.enumerated()), id: \.offset) { index, step in
+                        ForEach(steps.indices, id: \.self) { index in
                             HStack(alignment: .top, spacing: 12) {
-                                Text("\(index + 1)")
-                                    .font(.caption)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.apexEmerald)
-                                    .frame(width: 24, height: 24)
-                                    .background(Color.apexEmerald.opacity(0.1))
-                                    .cornerRadius(6)
-                                    .padding(.top, 2)
-
-                                Text(step)
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.apexEmerald.opacity(0.1))
+                                        .frame(width: 32, height: 32)
+                                    Text("\(index + 1)")
+                                        .font(.caption)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.apexEmerald)
+                                }
+                                Text(steps[index])
                                     .font(.body)
                                     .foregroundColor(.primary.opacity(0.85))
-                                    .lineSpacing(4)
                             }
                         }
                     }
@@ -219,6 +414,38 @@ struct FormulaDetailView: View {
                 .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
             }
         }
+    }
+    
+    private func proofSummaryCard(detailedProof: [ProofStep]) -> some View {
+        let keyInsights = detailedProof.compactMap { $0.keyInsight }
+        
+        return VStack(alignment: .leading, spacing: 12) {
+            Text("💡 证明关键洞见")
+                .font(.subheadline)
+                .fontWeight(.bold)
+                .foregroundColor(.apexGold)
+            
+            VStack(spacing: 8) {
+                ForEach(keyInsights, id: \.self) { insight in
+                    HStack(alignment: .top, spacing: 8) {
+                        Image(systemName: "star.fill")
+                            .font(.caption)
+                            .foregroundColor(.apexGold)
+                            .padding(.top, 2)
+                        Text(insight)
+                            .font(.caption)
+                            .foregroundColor(.primary.opacity(0.85))
+                    }
+                }
+            }
+        }
+        .padding(16)
+        .background(Color.apexGold.opacity(0.05))
+        .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.apexGold.opacity(0.2), lineWidth: 1)
+        )
     }
 
     private var applicationsSection: some View {
