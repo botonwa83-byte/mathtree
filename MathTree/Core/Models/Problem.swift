@@ -26,6 +26,7 @@ struct DualSolution: Codable {
     let descentMethod: SolutionPath
     let weaponUsed: String
     let timeRatio: Double
+    let detailedExplanation: String?
 }
 
 struct Problem: Identifiable, Codable {

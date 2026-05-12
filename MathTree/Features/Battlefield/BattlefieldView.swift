@@ -357,6 +357,26 @@ struct BattlefieldView: View {
                 )
             }
 
+            if let explanation = dual.detailedExplanation {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Image(systemName: "book.fill")
+                            .foregroundColor(.apexStarBlue)
+                        Text("降维秒杀详解")
+                            .font(.subheadline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.apexStarBlue)
+                    }
+                    Text(explanation)
+                        .font(.caption)
+                        .foregroundColor(.primary.opacity(0.85))
+                        .lineSpacing(6)
+                }
+                .padding(16)
+                .background(Color.apexStarBlue.opacity(0.05))
+                .cornerRadius(16)
+            }
+
             Text("💡 掌握高等数学思维，可以让你以更高的维度审视问题，实现真正的秒杀！")
                 .font(.caption)
                 .foregroundColor(.secondary)

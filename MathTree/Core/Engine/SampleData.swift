@@ -164,10 +164,36 @@ enum SampleData {
                 commonMistakes: ["忘记进位"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "按顺序计算", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "加法交换律优化", commonMistakes: []),
-                weaponUsed: "加法交换律",
-                timeRatio: 2.0
+                standardMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "按顺序计算", latex: "3+5=8", annotation: ""),
+                        SolutionStep(order: 2, description: "继续加法", latex: "8+7=15", annotation: "")
+                    ],
+                    keyInsight: "按顺序计算",
+                    commonMistakes: []
+                ),
+                descentMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "【秒杀】凑整法！", latex: "(3+7)+5 = 10+5 = 15", annotation: "先凑10再算！")
+                    ],
+                    keyInsight: "凑整让复杂计算变简单！",
+                    commonMistakes: []
+                ),
+                weaponUsed: "凑整法 (加法交换律)",
+                timeRatio: 2.0,
+                detailedExplanation: """
+                    【降维秒杀详解】
+                    
+                    这道题展示了如何用"凑整法"（加法交换律和结合律）来秒杀计算题：
+                    
+                    1️⃣ 观察：3和7可以凑成10
+                    2️⃣ 分组：(3+7)+5，利用交换律和结合律重新排列
+                    3️⃣ 计算：每组都是10，直接得出15
+                    
+                    💡 关键：遇到加法题，先看能不能凑整！这比按顺序计算快得多，也不容易出错！
+                    
+                    🧠 高阶思维：这是"代数运算律"的体现——虽然是小学题，但体现了"重新排列使计算简化"的思想，这种思想在高中、大学数学中也广泛使用！
+                    """
             ),
             gaokaoYear: nil,
             tags: ["算术", "小学"]
@@ -195,10 +221,35 @@ enum SampleData {
                 commonMistakes: ["忘记开方", "搞混斜边和直角边"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "直接应用勾股定理", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "记住3-4-5勾股数，秒答", commonMistakes: []),
-                weaponUsed: "勾股数记忆",
-                timeRatio: 5.0
+                standardMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "应用勾股定理", latex: "c²=3²+4²=25", annotation: ""),
+                        SolutionStep(order: 2, description: "开方", latex: "c=5", annotation: "")
+                    ],
+                    keyInsight: "直接应用勾股定理",
+                    commonMistakes: []
+                ),
+                descentMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "【秒杀】记住3-4-5勾股数！", latex: "c=5", annotation: "直接秒答！")
+                    ],
+                    keyInsight: "记住常见勾股数，秒答直角三角形！",
+                    commonMistakes: []
+                ),
+                weaponUsed: "勾股数记忆法",
+                timeRatio: 5.0,
+                detailedExplanation: """
+                    【降维秒杀详解】
+                    
+                    这道题展示了如何用"勾股数记忆法"来秒杀几何题：
+                    
+                    1️⃣ 观察：3和4，马上想到勾股数3-4-5
+                    2️⃣ 秒答：斜边就是5！
+                    
+                    💡 关键：记住常见勾股数（3-4-5，5-12-13，7-24-25，8-15-17等），它们的倍数也是勾股数！
+                    
+                    🧠 高阶思维：这是"数感"的体现——对数的敏感度和记忆，这种能力在解三角形、解析几何等高中内容中也至关重要！
+                    """
             ),
             gaokaoYear: nil,
             tags: ["几何", "初中"]
@@ -224,10 +275,37 @@ enum SampleData {
                 commonMistakes: ["记错符号"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "求根公式", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "韦达定理直接秒杀", commonMistakes: []),
+                standardMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "求根公式", latex: "x = [5 ± √(25-24)]/2", annotation: ""),
+                        SolutionStep(order: 2, description: "求出两根", latex: "x₁=2, x₂=3", annotation: ""),
+                        SolutionStep(order: 3, description: "相加", latex: "2+3=5", annotation: "")
+                    ],
+                    keyInsight: "求根公式",
+                    commonMistakes: []
+                ),
+                descentMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "【秒杀】韦达定理直接用！", latex: "x₁+x₂ = -b/a = -(-5)/1 = 5", annotation: "不求根，秒杀！")
+                    ],
+                    keyInsight: "韦达定理是二次方程的神器！",
+                    commonMistakes: []
+                ),
                 weaponUsed: "韦达定理",
-                timeRatio: 3.0
+                timeRatio: 3.0,
+                detailedExplanation: """
+                    【降维秒杀详解】
+                    
+                    这道题展示了如何用"韦达定理"来秒杀二次方程问题：
+                    
+                    1️⃣ 识别：对于 ax²+bx+c=0，根的和是 -b/a
+                    2️⃣ 代入：这里a=1, b=-5，所以和就是 -(-5)/1 = 5
+                    3️⃣ 完成：不需要求根，直接得出答案！
+                    
+                    💡 关键：韦达定理告诉我们"根与系数的关系"，在不需要知道具体根的时候特别有用！
+                    
+                    🧠 高阶思维：这是"对称多项式"思想的体现——虽然是初中题，但这种"研究整体性质而不求解个体"的思想，在高中不等式、数列，大学抽象代数中都有应用！
+                    """
             ),
             gaokaoYear: nil,
             tags: ["方程", "初中"]
@@ -257,10 +335,40 @@ enum SampleData {
                 commonMistakes: ["记错和角公式", "符号错误"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "和角公式展开", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "欧拉公式：e^(i(α+β))=e^(iα)·e^(iβ)", commonMistakes: []),
-                weaponUsed: "欧拉棱镜",
-                timeRatio: 4.0
+                standardMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "求cosα和sinβ", latex: "cosα=4/5, sinβ=3/5", annotation: ""),
+                        SolutionStep(order: 2, description: "和角公式展开", latex: "sinαcosβ+cosαsinβ", annotation: ""),
+                        SolutionStep(order: 3, description: "代入计算", latex: "(3/5)(4/5)+(4/5)(3/5)=24/25", annotation: "")
+                    ],
+                    keyInsight: "和角公式展开",
+                    commonMistakes: []
+                ),
+                descentMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "【秒杀】欧拉公式！", latex: "e^(i(α+β)) = e^(iα)·e^(iβ)", annotation: "欧拉公式"),
+                        SolutionStep(order: 2, description: "取虚部", latex: "sin(α+β) = Im[(cosα+isinα)(cosβ+isinβ)]", annotation: ""),
+                        SolutionStep(order: 3, description: "计算", latex: "Im[(4/5+3i/5)(4/5+3i/5)] = 24/25", annotation: "秒杀！")
+                    ],
+                    keyInsight: "欧拉公式让三角函数变成复数乘法！",
+                    commonMistakes: []
+                ),
+                weaponUsed: "欧拉棱镜 (欧拉公式)",
+                timeRatio: 4.0,
+                detailedExplanation: """
+                    【降维秒杀详解】
+                    
+                    这道题展示了如何用"欧拉公式"（大学内容）来秒杀三角函数题：
+                    
+                    1️⃣ 回忆：欧拉公式 e^(iθ) = cosθ + i sinθ
+                    2️⃣ 观察：sin(α+β) 是 e^(i(α+β)) 的虚部
+                    3️⃣ 计算：e^(i(α+β)) = e^(iα)·e^(iβ) = (4/5+3i/5)(4/5+3i/5) = (16/25-9/25)+(24/25)i
+                    4️⃣ 取虚部：就是 24/25！
+                    
+                    💡 关键：欧拉公式把三角函数的复杂运算变成了简单的复数乘法！
+                    
+                    🧠 高阶思维：这是"用更高观点统一低等概念"的典范——三角函数和指数函数在复数域统一了！这种思想在整个数学中都很重要！
+                    """
             ),
             gaokaoYear: 2020,
             tags: ["三角函数", "高中"]
@@ -288,10 +396,38 @@ enum SampleData {
                 commonMistakes: ["搞混 a 和 b", "忘记开方"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "椭圆基本性质", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "极坐标统一方程", commonMistakes: []),
-                weaponUsed: "圆锥曲线统一方程",
-                timeRatio: 3.0
+                standardMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "找a", latex: "a=5", annotation: ""),
+                        SolutionStep(order: 2, description: "找c", latex: "c=4", annotation: ""),
+                        SolutionStep(order: 3, description: "计算e", latex: "e=4/5", annotation: "")
+                    ],
+                    keyInsight: "按定义计算",
+                    commonMistakes: []
+                ),
+                descentMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "【秒杀】这是经典椭圆！", latex: "a=5, b=3 \\implies c=4 \\implies e=4/5", annotation: "记住常见椭圆参数"),
+                        SolutionStep(order: 2, description: "直接写出", latex: "e=4/5", annotation: "秒杀！")
+                    ],
+                    keyInsight: "记住常见椭圆，离心率秒出！",
+                    commonMistakes: []
+                ),
+                weaponUsed: "圆锥曲线直觉法",
+                timeRatio: 3.0,
+                detailedExplanation: """
+                    【降维秒杀详解】
+                    
+                    这道题展示了如何用"圆锥曲线直觉"来秒杀：
+                    
+                    1️⃣ 识别：x²/25 + y²/9 = 1 是经典椭圆
+                    2️⃣ 记住：a=5, b=3，所以 c=4（勾股数3-4-5）
+                    3️⃣ 秒答：e=c/a=4/5
+                    
+                    💡 关键：对常见圆锥曲线参数要有敏感度！
+                    
+                    🧠 高阶思维：这是"模式识别"能力的体现——快速识别已知模式，这种能力在解复杂题时能节省大量时间！
+                    """
             ),
             gaokaoYear: 2021,
             tags: ["圆锥曲线", "高中"]
@@ -318,10 +454,37 @@ enum SampleData {
                 commonMistakes: ["求导错误", "忘记代入"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "导数定义求极限", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "幂函数求导公式直接秒杀", commonMistakes: []),
-                weaponUsed: "求导刃",
-                timeRatio: 6.0
+                standardMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "求导", latex: "f'(x)=3x²-3", annotation: ""),
+                        SolutionStep(order: 2, description: "代入", latex: "f'(1)=0", annotation: "")
+                    ],
+                    keyInsight: "按部就班求导",
+                    commonMistakes: []
+                ),
+                descentMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "【秒杀】观察 f(x)=x(x²-3)", latex: "x=1是临界点", annotation: "直接观察"),
+                        SolutionStep(order: 2, description: "或者更高级：", latex: "f(x)在x=1处是极值点 \\implies f'(1)=0", annotation: "秒杀！")
+                    ],
+                    keyInsight: "极值点导数为0，直接秒答！",
+                    commonMistakes: []
+                ),
+                weaponUsed: "求导刃 (极值点性质)",
+                timeRatio: 6.0,
+                detailedExplanation: """
+                    【降维秒杀详解】
+                    
+                    这道题展示了如何用"极值点性质"来秒杀导数题：
+                    
+                    1️⃣ 观察：f(x)=x³-3x=x(x²-3)，x=1是一个临界点
+                    2️⃣ 直觉：这是一个三次函数，在x=1处应该是极值点
+                    3️⃣ 秒答：极值点导数为0，所以f'(1)=0！
+                    
+                    💡 关键：理解导数的几何意义——极值点处切线水平，斜率为0！
+                    
+                    🧠 高阶思维：这是"数形结合"和"性质预判"的体现——先分析函数性质，再精确计算，这种思想在解复杂题时事半功倍！
+                    """
             ),
             gaokaoYear: 2022,
             tags: ["导数", "高中"]
@@ -350,10 +513,37 @@ enum SampleData {
                 commonMistakes: ["求导错误", "忘记检查条件"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "等价无穷小替换", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "泰勒展开直接写出答案", commonMistakes: []),
-                weaponUsed: "洛必达之锤",
-                timeRatio: 5.0
+                standardMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "等价无穷小替换", latex: "sinx ≈ x - x³/6", annotation: "需要记住泰勒展开"),
+                        SolutionStep(order: 2, description: "代入", latex: "(x - x³/6 - x)/x³ = -1/6", annotation: "")
+                    ],
+                    keyInsight: "用泰勒展开或等价无穷小",
+                    commonMistakes: []
+                ),
+                descentMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "【秒杀】泰勒展开直接上！", latex: "sinx = x - x³/6 + o(x³)", annotation: "泰勒展开"),
+                        SolutionStep(order: 2, description: "代入", latex: "(x - x³/6 - x)/x³ = -x³/6 / x³ = -1/6", annotation: "秒杀！")
+                    ],
+                    keyInsight: "泰勒级数是极限的终极武器！",
+                    commonMistakes: []
+                ),
+                weaponUsed: "洛必达之锤 / 泰勒级数",
+                timeRatio: 5.0,
+                detailedExplanation: """
+                    【降维秒杀详解】
+                    
+                    这道题展示了如何用"泰勒级数"（大学内容）来秒杀极限题：
+                    
+                    1️⃣ 回忆：sinx 的泰勒展开是 sinx = x - x³/6 + x⁵/120 - ...
+                    2️⃣ 代入：sinx - x = -x³/6 + 高次项
+                    3️⃣ 相除：(sinx - x)/x³ = -1/6 + 高次项 → 极限就是 -1/6
+                    
+                    💡 关键：泰勒展开能把复杂函数变成多项式，极限计算一目了然！
+                    
+                    🧠 高阶思维：这是"用多项式逼近复杂函数"的思想——虽然是大学内容，但用在高考极限题上简直是降维打击！
+                    """
             ),
             gaokaoYear: 2022,
             tags: ["极限", "压轴"]
@@ -381,10 +571,39 @@ enum SampleData {
                 commonMistakes: ["记错余弦定理公式", "角度单位错误"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "余弦定理", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "向量点积公式", commonMistakes: []),
-                weaponUsed: "向量武器",
-                timeRatio: 3.0
+                standardMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "余弦定理", latex: "c²=3²+4²-2·3·4·cos60°", annotation: ""),
+                        SolutionStep(order: 2, description: "计算", latex: "c²=9+16-12=13", annotation: ""),
+                        SolutionStep(order: 3, description: "开方", latex: "c=√13", annotation: "")
+                    ],
+                    keyInsight: "按余弦定理计算",
+                    commonMistakes: []
+                ),
+                descentMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "【秒杀】向量法！", latex: "\\vec{AB} = \\vec{CB} - \\vec{CA}", annotation: "向量减法"),
+                        SolutionStep(order: 2, description: "平方", latex: "|\\vec{AB}|² = |\\vec{CB}|² + |\\vec{CA}|² - 2\\vec{CB}\\cdot\\vec{CA}", annotation: "点积性质"),
+                        SolutionStep(order: 3, description: "计算", latex: "c²=9+16-2·3·4·cos60°=13 \\implies c=√13", annotation: "秒杀！")
+                    ],
+                    keyInsight: "向量让几何问题代数化！",
+                    commonMistakes: []
+                ),
+                weaponUsed: "向量武器 (点积)",
+                timeRatio: 3.0,
+                detailedExplanation: """
+                    【降维秒杀详解】
+                    
+                    这道题展示了如何用"向量点积"来秒杀几何题：
+                    
+                    1️⃣ 构造向量：→AB = →CB - →CA
+                    2️⃣ 平方：|→AB|² = |→CB|² + |→CA|² - 2→CB·→CA
+                    3️⃣ 计算：就是 c² = a² + b² - 2ab cosC
+                    
+                    💡 关键：余弦定理其实就是向量点积的几何解释！
+                    
+                    🧠 高阶思维：这是"几何问题代数化"思想的体现——用向量工具可以统一处理很多几何问题！
+                    """
             ),
             gaokaoYear: 2019,
             tags: ["解三角形", "高中"]
@@ -412,10 +631,38 @@ enum SampleData {
                 commonMistakes: ["求导错误", "区间开闭判断错误"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "定义法比较", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "导数直接秒杀", commonMistakes: []),
-                weaponUsed: "求导刃",
-                timeRatio: 4.0
+                standardMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "求导", latex: "f'(x)=3x²-6x", annotation: ""),
+                        SolutionStep(order: 2, description: "解不等式", latex: "f'(x)<0 \\implies 0<x<2", annotation: "")
+                    ],
+                    keyInsight: "导数判断单调性",
+                    commonMistakes: []
+                ),
+                descentMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "【秒杀】观察三次函数形状！", latex: "f(x)=x³-3x²+1", annotation: "三次项系数为正"),
+                        SolutionStep(order: 2, description: "图像趋势", latex: "先增后减再增，递减区间在中间", annotation: ""),
+                        SolutionStep(order: 3, description: "看选项", latex: "只有(0,2)是中间区间", annotation: "秒杀！")
+                    ],
+                    keyInsight: "熟悉函数图像，区间秒出！",
+                    commonMistakes: []
+                ),
+                weaponUsed: "求导刃 (函数图像直觉)",
+                timeRatio: 3.0,
+                detailedExplanation: """
+                    【降维秒杀详解】
+                    
+                    这道题展示了如何用"函数图像直觉"来秒杀：
+                    
+                    1️⃣ 识别：这是三次函数 f(x)=x³-3x²+1，首项系数为正
+                    2️⃣ 趋势：三次函数"先增后减再增"，递减区间在中间
+                    3️⃣ 看选项：只有(0,2)是中间区间，秒答！
+                    
+                    💡 关键：熟悉基本函数的图像形状，能大大提高解题速度！
+                    
+                    🧠 高阶思维：这是"数形结合"和"定性分析"思想的体现——先从宏观把握函数性质，再进行精确计算！
+                    """
             ),
             gaokaoYear: 2021,
             tags: ["导数", "单调性", "高中"]
@@ -443,10 +690,38 @@ enum SampleData {
                 commonMistakes: ["项数计算错误", "公式记错"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "逐项相加", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "高斯配对法", commonMistakes: []),
-                weaponUsed: "高斯求和",
-                timeRatio: 10.0
+                standardMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "用另一个公式", latex: "Sₙ=na₁+n(n-1)d/2", annotation: ""),
+                        SolutionStep(order: 2, description: "计算", latex: "10×2+10×9×3/2=20+135=155", annotation: "")
+                    ],
+                    keyInsight: "按公式计算",
+                    commonMistakes: []
+                ),
+                descentMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "【秒杀】高斯配对法！", latex: "S₁₀ = (a₁+a₁₀)+(a₂+a₉)+...+(a₅+a₆)", annotation: "配对"),
+                        SolutionStep(order: 2, description: "计算", latex: "a₁+a₁₀=2+29=31", annotation: "每对都是31"),
+                        SolutionStep(order: 3, description: "相乘", latex: "5×31=155", annotation: "秒杀！")
+                    ],
+                    keyInsight: "高斯配对法，数列求和神器！",
+                    commonMistakes: []
+                ),
+                weaponUsed: "高斯求和法",
+                timeRatio: 4.0,
+                detailedExplanation: """
+                    【降维秒杀详解】
+                    
+                    这道题展示了如何用"高斯配对法"来秒杀数列题：
+                    
+                    1️⃣ 回忆：高斯小时候计算1+2+...+100的方法——首尾配对
+                    2️⃣ 配对：(a₁+a₁₀) = (a₂+a₉) = ... = (a₅+a₆) = 31
+                    3️⃣ 计算：5对 × 31 = 155
+                    
+                    💡 关键：等差数列中，"距离相等的两项之和相等"！
+                    
+                    🧠 高阶思维：这是"对称性"思想的体现——利用数列的对称性简化计算，这种思想在高中数学乃至大学数学中都非常重要！
+                    """
             ),
             gaokaoYear: 2020,
             tags: ["数列", "高中"]
@@ -474,10 +749,37 @@ enum SampleData {
                 commonMistakes: ["计数错误"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "直接计数", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "对称性：奇偶各半", commonMistakes: []),
+                standardMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "数偶数个数", latex: "2,4,6,8,10 → 5个", annotation: ""),
+                        SolutionStep(order: 2, description: "计算概率", latex: "5/10=1/2", annotation: "")
+                    ],
+                    keyInsight: "直接计数",
+                    commonMistakes: []
+                ),
+                descentMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "【秒杀】对称性！", latex: "1-10中奇偶各一半", annotation: "对称性"),
+                        SolutionStep(order: 2, description: "秒答", latex: "P=1/2", annotation: "秒杀！")
+                    ],
+                    keyInsight: "利用对称性，概率秒出！",
+                    commonMistakes: []
+                ),
                 weaponUsed: "对称性思维",
-                timeRatio: 3.0
+                timeRatio: 3.0,
+                detailedExplanation: """
+                    【降维秒杀详解】
+                    
+                    这道题展示了如何用"对称性思维"来秒杀概率题：
+                    
+                    1️⃣ 观察：1到10是连续整数，奇偶对称
+                    2️⃣ 推理：取到奇数和偶数的概率应该相等
+                    3️⃣ 秒答：概率就是 1/2
+                    
+                    💡 关键：对称性是概率论中的强大工具！
+                    
+                    🧠 高阶思维：这是"对称性与不变性"思想的体现——寻找问题中的对称关系，能大大简化计算！
+                    """
             ),
             gaokaoYear: 2019,
             tags: ["概率", "高中"]
@@ -504,10 +806,35 @@ enum SampleData {
                 commonMistakes: ["搞混点积和叉积", "符号错误"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "定义计算", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "内积空间性质", commonMistakes: []),
-                weaponUsed: "线性代数",
-                timeRatio: 2.0
+                standardMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "计算", latex: "1×3+2×4=3+8=11", annotation: "")
+                    ],
+                    keyInsight: "定义计算",
+                    commonMistakes: []
+                ),
+                descentMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "【秒杀】点积就是投影！", latex: "\\vec{a}\\cdot\\vec{b} = |\\vec{a}||\\vec{b}|\\cos\\theta", annotation: "但用坐标更快"),
+                        SolutionStep(order: 2, description: "计算", latex: "1×3+2×4=11", annotation: "秒杀！")
+                    ],
+                    keyInsight: "点积计算要熟练！",
+                    commonMistakes: []
+                ),
+                weaponUsed: "向量武器 (点积)",
+                timeRatio: 1.5,
+                detailedExplanation: """
+                    【降维秒杀详解】
+                    
+                    这道题展示了向量点积的计算：
+                    
+                    1️⃣ 公式：→a·→b = x₁x₂ + y₁y₂
+                    2️⃣ 计算：1×3 + 2×4 = 3 + 8 = 11
+                    
+                    💡 关键：点积是代数和几何的桥梁！
+                    
+                    🧠 高阶思维：这是"几何概念代数化"的体现——向量让几何问题可以用代数方法计算！
+                    """
             ),
             gaokaoYear: 2021,
             tags: ["向量", "高中"]
@@ -534,10 +861,40 @@ enum SampleData {
                 commonMistakes: ["忘记等号成立条件", "不满足正数条件"]
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "基本不等式", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "求导找极值点", commonMistakes: []),
+                standardMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "基本不等式", latex: "x + 4/x ≥ 2√(x·4/x) = 4", annotation: ""),
+                        SolutionStep(order: 2, description: "等号成立条件", latex: "x = 4/x \\implies x=2", annotation: "")
+                    ],
+                    keyInsight: "用基本不等式求最值",
+                    commonMistakes: []
+                ),
+                descentMethod: SolutionPath(
+                    steps: [
+                        SolutionStep(order: 1, description: "【秒杀】求导法！", latex: "f(x) = x + 4/x", annotation: "设函数"),
+                        SolutionStep(order: 2, description: "求导", latex: "f'(x) = 1 - 4/x²", annotation: "求导"),
+                        SolutionStep(order: 3, description: "找临界点", latex: "f'(x)=0 \\implies x²=4 \\implies x=2", annotation: "x>0"),
+                        SolutionStep(order: 4, description: "秒答", latex: "f(2)=2+4/2=4", annotation: "秒杀！")
+                    ],
+                    keyInsight: "求导是求函数最值的通用方法！",
+                    commonMistakes: []
+                ),
                 weaponUsed: "求导刃",
-                timeRatio: 3.0
+                timeRatio: 3.0,
+                detailedExplanation: """
+                    【降维秒杀详解】
+                    
+                    这道题展示了如何用"求导法"（通用方法）来秒杀最值问题：
+                    
+                    1️⃣ 设函数：f(x) = x + 4/x
+                    2️⃣ 求导数：f'(x) = 1 - 4/x²
+                    3️⃣ 找临界点：f'(x)=0 → x²=4 → x=2（因为x>0）
+                    4️⃣ 秒答：f(2)=2+4/2=4
+                    
+                    💡 关键：求导是求函数极值的通用方法，不需要记住各种不等式技巧！
+                    
+                    🧠 高阶思维：这是"微积分工具简化初等问题"的典范——虽然基本不等式也能做，但求导是更通用、更系统的方法，这种思想在解决复杂问题时尤为重要！
+                    """
             ),
             gaokaoYear: 2022,
             tags: ["不等式", "高中"]
