@@ -226,18 +226,19 @@ struct HeroDetailView: View {
                 .foregroundColor(.apexStarBlue)
 
             FlowLayout(spacing: 8) {
-                // In a real app, this would fetch actual Formula objects
                 ForEach(hero.relatedMysteries, id: \.self) { mysteryId in
-                    HStack {
-                        Image(systemName: "magnifyingglass.circle.fill")
-                        Text(mysteryId)
+                    if let mystery = SampleData.mysteries.first(where: { $0.id == mysteryId }) {
+                        HStack {
+                            Image(systemName: "magnifyingglass.circle.fill")
+                            Text(mystery.title)
+                        }
+                        .font(.caption)
+                        .foregroundColor(.apexMystery)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(Color.apexMystery.opacity(0.1))
+                        .cornerRadius(8)
                     }
-                    .font(.caption)
-                    .foregroundColor(.apexMystery)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .background(Color.apexMystery.opacity(0.1))
-                    .cornerRadius(8)
                 }
             }
         }

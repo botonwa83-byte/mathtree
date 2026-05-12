@@ -167,23 +167,23 @@ struct FormulaDetailView: View {
                 .foregroundColor(.apexEmerald)
 
             HStack(alignment: .top, spacing: 0) {
-                // Prereqs
                 VStack(spacing: 12) {
                     Text("来自")
                         .font(.caption2)
                         .foregroundColor(.secondary)
-                    
+
                     if formula.prerequisites.isEmpty {
                         DnaNode(title: "公理", color: .gray)
                     } else {
                         ForEach(formula.prerequisites, id: \.self) { prereq in
-                            DnaNode(title: prereq, color: .apexStarBlue)
+                            if let prereqFormula = SampleData.formulas.first(where: { $0.id == prereq }) {
+                                DnaNode(title: prereqFormula.name, color: .apexStarBlue)
+                            }
                         }
                     }
                 }
                 .frame(maxWidth: .infinity)
 
-                // Connector
                 VStack(spacing: 0) {
                     Spacer().frame(height: 40)
                     Image(systemName: "chevron.right.2")
@@ -191,7 +191,6 @@ struct FormulaDetailView: View {
                 }
                 .frame(width: 30)
 
-                // Current
                 VStack(spacing: 12) {
                     Text("当前")
                         .font(.caption2)
@@ -200,7 +199,6 @@ struct FormulaDetailView: View {
                 }
                 .frame(maxWidth: .infinity)
 
-                // Connector
                 VStack(spacing: 0) {
                     Spacer().frame(height: 40)
                     Image(systemName: "chevron.right.2")
@@ -208,17 +206,18 @@ struct FormulaDetailView: View {
                 }
                 .frame(width: 30)
 
-                // Derivations
                 VStack(spacing: 12) {
                     Text("生出")
                         .font(.caption2)
                         .foregroundColor(.secondary)
-                    
+
                     if formula.derivations.isEmpty {
                         DnaNode(title: "未知领域", color: .gray)
                     } else {
                         ForEach(formula.derivations.prefix(2), id: \.self) { deriv in
-                            DnaNode(title: deriv, color: .apexLava)
+                            if let derivFormula = SampleData.formulas.first(where: { $0.id == deriv }) {
+                                DnaNode(title: derivFormula.name, color: .apexLava)
+                            }
                         }
                     }
                 }

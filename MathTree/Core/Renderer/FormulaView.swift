@@ -23,9 +23,7 @@ struct FormulaView: UIViewRepresentable {
     }
 
     func updateUIView(_ webView: WKWebView, context: Context) {
-        let escapedLatex = latex
-            .replacingOccurrences(of: "\\", with: "\\\\")
-            .replacingOccurrences(of: "'", with: "\\'")
+        let escapedLatex = escapeForJavaScript(latex)
 
         let html = """
         <!DOCTYPE html><html>
@@ -62,5 +60,16 @@ struct FormulaView: UIViewRepresentable {
         </body></html>
         """
         webView.loadHTMLString(html, baseURL: nil)
+    }
+
+    private func escapeForJavaScript(_ string: String) -> String {
+        return string
+            .replacingOccurrences(of: "\\", with: "\\\\")
+            .replacingOccurrences(of: "'", with: "\\'")
+            .replacingOccurrences(of: "\n", with: "\\n")
+            .replacingOccurrences(of: "\r", with: "\\r")
+            .replacingOccurrences(of: "\t", with: "\\t")
+            .replacingOccurrences(of: "<", with: "\\u003C")
+            .replacingOccurrences(of: ">", with: "\\u003E")
     }
 }

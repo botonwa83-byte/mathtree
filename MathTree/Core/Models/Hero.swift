@@ -28,7 +28,7 @@ struct MathHero: Identifiable, Codable {
         weaponSkills: ["euler_prism", "euler_equation"],
         legendStory: "双眼相继失明后，仍然靠心算完成了大量工作。一生发表论文800+篇，直到去世前都在计算。",
         famousQuote: "数学是研究所有可能世界的科学。",
-        relatedMysteries: ["euler_identity"],
+        relatedMysteries: ["099_equals_1", "gabriel_horn"],
         portraitEmoji: "🧮"
     )
 
@@ -41,7 +41,7 @@ struct MathHero: Identifiable, Codable {
         weaponSkills: ["matrix_cannon", "gaussian_elimination"],
         legendStory: "3岁时发现老师算术题的错误。10岁时用等差数列首尾配对秒算1到100之和，震惊了老师。终生不轻易发表，因为他要求每篇文章都如大理石雕塑般完美。",
         famousQuote: "数学是科学的女王，数论是数学的女王。",
-        relatedMysteries: ["complex_reality", "non_euclidean"],
+        relatedMysteries: ["monty_hall"],
         portraitEmoji: "👑"
     )
 }

@@ -24,12 +24,16 @@ struct BattlefieldView: View {
                     VStack(spacing: 20) {
                         battleHeader
                         topicSelector
-                        
+
                         if !filteredProblems.isEmpty {
                             problemCard
-                            
+
                             if showDualView, let dual = filteredProblems[currentIndex].dualSolution {
                                 dualSolutionView(dual)
+                            }
+
+                            if showSolution {
+                                nextProblemButton
                             }
                         } else {
                             emptyState
@@ -40,7 +44,7 @@ struct BattlefieldView: View {
                 }
                 .background(Color.apexBackground)
                 .navigationTitle("战场")
-                
+
                 if showDescendAnimation {
                     DescendAnimationView(
                         title: "维度拉升",
@@ -51,6 +55,38 @@ struct BattlefieldView: View {
                     .zIndex(100)
                 }
             }
+        }
+    }
+
+    private var nextProblemButton: some View {
+        Button {
+            withAnimation {
+                goToNextProblem()
+            }
+        } label: {
+            HStack {
+                Image(systemName: "arrow.right.circle.fill")
+                Text("下一题")
+            }
+            .font(.subheadline)
+            .fontWeight(.bold)
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 16)
+            .background(Color.apexEmerald)
+            .cornerRadius(16)
+        }
+        .padding(.top, 8)
+    }
+
+    private func goToNextProblem() {
+        selectedAnswer = nil
+        showSolution = false
+        showDualView = false
+        if currentIndex < filteredProblems.count - 1 {
+            currentIndex += 1
+        } else {
+            currentIndex = 0
         }
     }
 
@@ -132,7 +168,7 @@ struct BattlefieldView: View {
                 VStack(spacing: 12) {
                     ForEach(Array(options.enumerated()), id: \.offset) { index, option in
                         OptionButton(
-                            label: ["A", "B", "C", "D"][index],
+                            label: optionLabel(for: index),
                             text: option,
                             isSelected: selectedAnswer == option,
                             isCorrect: showSolution ? option == problem.answer : nil
@@ -296,6 +332,11 @@ struct BattlefieldView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(60)
+    }
+
+    private func optionLabel(for index: Int) -> String {
+        let labels = ["A", "B", "C", "D", "E", "F", "G", "H"]
+        return index < labels.count ? labels[index] : "\(index + 1)"
     }
 }
 

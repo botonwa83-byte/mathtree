@@ -3,6 +3,7 @@ import SwiftUI
 struct CommandCenterView: View {
     @EnvironmentObject var profile: StudentProfile
     @State private var showDailyStrike = false
+    @State private var selectedFormula: Formula?
 
     var body: some View {
         NavigationStack {
@@ -22,6 +23,11 @@ struct CommandCenterView: View {
             .navigationTitle("MathTree")
             .sheet(isPresented: $showDailyStrike) {
                 DailyStrikeView()
+            }
+            .sheet(item: $selectedFormula) { formula in
+                NavigationStack {
+                    FormulaDetailView(formula: formula)
+                }
             }
         }
     }
@@ -135,7 +141,7 @@ struct CommandCenterView: View {
                         
                         if index == 0 {
                             Button("开始学习") {
-                                // Action to jump to formula detail
+                                selectedFormula = formula
                             }
                             .font(.caption)
                             .fontWeight(.bold)

@@ -82,7 +82,7 @@ struct MathMystery: Identifiable, Codable {
         verdict: "在实数体系中，0.999... 严格等于 1。这不是近似，不是约定，是严格的数学事实。",
         historicalContext: "这个问题在数学论坛上引发了数以万计的争论。2007年一项调查显示，约1/3的大学生学过极限后仍不相信这个结论。",
         relatedWeaponId: nil,
-        relatedHeroId: "cantor",
+        relatedHeroId: "russell",
         votes: MysteryVotes(agreeCount: 0, disagreeCount: 0, userVote: nil),
         openQuestion: nil
     )

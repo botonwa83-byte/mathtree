@@ -58,13 +58,13 @@ class StudentProfile: ObservableObject, Codable {
         self.formulaMasteries = [
             "pythagorean": 0.9,
             "add_commute": 1.0,
-            "quad_formula": 0.7
+            "quad_root": 0.7
         ]
         self.unlockedWeapons = ["derivative_blade"]
-        self.completedMysteries = ["cat_on_earth"]
+        self.completedMysteries = ["099_equals_1", "monty_hall"]
         self.predictedGaokaoScore = 112
         self.weaknessAreas = [.trigonometry: 0.45, .calculus: 0.3]
-        self.learningPath = ["derivative_def", "taylor_series", "euler_formula"]
+        self.learningPath = ["pythagorean", "quad_root", "sin_add"]
     }
 
     required init(from decoder: Decoder) throws {
