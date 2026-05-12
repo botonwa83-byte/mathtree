@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 enum MysteryCategory: String, Codable, CaseIterable {
     case intuitiveRebel = "intuitive_rebel"
@@ -21,6 +22,15 @@ enum MysteryCategory: String, Codable, CaseIterable {
         case .infinityWar: return "infinity"
         case .foundation: return "building.columns"
         case .coldCase: return "questionmark.folder"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .intuitiveRebel: return .apexLava
+        case .infinityWar: return .apexStarBlue
+        case .foundation: return .apexGold
+        case .coldCase: return .apexDanger
         }
     }
 }

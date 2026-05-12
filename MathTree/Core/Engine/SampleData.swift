@@ -207,6 +207,148 @@ enum SampleData {
             relatedHeroId: nil,
             votes: MysteryVotes(agreeCount: 6700, disagreeCount: 1100, userVote: nil),
             openQuestion: "现实物理中存在吗？"
+        ),
+
+        MathMystery(
+            id: "missing_square",
+            title: "失踪的正方形：视觉魔术",
+            category: .intuitiveRebel,
+            shockRating: 7,
+            summary: "拼图重组后面积凭空增加？",
+            premise: "将一个三角形切分重组，竟然多出了一个正方形的面积。",
+            arguments: [
+                Argument(title: "视觉派", content: "看起来三角形没变啊！", isCorrect: false),
+                Argument(title: "几何派", content: "斜边不是直线，有细微缝隙。", isCorrect: true)
+            ],
+            proofSteps: [
+                ProofStep(order: 1, latex: "\\tan \\theta_1 \\neq \\tan \\theta_2", explanation: "两个小三角形斜率不同"),
+                ProofStep(order: 2, latex: "\\text{总面积始终}=32", explanation: "重组后斜边外凸")
+            ],
+            verdict: "视觉欺骗，斜边实际上是向外凸的折线。",
+            historicalContext: "经典的几何悖论，挑战人类视觉感知。",
+            relatedWeaponId: nil,
+            relatedHeroId: nil,
+            votes: MysteryVotes(agreeCount: 9200, disagreeCount: 300, userVote: nil),
+            openQuestion: "AI能识别这种欺骗吗？"
+        ),
+
+        MathMystery(
+            id: "blue_eyes",
+            title: "蓝眼睛谜题：逻辑的传染",
+            category: .foundation,
+            shockRating: 9,
+            summary: "100个蓝眼睛岛民的自杀谜题",
+            premise: "岛上100个蓝眼睛和900个棕眼睛的人，外人说'看到蓝眼睛'后，所有人会在100天后自杀？",
+            arguments: [
+                Argument(title: "无用派", content: "大家都知道有蓝眼睛，说不说一样。", isCorrect: false),
+                Argument(title: "归纳派", content: "公共知识引发连锁反应。", isCorrect: true)
+            ],
+            proofSteps: [
+                ProofStep(order: 1, latex: "n=1: 立即知道", explanation: "只有一个蓝眼睛时"),
+                ProofStep(order: 2, latex: "n=2: 第一天没人死", explanation: "推断自己也是蓝眼睛"),
+                ProofStep(order: 3, latex: "n=100: 第100天集体自杀", explanation: "数学归纳")
+            ],
+            verdict: "纯逻辑推导下结论成立。",
+            historicalContext: "陶哲轩提出的经典逻辑谜题。",
+            relatedWeaponId: nil,
+            relatedHeroId: nil,
+            votes: MysteryVotes(agreeCount: 8500, disagreeCount: 4100, userVote: nil),
+            openQuestion: "公共知识的边界在哪里？"
+        ),
+
+        MathMystery(
+            id: "prisoners_paradox",
+            title: "100囚犯问题：逆天策略",
+            category: .intuitiveRebel,
+            shockRating: 10,
+            summary: "看似无解的问题竟然有30%胜率",
+            premise: "100个囚犯，每人抽屉里有自己号码，最多开50个抽屉，如何协作提高胜率？",
+            arguments: [
+                Argument(title: "随机派", content: "概率极小，几乎不可能。", isCorrect: false),
+                Argument(title: "循环派", content: "按号码形成循环，成功率超30%。", isCorrect: true)
+            ],
+            proofSteps: [
+                ProofStep(order: 1, latex: "P(\\text{cycle length} \\leq 50)", explanation: "最长循环≤50"),
+                ProofStep(order: 2, latex: "P \\approx 31.18\\%", explanation: "调和级数计算")
+            ],
+            verdict: "通过数学策略，成功率可达约31%。",
+            historicalContext: "组合数学中的经典问题。",
+            relatedWeaponId: nil,
+            relatedHeroId: nil,
+            votes: MysteryVotes(agreeCount: 12000, disagreeCount: 2800, userVote: nil),
+            openQuestion: "最优策略是多少？"
+        ),
+
+        MathMystery(
+            id: "ants_on_stick",
+            title: "蚂蚁军团：碰撞等于穿越",
+            category: .infinityWar,
+            shockRating: 7,
+            summary: "蚂蚁碰撞掉头，其实等于穿身而过",
+            premise: "100只蚂蚁在1米长棍子上随机爬行，碰撞后掉头，多久全部掉落？",
+            arguments: [
+                Argument(title: "复杂派", content: "碰撞次数太多无法计算。", isCorrect: false),
+                Argument(title: "等效派", content: "碰撞等于互换身份继续走。", isCorrect: true)
+            ],
+            proofSteps: [
+                ProofStep(order: 1, latex: "t_{max} = 1\\text{m} / v", explanation: "最长时间=一端到另一端"),
+                ProofStep(order: 2, latex: "E[X] = \\frac{n}{2} \\cdot \\frac{1}{3}", explanation: "期望碰撞次数")
+            ],
+            verdict: "最长时间就是一只蚂蚁从一端走到另一端的时间。",
+            historicalContext: "巧妙的等效思维问题。",
+            relatedWeaponId: nil,
+            relatedHeroId: nil,
+            votes: MysteryVotes(agreeCount: 7800, disagreeCount: 600, userVote: nil),
+            openQuestion: "三维空间会怎样？"
+        ),
+
+        MathMystery(
+            id: "rational_pirates",
+            title: "海盗分金：逆向思维",
+            category: .foundation,
+            shockRating: 8,
+            summary: "海盗如何分配金币才能活下来？",
+            premise: "5个海盗分100金币，从高到低提议，半数同意通过，否则被喂鲨鱼。",
+            arguments: [
+                Argument(title: "平均派", content: "每人20金币最公平。", isCorrect: false),
+                Argument(title: "逆向派", content: "从最后一个海盗开始倒推。", isCorrect: true)
+            ],
+            proofSteps: [
+                ProofStep(order: 1, latex: "P1: 0, P2: 100", explanation: "只剩两人时"),
+                ProofStep(order: 2, latex: "P1: 1, P3: 99", explanation: "三人时买通P1"),
+                ProofStep(order: 3, latex: "P2: 1, P4: 99", explanation: "四人时买通P2"),
+                ProofStep(order: 4, latex: "P1: 1, P3: 1, P5: 98", explanation: "五人时买通P1,P3")
+            ],
+            verdict: "最强海盗可获得98枚金币。",
+            historicalContext: "博弈论经典问题。",
+            relatedWeaponId: nil,
+            relatedHeroId: nil,
+            votes: MysteryVotes(agreeCount: 10500, disagreeCount: 1500, userVote: nil),
+            openQuestion: "100个海盗会怎样？"
+        ),
+
+        MathMystery(
+            id: "drunk_walk",
+            title: "醉汉回家：随机游走",
+            category: .infinityWar,
+            shockRating: 7,
+            summary: "喝醉的人一定能回家吗？",
+            premise: "醉汉在二维平面随机游走，最终回到原点的概率是多少？",
+            arguments: [
+                Argument(title: "迷失派", content: "越走越远，回不来了。", isCorrect: false),
+                Argument(title: "回归派", content: "二维必然回来，三维不一定。", isCorrect: true)
+            ],
+            proofSteps: [
+                ProofStep(order: 1, latex: "d=1: P=1", explanation: "一维必回"),
+                ProofStep(order: 2, latex: "d=2: P=1", explanation: "二维必回"),
+                ProofStep(order: 3, latex: "d \\geq 3: P < 1", explanation: "三维及以上概率小于1")
+            ],
+            verdict: "二维随机游走是常返的，三维则不是。",
+            historicalContext: "波利亚在1921年证明的经典结果。",
+            relatedWeaponId: nil,
+            relatedHeroId: nil,
+            votes: MysteryVotes(agreeCount: 6200, disagreeCount: 800, userVote: nil),
+            openQuestion: "四维空间的概率是多少？"
         )
     ]
 
@@ -973,11 +1115,7 @@ enum SampleData {
 
     // MARK: - Heroes
 
-    static let heroes: [MathHero] = [
-        MathHero(id: "euler", name: "欧拉", nameEN: "Leonhard Euler", era: "1707 - 1783", attributes: HeroAttributes(insight: 10, creativity: 10, perseverance: 9, influence: 10), weaponSkills: ["欧拉恒等式"], legendStory: "失明后依然统治数学界。", famousQuote: "数学是上帝书写宇宙的语言。", relatedMysteries: ["099_equals_1", "gabriel_horn"], portraitEmoji: "👴"),
-        MathHero(id: "gauss", name: "高斯", nameEN: "Carl Friedrich Gauss", era: "1777 - 1855", attributes: HeroAttributes(insight: 10, creativity: 9, perseverance: 10, influence: 10), weaponSkills: ["正态分布"], legendStory: "3岁纠错，10岁秒算。", famousQuote: "数学是科学的女王。", relatedMysteries: ["monty_hall"], portraitEmoji: "👑"),
-        MathHero(id: "russell", name: "罗素", nameEN: "Bertrand Russell", era: "1872 - 1970", attributes: HeroAttributes(insight: 10, creativity: 8, perseverance: 9, influence: 10), weaponSkills: ["逻辑主义"], legendStory: "用逻辑挑战整个数学界。", famousQuote: "数学不确定的科学。", relatedMysteries: ["russell_paradox"], portraitEmoji: "🎩")
-    ]
+    static let heroes: [MathHero] = MathHero.allHeroes
 
     // MARK: - Weapons
 

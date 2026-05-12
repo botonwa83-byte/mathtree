@@ -3,6 +3,7 @@ import SwiftUI
 struct MysteryRoomView: View {
     @State private var mysteries: [MathMystery] = SampleData.mysteries
     @State private var selectedCategory: MysteryCategory?
+    @State private var showStats = false
 
     var filteredMysteries: [MathMystery] {
         if let cat = selectedCategory {
@@ -11,66 +12,173 @@ struct MysteryRoomView: View {
         return mysteries
     }
 
+    var totalVotes: Int {
+        mysteries.reduce(0) { $0 + $1.votes.agreeCount + $1.votes.disagreeCount }
+    }
+
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 20) {
+                VStack(spacing: 24) {
                     mysteryHeader
+                    statsBanner
                     categoryFilter
-
-                    ForEach(filteredMysteries) { mystery in
-                        NavigationLink {
-                            MysteryDetailView(mystery: mystery)
-                        } label: {
-                            MysteryCard(mystery: mystery)
-                        }
-                    }
+                    popularSection
+                    mysteryGrid
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 12)
             }
             .background(Color.mysteryBackground)
-            .navigationTitle("发现")
+            .navigationTitle("数学发现")
         }
     }
 
     private var mysteryHeader: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Image(systemName: "puzzlepiece.fill")
-                    .foregroundColor(.apexMystery)
-                    .font(.title2)
-                Text("数学悬案")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .foregroundColor(.primary)
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .center, spacing: 12) {
+                ZStack {
+                    Circle()
+                        .fill(Color.apexMystery.opacity(0.15))
+                        .frame(width: 48, height: 48)
+                    Image(systemName: "sparkles")
+                        .foregroundColor(.apexMystery)
+                        .font(.title)
+                }
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("数学发现之旅")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+                    Text("探索数学中最令人惊叹的谜题与悖论")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+                Button {
+                    withAnimation { showStats.toggle() }
+                } label: {
+                    Image(systemName: showStats ? "chevron.down" : "bar.chart.2")
+                        .font(.title)
+                        .foregroundColor(.apexMystery)
+                }
             }
-            Text("数学史上最惊人的争议、悖论与未解之谜")
-                .font(.caption)
-                .foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(20)
         .background(
             LinearGradient(
-                colors: [Color.apexMystery.opacity(0.1), Color.mysteryBackground],
+                colors: [Color.apexMystery.opacity(0.12), Color.mysteryBackground],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
         )
-        .cornerRadius(20)
+        .cornerRadius(24)
+        .shadow(color: Color.apexMystery.opacity(0.1), radius: 12, y: 4)
+    }
+
+    private var statsBanner: some View {
+        if showStats {
+            return AnyView(
+                HStack(spacing: 16) {
+                    StatCard(value: "\(mysteries.count)", label: "悬案数量", color: .apexMystery)
+                    StatCard(value: "\(totalVotes / 1000)K+", label: "讨论人数", color: .apexStarBlue)
+                    StatCard(value: "100%", label: "烧脑指数", color: .apexGold)
+                }
+                .transition(.opacity.animation(.easeInOut(duration: 0.3)))
+            )
+        }
+        return AnyView(EmptyView())
     }
 
     private var categoryFilter: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 10) {
-                CategoryChip(title: "全部", icon: "square.grid.2x2", isSelected: selectedCategory == nil) {
+            HStack(spacing: 12) {
+                CategoryChip(title: "全部悬案", icon: "sparkles", isSelected: selectedCategory == nil, color: .apexMystery) {
                     selectedCategory = nil
                 }
                 ForEach(MysteryCategory.allCases, id: \.self) { cat in
-                    CategoryChip(title: cat.displayName, icon: cat.icon, isSelected: selectedCategory == cat) {
+                    CategoryChip(title: cat.displayName, icon: cat.icon, isSelected: selectedCategory == cat, color: cat.color) {
                         selectedCategory = cat
                     }
+                }
+            }
+        }
+    }
+
+    private var popularSection: some View {
+        if let topMystery = filteredMysteries.max(by: { ($0.votes.agreeCount + $0.votes.disagreeCount) < ($1.votes.agreeCount + $1.votes.disagreeCount) }) {
+            return AnyView(
+                NavigationLink {
+                    MysteryDetailView(mystery: topMystery)
+                } label: {
+                    VStack(alignment: .leading, spacing: 16) {
+                        HStack {
+                            Text("🔥 本周最热")
+                                .font(.caption)
+                                .fontWeight(.bold)
+                                .foregroundColor(.apexLava)
+                            Spacer()
+                            Image(systemName: "trending.up")
+                                .font(.caption)
+                                .foregroundColor(.apexLava)
+                        }
+                        
+                        Text(topMystery.title)
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.primary)
+                        
+                        Text(topMystery.summary)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        
+                        HStack(spacing: 16) {
+                            HStack(spacing: 4) {
+                                Image(systemName: "thumbsup")
+                                    .font(.caption)
+                                    .foregroundColor(.apexEmerald)
+                                Text("\(topMystery.votes.agreeCount)")
+                                    .font(.caption)
+                                    .foregroundColor(.apexEmerald)
+                            }
+                            HStack(spacing: 4) {
+                                Image(systemName: "thumbsdown")
+                                    .font(.caption)
+                                    .foregroundColor(.apexDanger)
+                                Text("\(topMystery.votes.disagreeCount)")
+                                    .font(.caption)
+                                    .foregroundColor(.apexDanger)
+                            }
+                            Spacer()
+                            Text("查看详情")
+                                .font(.caption)
+                                .foregroundColor(.apexMystery)
+                        }
+                    }
+                    .padding(20)
+                    .background(
+                        LinearGradient(
+                            colors: [Color.apexLava.opacity(0.08), Color.apexCardSurface],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    .cornerRadius(20)
+                    .shadow(color: Color.apexLava.opacity(0.1), radius: 8, y: 4)
+                }
+            )
+        }
+        return AnyView(EmptyView())
+    }
+
+    private var mysteryGrid: some View {
+        LazyVGrid(columns: [GridItem(.flexible())], spacing: 16) {
+            ForEach(filteredMysteries) { mystery in
+                NavigationLink {
+                    MysteryDetailView(mystery: mystery)
+                } label: {
+                    MysteryCard(mystery: mystery)
                 }
             }
         }
@@ -81,7 +189,16 @@ struct CategoryChip: View {
     let title: String
     let icon: String
     let isSelected: Bool
+    let color: Color
     let action: () -> Void
+
+    init(title: String, icon: String, isSelected: Bool, color: Color = .apexMystery, action: @escaping () -> Void) {
+        self.title = title
+        self.icon = icon
+        self.isSelected = isSelected
+        self.color = color
+        self.action = action
+    }
 
     var body: some View {
         Button(action: action) {
@@ -92,12 +209,36 @@ struct CategoryChip: View {
                     .font(.caption)
                     .fontWeight(.medium)
             }
-            .foregroundColor(isSelected ? .white : .apexMystery)
+            .foregroundColor(isSelected ? .white : color)
             .padding(.horizontal, 14)
             .padding(.vertical, 8)
-            .background(isSelected ? Color.apexMystery : Color.apexMystery.opacity(0.1))
+            .background(isSelected ? color : color.opacity(0.1))
             .cornerRadius(20)
+            .shadow(color: isSelected ? color.opacity(0.3) : .clear, radius: 4, y: 2)
         }
+    }
+}
+
+struct StatCard: View {
+    let value: String
+    let label: String
+    let color: Color
+
+    var body: some View {
+        VStack(spacing: 4) {
+            Text(value)
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(color)
+            Text(label)
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(Color.apexCardSurface)
+        .cornerRadius(16)
+        .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
     }
 }
 
