@@ -8,6 +8,7 @@ struct FormulaDetailView: View {
             VStack(alignment: .leading, spacing: 24) {
                 formulaPresentation
                 intuitionSection
+                interactiveSandbox
                 dnaChainSection
                 advancedSection
             }
@@ -17,6 +18,54 @@ struct FormulaDetailView: View {
         }
         .background(Color.apexBackground)
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private var interactiveSandbox: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Label("互动实验室", systemImage: "hand.tap.fill")
+                .font(.headline)
+                .foregroundColor(.apexStarBlue)
+
+            VStack(alignment: .leading, spacing: 12) {
+                Text("在这个实验室，你可以动态调整参数，直观感受公式的变化。")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+
+                // Mock Interactive Area
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.apexBackground.opacity(0.5))
+                        .frame(height: 160)
+                    
+                    VStack(spacing: 20) {
+                        Text("参数控制 (演示)")
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                        
+                        HStack {
+                            Text("a = 1.0")
+                                .font(.system(.caption, design: .monospaced))
+                            Slider(value: .constant(0.5))
+                                .tint(.apexStarBlue)
+                        }
+                        
+                        Text("图形实时预览区")
+                            .font(.subheadline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.apexStarBlue)
+                    }
+                    .padding(20)
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.apexStarBlue.opacity(0.1), lineWidth: 1)
+                )
+            }
+        }
+        .padding(20)
+        .background(Color.apexCardSurface)
+        .cornerRadius(20)
+        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
     private var formulaPresentation: some View {

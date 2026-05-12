@@ -40,22 +40,31 @@ class StudentProfile: ObservableObject, Codable {
     @Published var unlockedWeapons: [String]
     @Published var completedMysteries: [String]
     @Published var predictedGaokaoScore: Double
+    @Published var weaknessAreas: [FormulaCategory: Double] // Category and its error rate
+    @Published var learningPath: [String] // Sequence of formula IDs to follow
 
     enum CodingKeys: String, CodingKey {
         case displayName, currentLevel, streak, totalProblems, correctProblems
         case formulaMasteries, unlockedWeapons, completedMysteries, predictedGaokaoScore
+        case weaknessAreas, learningPath
     }
 
     init() {
         self.displayName = "数学探险家"
         self.currentLevel = .high
-        self.streak = 0
-        self.totalProblems = 0
-        self.correctProblems = 0
-        self.formulaMasteries = [:]
-        self.unlockedWeapons = []
-        self.completedMysteries = []
-        self.predictedGaokaoScore = 90
+        self.streak = 5
+        self.totalProblems = 128
+        self.correctProblems = 102
+        self.formulaMasteries = [
+            "pythagorean": 0.9,
+            "add_commute": 1.0,
+            "quad_formula": 0.7
+        ]
+        self.unlockedWeapons = ["derivative_blade"]
+        self.completedMysteries = ["cat_on_earth"]
+        self.predictedGaokaoScore = 112
+        self.weaknessAreas = [.trigonometry: 0.45, .calculus: 0.3]
+        self.learningPath = ["derivative_def", "taylor_series", "euler_formula"]
     }
 
     required init(from decoder: Decoder) throws {
@@ -69,6 +78,8 @@ class StudentProfile: ObservableObject, Codable {
         unlockedWeapons = try container.decode([String].self, forKey: .unlockedWeapons)
         completedMysteries = try container.decode([String].self, forKey: .completedMysteries)
         predictedGaokaoScore = try container.decode(Double.self, forKey: .predictedGaokaoScore)
+        weaknessAreas = try container.decode([FormulaCategory: Double].self, forKey: .weaknessAreas)
+        learningPath = try container.decode([String].self, forKey: .learningPath)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -82,6 +93,8 @@ class StudentProfile: ObservableObject, Codable {
         try container.encode(unlockedWeapons, forKey: .unlockedWeapons)
         try container.encode(completedMysteries, forKey: .completedMysteries)
         try container.encode(predictedGaokaoScore, forKey: .predictedGaokaoScore)
+        try container.encode(weaknessAreas, forKey: .weaknessAreas)
+        try container.encode(learningPath, forKey: .learningPath)
     }
 
     var accuracy: Double {

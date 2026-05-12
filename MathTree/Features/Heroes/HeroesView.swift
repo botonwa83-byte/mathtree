@@ -129,6 +129,7 @@ struct HeroDetailView: View {
                 heroHeader
                 storySection
                 quoteSection
+                relatedKnowledgeSection
                 weaponsSection
             }
             .padding(.horizontal, 20)
@@ -215,6 +216,33 @@ struct HeroDetailView: View {
                 endPoint: .bottom
             )
         )
+        .cornerRadius(20)
+    }
+
+    private var relatedKnowledgeSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Label("相关知识点", systemImage: "link")
+                .font(.headline)
+                .foregroundColor(.apexStarBlue)
+
+            FlowLayout(spacing: 8) {
+                // In a real app, this would fetch actual Formula objects
+                ForEach(hero.relatedMysteries, id: \.self) { mysteryId in
+                    HStack {
+                        Image(systemName: "magnifyingglass.circle.fill")
+                        Text(mysteryId)
+                    }
+                    .font(.caption)
+                    .foregroundColor(.apexMystery)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .background(Color.apexMystery.opacity(0.1))
+                    .cornerRadius(8)
+                }
+            }
+        }
+        .padding(20)
+        .background(Color.apexCardSurface)
         .cornerRadius(20)
     }
 

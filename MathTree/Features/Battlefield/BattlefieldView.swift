@@ -1,13 +1,21 @@
 import SwiftUI
 
 struct BattlefieldView: View {
-    @State private var problems: [Problem] = []
+    @State private var problems: [Problem] = SampleData.problems
     @State private var currentIndex = 0
     @State private var showSolution = false
     @State private var selectedAnswer: String?
-
+    @State private var selectedTopic: FormulaCategory?
     @State private var showDualView = false
     @State private var showDescendAnimation = false
+
+    var filteredProblems: [Problem] {
+        if let topic = selectedTopic {
+            // In a real app, this would filter by problem tags/formulas
+            return problems.filter { $0.tags.contains(topic.displayName) || topic == .calculus } 
+        }
+        return problems
+    }
 
     var body: some View {
         NavigationStack {
@@ -15,11 +23,12 @@ struct BattlefieldView: View {
                 ScrollView {
                     VStack(spacing: 20) {
                         battleHeader
-
-                        if !problems.isEmpty {
+                        topicSelector
+                        
+                        if !filteredProblems.isEmpty {
                             problemCard
-
-                            if showDualView, let dual = problems[currentIndex].dualSolution {
+                            
+                            if showDualView, let dual = filteredProblems[currentIndex].dualSolution {
                                 dualSolutionView(dual)
                             }
                         } else {
@@ -35,24 +44,23 @@ struct BattlefieldView: View {
                 if showDescendAnimation {
                     DescendAnimationView(
                         title: "维度拉升",
-                        subtitle: "目标：\(problems[currentIndex].dualSolution?.weaponUsed ?? "高维武器")",
+                        subtitle: "目标：\(filteredProblems[currentIndex].dualSolution?.weaponUsed ?? "高维武器")",
                         isPresented: $showDescendAnimation
                     )
                     .transition(.opacity)
                     .zIndex(100)
                 }
             }
-            .onAppear { loadProblems() }
         }
     }
 
     private var battleHeader: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("今日高考题")
+                Text("实战训练")
                     .font(.headline)
                     .foregroundColor(.primary)
-                Text("用降维工具秒杀高考题")
+                Text("用高阶思维，精准打击薄弱环节")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -62,20 +70,37 @@ struct BattlefieldView: View {
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(.apexLava)
-                Text("/ \(problems.count)")
+                Text("/ \(filteredProblems.count)")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
         }
-        .padding(20)
+        .padding(24)
         .background(Color.apexCardSurface)
         .cornerRadius(20)
         .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
+    private var topicSelector: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 12) {
+                TopicChip(title: "全部今日", isSelected: selectedTopic == nil) {
+                    selectedTopic = nil
+                    currentIndex = 0
+                }
+                ForEach(FormulaCategory.allCases, id: \.self) { topic in
+                    TopicChip(title: topic.displayName, isSelected: selectedTopic == topic) {
+                        selectedTopic = topic
+                        currentIndex = 0
+                    }
+                }
+            }
+        }
+    }
+
     private var problemCard: some View {
-        let problem = problems[currentIndex]
-        return VStack(alignment: .leading, spacing: 16) {
+        let problem = filteredProblems[currentIndex]
+        return VStack(alignment: .leading, spacing: 20) {
             HStack {
                 Label("难度", systemImage: "chart.bar.fill")
                     .font(.caption)
@@ -96,7 +121,7 @@ struct BattlefieldView: View {
             Text(problem.content)
                 .font(.body)
                 .foregroundColor(.primary)
-                .lineSpacing(6)
+                .lineSpacing(8)
 
             if let latex = problem.contentLatex {
                 FormulaView(latex: latex, fontSize: 20)
@@ -104,7 +129,7 @@ struct BattlefieldView: View {
             }
 
             if let options = problem.options {
-                VStack(spacing: 10) {
+                VStack(spacing: 12) {
                     ForEach(Array(options.enumerated()), id: \.offset) { index, option in
                         OptionButton(
                             label: ["A", "B", "C", "D"][index],
@@ -124,12 +149,12 @@ struct BattlefieldView: View {
                 } label: {
                     Text("查看解析")
                         .font(.subheadline)
-                        .fontWeight(.medium)
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
+                        .padding(.vertical, 16)
                         .background(Color.apexStarBlue)
-                        .cornerRadius(14)
+                        .cornerRadius(16)
                 }
 
                 Button {
@@ -141,16 +166,16 @@ struct BattlefieldView: View {
                     }
                 } label: {
                     HStack {
-                        Image(systemName: "arrow.up.right.and.arrow.down.left.rectangle")
-                        Text("对比解法")
+                        Image(systemName: "bolt.fill")
+                        Text("降维秒杀")
                     }
                     .font(.subheadline)
-                    .fontWeight(.medium)
+                    .fontWeight(.bold)
                     .foregroundColor(.apexLava)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
+                    .padding(.vertical, 16)
                     .background(Color.apexLava.opacity(0.1))
-                    .cornerRadius(14)
+                    .cornerRadius(16)
                 }
             }
 
@@ -158,28 +183,28 @@ struct BattlefieldView: View {
                 solutionView(problem.solution)
             }
         }
-        .padding(20)
+        .padding(24)
         .background(Color.apexCardSurface)
-        .cornerRadius(20)
-        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+        .cornerRadius(24)
+        .shadow(color: .black.opacity(0.05), radius: 10, y: 5)
     }
 
     private func solutionView(_ solution: SolutionPath) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 16) {
             Divider().background(Color.gray.opacity(0.1))
 
             HStack {
                 Image(systemName: "lightbulb.fill")
                     .foregroundColor(.apexGold)
                 Text("解题关键")
-                    .font(.subheadline)
-                    .fontWeight(.medium)
+                    .font(.headline)
                     .foregroundColor(.apexGold)
             }
 
             Text(solution.keyInsight)
                 .font(.subheadline)
-                .foregroundColor(.primary)
+                .foregroundColor(.primary.opacity(0.8))
+                .lineSpacing(4)
 
             ForEach(solution.steps) { step in
                 HStack(alignment: .top, spacing: 12) {
@@ -191,7 +216,7 @@ struct BattlefieldView: View {
                         .background(Color.apexStarBlue)
                         .cornerRadius(12)
 
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: 6) {
                         Text(step.description)
                             .font(.subheadline)
                             .foregroundColor(.primary)
@@ -209,73 +234,88 @@ struct BattlefieldView: View {
     private func dualSolutionView(_ dual: DualSolution) -> some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: 10) {
                     Text("常规解法")
                         .font(.caption)
                         .fontWeight(.bold)
                         .foregroundColor(.secondary)
-                    Text("高中标准做法")
-                        .font(.caption2)
-                        .foregroundColor(.secondary.opacity(0.7))
                     Divider().background(Color.gray.opacity(0.1))
                     Text("步骤：\(dual.standardMethod.steps.count)步")
-                        .font(.caption)
+                        .font(.caption2)
                         .foregroundColor(.primary)
-                    Text("风险：易出错")
-                        .font(.caption)
+                    Text("风险：极高")
+                        .font(.caption2)
                         .foregroundColor(.apexDanger)
                 }
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(16)
 
                 Rectangle()
                     .fill(Color.gray.opacity(0.1))
                     .frame(width: 1)
 
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: 10) {
                     Text("降维解法")
                         .font(.caption)
                         .fontWeight(.bold)
                         .foregroundColor(.apexLava)
-                    Text("高阶工具秒杀")
-                        .font(.caption2)
-                        .foregroundColor(.apexLava.opacity(0.7))
                     Divider().background(Color.gray.opacity(0.1))
                     Text("步骤：\(dual.descentMethod.steps.count)步")
-                        .font(.caption)
+                        .font(.caption2)
                         .foregroundColor(.primary)
-                    Text("风险：几乎为零")
-                        .font(.caption)
+                    Text("效率：\(dual.timeRatio)x 提升")
+                        .font(.caption2)
                         .foregroundColor(.apexEmerald)
                 }
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(16)
             }
             .background(Color.apexCardSurface)
             .cornerRadius(20)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.apexLava.opacity(0.2), lineWidth: 1)
+                    .stroke(Color.apexLava.opacity(0.3), lineWidth: 1)
             )
             .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
         }
+        .padding(.top, 10)
     }
 
     private var emptyState: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 20) {
             Image(systemName: "sparkles")
-                .font(.system(size: 48))
-                .foregroundColor(.apexEmerald)
-            Text("正在加载题目...")
+                .font(.system(size: 64))
+                .foregroundColor(.apexEmerald.opacity(0.3))
+            Text("该领域暂时没有实战题目")
                 .font(.headline)
                 .foregroundColor(.secondary)
+            Button("切换主题") {
+                selectedTopic = nil
+            }
+            .buttonStyle(.bordered)
         }
         .frame(maxWidth: .infinity)
-        .padding(40)
+        .padding(60)
     }
+}
 
-    private func loadProblems() {
-        problems = SampleData.problems
+struct TopicChip: View {
+    let title: String
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(isSelected ? .white : .secondary)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .background(isSelected ? Color.apexLava : Color.white)
+                .cornerRadius(20)
+                .shadow(color: .black.opacity(isSelected ? 0.1 : 0.02), radius: 4, y: 2)
+        }
     }
 }
 
@@ -283,11 +323,11 @@ struct DifficultyBar: View {
     let level: Double
 
     var body: some View {
-        HStack(spacing: 3) {
+        HStack(spacing: 4) {
             ForEach(0..<5) { i in
                 Capsule()
                     .fill(Double(i) / 5.0 < level ? rainbowColor(i) : Color.gray.opacity(0.15))
-                    .frame(width: 14, height: 5)
+                    .frame(width: 16, height: 6)
             }
         }
     }
@@ -307,11 +347,11 @@ struct OptionButton: View {
     var backgroundColor: Color {
         if let correct = isCorrect {
             if isSelected {
-                return correct ? Color.apexEmerald.opacity(0.12) : Color.apexDanger.opacity(0.12)
+                return correct ? Color.apexEmerald.opacity(0.15) : Color.apexDanger.opacity(0.15)
             }
-            if correct { return Color.apexEmerald.opacity(0.08) }
+            if correct { return Color.apexEmerald.opacity(0.1) }
         }
-        return isSelected ? Color.apexStarBlue.opacity(0.1) : Color.apexBackground
+        return isSelected ? Color.apexStarBlue.opacity(0.1) : Color.apexBackground.opacity(0.5)
     }
 
     var borderColor: Color {
@@ -321,32 +361,32 @@ struct OptionButton: View {
             }
             if correct { return .apexEmerald }
         }
-        return isSelected ? .apexStarBlue : Color.gray.opacity(0.2)
+        return isSelected ? .apexStarBlue : Color.gray.opacity(0.1)
     }
 
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 12) {
+            HStack(spacing: 16) {
                 Text(label)
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(isSelected ? .apexStarBlue : .secondary)
-                    .frame(width: 28, height: 28)
-                    .background(isSelected ? Color.apexStarBlue.opacity(0.12) : Color.clear)
-                    .cornerRadius(14)
+                    .frame(width: 32, height: 32)
+                    .background(isSelected ? Color.apexStarBlue.opacity(0.2) : Color.white)
+                    .cornerRadius(16)
 
                 Text(text)
-                    .font(.subheadline)
+                    .font(.body)
                     .foregroundColor(.primary)
 
                 Spacer()
             }
-            .padding(14)
+            .padding(16)
             .background(backgroundColor)
-            .cornerRadius(14)
+            .cornerRadius(16)
             .overlay(
-                RoundedRectangle(cornerRadius: 14)
-                    .stroke(borderColor, lineWidth: 1)
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(borderColor, lineWidth: 1.5)
             )
         }
     }

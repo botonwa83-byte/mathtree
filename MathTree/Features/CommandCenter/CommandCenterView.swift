@@ -10,7 +10,8 @@ struct CommandCenterView: View {
                 VStack(spacing: 20) {
                     dailyStrikeCard
                     streakCard
-                    weaponRecommendation
+                    learningRoadmap
+                    weaknessAnalysisCard
                     quickActions
                     gaokaoScoreCard
                 }
@@ -76,45 +77,117 @@ struct CommandCenterView: View {
         .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
-    private var weaponRecommendation: some View {
+    private var learningRoadmap: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Image(systemName: "map.fill")
+                    .foregroundColor(.apexLava)
+                Text("学习路线图")
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                Spacer()
+                Text("距离目标 30%")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+
+            VStack(spacing: 0) {
+                ForEach(Array(profile.learningPath.enumerated()), id: \.offset) { index, formulaId in
+                    let formula = SampleData.formulas.first(where: { $0.id == formulaId })
+                    HStack(spacing: 16) {
+                        // Node
+                        VStack(spacing: 0) {
+                            ZStack {
+                                Circle()
+                                    .fill(index == 0 ? Color.apexLava : Color.gray.opacity(0.1))
+                                    .frame(width: 32, height: 32)
+                                
+                                if index == 0 {
+                                    Image(systemName: "play.fill")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(.white)
+                                } else {
+                                    Image(systemName: "lock.fill")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(.gray)
+                                }
+                            }
+                            
+                            if index < profile.learningPath.count - 1 {
+                                Rectangle()
+                                    .fill(Color.gray.opacity(0.1))
+                                    .frame(width: 2, height: 40)
+                            }
+                        }
+
+                        // Info
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(formula?.name ?? "未知知识点")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                                .foregroundColor(index == 0 ? .primary : .secondary)
+                            Text(index == 0 ? "当前攻克中" : "待解锁")
+                                .font(.caption2)
+                                .foregroundColor(index == 0 ? .apexLava : .secondary)
+                        }
+                        
+                        Spacer()
+                        
+                        if index == 0 {
+                            Button("开始学习") {
+                                // Action to jump to formula detail
+                            }
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Color.apexLava)
+                            .cornerRadius(12)
+                        }
+                    }
+                }
+            }
+        }
+        .padding(24)
+        .background(Color.apexCardSurface)
+        .cornerRadius(20)
+        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+    }
+
+    private var weaknessAnalysisCard: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Image(systemName: "wand.and.stars")
-                    .foregroundColor(.apexMystery)
-                Text("推荐武器")
+                Image(systemName: "chart.pie.fill")
+                    .foregroundColor(.apexEmerald)
+                Text("薄弱环节分析")
                     .font(.headline)
                     .foregroundColor(.primary)
             }
 
-            HStack(spacing: 16) {
-                ZStack {
-                    Circle()
-                        .fill(
-                            LinearGradient(colors: [.apexLava.opacity(0.3), .apexGold.opacity(0.3)],
-                                           startPoint: .topLeading, endPoint: .bottomTrailing)
-                        )
-                        .frame(width: 56, height: 56)
-                    Image(systemName: "function")
-                        .font(.title2)
-                        .foregroundColor(.apexLava)
+            Text("你在「\(profile.weaknessAreas.keys.first?.displayName ?? "数学")」领域的错误率较高，建议针对性练习。")
+                .font(.caption)
+                .foregroundColor(.secondary)
+                .lineLimit(2)
+
+            HStack(spacing: 12) {
+                ForEach(Array(profile.weaknessAreas.keys.prefix(2)), id: \.self) { category in
+                    HStack {
+                        Text(category.displayName)
+                            .font(.caption2)
+                            .fontWeight(.bold)
+                            .foregroundColor(.apexEmerald)
+                        Spacer()
+                        Text("\(Int((profile.weaknessAreas[category] ?? 0) * 100))%")
+                            .font(.caption2)
+                            .foregroundColor(.apexDanger)
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(Color.apexEmerald.opacity(0.1))
+                    .cornerRadius(10)
+                    .frame(maxWidth: .infinity)
                 }
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("求导刃")
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                    Text("第二阶 · 快刀")
-                        .font(.caption)
-                        .foregroundColor(.apexLava)
-                    Text("可秒杀：函数极值、切线方程等")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.secondary)
             }
         }
         .padding(20)
