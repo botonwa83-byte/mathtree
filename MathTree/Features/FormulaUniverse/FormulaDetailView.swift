@@ -8,6 +8,10 @@ struct FormulaDetailView: View {
             VStack(alignment: .leading, spacing: 24) {
                 formulaPresentation
                 intuitionSection
+                detailedExplanationSection
+                proofStepsSection
+                applicationsSection
+                historySection
                 interactiveSandbox
                 dnaChainSection
                 advancedSection
@@ -158,6 +162,118 @@ struct FormulaDetailView: View {
         .background(Color.apexCardSurface)
         .cornerRadius(20)
         .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+    }
+
+    private var detailedExplanationSection: some View {
+        Group {
+            if let explanation = formula.detailedExplanation {
+                VStack(alignment: .leading, spacing: 12) {
+                    Label("详细解释", systemImage: "book.fill")
+                        .font(.headline)
+                        .foregroundColor(.apexStarBlue)
+
+                    Text(explanation)
+                        .font(.body)
+                        .foregroundColor(.primary.opacity(0.9))
+                        .lineSpacing(8)
+                }
+                .padding(20)
+                .background(Color.apexCardSurface)
+                .cornerRadius(20)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+            }
+        }
+    }
+
+    private var proofStepsSection: some View {
+        Group {
+            if let steps = formula.proofSteps, !steps.isEmpty {
+                VStack(alignment: .leading, spacing: 16) {
+                    Label("证明步骤", systemImage: "checkmark.seal.fill")
+                        .font(.headline)
+                        .foregroundColor(.apexEmerald)
+
+                    VStack(alignment: .leading, spacing: 12) {
+                        ForEach(Array(steps.enumerated()), id: \.offset) { index, step in
+                            HStack(alignment: .top, spacing: 12) {
+                                Text("\(index + 1)")
+                                    .font(.caption)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.apexEmerald)
+                                    .frame(width: 24, height: 24)
+                                    .background(Color.apexEmerald.opacity(0.1))
+                                    .cornerRadius(6)
+                                    .padding(.top, 2)
+
+                                Text(step)
+                                    .font(.body)
+                                    .foregroundColor(.primary.opacity(0.85))
+                                    .lineSpacing(4)
+                            }
+                        }
+                    }
+                }
+                .padding(20)
+                .background(Color.apexCardSurface)
+                .cornerRadius(20)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+            }
+        }
+    }
+
+    private var applicationsSection: some View {
+        Group {
+            if let apps = formula.applications, !apps.isEmpty {
+                VStack(alignment: .leading, spacing: 16) {
+                    Label("应用场景", systemImage: "sparkles")
+                        .font(.headline)
+                        .foregroundColor(.apexMystery)
+
+                    HStack(spacing: 8) {
+                        ForEach(apps, id: \.self) { app in
+                            HStack(spacing: 6) {
+                                Image(systemName: "arrow.right")
+                                    .font(.caption)
+                                    .foregroundColor(.apexMystery.opacity(0.7))
+                                Text(app)
+                                    .font(.caption)
+                                    .foregroundColor(.primary.opacity(0.9))
+                            }
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(Color.apexMystery.opacity(0.08))
+                            .cornerRadius(12)
+                        }
+                    }
+                }
+                .padding(20)
+                .background(Color.apexCardSurface)
+                .cornerRadius(20)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+            }
+        }
+    }
+
+    private var historySection: some View {
+        Group {
+            if let history = formula.history {
+                VStack(alignment: .leading, spacing: 12) {
+                    Label("历史背景", systemImage: "clock")
+                        .font(.headline)
+                        .foregroundColor(.apexLava)
+
+                    Text(history)
+                        .font(.body)
+                        .foregroundColor(.primary.opacity(0.85))
+                        .lineSpacing(6)
+                        .italic()
+                }
+                .padding(20)
+                .background(Color.apexCardSurface)
+                .cornerRadius(20)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+            }
+        }
     }
 
     private var dnaChainSection: some View {
