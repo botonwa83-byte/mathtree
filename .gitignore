@@ -1,0 +1,38 @@
+# Xcode
+*.xcuserstate
+*.xcuserdatad
+*.xcworkspace
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# CocoaPods
+Pods/
+
+# Build
+build/
+*.app
+*.appex
+*.framework
+*.dylib
+*.ipa
+*.dSYM
+
+# Swift Package Manager
+.swiftpm/
+Packages/Package.resolved
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# IDE
+*.swp
+*~.nib

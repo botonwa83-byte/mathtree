@@ -5,50 +5,147 @@ enum SampleData {
     // MARK: - Formulas (Exhaustive Spectrum: Elem -> Univ)
 
     static let formulas: [Formula] = [
-        // -------------------------------------------------------------------------
-        // ELEMENTARY & MIDDLE (Essentials)
-        // -------------------------------------------------------------------------
+        // ELEMENTARY
         Formula(id: "add_commute", name: "加法交换律", latex: "a + b = b + a", level: .elementary, category: .algebra, prerequisites: [], derivations: ["add_assoc"], advancedForm: "group_theory", gaokaoRelevance: 1.0, tags: ["算术", "基础"], intuition: "顺序不换，结果不变。", leapfrogKey: false, unlockedBy: nil),
         Formula(id: "rect_area", name: "矩形面积", latex: "S = a \\times b", level: .elementary, category: .geometry, prerequisites: [], derivations: ["tri_area"], advancedForm: "integration", gaokaoRelevance: 1.0, tags: ["几何", "面积"], intuition: "铺地砖的总数。", leapfrogKey: false, unlockedBy: nil),
+        
+        // MIDDLE
         Formula(id: "pythagorean", name: "勾股定理", latex: "a^2 + b^2 = c^2", level: .middle, category: .geometry, prerequisites: ["rect_area"], derivations: ["dist_formula"], advancedForm: "inner_product", gaokaoRelevance: 1.0, tags: ["几何", "核心"], intuition: "直角三角形的三边‘力量’守恒。", leapfrogKey: true, unlockedBy: nil),
         Formula(id: "quad_root", name: "二次方程求根公式", latex: "x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}", level: .middle, category: .algebra, prerequisites: [], derivations: ["vieta"], advancedForm: "galois", gaokaoRelevance: 1.0, tags: ["方程", "必考"], intuition: "暴力破解任何二次方程的终极钥匙。", leapfrogKey: true, unlockedBy: nil),
 
-        // -------------------------------------------------------------------------
-        // HIGH SCHOOL (Gaokao Core)
-        // -------------------------------------------------------------------------
+        // HIGH SCHOOL
         Formula(id: "sin_add", name: "和角公式", latex: "\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta", level: .high, category: .trigonometry, prerequisites: ["pythagorean"], derivations: ["double_angle"], advancedForm: "euler_formula", gaokaoRelevance: 1.0, tags: ["三角函数", "核心"], intuition: "旋转的分解与合成。", leapfrogKey: true, unlockedBy: nil),
         Formula(id: "cosine_rule", name: "余弦定理", latex: "a^2 = b^2 + c^2 - 2bc\\cos A", level: .high, category: .trigonometry, prerequisites: ["pythagorean"], derivations: [], advancedForm: "vector_dot", gaokaoRelevance: 1.0, tags: ["解三角形", "必考"], intuition: "勾股定理的非直角修正版。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "arith_sn", name: "等差数列求和", latex: "S_n = \\frac{n(a_1+a_n)}{2}", level: .high, category: .sequences, prerequisites: [], derivations: [], advancedForm: "arithmetic_series", gaokaoRelevance: 1.0, tags: ["数列", "必考"], intuition: "首尾配对，整体平衡。", leapfrogKey: false, unlockedBy: nil),
-        Formula(id: "geom_sn", name: "等比数列求和", latex: "S_n = \\frac{a_1(1-q^n)}{1-q}", level: .high, category: .sequences, prerequisites: [], derivations: [], advancedForm: "geometric_series", gaokaoRelevance: 1.0, tags: ["数列", "必考"], intuition: "指数级的累积爆发力。", leapfrogKey: true, unlockedBy: nil),
         Formula(id: "ellipse_eq", name: "椭圆标准方程", latex: "\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1", level: .high, category: .conicSections, prerequisites: ["pythagorean"], derivations: [], advancedForm: "conic_projection", gaokaoRelevance: 1.0, tags: ["圆锥曲线", "核心"], intuition: "被均匀拉伸的圆。", leapfrogKey: true, unlockedBy: nil),
         Formula(id: "deriv_power", name: "幂函数导数", latex: "(x^n)' = nx^{n-1}", level: .high, category: .calculus, prerequisites: [], derivations: [], advancedForm: "operator", gaokaoRelevance: 1.0, tags: ["导数", "核心"], intuition: "降幂打击，瞬时变化。", leapfrogKey: true, unlockedBy: nil),
 
-        // -------------------------------------------------------------------------
-        // UNIVERSITY (The Ultimate Weaponry)
-        // -------------------------------------------------------------------------
-        
-        // 1. CALCULUS & ANALYSIS
-        Formula(id: "lopital_rule", name: "洛必达法则", latex: "\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)}", level: .university, category: .calculus, prerequisites: ["derivative_def"], derivations: [], advancedForm: "cauchy_mean_value", gaokaoRelevance: 0.8, tags: ["极限", "秒杀"], intuition: "看谁跑得快，谁就决定极限。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "taylor_series", name: "泰勒级数", latex: "f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n", level: .university, category: .calculus, prerequisites: ["derivative_def"], derivations: ["euler_proof"], advancedForm: "analytic_continuation", gaokaoRelevance: 0.3, tags: ["逼近", "多项式"], intuition: "把复杂曲线切碎成无限个简单多项式。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "nl_formula", name: "牛顿-莱布尼茨公式", latex: "\\int_a^b f(x)dx = F(b) - F(a)", level: .university, category: .calculus, prerequisites: ["derivative_def"], derivations: ["stokes"], advancedForm: "exterior_diff", gaokaoRelevance: 0.9, tags: ["积分", "核心"], intuition: "微分是‘破坏’，积分是‘重建’。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "stokes_theorem", name: "斯托克斯公式", latex: "\\oint_{\\partial\\Sigma} \\mathbf{F} \\cdot d\\mathbf{r} = \\iint_{\\Sigma} (\\nabla \\times \\mathbf{F}) \\cdot d\\mathbf{S}", level: .university, category: .calculus, prerequisites: ["nl_formula"], derivations: [], advancedForm: "generalized_stokes", gaokaoRelevance: 0.05, tags: ["多维分析", "边界"], intuition: "边界的环流等于内部的骚动总和。", leapfrogKey: false, unlockedBy: nil),
-        Formula(id: "gaussian_int", name: "高斯积分", latex: "\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}", level: .university, category: .calculus, prerequisites: [], derivations: [], advancedForm: "normal_dist", gaokaoRelevance: 0.1, tags: ["积分技巧", "统计基础"], intuition: "钟形曲线下的面积竟然是圆周率的开方。", leapfrogKey: true, unlockedBy: nil),
-
-        // 2. LINEAR ALGEBRA
-        Formula(id: "det_def", name: "行列式", latex: "\\det(A) = \\sum \\text{sgn}(\\sigma) a_{1,\\sigma(1)} \\dots a_{n,\\sigma(n)}", level: .university, category: .linearAlgebra, prerequisites: [], derivations: ["matrix_inv"], advancedForm: "wedge_product", gaokaoRelevance: 0.15, tags: ["矩阵", "体积"], intuition: "线性变换后空间的‘体积膨胀率’。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "eigen_eq", name: "特征值方程", latex: "A\\mathbf{v} = \\lambda\\mathbf{v}", level: .university, category: .linearAlgebra, prerequisites: ["det_def"], derivations: [], advancedForm: "spectral_theory", gaokaoRelevance: 0.1, tags: ["矩阵", "核心"], intuition: "变换中那些只长个子、不转弯的神奇方向。", leapfrogKey: true, unlockedBy: nil),
-        
-        // 3. COMPLEX & TRANSFORMS
-        Formula(id: "euler_formula", name: "欧拉公式", latex: "e^{i\\theta} = \\cos\\theta + i\\sin\\theta", level: .university, category: .complexNumbers, prerequisites: ["taylor_series"], derivations: ["euler_identity"], advancedForm: "harmonic_analysis", gaokaoRelevance: 0.2, tags: ["复数", "上帝公式"], intuition: "将指数、三角、虚数完美合一的终极美学。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "fourier_trans", name: "傅里叶变换", latex: "\\hat{f}(\\xi) = \\int_{-\\infty}^{\\infty} f(x)e^{-2\\pi i x \\xi} dx", level: .university, category: .calculus, prerequisites: ["euler_formula"], derivations: [], advancedForm: "quantum_mechanics", gaokaoRelevance: 0.0, tags: ["信号处理", "频谱"], intuition: "把混乱的信号拆解成纯净的频率彩虹。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "laplace_trans", name: "拉普拉斯变换", latex: "F(s) = \\int_{0}^{\\infty} f(t)e^{-st} dt", level: .university, category: .calculus, prerequisites: [], derivations: [], advancedForm: "control_theory", gaokaoRelevance: 0.1, tags: ["微分方程", "系统论"], intuition: "将难搞的微分运算变成简单的初中代数。", leapfrogKey: false, unlockedBy: nil),
-
-        // 4. PROBABILITY & OTHERS
-        Formula(id: "bayes_theorem", name: "贝叶斯定理", latex: "P(A|B) = \\frac{P(B|A)P(A)}{P(B)}", level: .university, category: .probability, prerequisites: [], derivations: [], advancedForm: "ai_inference", gaokaoRelevance: 0.8, tags: ["概率", "决策"], intuition: "有了新证据，该如何科学地更新你的偏见。", leapfrogKey: true, unlockedBy: nil),
-        Formula(id: "central_limit", name: "中心极限定理", latex: "\\bar{X}_n \\xrightarrow{d} N(\\mu, \\sigma^2/n)", level: .university, category: .probability, prerequisites: [], derivations: [], advancedForm: "asymptotics", gaokaoRelevance: 0.5, tags: ["统计基础", "自然规律"], intuition: "无论起点多么奇葩，终点都是正态分布。", leapfrogKey: false, unlockedBy: nil)
+        // UNIVERSITY
+        Formula(id: "lopital_rule", name: "洛必达法则", latex: "\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)}", level: .university, category: .calculus, prerequisites: ["derivative_def"], derivations: [], advancedForm: "cauchy_mean_value", gaokaoRelevance: 0.8, tags: ["极限", "秒杀"], intuition: "变化率决定极限。", leapfrogKey: true, unlockedBy: nil),
+        Formula(id: "taylor_series", name: "泰勒级数", latex: "f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n", level: .university, category: .calculus, prerequisites: ["derivative_def"], derivations: ["euler_proof"], advancedForm: "analytic_continuation", gaokaoRelevance: 0.3, tags: ["逼近", "多项式"], intuition: "无限多项式克隆曲线。", leapfrogKey: true, unlockedBy: nil),
+        Formula(id: "euler_formula", name: "欧拉公式", latex: "e^{i\\theta} = \\cos\\theta + i\\sin\\theta", level: .university, category: .complexNumbers, prerequisites: ["taylor_series"], derivations: ["euler_identity"], advancedForm: "harmonic_analysis", gaokaoRelevance: 0.2, tags: ["复数", "上帝公式"], intuition: "数学美学的巅峰合一。", leapfrogKey: true, unlockedBy: nil)
     ]
 
-    // MARK: - Problems (The High-Level Strike Pack)
+    // MARK: - Mysteries (RESTORED & EXHAUSTIVE)
+
+    static let mysteries: [MathMystery] = [
+        // CASE 1: 0.999... vs 1 (RESTORED)
+        MathMystery(
+            id: "099_equals_1",
+            title: "0.999... 到底等不等于 1？",
+            category: .infinityWar,
+            shockRating: 7,
+            summary: "挑战直觉的无限等式",
+            premise: "大多数人凭直觉认为 0.999... 永远比 1 少一点点。但在实数系中，它们完全相等。",
+            arguments: [
+                Argument(title: "直觉派", content: "既然它叫0.999...，那就说明还没到1啊！", isCorrect: false),
+                Argument(title: "分数派", content: "1/3 = 0.333...，两边乘以3即得 1 = 0.999...。", isCorrect: true)
+            ],
+            proofSteps: [
+                ProofStep(order: 1, latex: "10x = 9.\\overline{9}", explanation: "两边乘以10"),
+                ProofStep(order: 2, latex: "9x = 9 \\implies x = 1", explanation: "相减并解得 x = 1")
+            ],
+            verdict: "它们是同一个实数的不同表示。",
+            historicalContext: "它揭示了人类在处理‘无限’概念时的直觉局限。",
+            relatedWeaponId: nil,
+            relatedHeroId: "euler",
+            votes: MysteryVotes(agreeCount: 15400, disagreeCount: 3200, userVote: nil),
+            openQuestion: "如果是非标准分析会怎样？"
+        ),
+
+        // CASE 2: MONTY HALL PROBLEM (RESTORED)
+        MathMystery(
+            id: "monty_hall",
+            title: "三门问题：换还是不换？",
+            category: .intuitiveRebel,
+            shockRating: 10,
+            summary: "概率论中最臭名昭著的‘直觉杀手’",
+            premise: "三扇门，选一扇。主持人打开一扇有羊的门，换门中奖率会倍增吗？",
+            arguments: [
+                Argument(title: "平衡派", content: "剩两扇门，概率各50%。", isCorrect: false),
+                Argument(title: "统计派", content: "换门中奖率 2/3。", isCorrect: true)
+            ],
+            proofSteps: [
+                ProofStep(order: 1, latex: "P(\\text{Win}|\\text{Change}) = 2/3", explanation: "最初选错概率转嫁给剩余门")
+            ],
+            verdict: "换门让胜率翻倍。",
+            historicalContext: "曾引发全美数千名博士写信抗议。",
+            relatedWeaponId: "bayes_theorem",
+            relatedHeroId: nil,
+            votes: MysteryVotes(agreeCount: 21000, disagreeCount: 8400, userVote: nil),
+            openQuestion: "100扇门会怎样？"
+        ),
+
+        // CASE 3: BANACH-TARSKI PARADOX (RESTORED)
+        MathMystery(
+            id: "banach_tarski",
+            title: "分球怪论：点石成金？",
+            category: .intuitiveRebel,
+            shockRating: 10,
+            summary: "将一个球切碎，拼成两个一模一样的球",
+            premise: "利用选择公理，我们可以将一个实心球体分解并重组成两个等大球体。",
+            arguments: [
+                Argument(title: "物质守恒派", content: "这违反物理定律！", isCorrect: true),
+                Argument(title: "数学派", content: "数学上的‘块’可以没有体积概念。", isCorrect: true)
+            ],
+            proofSteps: [
+                ProofStep(order: 1, latex: "V_{new} = 2V_{old}", explanation: "不可测集的奇迹")
+            ],
+            verdict: "纯数学定义下成立。",
+            historicalContext: "挑战了我们对体积和无穷的根本认知。",
+            relatedWeaponId: nil,
+            relatedHeroId: nil,
+            votes: MysteryVotes(agreeCount: 4500, disagreeCount: 1200, userVote: nil),
+            openQuestion: "原子也有体积吗？"
+        ),
+
+        // CASE 4: RUSSELL'S PARADOX (RESTORED)
+        MathMystery(
+            id: "russell_paradox",
+            title: "理发师悖论：数学的大地震",
+            category: .foundation,
+            shockRating: 9,
+            summary: "一个差点摧毁整个数学大厦的逻辑圈套",
+            premise: "给所有不给自己刮脸的人刮脸，理发师该给自己刮吗？",
+            arguments: [
+                Argument(title: "刮脸派", content: "刮了就违反规矩。", isCorrect: false),
+                Argument(title: "不刮派", content: "不刮就必须给自己刮。", isCorrect: false)
+            ],
+            proofSteps: [
+                ProofStep(order: 1, latex: "R \\in R \\iff R \\notin R", explanation: "逻辑自相矛盾")
+            ],
+            verdict: "朴素集合论存在致命漏洞。",
+            historicalContext: "迫使数学界进入公理化时代。",
+            relatedWeaponId: nil,
+            relatedHeroId: "russell",
+            votes: MysteryVotes(agreeCount: 12000, disagreeCount: 500, userVote: nil),
+            openQuestion: "地基真的彻底安全了吗？"
+        ),
+
+        // CASE 5: GABRIEL'S HORN (RESTORED)
+        MathMystery(
+            id: "gabriel_horn",
+            title: "加百列号角：有限与无限",
+            category: .infinityWar,
+            shockRating: 8,
+            summary: "可以装满油漆，却涂不满自己的表面",
+            premise: "旋转体体积有限，但表面积却是无限的。",
+            arguments: [
+                Argument(title: "直觉派", content: "装满漆说明表面都被盖住了。", isCorrect: false),
+                Argument(title: "数学派", content: "体积和面积是不同维度的积分。", isCorrect: true)
+            ],
+            proofSteps: [
+                ProofStep(order: 1, latex: "V = \\pi, S \\to \\infty", explanation: "积分发散速度不同")
+            ],
+            verdict: "真实的数学奇观。",
+            historicalContext: "17世纪震撼了托里拆利。",
+            relatedWeaponId: "nl_formula",
+            relatedHeroId: nil,
+            votes: MysteryVotes(agreeCount: 6700, disagreeCount: 1100, userVote: nil),
+            openQuestion: "现实物理中存在吗？"
+        )
+    ]
+
+    // MARK: - Problems (Strike Pack)
 
     static let problems: [Problem] = [
         Problem(
@@ -62,18 +159,17 @@ enum SampleData {
             answer: "-1/6",
             difficulty: 0.85,
             averageTime: 300,
-            hints: ["这是 0/0 型极限", "利用洛必达法则连续求导"],
+            hints: ["洛必达法则"],
             solution: SolutionPath(
                 steps: [
-                    SolutionStep(order: 1, description: "识别 0/0 型", latex: "\\sin 0 - 0 = 0", annotation: "符合洛必达"),
-                    SolutionStep(order: 2, description: "三次求导秒杀", latex: "\\lim \\frac{-\\cos x}{6}", annotation: "代入 x=0 得 -1/6")
+                    SolutionStep(order: 1, description: "求导三次", latex: "\\lim \\frac{-\\cos x}{6}", annotation: "结果 -1/6")
                 ],
-                keyInsight: "洛必达法则是处理复杂极限的暴力美学工具。",
-                commonMistakes: ["求导系数算错"]
+                keyInsight: "高阶思维降维打击。",
+                commonMistakes: []
             ),
             dualSolution: DualSolution(
-                standardMethod: SolutionPath(steps: [], keyInsight: "泰勒展开 (超纲)", commonMistakes: []),
-                descentMethod: SolutionPath(steps: [], keyInsight: "洛必达法则三次求导", commonMistakes: []),
+                standardMethod: SolutionPath(steps: [], keyInsight: "等价无穷小", commonMistakes: []),
+                descentMethod: SolutionPath(steps: [], keyInsight: "洛必达三次求导", commonMistakes: []),
                 weaponUsed: "洛必达之锤",
                 timeRatio: 5.0
             ),
@@ -82,32 +178,12 @@ enum SampleData {
         )
     ]
 
-    // MARK: - Heroes (Preserved)
+    // MARK: - Heroes
 
     static let heroes: [MathHero] = [
-        MathHero(id: "euler", name: "欧拉", nameEN: "Leonhard Euler", era: "1707 - 1783", attributes: HeroAttributes(insight: 10, creativity: 10, perseverance: 9, influence: 10), weaponSkills: ["欧拉恒等式", "变分法"], legendStory: "失明后统治数学界半个世纪。", famousQuote: "数学是上帝书写宇宙的语言。", relatedMysteries: ["099_equals_1"], portraitEmoji: "👴"),
-        MathHero(id: "gauss", name: "高斯", nameEN: "Carl Friedrich Gauss", era: "1777 - 1855", attributes: HeroAttributes(insight: 10, creativity: 9, perseverance: 10, influence: 10), weaponSkills: ["正态分布", "曲率"], legendStory: "3岁纠错，10岁秒算，完美的数学王子。", famousQuote: "数学是科学的女王。", relatedMysteries: ["monty_hall"], portraitEmoji: "👑")
-    ]
-
-    // MARK: - Mysteries (Expanded)
-
-    static let mysteries: [MathMystery] = [
-        MathMystery(
-            id: "monty_hall",
-            title: "三门问题",
-            category: .intuitiveRebel,
-            shockRating: 10,
-            summary: "概率直觉的终结者",
-            premise: "换门胜率真的会翻倍吗？",
-            arguments: [Argument(title: "统计派", content: "换门赢面 2/3", isCorrect: true)],
-            proofSteps: [ProofStep(order: 1, latex: "P=2/3", explanation: "直觉挑战")],
-            verdict: "科学证明，换门更明智。",
-            historicalContext: "曾引发全美数学大讨论。",
-            relatedWeaponId: "bayes_theorem",
-            relatedHeroId: nil,
-            votes: MysteryVotes(agreeCount: 21000, disagreeCount: 8400, userVote: nil),
-            openQuestion: "100扇门又如何？"
-        )
+        MathHero(id: "euler", name: "欧拉", nameEN: "Leonhard Euler", era: "1707 - 1783", attributes: HeroAttributes(insight: 10, creativity: 10, perseverance: 9, influence: 10), weaponSkills: ["欧拉恒等式"], legendStory: "失明后依然统治数学界。", famousQuote: "数学是上帝书写宇宙的语言。", relatedMysteries: ["099_equals_1", "gabriel_horn"], portraitEmoji: "👴"),
+        MathHero(id: "gauss", name: "高斯", nameEN: "Carl Friedrich Gauss", era: "1777 - 1855", attributes: HeroAttributes(insight: 10, creativity: 9, perseverance: 10, influence: 10), weaponSkills: ["正态分布"], legendStory: "3岁纠错，10岁秒算。", famousQuote: "数学是科学的女王。", relatedMysteries: ["monty_hall"], portraitEmoji: "👑"),
+        MathHero(id: "russell", name: "罗素", nameEN: "Bertrand Russell", era: "1872 - 1970", attributes: HeroAttributes(insight: 10, creativity: 8, perseverance: 9, influence: 10), weaponSkills: ["逻辑主义"], legendStory: "用逻辑挑战整个数学界。", famousQuote: "数学不确定的科学。", relatedMysteries: ["russell_paradox"], portraitEmoji: "🎩")
     ]
 
     // MARK: - Weapons
