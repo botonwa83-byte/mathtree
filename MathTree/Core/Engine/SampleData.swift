@@ -69,35 +69,293 @@ enum SampleData {
             unlockedBy: nil
         ),
 
-        // HIGH
+        // HIGH SCHOOL - COMPREHENSIVE
+        
+        // 1. Sets & Logic
         Formula(
-            id: "quad_formula",
-            name: "一元二次方程求根公式",
-            latex: "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}",
+            id: "set_intersect",
+            name: "集合交集",
+            latex: "A \\cap B = \\{x | x \\in A \\text{ 且 } x \\in B\\}",
             level: .high,
             category: .algebra,
-            prerequisites: ["linear_eq"],
-            derivations: ["derivative_quad"],
-            advancedForm: "vieta_formulas",
-            gaokaoRelevance: 0.98,
-            tags: ["代数", "二次函数"],
-            intuition: "给任何一个抛物线，这个公式能直接告诉你它在哪里‘亲吻’了地面（x轴）。",
+            prerequisites: [],
+            derivations: [],
+            advancedForm: "boolean_algebra",
+            gaokaoRelevance: 1.0,
+            tags: ["集合", "基础"],
+            intuition: "两个圈重叠的那一部分。",
             leapfrogKey: false,
             unlockedBy: nil
         ),
         Formula(
-            id: "sin_cos_sum",
-            name: "三角和差公式",
-            latex: "\\sin(A \\pm B) = \\sin A \\cos B \\pm \\cos A \\sin B",
+            id: "set_union",
+            name: "集合并集",
+            latex: "A \\cup B = \\{x | x \\in A \\text{ 或 } x \\in B\\}",
+            level: .high,
+            category: .algebra,
+            prerequisites: [],
+            derivations: [],
+            advancedForm: "boolean_algebra",
+            gaokaoRelevance: 1.0,
+            tags: ["集合", "基础"],
+            intuition: "两个圈合并在一起的所有地盘。",
+            leapfrogKey: false,
+            unlockedBy: nil
+        ),
+
+        // 2. Functions & Logarithms
+        Formula(
+            id: "log_product",
+            name: "对数积化和",
+            latex: "\\log_a(MN) = \\log_a M + \\log_a N",
+            level: .high,
+            category: .algebra,
+            prerequisites: [],
+            derivations: ["log_change_base"],
+            advancedForm: "functional_eq",
+            gaokaoRelevance: 0.95,
+            tags: ["对数", "函数性质"],
+            intuition: "对数让乘法降级成加法，是计算时代的加速器。",
+            leapfrogKey: false,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "log_change_base",
+            name: "换底公式",
+            latex: "\\log_a b = \\frac{\\log_c b}{\\log_c a}",
+            level: .high,
+            category: .algebra,
+            prerequisites: ["log_product"],
+            derivations: [],
+            advancedForm: "linear_transform",
+            gaokaoRelevance: 0.9,
+            tags: ["对数", "核心技巧"],
+            intuition: "不同底数的对数可以通过这个‘汇率’进行转换。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+
+        // 3. Trigonometry
+        Formula(
+            id: "sin_sq_cos_sq",
+            name: "同角三角恒等式",
+            latex: "\\sin^2\\alpha + \\cos^2\\alpha = 1",
             level: .high,
             category: .trigonometry,
             prerequisites: ["pythagorean"],
-            derivations: ["double_angle"],
+            derivations: ["double_angle_cos"],
+            advancedForm: "unit_circle",
+            gaokaoRelevance: 1.0,
+            tags: ["三角函数", "必考"],
+            intuition: "无论角度怎么变，点在单位圆上跑，距离圆心的距离平方永远是1。",
+            leapfrogKey: false,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "sin_add",
+            name: "正弦和角公式",
+            latex: "\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta",
+            level: .high,
+            category: .trigonometry,
+            prerequisites: ["sin_sq_cos_sq"],
+            derivations: ["sin_double"],
             advancedForm: "euler_formula",
-            gaokaoRelevance: 0.92,
-            tags: ["三角函数", "恒等变换"],
-            intuition: "不需要死记硬背，它们其实就是复数在圆周上的‘旋转’。",
+            gaokaoRelevance: 0.98,
+            tags: ["三角函数", "核心变换"],
+            intuition: "两个旋转的叠加，像是一场舞蹈的配合。",
             leapfrogKey: true,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "sine_rule",
+            name: "正弦定理",
+            latex: "\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C} = 2R",
+            level: .high,
+            category: .trigonometry,
+            prerequisites: ["sin_sq_cos_sq"],
+            derivations: [],
+            advancedForm: "exterior_diff_form",
+            gaokaoRelevance: 0.95,
+            tags: ["解三角形", "必考"],
+            intuition: "三角形的边长与其对角的‘张开程度’成正比。",
+            leapfrogKey: false,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "cosine_rule",
+            name: "余弦定理",
+            latex: "a^2 = b^2 + c^2 - 2bc\\cos A",
+            level: .high,
+            category: .trigonometry,
+            prerequisites: ["pythagorean"],
+            derivations: [],
+            advancedForm: "inner_product_def",
+            gaokaoRelevance: 0.98,
+            tags: ["解三角形", "核心"],
+            intuition: "它是勾股定理的‘通用版’，修正了非直角时的偏差。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+
+        // 4. Sequences
+        Formula(
+            id: "arith_seq_sn",
+            name: "等差数列求和",
+            latex: "S_n = \\frac{n(a_1 + a_n)}{2}",
+            level: .high,
+            category: .algebra,
+            prerequisites: [],
+            derivations: [],
+            advancedForm: "gauss_sum",
+            gaokaoRelevance: 1.0,
+            tags: ["数列", "必考"],
+            intuition: "首尾配对，每一对的和都相等。",
+            leapfrogKey: false,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "geom_seq_sn",
+            name: "等比数列求和",
+            latex: "S_n = \\frac{a_1(1-q^n)}{1-q}",
+            level: .high,
+            category: .algebra,
+            prerequisites: [],
+            derivations: [],
+            advancedForm: "geometric_series",
+            gaokaoRelevance: 1.0,
+            tags: ["数列", "必考"],
+            intuition: "复利的力量，时间越长，总和爆发越猛。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+
+        // 5. Vectors
+        Formula(
+            id: "vector_dot",
+            name: "向量数量积",
+            latex: "\\vec{a} \\cdot \\vec{b} = |\\vec{a}| |\\vec{b}| \\cos\\theta",
+            level: .high,
+            category: .algebra,
+            prerequisites: ["cosine_rule"],
+            derivations: [],
+            advancedForm: "inner_product_space",
+            gaokaoRelevance: 0.95,
+            tags: ["向量", "几何意义"],
+            intuition: "衡量两个向量在同一个方向上的‘共鸣’程度。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+
+        // 6. Analytic Geometry
+        Formula(
+            id: "point_to_line",
+            name: "点到直线距离",
+            latex: "d = \\frac{|Ax_0 + By_0 + C|}{\\sqrt{A^2 + B^2}}",
+            level: .high,
+            category: .geometry,
+            prerequisites: ["vector_dot"],
+            derivations: [],
+            advancedForm: "linear_subspace_dist",
+            gaokaoRelevance: 0.98,
+            tags: ["解析几何", "核心"],
+            intuition: "从点垂直砸向直线的最近距离。",
+            leapfrogKey: false,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "ellipse_std",
+            name: "椭圆标准方程",
+            latex: "\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1",
+            level: .high,
+            category: .geometry,
+            prerequisites: ["pythagorean"],
+            derivations: [],
+            advancedForm: "conic_section",
+            gaokaoRelevance: 1.0,
+            tags: ["圆锥曲线", "必考"],
+            intuition: "被‘拉扁’了的圆，到两个焦点的距离之和恒定。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "hyperbola_std",
+            name: "双曲线标准方程",
+            latex: "\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1",
+            level: .high,
+            category: .geometry,
+            prerequisites: ["pythagorean"],
+            derivations: [],
+            advancedForm: "conic_section",
+            gaokaoRelevance: 1.0,
+            tags: ["圆锥曲线", "必考"],
+            intuition: "两条相向而行的无限曲线，到两个焦点的距离之差恒定。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+
+        // 7. Calculus (High School)
+        Formula(
+            id: "deriv_power",
+            name: "幂函数导数",
+            latex: "(x^n)' = nx^{n-1}",
+            level: .high,
+            category: .calculus,
+            prerequisites: [],
+            derivations: [],
+            advancedForm: "operator_theory",
+            gaokaoRelevance: 1.0,
+            tags: ["导数", "核心"],
+            intuition: "降幂打击！高次幂的变化率由低次幂决定。",
+            leapfrogKey: true,
+            unlockedBy: nil
+        ),
+        Formula(
+            id: "deriv_product",
+            name: "导数乘法法则",
+            latex: "(uv)' = u'v + uv'",
+            level: .high,
+            category: .calculus,
+            prerequisites: ["deriv_power"],
+            derivations: [],
+            advancedForm: "leibniz_rule",
+            gaokaoRelevance: 0.95,
+            tags: ["导数", "法则"],
+            intuition: "两个函数轮流对变化率做出贡献。",
+            leapfrogKey: false,
+            unlockedBy: nil
+        ),
+
+        // 8. Solid Geometry
+        Formula(
+            id: "sphere_vol",
+            name: "球体体积",
+            latex: "V = \\frac{4}{3}\\pi R^3",
+            level: .high,
+            category: .geometry,
+            prerequisites: [],
+            derivations: [],
+            advancedForm: "cavalieri_principle",
+            gaokaoRelevance: 0.9,
+            tags: ["立体几何", "体积"],
+            intuition: "半径翻倍，体积翻八倍！",
+            leapfrogKey: false,
+            unlockedBy: nil
+        ),
+
+        // 9. Probability
+        Formula(
+            id: "combination",
+            name: "组合数公式",
+            latex: "C_n^k = \\frac{n!}{k!(n-k)!}",
+            level: .high,
+            category: .probability,
+            prerequisites: [],
+            derivations: [],
+            advancedForm: "gamma_function",
+            gaokaoRelevance: 0.95,
+            tags: ["概率", "计数"],
+            intuition: "不管顺序，只选人。",
+            leapfrogKey: false,
             unlockedBy: nil
         ),
 
@@ -108,12 +366,12 @@ enum SampleData {
             latex: "e^{i\\theta} = \\cos\\theta + i\\sin\\theta",
             level: .university,
             category: .complexNumbers,
-            prerequisites: ["sin_cos_sum", "complex_def"],
-            derivations: ["trig_identity_all", "fourier_transform"],
+            prerequisites: ["sin_add"],
+            derivations: ["fourier_transform"],
             advancedForm: "riemann_surface",
             gaokaoRelevance: 0.4,
             tags: ["复变函数", "上帝公式"],
-            intuition: "它是连接代数、三角和指数函数的桥梁，让枯燥的公式变成了美妙的旋转。",
+            intuition: "连接代数与几何的神奇桥梁。",
             leapfrogKey: true,
             unlockedBy: nil
         ),
@@ -123,12 +381,12 @@ enum SampleData {
             latex: "f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}",
             level: .university,
             category: .calculus,
-            prerequisites: ["limit_def"],
-            derivations: ["power_rule", "chain_rule"],
+            prerequisites: [],
+            derivations: ["deriv_power"],
             advancedForm: "differential_geometry",
             gaokaoRelevance: 0.85,
             tags: ["微积分", "变化率"],
-            intuition: "导数就是‘瞬间’的变化速度，是你在那一秒钟飞驰的感觉。",
+            intuition: "瞬间的极限速度。",
             leapfrogKey: true,
             unlockedBy: nil
         ),
@@ -139,24 +397,24 @@ enum SampleData {
             level: .university,
             category: .calculus,
             prerequisites: ["derivative_def"],
-            derivations: ["euler_identity_proof"],
+            derivations: [],
             advancedForm: "analytic_continuation",
             gaokaoRelevance: 0.3,
             tags: ["微积分", "逼近"],
-            intuition: "再复杂的曲线，只要我们知道它在某一点的所有信息，就能用无限个简单的多项式去‘克隆’它。",
+            intuition: "用无限个简单的多项式‘克隆’复杂曲线。",
             leapfrogKey: false,
             unlockedBy: nil
         )
     ]
 
-    // MARK: - Problems
+    // MARK: - Problems, Heroes, Mysteries, Weapons, DailyStrikes (Preserved from previous versions)
 
     static let problems: [Problem] = [
         Problem(
             id: "prob_gaokao_001",
             type: .multipleChoice,
             tier: 3,
-            formulaIds: ["quad_formula", "derivative_def"],
+            formulaIds: ["deriv_power", "derivative_def"],
             content: "已知函数 f(x) = x³ - 3x + 2，求其在 [0, 2] 上的最小值。",
             contentLatex: "f(x) = x^3 - 3x + 2, x \\in [0, 2]",
             options: ["0", "2", "-2", "4"],
@@ -198,8 +456,6 @@ enum SampleData {
         )
     ]
 
-    // MARK: - Heroes
-
     static let heroes: [MathHero] = [
         MathHero(
             id: "euler",
@@ -226,8 +482,6 @@ enum SampleData {
             portraitEmoji: "👑"
         )
     ]
-
-    // MARK: - Mysteries
 
     static let mysteries: [MathMystery] = [
         MathMystery(
@@ -280,8 +534,6 @@ enum SampleData {
         )
     ]
 
-    // MARK: - Weapons
-
     static let weapons: [DescendWeapon] = [
         DescendWeapon(
             id: "derivative_blade",
@@ -326,8 +578,6 @@ enum SampleData {
             masteryLevel: .locked
         )
     ]
-
-    // MARK: - Daily Strikes
 
     static let dailyStrikes: [DailyStrike] = [
         DailyStrike(
