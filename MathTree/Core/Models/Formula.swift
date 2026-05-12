@@ -70,6 +70,10 @@ struct Formula: Identifiable, Codable {
     let intuition: String
     let leapfrogKey: Bool
     let unlockedBy: String?
+    let detailedExplanation: String?
+    let proofSteps: [String]?
+    let applications: [String]?
+    let history: String?
 
     static let example = Formula(
         id: "pythagorean",
@@ -84,6 +88,10 @@ struct Formula: Identifiable, Codable {
         tags: ["几何", "基础", "必考"],
         intuition: "直角三角形两条直角边的平方和等于斜边的平方",
         leapfrogKey: false,
-        unlockedBy: nil
+        unlockedBy: nil,
+        detailedExplanation: nil,
+        proofSteps: nil,
+        applications: nil,
+        history: nil
     )
 }
