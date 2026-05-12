@@ -182,6 +182,7 @@ struct FormulaCard: View {
 
             FormulaView(latex: formula.latex, fontSize: 18)
                 .frame(height: 44)
+                .allowsHitTesting(false)
 
             Text(formula.intuition)
                 .font(.caption)
