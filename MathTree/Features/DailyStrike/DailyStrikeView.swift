@@ -2,7 +2,7 @@ import SwiftUI
 
 struct DailyStrikeView: View {
     @Environment(\.dismiss) var dismiss
-    @State private var currentStrike = SampleData.dailyStrikes.randomElement() ?? SampleData.dailyStrikes[0]
+    @State private var currentStrike = SampleData.dailyStrikes.randomElement() ?? DailyStrike(type: "思维", question: "暂无题目", answer: "敬请期待", detail: nil)
     @State private var showAnswer = false
 
     var body: some View {
@@ -21,6 +21,7 @@ struct DailyStrikeView: View {
                     }
                     .padding(.horizontal, 20)
                     .padding(.top, 40)
+                    .readableContentWidth()
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -83,7 +84,7 @@ struct DailyStrikeView: View {
                     .foregroundColor(.apexGold)
             }
 
-            Text(currentStrike.answer)
+            Text(currentStrike.answer.mathPretty)
                 .font(.body)
                 .foregroundColor(.primary)
                 .lineSpacing(6)
@@ -110,12 +111,19 @@ struct DailyStrikeView: View {
     private var actionButton: some View {
         Button {
             withAnimation(.spring(response: 0.5)) {
-                showAnswer.toggle()
+                if showAnswer {
+                    if let next = SampleData.dailyStrikes.randomElement() {
+                        currentStrike = next
+                    }
+                    showAnswer = false
+                } else {
+                    showAnswer = true
+                }
             }
         } label: {
             Text(showAnswer ? "下一击" : "揭晓答案")
                 .font(.headline)
-                .foregroundColor(.primary)
+                .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
                 .background(Color.apexLava)

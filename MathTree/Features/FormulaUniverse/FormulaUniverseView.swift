@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct FormulaUniverseView: View {
+    @Environment(\.horizontalSizeClass) private var sizeClass
     @State private var formulas: [Formula] = SampleData.formulas
     @State private var selectedLevel: FormulaLevel?
     @State private var selectedCategory: FormulaCategory?
@@ -23,24 +24,46 @@ struct FormulaUniverseView: View {
         return result
     }
 
+    private var isIPad: Bool { sizeClass == .regular }
+
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 20) {
+                VStack(spacing: 16) {
                     universeHeader
                     levelFilter
                     categoryFilter
 
-                    ForEach(filteredFormulas) { formula in
-                        NavigationLink {
-                            FormulaDetailView(formula: formula)
-                        } label: {
-                            FormulaCard(formula: formula)
+                    if isIPad {
+                        // iPad: 2-column grid
+                        LazyVGrid(columns: [
+                            GridItem(.flexible(), spacing: 16),
+                            GridItem(.flexible(), spacing: 16)
+                        ], spacing: 16) {
+                            ForEach(filteredFormulas) { formula in
+                                NavigationLink {
+                                    FormulaDetailView(formula: formula)
+                                } label: {
+                                    FormulaCard(formula: formula)
+                                }
+                            }
+                        }
+                    } else {
+                        // iPhone: single column
+                        LazyVStack(spacing: 14) {
+                            ForEach(filteredFormulas) { formula in
+                                NavigationLink {
+                                    FormulaDetailView(formula: formula)
+                                } label: {
+                                    FormulaCard(formula: formula)
+                                }
+                            }
                         }
                     }
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, isIPad ? 32 : 16)
                 .padding(.top, 12)
+                .padding(.bottom, 30)
             }
             .background(Color.apexBackground)
             .navigationTitle("公式")
@@ -64,7 +87,7 @@ struct FormulaUniverseView: View {
                 .foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(20)
+        .padding(isIPad ? 24 : 16)
         .background(
             LinearGradient(
                 colors: [Color.apexStarBlue.opacity(0.2), Color.apexBackground],
@@ -72,12 +95,12 @@ struct FormulaUniverseView: View {
                 endPoint: .bottomTrailing
             )
         )
-        .cornerRadius(20)
+        .cornerRadius(16)
     }
 
     private var levelFilter: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 10) {
+            HStack(spacing: 8) {
                 LevelChip(title: "全部", color: .gray, isSelected: selectedLevel == nil) {
                     selectedLevel = nil
                 }
@@ -96,7 +119,7 @@ struct FormulaUniverseView: View {
 
     private var categoryFilter: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 10) {
+            HStack(spacing: 8) {
                 CategoryChip(title: "全部", icon: "square.grid.2x2", isSelected: selectedCategory == nil) {
                     selectedCategory = nil
                 }
@@ -120,6 +143,8 @@ struct FormulaUniverseView: View {
     }
 }
 
+// MARK: - Level Chip
+
 struct LevelChip: View {
     let title: String
     let color: Color
@@ -132,25 +157,31 @@ struct LevelChip: View {
                 .font(.caption)
                 .fontWeight(.medium)
                 .foregroundColor(isSelected ? .white : color)
-                .padding(.horizontal, 14)
-                .padding(.vertical, 8)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 7)
                 .background(isSelected ? color.opacity(0.8) : color.opacity(0.15))
-                .cornerRadius(20)
+                .cornerRadius(16)
         }
     }
 }
 
+// MARK: - Formula Card
+
 struct FormulaCard: View {
+    @Environment(\.horizontalSizeClass) private var sizeClass
     let formula: Formula
 
+    private var isIPad: Bool { sizeClass == .regular }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
+        VStack(alignment: .leading, spacing: 10) {
+            // Top row: level badge + category + leapfrog + gaokao
+            HStack(spacing: 6) {
                 Text(formula.level.displayName)
                     .font(.caption2)
                     .fontWeight(.bold)
                     .foregroundColor(levelColor)
-                    .padding(.horizontal, 8)
+                    .padding(.horizontal, 7)
                     .padding(.vertical, 3)
                     .background(levelColor.opacity(0.15))
                     .cornerRadius(6)
@@ -163,7 +194,7 @@ struct FormulaCard: View {
 
                 if formula.leapfrogKey {
                     Image(systemName: "bolt.fill")
-                        .font(.caption)
+                        .font(.caption2)
                         .foregroundColor(.apexGold)
                 }
 
@@ -176,36 +207,41 @@ struct FormulaCard: View {
                 .foregroundColor(.apexLava)
             }
 
+            // Formula name
             Text(formula.name)
-                .font(.headline)
+                .font(.subheadline)
+                .fontWeight(.bold)
                 .foregroundColor(.primary)
+                .lineLimit(2)
+                .fixedSize(horizontal: false, vertical: true)
 
-            FormulaView(latex: formula.latex, fontSize: 18)
-                .frame(height: 44)
+            // LaTeX formula
+            FormulaView(latex: formula.latex, fontSize: isIPad ? 14 : 12)
                 .allowsHitTesting(false)
 
+            // Intuition
             Text(formula.intuition)
                 .font(.caption)
                 .foregroundColor(.secondary)
                 .lineLimit(2)
+                .fixedSize(horizontal: false, vertical: true)
 
+            // Tags - wrapped flow layout
             if !formula.tags.isEmpty {
-                HStack(spacing: 6) {
-                    ForEach(formula.tags.prefix(3), id: \.self) { tag in
-                        Text(tag)
-                            .font(.caption2)
-                            .foregroundColor(.apexStarBlue)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(Color.apexStarBlue.opacity(0.1))
-                            .cornerRadius(4)
-                    }
+                WrappingHStack(items: Array(formula.tags.prefix(4))) { tag in
+                    Text(tag)
+                        .font(.caption2)
+                        .foregroundColor(.apexStarBlue)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(Color.apexStarBlue.opacity(0.1))
+                        .cornerRadius(4)
                 }
             }
         }
-        .padding(20)
+        .padding(isIPad ? 20 : 14)
         .background(Color.apexCardSurface)
-        .cornerRadius(20)
+        .cornerRadius(16)
         .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
@@ -216,6 +252,24 @@ struct FormulaCard: View {
         case .high: return .levelHigh
         case .university: return .levelUniversity
         case .advanced: return .levelAdvanced
+        }
+    }
+}
+
+// MARK: - Wrapping HStack (Flow Layout)
+
+struct WrappingHStack<Item: Hashable, Content: View>: View {
+    let items: [Item]
+    let content: (Item) -> Content
+
+    var body: some View {
+        // Use a simple HStack with scroll for compatibility
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 6) {
+                ForEach(items, id: \.self) { item in
+                    content(item)
+                }
+            }
         }
     }
 }

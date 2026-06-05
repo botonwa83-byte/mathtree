@@ -4,25 +4,24 @@ struct HeroesView: View {
     @State private var heroes: [MathHero] = SampleData.heroes
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 20) {
-                    heroesHeader
+        ScrollView {
+            VStack(spacing: 20) {
+                heroesHeader
 
-                    ForEach(heroes) { hero in
-                        NavigationLink {
-                            HeroDetailView(hero: hero)
-                        } label: {
-                            HeroCard(hero: hero)
-                        }
+                ForEach(heroes) { hero in
+                    NavigationLink {
+                        HeroDetailView(hero: hero)
+                    } label: {
+                        HeroCard(hero: hero)
                     }
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 12)
             }
-            .background(Color.apexBackground)
-            .navigationTitle("人物")
+            .padding(.horizontal, 20)
+            .padding(.top, 12)
+            .readableContentWidth()
         }
+        .background(Color.apexBackground)
+        .navigationTitle("人物")
     }
 
     private var heroesHeader: some View {
@@ -135,6 +134,7 @@ struct HeroDetailView: View {
             .padding(.horizontal, 20)
             .padding(.top, 12)
             .padding(.bottom, 40)
+            .readableContentWidth()
         }
         .background(Color.apexBackground)
         .navigationBarTitleDisplayMode(.inline)

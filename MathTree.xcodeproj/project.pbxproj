@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A10001 /* MathTreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001 /* MathTreeApp.swift */; };
+		A10064 /* PromoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10064 /* PromoView.swift */; };
+		A10065 /* SecondKillProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10065 /* SecondKillProblems.swift */; };
+		A10066 /* SecondKillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10066 /* SecondKillView.swift */; };
 		A10002 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002 /* SampleData.swift */; };
 		A10003 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003 /* Formula.swift */; };
 		A10004 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004 /* Hero.swift */; };
@@ -26,10 +29,59 @@
 		A10017 /* HeroesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017 /* HeroesView.swift */; };
 		A10018 /* MysteryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10018 /* MysteryDetailView.swift */; };
 		A10019 /* MysteryRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10019 /* MysteryRoomView.swift */; };
+		A10020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10020 /* Assets.xcassets */; };
+		A10061 /* katex in Resources */ = {isa = PBXBuildFile; fileRef = B10061 /* katex */; };
+		A10062 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B10062 /* PrivacyInfo.xcprivacy */; };
+		A10021 /* ProblemMasteryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10021 /* ProblemMasteryManager.swift */; };
+		A10030 /* GeometryProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10030 /* GeometryProblems.swift */; };
+		A10031 /* GaokaoSolidGeometryProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10031 /* GaokaoSolidGeometryProblems.swift */; };
+		A10040 /* FunctionProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10040 /* FunctionProblems.swift */; };
+		A10041 /* SequenceProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10041 /* SequenceProblems.swift */; };
+		A10042 /* ConicProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10042 /* ConicProblems.swift */; };
+		A10043 /* ProbabilityProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10043 /* ProbabilityProblems.swift */; };
+		A10044 /* TrigProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10044 /* TrigProblems.swift */; };
+		A10045 /* VectorProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10045 /* VectorProblems.swift */; };
+		A10046 /* InequalityProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10046 /* InequalityProblems.swift */; };
+		A10047 /* ComprehensiveProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10047 /* ComprehensiveProblems.swift */; };
+		A10048 /* AdvancedGeometryProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10048 /* AdvancedGeometryProblems.swift */; };
+		A10049 /* ComplexNumberProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10049 /* ComplexNumberProblems.swift */; };
+		A10050 /* StatisticsProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10050 /* StatisticsProblems.swift */; };
+		A10051 /* CountingProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10051 /* CountingProblems.swift */; };
+		A10052 /* LogicSetProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10052 /* LogicSetProblems.swift */; };
+		A10053 /* LinearProgrammingProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10053 /* LinearProgrammingProblems.swift */; };
+		A10054 /* PolarParametricProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10054 /* PolarParametricProblems.swift */; };
+		A10055 /* InequalitySelectedProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10055 /* InequalitySelectedProblems.swift */; };
+		A10056 /* GaokaoConicAdvProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10056 /* GaokaoConicAdvProblems.swift */; };
+		A10057 /* LineCircleProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10057 /* LineCircleProblems.swift */; };
+		A10058 /* ExpLogProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10058 /* ExpLogProblems.swift */; };
+		A10059 /* TrigIdentityProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10059 /* TrigIdentityProblems.swift */; };
+		A10060 /* CollegeWeaponProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10060 /* CollegeWeaponProblems.swift */; };
+		A10032 /* PracticeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10032 /* PracticeManager.swift */; };
+		A10033 /* ErrorBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10033 /* ErrorBookView.swift */; };
+		A10034 /* ReviewScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10034 /* ReviewScheduler.swift */; };
+		A10035 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10035 /* ReviewView.swift */; };
+		A10036 /* StreakManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10036 /* StreakManager.swift */; };
+		A10063 /* ViewAdaptation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10063 /* ViewAdaptation.swift */; };
+		A20001 /* MathTreeDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20001 /* MathTreeDataTests.swift */; };
+		A20002 /* ContentReviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20002 /* ContentReviewTests.swift */; };
+		A20003 /* ModelLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20003 /* ModelLogicTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		J10001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = H10001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F10001;
+			remoteInfo = MathTree;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B10001 /* MathTreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTreeApp.swift; sourceTree = "<group>"; };
+		B10064 /* PromoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoView.swift; sourceTree = "<group>"; };
+		B10065 /* SecondKillProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondKillProblems.swift; sourceTree = "<group>"; };
+		B10066 /* SecondKillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondKillView.swift; sourceTree = "<group>"; };
 		B10002 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		B10003 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		B10004 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
@@ -48,11 +100,55 @@
 		B10017 /* HeroesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesView.swift; sourceTree = "<group>"; };
 		B10018 /* MysteryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MysteryDetailView.swift; sourceTree = "<group>"; };
 		B10019 /* MysteryRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MysteryRoomView.swift; sourceTree = "<group>"; };
+		B10020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B10061 /* katex */ = {isa = PBXFileReference; lastKnownFileType = folder; path = katex; sourceTree = "<group>"; };
+		B10062 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		B10021 /* ProblemMasteryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemMasteryManager.swift; sourceTree = "<group>"; };
+		B10030 /* GeometryProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryProblems.swift; sourceTree = "<group>"; };
+		B10031 /* GaokaoSolidGeometryProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaokaoSolidGeometryProblems.swift; sourceTree = "<group>"; };
+		B10040 /* FunctionProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionProblems.swift; sourceTree = "<group>"; };
+		B10041 /* SequenceProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceProblems.swift; sourceTree = "<group>"; };
+		B10042 /* ConicProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConicProblems.swift; sourceTree = "<group>"; };
+		B10043 /* ProbabilityProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProbabilityProblems.swift; sourceTree = "<group>"; };
+		B10044 /* TrigProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigProblems.swift; sourceTree = "<group>"; };
+		B10045 /* VectorProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorProblems.swift; sourceTree = "<group>"; };
+		B10046 /* InequalityProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InequalityProblems.swift; sourceTree = "<group>"; };
+		B10047 /* ComprehensiveProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveProblems.swift; sourceTree = "<group>"; };
+		B10048 /* AdvancedGeometryProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedGeometryProblems.swift; sourceTree = "<group>"; };
+		B10049 /* ComplexNumberProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexNumberProblems.swift; sourceTree = "<group>"; };
+		B10050 /* StatisticsProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsProblems.swift; sourceTree = "<group>"; };
+		B10051 /* CountingProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingProblems.swift; sourceTree = "<group>"; };
+		B10052 /* LogicSetProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicSetProblems.swift; sourceTree = "<group>"; };
+		B10053 /* LinearProgrammingProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgrammingProblems.swift; sourceTree = "<group>"; };
+		B10054 /* PolarParametricProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarParametricProblems.swift; sourceTree = "<group>"; };
+		B10055 /* InequalitySelectedProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InequalitySelectedProblems.swift; sourceTree = "<group>"; };
+		B10056 /* GaokaoConicAdvProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaokaoConicAdvProblems.swift; sourceTree = "<group>"; };
+		B10057 /* LineCircleProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineCircleProblems.swift; sourceTree = "<group>"; };
+		B10058 /* ExpLogProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpLogProblems.swift; sourceTree = "<group>"; };
+		B10059 /* TrigIdentityProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigIdentityProblems.swift; sourceTree = "<group>"; };
+		B10060 /* CollegeWeaponProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeWeaponProblems.swift; sourceTree = "<group>"; };
+		B10032 /* PracticeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeManager.swift; sourceTree = "<group>"; };
+		B10033 /* ErrorBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBookView.swift; sourceTree = "<group>"; };
+		B10034 /* ReviewScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewScheduler.swift; sourceTree = "<group>"; };
+		B10035 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		B10036 /* StreakManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakManager.swift; sourceTree = "<group>"; };
+		B10063 /* ViewAdaptation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAdaptation.swift; sourceTree = "<group>"; };
+		B20001 /* MathTreeDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTreeDataTests.swift; sourceTree = "<group>"; };
+		B20002 /* ContentReviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentReviewTests.swift; sourceTree = "<group>"; };
+		B20003 /* ModelLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLogicTests.swift; sourceTree = "<group>"; };
 		C10001 /* MathTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C20001 /* MathTreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathTreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D10001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D20001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -66,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				E10002 /* MathTree */,
+				E20001 /* MathTreeTests */,
 				E10020 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -76,6 +173,7 @@
 				E10003 /* App */,
 				E10004 /* Core */,
 				E10010 /* Features */,
+				E10021 /* Resources */,
 			);
 			path = MathTree;
 			sourceTree = "<group>";
@@ -84,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				B10001 /* MathTreeApp.swift */,
+				B10064 /* PromoView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -115,6 +214,35 @@
 			isa = PBXGroup;
 			children = (
 				B10002 /* SampleData.swift */,
+				B10030 /* GeometryProblems.swift */,
+				B10031 /* GaokaoSolidGeometryProblems.swift */,
+				B10040 /* FunctionProblems.swift */,
+				B10041 /* SequenceProblems.swift */,
+				B10042 /* ConicProblems.swift */,
+				B10043 /* ProbabilityProblems.swift */,
+				B10044 /* TrigProblems.swift */,
+				B10045 /* VectorProblems.swift */,
+				B10046 /* InequalityProblems.swift */,
+				B10047 /* ComprehensiveProblems.swift */,
+				B10048 /* AdvancedGeometryProblems.swift */,
+				B10049 /* ComplexNumberProblems.swift */,
+				B10050 /* StatisticsProblems.swift */,
+				B10051 /* CountingProblems.swift */,
+				B10052 /* LogicSetProblems.swift */,
+				B10053 /* LinearProgrammingProblems.swift */,
+				B10054 /* PolarParametricProblems.swift */,
+				B10055 /* InequalitySelectedProblems.swift */,
+				B10056 /* GaokaoConicAdvProblems.swift */,
+				B10057 /* LineCircleProblems.swift */,
+				B10058 /* ExpLogProblems.swift */,
+				B10059 /* TrigIdentityProblems.swift */,
+				B10060 /* CollegeWeaponProblems.swift */,
+				B10065 /* SecondKillProblems.swift */,
+				B10021 /* ProblemMasteryManager.swift */,
+				B10032 /* PracticeManager.swift */,
+				B10034 /* ReviewScheduler.swift */,
+				B10036 /* StreakManager.swift */,
+				B10063 /* ViewAdaptation.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -134,9 +262,12 @@
 				E10011 /* Battlefield */,
 				E10012 /* CommandCenter */,
 				E10013 /* DailyStrike */,
+				E10017 /* ErrorBook */,
 				E10014 /* FormulaUniverse */,
 				E10015 /* Heroes */,
 				E10016 /* MysteryRoom */,
+				E10018 /* Review */,
+				E10019 /* SecondKill */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -183,6 +314,30 @@
 			path = Heroes;
 			sourceTree = "<group>";
 		};
+		E10018 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				B10035 /* ReviewView.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		E10019 /* SecondKill */ = {
+			isa = PBXGroup;
+			children = (
+				B10066 /* SecondKillView.swift */,
+			);
+			path = SecondKill;
+			sourceTree = "<group>";
+		};
+		E10017 /* ErrorBook */ = {
+			isa = PBXGroup;
+			children = (
+				B10033 /* ErrorBookView.swift */,
+			);
+			path = ErrorBook;
+			sourceTree = "<group>";
+		};
 		E10016 /* MysteryRoom */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,8 +351,29 @@
 			isa = PBXGroup;
 			children = (
 				C10001 /* MathTree.app */,
+				C20001 /* MathTreeTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E10021 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B10020 /* Assets.xcassets */,
+				B10061 /* katex */,
+				B10062 /* PrivacyInfo.xcprivacy */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E20001 /* MathTreeTests */ = {
+			isa = PBXGroup;
+			children = (
+				B20001 /* MathTreeDataTests.swift */,
+				B20002 /* ContentReviewTests.swift */,
+				B20003 /* ModelLogicTests.swift */,
+			);
+			path = MathTreeTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +396,23 @@
 			productReference = C10001 /* MathTree.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F20001 /* MathTreeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = G20001 /* Build configuration list for PBXNativeTarget "MathTreeTests" */;
+			buildPhases = (
+				F20002 /* Sources */,
+				D20001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				K10001 /* PBXTargetDependency */,
+			);
+			name = MathTreeTests;
+			productName = MathTreeTests;
+			productReference = C20001 /* MathTreeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -228,10 +421,14 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 2650;
 				TargetAttributes = {
 					F10001 = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					F20001 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = F10001;
 					};
 				};
 			};
@@ -250,6 +447,7 @@
 			projectRoot = "";
 			targets = (
 				F10001 /* MathTree */,
+				F20001 /* MathTreeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -259,6 +457,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A10020 /* Assets.xcassets in Resources */,
+				A10061 /* katex in Resources */,
+				A10062 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +471,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10001 /* MathTreeApp.swift in Sources */,
+				A10064 /* PromoView.swift in Sources */,
+				A10065 /* SecondKillProblems.swift in Sources */,
+				A10066 /* SecondKillView.swift in Sources */,
 				A10002 /* SampleData.swift in Sources */,
+				A10030 /* GeometryProblems.swift in Sources */,
+				A10031 /* GaokaoSolidGeometryProblems.swift in Sources */,
+				A10040 /* FunctionProblems.swift in Sources */,
+				A10041 /* SequenceProblems.swift in Sources */,
+				A10042 /* ConicProblems.swift in Sources */,
+				A10043 /* ProbabilityProblems.swift in Sources */,
+				A10044 /* TrigProblems.swift in Sources */,
+				A10045 /* VectorProblems.swift in Sources */,
+				A10046 /* InequalityProblems.swift in Sources */,
+				A10047 /* ComprehensiveProblems.swift in Sources */,
+				A10048 /* AdvancedGeometryProblems.swift in Sources */,
+				A10049 /* ComplexNumberProblems.swift in Sources */,
+				A10050 /* StatisticsProblems.swift in Sources */,
+				A10051 /* CountingProblems.swift in Sources */,
+				A10052 /* LogicSetProblems.swift in Sources */,
+				A10053 /* LinearProgrammingProblems.swift in Sources */,
+				A10054 /* PolarParametricProblems.swift in Sources */,
+				A10055 /* InequalitySelectedProblems.swift in Sources */,
+				A10056 /* GaokaoConicAdvProblems.swift in Sources */,
+				A10057 /* LineCircleProblems.swift in Sources */,
+				A10058 /* ExpLogProblems.swift in Sources */,
+				A10059 /* TrigIdentityProblems.swift in Sources */,
+				A10060 /* CollegeWeaponProblems.swift in Sources */,
+				A10021 /* ProblemMasteryManager.swift in Sources */,
 				A10003 /* Formula.swift in Sources */,
 				A10004 /* Hero.swift in Sources */,
 				A10005 /* Mystery.swift in Sources */,
@@ -288,10 +516,34 @@
 				A10017 /* HeroesView.swift in Sources */,
 				A10018 /* MysteryDetailView.swift in Sources */,
 				A10019 /* MysteryRoomView.swift in Sources */,
+				A10032 /* PracticeManager.swift in Sources */,
+				A10033 /* ErrorBookView.swift in Sources */,
+				A10034 /* ReviewScheduler.swift in Sources */,
+				A10035 /* ReviewView.swift in Sources */,
+				A10036 /* StreakManager.swift in Sources */,
+				A10063 /* ViewAdaptation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F20002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20001 /* MathTreeDataTests.swift in Sources */,
+				A20002 /* ContentReviewTests.swift in Sources */,
+				A20003 /* ModelLogicTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		K10001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F10001 /* MathTree */;
+			targetProxy = J10001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		G10004 /* Debug */ = {
@@ -299,6 +551,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
@@ -313,6 +566,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
@@ -324,8 +578,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Z7F8BY55DS;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -344,6 +600,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -354,6 +611,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
@@ -368,6 +626,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
@@ -379,8 +638,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Z7F8BY55DS;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -391,6 +652,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -403,10 +665,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z7F8BY55DS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MathTree;
+				INFOPLIST_KEY_CFBundleDisplayName = "数学制高点";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -434,10 +695,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z7F8BY55DS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MathTree;
+				INFOPLIST_KEY_CFBundleDisplayName = "数学制高点";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -458,6 +718,44 @@
 			};
 			name = Release;
 		};
+		G20002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mathtree.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MathTree.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MathTree";
+			};
+			name = Debug;
+		};
+		G20003 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mathtree.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MathTree.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MathTree";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -475,6 +773,15 @@
 			buildConfigurations = (
 				G10006 /* Debug */,
 				G10007 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		G20001 /* Build configuration list for PBXNativeTarget "MathTreeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G20002 /* Debug */,
+				G20003 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

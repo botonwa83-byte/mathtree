@@ -78,7 +78,7 @@ struct MathHero: Identifiable, Codable {
         era: "前287-前212",
         attributes: HeroAttributes(insight: 10, creativity: 10, perseverance: 9, influence: 9),
         weaponSkills: ["buoyancy_principle"],
-        legendStory: "洗澡时发现浮力定律，赤身裸体跑上街大喊'Eureka!'。发明了阿基米德螺旋、杠杆原理，据说能用镜子烧毁敌军战船。",
+        legendStory: "洗澡时发现浮力定律，兴奋地冲上街大喊'Eureka!'（我发现了！）。发明了阿基米德螺旋、杠杆原理，据说能用镜子聚光退敌。",
         famousQuote: "给我一个支点，我就能撬动地球。",
         relatedMysteries: [],
         portraitEmoji: "⚖️"
@@ -118,7 +118,7 @@ struct MathHero: Identifiable, Codable {
         attributes: HeroAttributes(insight: 10, creativity: 10, perseverance: 6, influence: 10),
         weaponSkills: ["riemann_zeta"],
         legendStory: "提出了黎曼几何，为爱因斯坦的广义相对论提供了数学基础。提出的黎曼猜想至今仍是数学界最大的未解之谜之一。",
-        famousQuote: "只有在潮水退去时，你才知道谁在裸泳。",
+        famousQuote: "如果把π的小数点后的数字全部写出来，它们将充满整个宇宙。",
         relatedMysteries: [],
         portraitEmoji: "🌊"
     )

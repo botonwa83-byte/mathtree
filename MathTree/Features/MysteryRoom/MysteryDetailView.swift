@@ -107,7 +107,7 @@ struct MysteryDetailView: View {
                     }
 
                     if expandedArgIndex == index {
-                        Text(argument.content)
+                        Text(argument.content.mathPretty)
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .lineSpacing(4)
@@ -156,11 +156,11 @@ struct MysteryDetailView: View {
                         .cornerRadius(12)
 
                     VStack(alignment: .leading, spacing: 4) {
-                        FormulaView(latex: step.latex, fontSize: 18)
-                            .frame(height: 40)
+                        FormulaView(latex: step.latex, fontSize: 14)
                         Text(step.explanation)
                             .font(.caption)
                             .foregroundColor(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
             }

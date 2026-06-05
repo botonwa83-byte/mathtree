@@ -1,41 +1,106 @@
 import SwiftUI
 
 extension Color {
-    // Rainbow Fresh Theme (Primary)
-    static let apexBackground = Color(hex: "F5F0EB")       // warm cream
-    static let apexCardSurface = Color.white
-    static let apexLava = Color(hex: "FF7043")             // warm coral
-    static let apexEmerald = Color(hex: "26A69A")           // teal mint
-    static let apexStarBlue = Color(hex: "42A5F5")          // sky blue
-    static let apexDanger = Color(hex: "EF5350")            // soft red
-    static let apexMystery = Color(hex: "7E57C2")           // lavender purple
-    static let apexGold = Color(hex: "FFA726")              // warm amber
-    static let mysteryBackground = Color(hex: "F3EEFF")     // light lavender
-    static let mysteryPaper = Color(hex: "FFF8E1")          // parchment cream
+    // MARK: - Adaptive base colors (light / dark)
 
-    // Rainbow Levels Palette
-    static let levelElementary = Color(hex: "66BB6A")       // Fresh Green
-    static let levelMiddle = Color(hex: "42A5F5")           // Sky Blue
-    static let levelHigh = Color(hex: "FF7043")             // Lava Orange
-    static let levelUniversity = Color(hex: "7E57C2")       // Mystery Purple
-    static let levelAdvanced = Color(hex: "26A69A")         // Emerald Teal
+    static let apexBackground = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x1C1C1E) : UIColor(hex6: 0xF5F0EB)
+    })
 
-    // Legacy / Deep Space Theme (Optional / Utility)
+    static let apexCardSurface = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x2C2C2E) : UIColor(hex6: 0xFFFFFF)
+    })
+
+    static let mysteryBackground = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x1E1A2E) : UIColor(hex6: 0xF3EEFF)
+    })
+
+    static let mysteryPaper = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x2A2520) : UIColor(hex6: 0xFFF8E1)
+    })
+
+    // MARK: - Accent colors (slightly adjusted for dark readability)
+
+    static let apexLava = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0xFF8A65) : UIColor(hex6: 0xFF7043)
+    })
+
+    static let apexEmerald = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x4DB6AC) : UIColor(hex6: 0x26A69A)
+    })
+
+    static let apexStarBlue = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x64B5F6) : UIColor(hex6: 0x42A5F5)
+    })
+
+    static let apexDanger = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0xEF5350) : UIColor(hex6: 0xEF5350)
+    })
+
+    static let apexMystery = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x9575CD) : UIColor(hex6: 0x7E57C2)
+    })
+
+    static let apexGold = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0xFFB74D) : UIColor(hex6: 0xFFA726)
+    })
+
+    // MARK: - Level palette (brighter in dark mode)
+
+    static let levelElementary = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x81C784) : UIColor(hex6: 0x66BB6A)
+    })
+
+    static let levelMiddle = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x64B5F6) : UIColor(hex6: 0x42A5F5)
+    })
+
+    static let levelHigh = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0xFF8A65) : UIColor(hex6: 0xFF7043)
+    })
+
+    static let levelUniversity = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x9575CD) : UIColor(hex6: 0x7E57C2)
+    })
+
+    static let levelAdvanced = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x4DB6AC) : UIColor(hex6: 0x26A69A)
+    })
+
+    // MARK: - Deep space (unchanged, already dark)
+
     static let apexDeepBackground = Color(hex: "070C1D")
     static let apexDeepSurface = Color(hex: "0E1628")
     static let apexDeepActive = Color(hex: "FF6B35")
     static let apexDeepBrand = Color(hex: "0EC9A0")
     static let apexDeepStar = Color(hex: "3B8DE0")
 
-    // Rainbow accent palette for tags / chips
-    static let rainbowRed = Color(hex: "FF7043")
-    static let rainbowOrange = Color(hex: "FFA726")
-    static let rainbowYellow = Color(hex: "FFEE58")
-    static let rainbowGreen = Color(hex: "66BB6A")
-    static let rainbowTeal = Color(hex: "26A69A")
-    static let rainbowBlue = Color(hex: "42A5F5")
-    static let rainbowIndigo = Color(hex: "5C6BC0")
-    static let rainbowPurple = Color(hex: "AB47BC")
+    // MARK: - Rainbow accent palette (brighter in dark)
+
+    static let rainbowRed = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0xFF8A65) : UIColor(hex6: 0xFF7043)
+    })
+    static let rainbowOrange = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0xFFB74D) : UIColor(hex6: 0xFFA726)
+    })
+    static let rainbowYellow = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0xFFF176) : UIColor(hex6: 0xFFEE58)
+    })
+    static let rainbowGreen = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x81C784) : UIColor(hex6: 0x66BB6A)
+    })
+    static let rainbowTeal = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x4DB6AC) : UIColor(hex6: 0x26A69A)
+    })
+    static let rainbowBlue = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x64B5F6) : UIColor(hex6: 0x42A5F5)
+    })
+    static let rainbowIndigo = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0x7986CB) : UIColor(hex6: 0x5C6BC0)
+    })
+    static let rainbowPurple = Color(UIColor { tc in
+        tc.userInterfaceStyle == .dark ? UIColor(hex6: 0xBA68C8) : UIColor(hex6: 0xAB47BC)
+    })
 
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -56,6 +121,19 @@ extension Color {
             green: Double(g) / 255,
             blue: Double(b) / 255,
             opacity: Double(a) / 255
+        )
+    }
+}
+
+// MARK: - UIColor hex helper for adaptive colors
+
+extension UIColor {
+    convenience init(hex6: UInt32) {
+        self.init(
+            red:   CGFloat((hex6 >> 16) & 0xFF) / 255,
+            green: CGFloat((hex6 >> 8)  & 0xFF) / 255,
+            blue:  CGFloat( hex6        & 0xFF) / 255,
+            alpha: 1
         )
     }
 }

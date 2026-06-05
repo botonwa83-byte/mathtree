@@ -46,6 +46,24 @@ struct Problem: Identifiable, Codable {
     let gaokaoYear: Int?
     let tags: [String]
 
+    init(id: String, type: ProblemType, tier: Int, formulaIds: [String], content: String, contentLatex: String?, options: [String]?, answer: String, difficulty: Double, averageTime: TimeInterval, hints: [String], solution: SolutionPath, dualSolution: DualSolution? = nil, gaokaoYear: Int?, tags: [String]) {
+        self.id = id
+        self.type = type
+        self.tier = tier
+        self.formulaIds = formulaIds
+        self.content = content
+        self.contentLatex = contentLatex
+        self.options = options
+        self.answer = answer
+        self.difficulty = difficulty
+        self.averageTime = averageTime
+        self.hints = hints
+        self.solution = solution
+        self.dualSolution = dualSolution
+        self.gaokaoYear = gaokaoYear
+        self.tags = tags
+    }
+
     static let example = Problem(
         id: "prob_001",
         type: .multipleChoice,

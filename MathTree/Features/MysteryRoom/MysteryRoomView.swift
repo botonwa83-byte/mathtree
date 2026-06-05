@@ -17,21 +17,20 @@ struct MysteryRoomView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 24) {
-                    mysteryHeader
-                    statsBanner
-                    categoryFilter
-                    popularSection
-                    mysteryGrid
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 12)
+        ScrollView {
+            VStack(spacing: 24) {
+                mysteryHeader
+                statsBanner
+                categoryFilter
+                popularSection
+                mysteryGrid
             }
-            .background(Color.mysteryBackground)
-            .navigationTitle("数学发现")
+            .padding(.horizontal, 20)
+            .padding(.top, 12)
+            .readableContentWidth()
         }
+        .background(Color.mysteryBackground)
+        .navigationTitle("数学发现")
     }
 
     private var mysteryHeader: some View {

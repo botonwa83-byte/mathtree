@@ -36,3 +36,12 @@ Packages/Package.resolved
 # IDE
 *.swp
 *~.nib
+
+# Node (icon generation tooling)
+node_modules/
+package.json
+package-lock.json
+generate-icons.js
+
+# Scratch / temp files
+*_temp.swift
