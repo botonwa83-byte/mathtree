@@ -40,12 +40,16 @@ private struct FormulaWebView: UIViewRepresentable {
         Coordinator(dynamicHeight: $dynamicHeight)
     }
 
+    /// 所有公式 webview 共享同一个进程池，避免每个公式各起一个 WebContent 进程导致内存膨胀、被系统 SIGKILL。
+    private static let sharedProcessPool = WKProcessPool()
+
     func makeUIView(context: Context) -> WKWebView {
         let controller = WKUserContentController()
         controller.add(context.coordinator, name: "sizeReporter")
 
         let config = WKWebViewConfiguration()
         config.userContentController = controller
+        config.processPool = FormulaWebView.sharedProcessPool
         if #available(iOS 16.4, *) {
             config.defaultWebpagePreferences.allowsContentJavaScript = true
         }

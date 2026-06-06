@@ -20,13 +20,18 @@ struct SecondKillView: View {
         cases.filter { $0.weapon == weapon }
     }
 
+    /// 精选对决：按省时倍数取最震撼的前 6 道（首页只给"尝鲜"，全部走"全部战例"页）。
+    private var featuredCases: [SecondKillCase] {
+        Array(cases.sorted { $0.speedup > $1.speedup }.prefix(6))
+    }
+
     var body: some View {
         ScrollView {
             VStack(spacing: 22) {
                 heroHeader
                 creedBanner
+                featuredSection
                 arsenalSection
-                casesSection
                 originNote
             }
             .padding(.horizontal, 20)
@@ -148,19 +153,40 @@ struct SecondKillView: View {
 
     // MARK: 战例
 
-    private var casesSection: some View {
+    private var featuredSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            sectionHeader(icon: "list.star", title: "压轴战例", subtitle: "每道题：常规法 vs 降维秒杀")
-
-            VStack(spacing: 12) {
-                ForEach(cases) { c in
-                    NavigationLink {
-                        KillDuelView(killCase: c)
-                    } label: {
-                        SKCaseRow(killCase: c)
-                    }
-                    .buttonStyle(.plain)
+            // 标题行 + "全部"入口
+            HStack(spacing: 8) {
+                Image(systemName: "bolt.fill").foregroundColor(.apexLava)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text("精选对决").font(.headline).foregroundColor(.primary)
+                    Text("省时最震撼的几道 · 常规法 vs 降维秒杀")
+                        .font(.caption2).foregroundColor(.secondary)
                 }
+                Spacer()
+                NavigationLink {
+                    AllCasesView(cases: cases)
+                } label: {
+                    HStack(spacing: 2) {
+                        Text("全部 \(cases.count) 道").font(.caption).fontWeight(.semibold)
+                        Image(systemName: "chevron.right").font(.caption2)
+                    }
+                    .foregroundColor(.apexLava)
+                }
+            }
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(featuredCases) { c in
+                        NavigationLink {
+                            KillDuelView(killCase: c)
+                        } label: {
+                            SKFeaturedCard(killCase: c)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.vertical, 2)
             }
         }
     }
@@ -271,6 +297,121 @@ private struct SKCaseRow: View {
         .background(Color.apexCardSurface)
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.04), radius: 5, y: 2)
+    }
+}
+
+// MARK: - 精选对决卡（横滑用，紧凑固定宽）
+
+private struct SKFeaturedCard: View {
+    let killCase: SecondKillCase
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(killCase.weapon.tint.opacity(0.15))
+                        .frame(width: 36, height: 36)
+                    Image(systemName: killCase.weapon.icon)
+                        .foregroundColor(killCase.weapon.tint)
+                }
+                Spacer()
+                HStack(spacing: 3) {
+                    Image(systemName: "bolt.fill")
+                    Text("\(Int(killCase.speedup.rounded()))×")
+                }
+                .font(.system(size: 12, weight: .black, design: .rounded))
+                .foregroundColor(.white)
+                .padding(.horizontal, 8).padding(.vertical, 3)
+                .background(Color.apexLava)
+                .cornerRadius(Radius.chip)
+            }
+
+            Text(killCase.title)
+                .font(.subheadline).fontWeight(.bold)
+                .foregroundColor(.primary)
+                .lineLimit(3)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            Spacer(minLength: 0)
+
+            Text(killCase.weapon.displayName)
+                .font(.caption2).fontWeight(.semibold)
+                .foregroundColor(killCase.weapon.tint)
+                .lineLimit(1)
+        }
+        .padding(14)
+        .frame(width: 190, height: 158, alignment: .topLeading)
+        .background(Color.apexCardSurface)
+        .cornerRadius(Radius.card)
+        .cardShadow()
+    }
+}
+
+// MARK: - 全部压轴战例（独立列表页，懒加载 + 分组筛选）
+
+struct AllCasesView: View {
+    let cases: [SecondKillCase]
+    @State private var filter: CaseFilter = .all
+
+    enum CaseFilter: String, CaseIterable, Identifiable {
+        case all = "全部"
+        case descent = "降维武器"
+        case technique = "选择题技巧"
+        var id: String { rawValue }
+    }
+
+    private var shown: [SecondKillCase] {
+        switch filter {
+        case .all:       return cases
+        case .descent:   return cases.filter { !$0.weapon.isExamTechnique }
+        case .technique: return cases.filter { $0.weapon.isExamTechnique }
+        }
+    }
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // 分组筛选
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(CaseFilter.allCases) { f in
+                        let selected = filter == f
+                        Button {
+                            filter = f
+                        } label: {
+                            Text(f.rawValue)
+                                .font(.caption).fontWeight(.semibold)
+                                .foregroundColor(selected ? .white : .apexLava)
+                                .padding(.horizontal, 14).padding(.vertical, 7)
+                                .background(selected ? Color.apexLava : Color.apexLava.opacity(0.1))
+                                .cornerRadius(Radius.chip)
+                        }
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+            }
+
+            ScrollView {
+                LazyVStack(spacing: 12) {
+                    ForEach(shown) { c in
+                        NavigationLink {
+                            KillDuelView(killCase: c)
+                        } label: {
+                            SKCaseRow(killCase: c)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 4)
+                .padding(.bottom, 32)
+                .readableContentWidth()
+            }
+        }
+        .background(Color.apexBackground)
+        .navigationTitle("全部压轴战例 · \(shown.count)")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

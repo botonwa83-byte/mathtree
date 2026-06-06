@@ -3605,13 +3605,6 @@ enum SampleData {
 
     static let heroes: [MathHero] = MathHero.allHeroes
 
-    // MARK: - Weapons
-
-    static let weapons: [DescendWeapon] = [
-        DescendWeapon(id: "derivative_blade", name: "Derivative Blade", codename: "求导刃", tier: .blade, principle: "导数", tagline: "变化率秒杀器", unlockConditions: [], slayableGaokaoTypes: ["单调性"], demonstrations: [], masteryLevel: .beginner),
-        DescendWeapon(id: "lopital_hammer", name: "L'Hôpital's Hammer", codename: "洛必达之锤", tier: .heavyWeapon, principle: "导数极限", tagline: "极限陷阱粉碎机", unlockConditions: [], slayableGaokaoTypes: ["极限"], demonstrations: [], masteryLevel: .locked)
-    ]
-
     // MARK: - Daily Strikes
 
     static let dailyStrikes: [DailyStrike] = [

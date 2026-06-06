@@ -13,23 +13,32 @@ struct CommandCenterView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 20) {
+                VStack(spacing: Spacing.xl) {
+                    // 品牌入口
                     secondKillHero
+
+                    // 今日 — 行动区
+                    sectionHeader("今日")
                     countdownAndStreakCard
                     dailyTasksCard
-                    reviewReminderCard
+                    dailyStrikeCard
+
+                    // 我的进度
+                    sectionHeader("我的进度")
                     practiceStatsCard
                     achievementsCard
-                    dailyStrikeCard
-                    contentOverviewCard
-                    learningRoadmap
                     knowledgeCoverageCard
                     gaokaoReadinessCard
+
+                    // 题库与路线
+                    sectionHeader("题库与路线")
+                    contentOverviewCard
+                    learningRoadmap
                     quickActions
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 12)
-                .padding(.bottom, 30)
+                .padding(.horizontal, Spacing.xl)
+                .padding(.top, Spacing.md)
+                .padding(.bottom, Spacing.xxl)
                 .readableContentWidth()
             }
             .background(Color.apexBackground)
@@ -49,6 +58,18 @@ struct CommandCenterView: View {
                 }
             }
         }
+    }
+
+    // MARK: - 区块标题
+
+    private func sectionHeader(_ title: String) -> some View {
+        HStack {
+            Text(title)
+                .font(.title3.weight(.bold))
+                .foregroundColor(.primary)
+            Spacer()
+        }
+        .padding(.top, Spacing.xs)
     }
 
     // MARK: - 秒杀殿堂（产品灵魂入口）
@@ -97,7 +118,7 @@ struct CommandCenterView: View {
                     startPoint: .topLeading, endPoint: .bottomTrailing
                 )
             )
-            .cornerRadius(22)
+            .cornerRadius(Radius.hero)
             .shadow(color: Color.apexLava.opacity(0.3), radius: 14, y: 8)
         }
         .buttonStyle(.plain)
@@ -131,7 +152,7 @@ struct CommandCenterView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 18)
                 .background(Color.apexCardSurface)
-                .cornerRadius(16)
+                .cornerRadius(Radius.card)
             }
 
             // Streak
@@ -150,7 +171,7 @@ struct CommandCenterView: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 18)
             .background(Color.apexCardSurface)
-            .cornerRadius(16)
+            .cornerRadius(Radius.card)
 
             // Today stats
             VStack(spacing: 6) {
@@ -165,7 +186,7 @@ struct CommandCenterView: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 18)
             .background(Color.apexCardSurface)
-            .cornerRadius(16)
+            .cornerRadius(Radius.card)
         }
     }
 
@@ -267,7 +288,7 @@ struct CommandCenterView: View {
         }
         .padding(20)
         .background(Color.apexCardSurface)
-        .cornerRadius(20)
+        .cornerRadius(Radius.card)
         .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
@@ -343,79 +364,8 @@ struct CommandCenterView: View {
                 }
                 .padding(20)
                 .background(Color.apexCardSurface)
-                .cornerRadius(20)
+                .cornerRadius(Radius.card)
                 .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
-            }
-        }
-    }
-
-    // MARK: - Review Reminder
-
-    private var reviewReminderCard: some View {
-        let scheduler = ReviewScheduler.shared
-        let dueCount = scheduler.dueCount
-
-        return Group {
-            if dueCount > 0 {
-                Button {
-                    showReview = true
-                } label: {
-                    HStack(spacing: 14) {
-                        ZStack {
-                            Circle()
-                                .fill(Color.apexLava.opacity(0.15))
-                                .frame(width: 50, height: 50)
-                            Image(systemName: "brain.head.profile")
-                                .font(.title3)
-                                .foregroundColor(.apexLava)
-                        }
-
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack(spacing: 6) {
-                                Text("今日待复习")
-                                    .font(.headline)
-                                    .foregroundColor(.primary)
-                                Text("\(dueCount) 道")
-                                    .font(.headline)
-                                    .fontWeight(.black)
-                                    .foregroundColor(.apexLava)
-                            }
-                            Text("根据艾宾浩斯遗忘曲线安排，及时复习防止遗忘")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-
-                        Spacer()
-
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.apexLava)
-                    }
-                    .padding(18)
-                    .background(
-                        LinearGradient(
-                            colors: [Color.apexLava.opacity(0.12), Color.apexCardSurface],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .cornerRadius(20)
-                    .shadow(color: Color.apexLava.opacity(0.1), radius: 8, y: 4)
-                }
-            } else if scheduler.totalScheduled > 0 {
-                HStack(spacing: 10) {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.apexEmerald)
-                    Text("今日复习已完成")
-                        .font(.subheadline)
-                        .foregroundColor(.apexEmerald)
-                    Spacer()
-                    Text("共 \(scheduler.totalScheduled) 题在复习计划中")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                .padding(16)
-                .background(Color.apexEmerald.opacity(0.08))
-                .cornerRadius(14)
             }
         }
     }
@@ -456,7 +406,7 @@ struct CommandCenterView: View {
                     endPoint: .bottomTrailing
                 )
             )
-            .cornerRadius(20)
+            .cornerRadius(Radius.card)
             .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
         }
     }
@@ -514,7 +464,7 @@ struct CommandCenterView: View {
         .padding(.vertical, 18)
         .padding(.horizontal, 8)
         .background(Color.apexCardSurface)
-        .cornerRadius(20)
+        .cornerRadius(Radius.card)
         .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
@@ -546,9 +496,9 @@ struct CommandCenterView: View {
                 }
             }
         }
-        .padding(24)
+        .padding(Spacing.xxl)
         .background(Color.apexCardSurface)
-        .cornerRadius(20)
+        .cornerRadius(Radius.card)
         .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
@@ -723,7 +673,7 @@ struct CommandCenterView: View {
         }
         .padding(20)
         .background(Color.apexCardSurface)
-        .cornerRadius(20)
+        .cornerRadius(Radius.card)
         .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
@@ -793,7 +743,7 @@ struct CommandCenterView: View {
         }
         .padding(20)
         .background(Color.apexCardSurface)
-        .cornerRadius(20)
+        .cornerRadius(Radius.card)
         .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
     }
 
@@ -906,7 +856,7 @@ struct CommandCenterView: View {
                 }
                 .padding(20)
                 .background(Color.apexCardSurface)
-                .cornerRadius(20)
+                .cornerRadius(Radius.card)
                 .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
             }
         }
@@ -1096,7 +1046,7 @@ struct QuickActionButton: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
             .background(Color.apexCardSurface)
-            .cornerRadius(20)
+            .cornerRadius(Radius.card)
             .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
         }
     }
@@ -1147,7 +1097,7 @@ struct GaokaoDatePickerView: View {
 
                 Spacer()
             }
-            .padding(24)
+            .padding(Spacing.xxl)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

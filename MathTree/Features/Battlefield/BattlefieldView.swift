@@ -59,6 +59,7 @@ struct BattlefieldView: View {
     @State private var showDualView = false
     @State private var showDescendAnimation = false
     @State private var showProblemList = false
+    @State private var showErrorBook = false
     @State private var answeredProblems = Set<Int>()
     @State private var solutionTab: SolutionTab = .insight
     @State private var hideMastered = true
@@ -142,7 +143,12 @@ struct BattlefieldView: View {
                 .background(Color.apexBackground)
                 .navigationTitle("实战训练")
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        Button {
+                            showErrorBook = true
+                        } label: {
+                            Image(systemName: "exclamationmark.triangle")
+                        }
                         Button {
                             showProblemList = true
                         } label: {
@@ -163,6 +169,9 @@ struct BattlefieldView: View {
             }
             .sheet(isPresented: $showProblemList) {
                 problemListView
+            }
+            .sheet(isPresented: $showErrorBook) {
+                ErrorBookView()
             }
             .onAppear { startTimer() }
             .onDisappear { stopTimer() }

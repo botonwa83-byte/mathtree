@@ -12,22 +12,27 @@ struct MathTreeApp: App {
     }
 }
 
-/// 启动先展示宣传页(赋予特殊能力「降维秒杀」)，再进入主界面。
+/// 启动流程：宣传页 → 登录页（可跳过）→ 主界面。
 struct RootView: View {
-    @State private var entered = false
+    @StateObject private var auth = AuthManager.shared
+    @State private var passedPromo = false
 
     var body: some View {
         ZStack {
-            if entered {
-                MainTabView()
-                    .transition(.opacity)
-            } else {
+            if !passedPromo {
                 PromoView {
-                    withAnimation(.easeInOut(duration: 0.45)) { entered = true }
+                    withAnimation(.easeInOut(duration: 0.45)) { passedPromo = true }
                 }
                 .transition(.opacity)
+            } else if !auth.hasPassedGate {
+                LoginView()
+                    .transition(.opacity)
+            } else {
+                MainTabView()
+                    .transition(.opacity)
             }
         }
+        .animation(.easeInOut(duration: 0.35), value: auth.hasPassedGate)
     }
 }
 
@@ -57,33 +62,58 @@ struct MainTabView: View {
                 }
                 .tag(1)
 
-            ErrorBookView()
-                .tabItem {
-                    Label("错题", systemImage: "exclamationmark.triangle")
-                }
-                .tag(2)
-
             FormulaUniverseView()
                 .tabItem {
-                    Label("公式", systemImage: "aqi.medium")
+                    Label("公式", systemImage: "function")
                 }
-                .tag(4)
+                .tag(2)
 
             MoreView()
                 .tabItem {
                     Label("更多", systemImage: "ellipsis.circle")
                 }
-                .tag(5)
+                .tag(3)
         }
         .tint(.apexLava)
     }
 }
 
-/// 「更多」标签页：收纳 数学发现 与 人物，统一提供导航。
+/// 「更多」标签页：收纳 个人中心、数学发现 与 人物，统一提供导航。
 struct MoreView: View {
+    @ObservedObject private var auth = AuthManager.shared
+
     var body: some View {
         NavigationStack {
             List {
+                Section {
+                    NavigationLink {
+                        ProfileView()
+                    } label: {
+                        HStack(spacing: 12) {
+                            Image(systemName: "person.crop.circle.fill")
+                                .font(.title)
+                                .foregroundColor(.apexLava)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(auth.currentUser?.nickname ?? "未登录")
+                                    .font(.headline).foregroundColor(.primary)
+                                Text(auth.currentUser?.maskedPhone ?? "登录 / 查看隐私政策与用户协议")
+                                    .font(.caption).foregroundColor(.secondary)
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
+                }
+
+                Section {
+                    NavigationLink {
+                        ErrorBookView()
+                    } label: {
+                        Label("错题本", systemImage: "exclamationmark.triangle")
+                    }
+                } header: {
+                    Text("我的练习")
+                }
+
                 Section {
                     NavigationLink {
                         MysteryRoomView()

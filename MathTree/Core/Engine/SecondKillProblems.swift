@@ -35,6 +35,30 @@ enum KillWeapon: String, CaseIterable, Identifiable {
     case optionElimination  // 选项代入 · 排除法
     case numberShape        // 数形结合 · 几何意义
     case estimation         // 估算 · 特例比较
+    case symmetryPeriod     // 对称性 · 周期速算
+    case vieta              // 韦达定理 · 根与系数
+    case substitution       // 整体代换 · 换元
+    case complement         // 正难则反 · 补集法
+    case trigGraph          // 三角图象 · 五点定参
+    case extremePosition    // 极端位置 · 临界值
+    case amgmTrick          // 基本不等式 · 取等
+    case coordinateMethod   // 坐标化 · 建系秒算
+    case homomorphism       // 同构法 · exp-ln
+    case paramSeparation    // 参数分离 · 恒成立
+    case hiddenZero         // 隐零点 · 虚设零点
+    case pointDifference    // 点差法 · 中点弦
+    case constructCompare   // 构造函数 · 比大小
+    case polarization       // 极化恒等式 · 向量
+    case necessityProbe     // 必要性探路 · 端点
+    case sequencePeriod     // 数列周期 · 找规律
+    case telescoping        // 裂项相消 · 望远镜求和
+    case scaling            // 放缩法 · 数列不等式
+    case conicVieta         // 设而不求 · 韦达整体代
+    case induction          // 数学归纳法 · 多米诺
+    case oddConstruct       // 奇偶构造 · 抽公因式
+    case linearProgramming  // 线性规划 · 可行域顶点
+    case basicQuantity      // 基本量法 · 等差等比
+    case complexNumber      // 复数运算 · 模与共轭
 
     var id: String { rawValue }
 
@@ -59,6 +83,30 @@ enum KillWeapon: String, CaseIterable, Identifiable {
         case .optionElimination: return "选项代入 · 排除法"
         case .numberShape:      return "数形结合 · 几何意义"
         case .estimation:       return "估算 · 特例比较"
+        case .symmetryPeriod:   return "对称性 · 周期速算"
+        case .vieta:            return "韦达定理 · 根与系数"
+        case .substitution:     return "整体代换 · 换元"
+        case .complement:       return "正难则反 · 补集法"
+        case .trigGraph:        return "三角图象 · 五点定参"
+        case .extremePosition:  return "极端位置 · 临界值"
+        case .amgmTrick:        return "基本不等式 · 取等"
+        case .coordinateMethod: return "坐标化 · 建系秒算"
+        case .homomorphism:     return "同构法 · exp-ln"
+        case .paramSeparation:  return "参数分离 · 恒成立"
+        case .hiddenZero:       return "隐零点 · 虚设零点"
+        case .pointDifference:  return "点差法 · 中点弦"
+        case .constructCompare: return "构造函数 · 比大小"
+        case .polarization:     return "极化恒等式 · 向量"
+        case .necessityProbe:   return "必要性探路 · 端点"
+        case .sequencePeriod:   return "数列周期 · 找规律"
+        case .telescoping:      return "裂项相消 · 望远镜求和"
+        case .scaling:          return "放缩法 · 数列不等式"
+        case .conicVieta:       return "设而不求 · 韦达整体代"
+        case .induction:        return "数学归纳法 · 多米诺"
+        case .oddConstruct:     return "奇偶构造 · 抽公因式"
+        case .linearProgramming: return "线性规划 · 可行域顶点"
+        case .basicQuantity:    return "基本量法 · 等差等比"
+        case .complexNumber:    return "复数运算 · 模与共轭"
         }
     }
 
@@ -84,6 +132,30 @@ enum KillWeapon: String, CaseIterable, Identifiable {
         case .optionElimination: return "别正算，把选项代回去，对的留下"
         case .numberShape:      return "代数式翻译成斜率/距离/面积，看图秒答"
         case .estimation:       return "选择题只要量级，估出大小直接排除"
+        case .symmetryPeriod:   return "对称轴/中心+周期，f(很大的数) 折回近处"
+        case .vieta:            return "不解方程，两根的对称式直接由系数出"
+        case .substitution:     return "把重复结构当整体，方程瞬间降次"
+        case .complement:       return "至少/至多型，算对立面 1−P 反而简单"
+        case .trigGraph:        return "y=Asin(ωx+φ)：周期定ω、特殊点定φ"
+        case .extremePosition:  return "动态最值取边界，圆/椭圆一步定范围"
+        case .amgmTrick:        return "1的代换破分式，和定积最大、积定和最小"
+        case .coordinateMethod: return "向量几何建系，点乘模长退化成算术"
+        case .homomorphism:     return "eˣ 与 ln 凑成同一函数 f(t)=teᵗ，比单调性"
+        case .paramSeparation:  return "恒成立 a≥g(x) ⟺ a≥g(x) 的最大值"
+        case .hiddenZero:       return "导数零点解不出？设 x₀ 满足 f'(x₀)=0 整体代换"
+        case .pointDifference:  return "中点弦斜率：两点代入作差，一步出 k"
+        case .constructCompare: return "aᵇ 与 bᵃ 比大小？构造 f(x)=lnx/x 比单调"
+        case .polarization:     return "a·b=¼(|a+b|²−|a−b|²)，点乘秒变模长"
+        case .necessityProbe:   return "含参恒成立，先代端点求出参数必要条件锁死"
+        case .sequencePeriod:   return "递推算前几项找周期，a₂₀₂₄ 落回一格"
+        case .telescoping:      return "每项拆成相邻两块的差，求和首尾对消"
+        case .scaling:          return "精确求和算不出？把每项放大/缩小到能求和"
+        case .conicVieta:       return "联立得二次，x₁+x₂、x₁x₂ 整体代入不解根"
+        case .induction:        return "n=1 成立 + 假设 n=k 推 n=k+1，整串自动成立"
+        case .oddConstruct:     return "f(x)=g(x)+b，g 奇，则 f(a)+f(−a)=2b"
+        case .linearProgramming: return "目标 z=ax+by 的最值，必在可行域顶点取到"
+        case .basicQuantity:    return "等差设 a₁,d；等比设 a₁,q，条件列方程一解到底"
+        case .complexNumber:    return "i 四次一循环、|z₁z₂|=|z₁||z₂|、共轭对称速算"
         }
     }
 
@@ -108,6 +180,30 @@ enum KillWeapon: String, CaseIterable, Identifiable {
         case .optionElimination: return "checklist.checked"
         case .numberShape:      return "ruler.fill"
         case .estimation:       return "lessthan.circle.fill"
+        case .symmetryPeriod:   return "circle.lefthalf.filled"
+        case .vieta:            return "plusminus.circle.fill"
+        case .substitution:     return "square.on.square"
+        case .complement:       return "minus.diamond.fill"
+        case .trigGraph:        return "wave.3.right"
+        case .extremePosition:  return "arrow.up.left.and.arrow.down.right"
+        case .amgmTrick:        return "equal.circle.fill"
+        case .coordinateMethod: return "grid"
+        case .homomorphism:     return "arrow.left.arrow.right.circle.fill"
+        case .paramSeparation:  return "a.circle.fill"
+        case .hiddenZero:       return "circle.dashed"
+        case .pointDifference:  return "chart.dots.scatter"
+        case .constructCompare: return "arrow.up.arrow.down.circle.fill"
+        case .polarization:     return "diamond.circle.fill"
+        case .necessityProbe:   return "target"
+        case .sequencePeriod:   return "repeat.circle.fill"
+        case .telescoping:      return "scissors"
+        case .scaling:          return "arrow.up.and.down.circle"
+        case .conicVieta:       return "questionmark.circle.fill"
+        case .induction:        return "list.number"
+        case .oddConstruct:     return "circle.righthalf.filled"
+        case .linearProgramming: return "pentagon.fill"
+        case .basicQuantity:    return "number.square"
+        case .complexNumber:    return "i.circle.fill"
         }
     }
 
@@ -132,6 +228,30 @@ enum KillWeapon: String, CaseIterable, Identifiable {
         case .optionElimination: return .apexEmerald
         case .numberShape:      return .apexStarBlue
         case .estimation:       return .rainbowOrange
+        case .symmetryPeriod:   return .rainbowPurple
+        case .vieta:            return .apexStarBlue
+        case .substitution:     return .rainbowTeal
+        case .complement:       return .rainbowOrange
+        case .trigGraph:        return .rainbowBlue
+        case .extremePosition:  return .rainbowRed
+        case .amgmTrick:        return .apexEmerald
+        case .coordinateMethod: return .rainbowGreen
+        case .homomorphism:     return .apexLava
+        case .paramSeparation:  return .apexStarBlue
+        case .hiddenZero:       return .apexMystery
+        case .pointDifference:  return .rainbowIndigo
+        case .constructCompare: return .apexGold
+        case .polarization:     return .rainbowPurple
+        case .necessityProbe:   return .apexEmerald
+        case .sequencePeriod:   return .rainbowTeal
+        case .telescoping:      return .rainbowYellow
+        case .scaling:          return .rainbowOrange
+        case .conicVieta:       return .rainbowBlue
+        case .induction:        return .rainbowGreen
+        case .oddConstruct:     return .rainbowPurple
+        case .linearProgramming: return .apexEmerald
+        case .basicQuantity:    return .rainbowYellow
+        case .complexNumber:    return .rainbowTeal
         }
     }
 
@@ -139,15 +259,25 @@ enum KillWeapon: String, CaseIterable, Identifiable {
     var inSyllabus: Bool {
         switch self {
         case .secondDerivative, .tangentLine, .cauchyPower, .sosDecomposition, .trigSubstitution,
-             .specialValue, .optionElimination, .numberShape, .estimation: return true
-        default: return false
+             .specialValue, .optionElimination, .numberShape, .estimation,
+             .symmetryPeriod, .vieta, .substitution, .complement, .trigGraph,
+             .extremePosition, .amgmTrick, .coordinateMethod,
+             .homomorphism, .paramSeparation, .hiddenZero, .pointDifference,
+             .constructCompare, .necessityProbe, .sequencePeriod,
+             .telescoping, .scaling, .conicVieta, .induction,
+             .oddConstruct, .linearProgramming, .basicQuantity, .complexNumber: return true
+        default: return false   // polarization（极化恒等式）超纲
         }
     }
 
     /// 是否为「选择/填空题技巧」类武器（纲内、靠机智不靠公式）。
     var isExamTechnique: Bool {
         switch self {
-        case .specialValue, .optionElimination, .numberShape, .estimation: return true
+        case .specialValue, .optionElimination, .numberShape, .estimation,
+             .symmetryPeriod, .vieta, .substitution, .complement, .trigGraph,
+             .extremePosition, .amgmTrick, .coordinateMethod,
+             .constructCompare, .polarization, .necessityProbe, .sequencePeriod,
+             .oddConstruct, .linearProgramming, .basicQuantity, .complexNumber: return true
         default: return false
         }
     }
@@ -193,6 +323,54 @@ enum KillWeapon: String, CaseIterable, Identifiable {
             return "把代数式翻译成几何量：(y₂−y₁)/(x₂−x₁) 是斜率、√((x−a)²+(y−b)²) 是距离、|x−a|+|x−b| 是数轴距离和、行列式是面积。画出图形，最值/范围一眼读出，免去繁琐代数。"
         case .estimation:
             return "选择题只需要『落在哪个区间/谁大谁小』，不需要精确值。对幂、对数、根式取公共乘方或与基准值（0、1、1/2、e）比较，估出量级即可锁定唯一选项，比精确计算快十倍。"
+        case .symmetryPeriod:
+            return "函数的对称性与周期把『远处的值』搬回『近处』：f(−x)=f(x)（偶/轴对称 x=a）、f(x)+f(2a−x)=2b（中心对称 (a,b)）、f(x+T)=f(x)（周期）。求 f(很大的数) 或一串等距点之和时，先用周期把自变量落回一个周期内，再用对称把它折到已知区间——全程无需求出解析式。"
+        case .vieta:
+            return "一元二次 ax²+bx+c=0 的两根满足 x₁+x₂=−b/a、x₁x₂=c/a。任何关于两根的对称式（x₁²+x₂²、1/x₁+1/x₂、(x₁−x₂)²、x₁/x₂+x₂/x₁ 等）都能用这两个基本对称式表出，于是『不解方程』直接由系数算出结果。"
+        case .substitution:
+            return "把题中反复出现的复杂结构（如 x+1、2ˣ、sinx、x²+x）整体看作一个新变量 t，原式往往瞬间降次、化简成熟悉的二次或一次问题；解出 t 再回代。关键是认出那个『反复出现的整体』。"
+        case .complement:
+            return "对『至少 / 至多』型计数与概率，正面分类讨论往往情形繁多，而它的对立面通常只有一种或极少情形。用 所求 = 全集 − 补集（概率 P(A)=1−P(Ā)）一步绕过繁琐分类。"
+        case .trigGraph:
+            return "y=Asin(ωx+φ)+k 的四个参数各管一件事：A 由最值定（(max−min)/2）、k 由中线定、ω 由周期定（ω=2π/T）、φ 由一个特殊点（最值点 / 过零上升点 / 对称轴）定。逐个击破，不必联立方程组。"
+        case .extremePosition:
+            return "当某个量随动点 / 参数连续变化时，它的最大、最小值只可能在『边界 / 端点 / 相切 / 共线』这些极端位置取到。直接跳到极端位置算一个值——圆上点到定点（线）的距离 d±r、椭圆上点到焦点的距离 a±c、线性目标在可行域顶点的取值，都是如此，省去求导或联立。"
+        case .amgmTrick:
+            return "基本不等式 a+b≥2√(ab)（a,b>0）：和为定值时积最大、积为定值时和最小。遇到分式求最值常配合『1 的代换』（把约束 x+y=1 乘进式子）或对勾函数凑配，把分式压成可取等的定值。一正二定三相等，缺一不可。"
+        case .coordinateMethod:
+            return "向量与平面几何中的垂直、平行、夹角、长度，一旦建立直角坐标系赋上坐标，全部退化成坐标的加减与点乘 x₁x₂+y₁y₂。选一个让多数点坐标简单的原点和轴向，几何直觉题就变成纯算术。"
+        case .homomorphism:
+            return "同构（同形）思想：把不等式两边整理成同一个函数 f 在不同自变量处的值 f(A) 与 f(B)，再用 f 的单调性把『f(A)≥f(B)』直接降为『A≥B』。处理 eˣ 与 ln x 混合的压轴不等式时，常借 x=e^{ln x}、xeˣ=e^{x+ln x} 把两边凑成 f(t)=teᵗ 的同一形式，超越不等式瞬间变成解一次/二次。"
+        case .paramSeparation:
+            return "含参不等式恒成立求参数范围时，先把参数 a 单独移到一侧：a≥g(x) 恒成立 ⟺ a≥g(x) 的最大值；a≤g(x) 恒成立 ⟺ a≤g(x) 的最小值。参数从『讨论对象』降为一条水平线，只需对不含参的 g(x) 求一次最值，免去对 a 分类讨论。"
+        case .hiddenZero:
+            return "求最值时若 f'(x)=0 解不出显式根（如 eˣ−1/x=0），就『虚设』一个零点 x₀ 满足 f'(x₀)=0，把这个等式当隐含条件。算 f(x₀) 时用 f'(x₀)=0 反解超越项（如 e^{x₀}=1/x₀ ⟹ ln x₀=−x₀）整体代入消元，最值便能化简并估出范围。"
+        case .pointDifference:
+            return "圆锥曲线的弦 AB 两端点都在曲线上，把两点坐标分别代入曲线方程再相减，平方差自动分解出『中点坐标 (x₁+x₂, y₁+y₂)』与『斜率 (y₁−y₂)/(x₁−x₂)』。于是中点一给定，弦的斜率一步解出，无需联立直线与曲线、再用韦达。"
+        case .constructCompare:
+            return "比较 aᵇ 与 bᵃ、或一串 (ln xᵢ)/xᵢ 的大小时，两边取对数化成 (ln a)/a 与 (ln b)/b，构造 f(x)=ln x / x。它在 (0,e) 递增、(e,+∞) 递减，把『比大小』转成『看自变量落在单调区间的哪一侧』，一眼定序。"
+        case .polarization:
+            return "极化恒等式 a·b=¼(|a+b|²−|a−b|²)，或三角形中线形式：M 为 BC 中点时 AB·AC=AM²−(BC/2)²。它把不易直接算的数量积换成『模长的平方差』，在只给对角线/中线/和差模长的题里一步出数。"
+        case .necessityProbe:
+            return "含参恒成立题，先抓住使两边相等的『端点/取等点』x₀：因为 x₀ 是差函数 g 的最小值点，必有 g'(x₀)=0（甚至 g''(x₀)≥0），由此解出参数的必要条件，往往直接锁定答案。选填只需必要性即可秒选，解答题再补一句充分性验证。"
+        case .sequencePeriod:
+            return "由递推 a_{n+1}=f(a_n)（或 a_{n+2}=f(a_n,a_{n+1})）定义的数列，挨个算出前几项，常会发现『绕一圈又回到起点』的周期 T。求 a_{2024}、S_{2024} 时，只要把下标对 T 取余落回一个周期内，或用『周期和』整除，瞬间得到结果。"
+        case .telescoping:
+            return "把数列每一项 aₖ 拆成相邻两项的差 aₖ=bₖ−bₖ₊₁（如 1/[k(k+1)]=1/k−1/(k+1)），求和时中间项首尾相消（望远镜求和），Σ 只剩首尾两项 b₁−bₙ₊₁。复杂求和瞬间坍缩成一次减法。"
+        case .scaling:
+            return "数列和的不等式若无法精确求和，就对通项整体放大或缩小成『可求和』的形式：常用 1/k² < 1/[k(k−1)]=1/(k−1)−1/k、2(√(k+1)−√k)<1/√k<2(√k−√(k−1))、或等比放缩。放完再求和，不等式一步证出，关键是放缩的『度』要恰到好处。"
+        case .conicVieta:
+            return "直线与圆锥曲线相交，联立消元得关于 x（或 y）的一元二次方程，交点坐标不必解出，只用韦达定理写出 x₁+x₂、x₁x₂，再把弦长、中点、面积、斜率等目标用这两个对称式整体表示。『设而不求』一步绕开解析几何里最繁的解坐标。"
+        case .induction:
+            return "对与正整数 n 有关的命题 P(n)：① 验证 P(1) 成立（奠基）；② 假设 P(k) 成立，推出 P(k+1) 也成立（递推）。两步齐备，命题对一切 n≥1 成立——像推倒一排多米诺。它把『证无穷多个命题』降为『证一个起点 + 一次传递』。"
+        case .oddConstruct:
+            return "若 f(x) 能写成『一个奇函数 g(x) 加常数 b』，即 f(x)=g(x)+b，则对称两点之和 f(a)+f(−a)=g(a)+g(−a)+2b=2b——与 a 无关。遇到 f(x)=ln(√(x²+1)+x)+c、或奇次幂/正弦叠加常数的函数，求对称点和、或对称区间上的『最大值+最小值』，先剥出奇函数部分，答案瞬间。"
+        case .linearProgramming:
+            return "线性约束（一组一次不等式）围成的可行域是凸多边形，线性目标 z=ax+by 的等值线平移时，最大、最小值必在多边形的顶点（或边界）处取到。于是只需求出各顶点坐标，代入目标函数比一比，最值立得，无需逐点扫描。"
+        case .basicQuantity:
+            return "等差数列由首项 a₁ 与公差 d 完全确定，等比数列由首项 a₁ 与公比 q 完全确定（aₙ、Sₙ 都是它们的式子）。把题目条件统统翻译成关于这两个『基本量』的方程，联立一解，整个数列就定了——无需找规律或凑通项。"
+        case .complexNumber:
+            return "复数三件套：① i 的幂四次一周期 i,−1,−i,1；② 模的乘除性 |z₁z₂|=|z₁|·|z₂|、|z₁/z₂|=|z₁|/|z₂|，比逐个算实虚部快得多；③ 共轭 z·z̄=|z|²、z+z̄=2Re(z)。算复数的模、高次幂、共轭表达式时，用这三条绕开暴力展开。"
         }
     }
 
@@ -237,6 +415,54 @@ enum KillWeapon: String, CaseIterable, Identifiable {
             return "求 √(…)+√(…) 的最值、(sinθ)/(cosθ−a) 的范围、|x−a|+|x−b| 的最小值等『有几何味』的式子。"
         case .estimation:
             return "比较若干幂/对数/根式的大小，或判断某表达式落在哪个区间（选择题）。"
+        case .symmetryPeriod:
+            return "求 f(很大的数) 或 f(a)+f(b)+… 一串等距点之和；题目给出 f(−x)=f(x)、f(x)+f(2−x)=常数、f(x+T)=f(x) 这类对称/周期条件。"
+        case .vieta:
+            return "出现『两根 x₁,x₂』但不要求具体根，只问它们的对称组合（和、积、平方和、差的平方、倒数和、比值和）。"
+        case .substitution:
+            return "式子里反复出现同一个复杂结构（x+1、2ˣ、sinx、x²+x…）；或给 f(g(x)) 反求 f(x)。"
+        case .complement:
+            return "计数/概率题里出现『至少』『至多』『不全是』『至少一个』，且正面情形分类很多。"
+        case .trigGraph:
+            return "给三角函数 y=Asin(ωx+φ) 的图象、最值点、周期、对称轴或平移信息，反求 A、ω、φ 或解析式。"
+        case .extremePosition:
+            return "圆/椭圆上的点到定点或定直线的最值；可行域上线性目标最值；求一个随动点连续变化量的最大/最小。"
+        case .amgmTrick:
+            return "正数和为定值（或可配成定值）求分式/和式最小；积为定值求和最小；出现 1/x+k/y 配 x+y=1 这类结构。"
+        case .coordinateMethod:
+            return "正方形/矩形/等边三角形里的向量点乘、模长、夹角；或解析几何中垂直、距离关系——图形规整、易于建系。"
+        case .homomorphism:
+            return "不等式/方程里 eˣ 与 ln x（或 x 与 ln x）混杂，且两边能整理成『同一结构作用在不同变量上』，常见 xeˣ 与 a·ln a 这类。"
+        case .paramSeparation:
+            return "含参不等式『对任意 x 恒成立』求参数范围，且参数能从主变量中分离（一次项或可整体移项）。"
+        case .hiddenZero:
+            return "求含 eˣ 与 x（或 ln x 与 x）混合函数的最值/极值，而导数方程 f'(x)=0 无法解出初等根。"
+        case .pointDifference:
+            return "圆锥曲线（椭圆/双曲线/抛物线）给出弦的中点，求该弦所在直线的斜率或方程。"
+        case .constructCompare:
+            return "比较两个『底与指数互换』的幂 aᵇ 与 bᵃ，或比较若干 (ln xᵢ)/xᵢ 形式数的大小。"
+        case .polarization:
+            return "求向量数量积 a·b，但只给了 |a+b| 与 |a−b|，或在三角形中给了中线长与底边长。"
+        case .necessityProbe:
+            return "含参恒成立/存在题，存在一个使两边恰好相等的特殊点（端点、对称点），从它入手最快。"
+        case .sequencePeriod:
+            return "由递推式定义的数列求很靠后的某一项 a_{2024} 或前若干项之和，且递推反复迭代呈现循环。"
+        case .telescoping:
+            return "求和的通项是分式且分母为相邻整数（或等差）之积，如 1/[k(k+1)]、1/[(2k−1)(2k+1)]，或 √(k+1)−√k 型。"
+        case .scaling:
+            return "证形如 Σ1/k²、Σ1/√k、Σ1/(2ᵏ−1) 的和式不等式，且和无法精确求出，只需卡住一个界。"
+        case .conicVieta:
+            return "直线与椭圆/抛物线/双曲线相交，求弦长、中点、面积、|AB| 等只依赖两交点对称组合的量。"
+        case .induction:
+            return "证明对一切正整数 n 成立的等式、不等式、整除或数列通项，且 P(k)→P(k+1) 有清晰的递推联系。"
+        case .oddConstruct:
+            return "求 f(a)+f(−a)、或函数在对称区间 [−m,m] 上的『最大值+最小值』，f 含 ln(√(x²+1)+x)、x³、sinx 等奇函数加常数。"
+        case .linearProgramming:
+            return "给一组一次不等式约束，求线性目标 z=ax+by（或斜率型、距离型）的最大/最小值。"
+        case .basicQuantity:
+            return "等差/等比数列给出若干项或前 n 项和的条件，求某项、公差公比、通项或另一个和。"
+        case .complexNumber:
+            return "求复数的模 |z|、高次幂 iⁿ 或 zⁿ、共轭 z̄ 相关表达式，尤其分式 |z|=|分子|/|分母| 型。"
         }
     }
 
@@ -244,8 +470,14 @@ enum KillWeapon: String, CaseIterable, Identifiable {
     var examSafe: Bool {
         switch self {
         case .secondDerivative, .tangentLine, .cauchyPower, .sosDecomposition, .trigSubstitution,
-             .specialValue, .optionElimination, .numberShape, .estimation: return true
-        default: return false
+             .specialValue, .optionElimination, .numberShape, .estimation,
+             .symmetryPeriod, .vieta, .substitution, .complement, .trigGraph,
+             .extremePosition, .amgmTrick, .coordinateMethod,
+             .homomorphism, .paramSeparation, .hiddenZero, .pointDifference,
+             .constructCompare, .necessityProbe, .sequencePeriod,
+             .telescoping, .scaling, .conicVieta, .induction,
+             .oddConstruct, .linearProgramming, .basicQuantity, .complexNumber: return true
+        default: return false   // polarization（极化恒等式）超纲，大题不直接认
         }
     }
 
@@ -290,6 +522,54 @@ enum KillWeapon: String, CaseIterable, Identifiable {
             return "✅ 数形结合纲内核心思想，选填可直接读图作答；解答题需把几何结论再用代数严格写出。"
         case .estimation:
             return "✅ 选择题估算合法且高效。但只用于『比大小/定区间』，需要精确值的填空/解答题不可估。"
+        case .symmetryPeriod:
+            return "✅ 函数对称性与周期是纲内核心，选填可直接用对称/周期化简求值；解答题写明对称（周期）的推导依据即可。"
+        case .vieta:
+            return "✅ 韦达定理（根与系数关系）纲内，可直接书写。注意先验证判别式 Δ≥0 保证两根存在再使用。"
+        case .substitution:
+            return "✅ 换元/整体代换纲内通法，选填解答都能用；解答题须写明新元的取值范围以保证等价。"
+        case .complement:
+            return "✅ 正难则反（补集思想）纲内，计数与概率均可直接书写：所求 = 全部 − 对立面。"
+        case .trigGraph:
+            return "✅ 三角函数图象与 ω、φ 的求法纲内高频，选填解答均可直接用；注意 φ 受 |φ| 范围约束取唯一值。"
+        case .extremePosition:
+            return "✅ 取极端/临界位置是选填速判利器；解答题须用代数（判别式/单调性/距离公式）把『极端取到』严格论证。"
+        case .amgmTrick:
+            return "✅ 基本不等式纲内核心，可直接书写。务必三查：一正二定三相等——取等条件不满足则最值取不到。"
+        case .coordinateMethod:
+            return "✅ 坐标法/建系纲内通法，向量与解析几何均可直接书写；选好原点与坐标轴能让点乘、模长退化成算术。"
+        case .homomorphism:
+            return "✅ 同构本质是构造单调函数，纲内可写。大题须显式写出『令 f(t)=…，f 在区间 … 上单调』再比较，不能只说『由同构』。"
+        case .paramSeparation:
+            return "✅ 分离参数+求最值是纲内主流解法，可直接书写。注意：分离时若两边除以含 x 的式子，要按其正负讨论，否则不等号方向出错。"
+        case .hiddenZero:
+            return "✅ 虚设零点是纲内常用技巧，大题可写。须先用单调性+零点存在定理说明『存在唯一 x₀ 使 f'(x₀)=0』，再代入整体化简。"
+        case .pointDifference:
+            return "✅ 点差法纲内常用，大题可写。须补两点：① 说明弦斜率存在（不竖直）；② 验证中点确在曲线内部（保证弦存在）。"
+        case .constructCompare:
+            return "✅ 构造函数比大小是纲内通法，选填解答都能用；解答题须写出 f(x)=ln x/x 的求导与单调区间。"
+        case .polarization:
+            return "⚠️ 极化恒等式高中不在考纲，选填可直接闪电得数；大题须改用基底或建系（AB·AC=(AM+MB)·(AM−MB)=AM²−MB²）现场推导。"
+        case .necessityProbe:
+            return "✅ 选填中代端点求必要条件极快、可直接定答案；解答题得到必要范围后，必须再证明充分性（该范围下确实恒成立）才完整。"
+        case .sequencePeriod:
+            return "✅ 找周期纯属纲内计算，选填解答都能用。注意下标与项号的对应（a₁ 是第 1 项），余数为 0 时落在周期最后一项。"
+        case .telescoping:
+            return "✅ 裂项相消纲内通法，大题可直接书写。务必写出裂项的恒等变形，并核对相消后剩下的首尾项（最易错在边界）。"
+        case .scaling:
+            return "✅ 放缩法纲内压轴常用，大题可写。注意放缩不能过头（否则界不够紧），且常需从第 2 项起放缩、首项单独留。"
+        case .conicVieta:
+            return "✅ 设而不求+韦达是解析几何主流解法，大题必备。务必先写判别式 Δ>0 保证相交；弦长用 |AB|=√(1+k²)·√((x₁+x₂)²−4x₁x₂)。"
+        case .induction:
+            return "✅ 数学归纳法纲内（选修），大题可直接书写。两步缺一不可，递推步必须『用到归纳假设 P(k)』，否则不成立。"
+        case .oddConstruct:
+            return "✅ 构造奇函数纲内，选填解答都能用。关键是正确剥离常数项 b，并验证剩余部分确为奇函数 g(−x)=−g(x)。"
+        case .linearProgramming:
+            return "✅ 线性规划纲内，选填解答均可。注意：① 先画准可行域、定顶点；② 非线性目标（斜率/距离）需结合几何意义而非只代顶点。"
+        case .basicQuantity:
+            return "✅ 基本量法是数列纲内根本方法，选填解答都能用。注意等比数列要留意 q=1 的特殊情形与 q≠0 的隐含条件。"
+        case .complexNumber:
+            return "✅ 复数运算纲内，选填解答都能用。模的乘除性、i 的周期、z·z̄=|z|² 是最常用的三个加速点。"
         }
     }
 }
@@ -1604,6 +1884,1345 @@ extension SampleData {
             mistakes: ["乘方次数取分母 2、3 的最小公倍数 6", "乘方保序需两数为正"],
             type: .multipleChoice,
             options: ["∛3 > √2", "√2 > ∛3", "√2 = ∛3", "无法比较"]
+        ),
+
+        // 49 ── 对称性·周期：偶函数+周期求远处值
+        skCase(
+            id: "sk_049", weapon: .symmetryPeriod,
+            title: "f(2025.5) 不用解析式，周期一折偶一翻就出",
+            source: "函数性质 · 对称+周期求值（高考选填高频）",
+            standardMinutes: 5, killSeconds: 25,
+            signal: "给偶函数且 f(x+2)=f(x)——周期把大数折回，偶性翻到已知段。",
+            content: "偶函数 f(x) 满足 f(x+2)=f(x)，当 0≤x≤1 时 f(x)=x，求 f(2025.5)。",
+            contentLatex: #"f\text{偶},\ f(x+2)=f(x),\ f(x)=x\,(0\le x\le1),\ f(2025.5)=?"#,
+            answer: "f(2025.5) = 1/2",
+            difficulty: 0.46, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "先按周期不断减 2", #"f(2025.5)=f(2025.5-1012\times2)=f(1.5)"#),
+                skStep(2, "1.5 不在 [0,1]，再减一个周期", #"f(1.5)=f(1.5-2)=f(-0.5)"#),
+                skStep(3, "用偶函数翻到正半轴", #"f(-0.5)=f(0.5)=0.5"#)
+            ],
+            killSteps: [
+                skStep(1, "周期 2：自变量模 2 落回 [-1,1]", #"2025.5\equiv1.5\equiv-0.5\ (\bmod\ 2)"#),
+                skStep(2, "偶性折到 [0,1] 直读", #"f(-0.5)=f(0.5)=0.5"#)
+            ],
+            stdKey: "逐步减周期、再判区间、再用偶性，三步分开走容易绕。",
+            killKey: "周期先把大数压进一个周期，偶性再把负的翻成正的——两步落到 f(x)=x 直接代。",
+            mistakes: ["周期是 2 不是 4", "1.5 仍要再减一个周期才落进 [-1,1]", "偶函数是 f(-x)=f(x)，别和奇函数搞混"],
+            type: .multipleChoice,
+            options: ["1/2", "3/2", "1", "0"]
+        ),
+
+        // 50 ── 对称性·周期：中心对称配对求和
+        skCase(
+            id: "sk_050", weapon: .symmetryPeriod,
+            title: "五个点求和，认出中心(1,2)两两配对秒加",
+            source: "函数性质 · 中心对称求和（高考选填）",
+            standardMinutes: 4, killSeconds: 20,
+            signal: "给 f(x)+f(2-x)=4——图象关于点(1,2)中心对称，等距点配对。",
+            content: "函数 f(x) 满足 f(x)+f(2-x)=4，求 f(-1)+f(0)+f(1)+f(2)+f(3)。",
+            contentLatex: #"f(x)+f(2-x)=4,\ \ \sum_{k=-1}^{3}f(k)=?"#,
+            answer: "和为 10",
+            difficulty: 0.44, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "由条件试代具体值", #"f(0)+f(2)=4,\ f(-1)+f(3)=4"#),
+                skStep(2, "中点处自配", #"f(1)+f(1)=4\Rightarrow f(1)=2"#),
+                skStep(3, "相加", #"4+4+2=10"#)
+            ],
+            killSteps: [
+                skStep(1, "识别中心对称 (1,2)", #"f(x)+f(2-x)=4\Rightarrow\text{关于}(1,2)\text{对称}"#),
+                skStep(2, "对称点两两配 4，中心点 f(1)=2", #"(f(-1)+f(3))+(f(0)+f(2))+f(1)=4+4+2=10"#)
+            ],
+            stdKey: "硬代每个值也行，但要逐一凑出哪两项配对。",
+            killKey: "看出对称中心 (1,2)，离中心等距的两点之和恒为 4，剩中心一点取 2，配对即得。",
+            mistakes: ["f(x)+f(2-x)=4 对称中心是 (1,2)，纵坐标 4/2=2", "中心点 x=1 处 f(1)=2 不可漏", "配对要按到中心的距离配"],
+            type: .multipleChoice,
+            options: ["10", "8", "12", "20"]
+        ),
+
+        // 51 ── 韦达定理：对称式由系数出
+        skCase(
+            id: "sk_051", weapon: .vieta,
+            title: "不解方程，x₁²+x₂² 与倒数和由系数直出",
+            source: "一元二次 · 根与系数关系（高考选填）",
+            standardMinutes: 4, killSeconds: 20,
+            signal: "只问两根的对称组合，不要求具体根——韦达直接套。",
+            content: "设 x₁, x₂ 是方程 x²-3x+1=0 的两根，求 x₁²+x₂² 与 1/x₁+1/x₂。",
+            contentLatex: #"x^2-3x+1=0\ \text{两根}\ x_1,x_2,\ \ x_1^2+x_2^2=?\ ,\ \tfrac1{x_1}+\tfrac1{x_2}=?"#,
+            answer: "x₁²+x₂²=7，1/x₁+1/x₂=3",
+            difficulty: 0.40, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "求根公式解出两根", #"x=\frac{3\pm\sqrt5}{2}"#),
+                skStep(2, "代入平方相加、通分", #"x_1^2+x_2^2,\ \frac{x_1+x_2}{x_1x_2}\ \text{再化简}"#)
+            ],
+            killSteps: [
+                skStep(1, "韦达写出和与积", #"x_1+x_2=3,\quad x_1x_2=1"#),
+                skStep(2, "对称式用和积表出", #"x_1^2+x_2^2=(x_1+x_2)^2-2x_1x_2=9-2=7"#),
+                skStep(3, "倒数和=和/积", #"\frac1{x_1}+\frac1{x_2}=\frac{x_1+x_2}{x_1x_2}=\frac31=3"#)
+            ],
+            stdKey: "求出带根号的根再代入，平方化简反而易错。",
+            killKey: "x₁+x₂=−b/a=3、x₁x₂=c/a=1，所有对称式都拿这两个拼，免去解根。",
+            mistakes: ["x₁²+x₂²=(x₁+x₂)²−2x₁x₂，别漏 −2x₁x₂", "倒数和通分分子是和、分母是积", "用前先看 Δ=5>0 两根存在"],
+            type: .fillInBlank
+        ),
+
+        // 52 ── 韦达定理：比值和
+        skCase(
+            id: "sk_052", weapon: .vieta,
+            title: "x₁/x₂+x₂/x₁ 通分后又是和与积",
+            source: "一元二次 · 根与系数关系（高考选填）",
+            standardMinutes: 4, killSeconds: 22,
+            signal: "比值之和 x₁/x₂+x₂/x₁，通分后分子是平方和、分母是积。",
+            content: "设 x₁, x₂ 是方程 2x²-4x+1=0 的两根，求 x₁/x₂ + x₂/x₁。",
+            contentLatex: #"2x^2-4x+1=0\ \text{两根},\ \ \frac{x_1}{x_2}+\frac{x_2}{x_1}=?"#,
+            answer: "值为 6",
+            difficulty: 0.44, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "解出两根", #"x=\frac{4\pm\sqrt{8}}{4}=1\pm\frac{\sqrt2}{2}"#),
+                skStep(2, "代入比值和并有理化", #"\frac{x_1}{x_2}+\frac{x_2}{x_1}\ \text{逐项化简}"#)
+            ],
+            killSteps: [
+                skStep(1, "韦达", #"x_1+x_2=2,\quad x_1x_2=\tfrac12"#),
+                skStep(2, "通分=平方和/积", #"\frac{x_1^2+x_2^2}{x_1x_2}=\frac{(x_1+x_2)^2-2x_1x_2}{x_1x_2}"#),
+                skStep(3, "代入", #"=\frac{4-1}{1/2}=\frac{3}{1/2}=6"#)
+            ],
+            stdKey: "带根号根代进比值再有理化，步骤长且易算错。",
+            killKey: "比值和通分=（和²−2积）/积，全用 x₁+x₂=2、x₁x₂=1/2 拼出。",
+            mistakes: ["x₁x₂=c/a=1/2 别忘了除 a", "分子 (x₁+x₂)²−2x₁x₂", "除以 1/2 等于乘 2"],
+            type: .multipleChoice,
+            options: ["6", "4", "8", "3"]
+        ),
+
+        // 53 ── 整体代换：抽象函数求解析式
+        skCase(
+            id: "sk_053", weapon: .substitution,
+            title: "f(x+1)=x²+2x，凑成 x+1 的式子一眼读出",
+            source: "函数 · 换元求解析式（高考选填）",
+            standardMinutes: 4, killSeconds: 20,
+            signal: "给 f(整体)=… 反求 f(x)——令整体为 t 或把右边凑成整体。",
+            content: "已知 f(x+1) = x² + 2x，求 f(x) 的解析式。",
+            contentLatex: #"f(x+1)=x^2+2x,\ \ f(x)=?"#,
+            answer: "f(x) = x² - 1",
+            difficulty: 0.42, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "令 t=x+1，则 x=t-1", #"x=t-1"#),
+                skStep(2, "代入展开", #"f(t)=(t-1)^2+2(t-1)=t^2-2t+1+2t-2=t^2-1"#),
+                skStep(3, "换回 x", #"f(x)=x^2-1"#)
+            ],
+            killSteps: [
+                skStep(1, "把右边凑成 (x+1) 的式子", #"x^2+2x=(x+1)^2-1"#),
+                skStep(2, "整体对照直接读", #"f(x+1)=(x+1)^2-1\Rightarrow f(x)=x^2-1"#)
+            ],
+            stdKey: "换元法稳妥，但要展开再合并同类项。",
+            killKey: "右边配方成 (x+1)²−1，与左边 f(x+1) 整体一一对应，把括号里的整体替成 x 即得。",
+            mistakes: ["配方 x²+2x=(x+1)²−1，常数 −1 别漏", "换元后定义域随之变化（本题为全体实数）"],
+            type: .fillInBlank
+        ),
+
+        // 54 ── 整体代换：指数方程降为二次
+        skCase(
+            id: "sk_054", weapon: .substitution,
+            title: "令 t=2ˣ，4ˣ−3·2ˣ+2=0 秒变二次",
+            source: "指数方程 · 换元（高考选填）",
+            standardMinutes: 4, killSeconds: 20,
+            signal: "出现 4ˣ 与 2ˣ（前者是后者的平方）——令 t=2ˣ 整体降次。",
+            content: "解方程 4ˣ - 3·2ˣ + 2 = 0。",
+            contentLatex: #"4^{x}-3\cdot2^{x}+2=0,\ \ x=?"#,
+            answer: "x = 0 或 x = 1",
+            difficulty: 0.40, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "注意 4ˣ=(2ˣ)²", #"4^{x}=(2^{x})^{2}"#),
+                skStep(2, "尝试因式分解", #"(2^{x})^{2}-3\cdot2^{x}+2=0"#),
+                skStep(3, "解出 2ˣ 再取对数", #"2^{x}=1\ \text{或}\ 2,\ x=0\ \text{或}\ 1"#)
+            ],
+            killSteps: [
+                skStep(1, "令 t=2ˣ (t>0)，整体换元", #"t^2-3t+2=0"#),
+                skStep(2, "因式分解", #"(t-1)(t-2)=0\Rightarrow t=1\ \text{或}\ 2"#),
+                skStep(3, "回代 2ˣ=t", #"2^{x}=1\Rightarrow x=0,\ \ 2^{x}=2\Rightarrow x=1"#)
+            ],
+            stdKey: "本质也是换元，只是没显式设 t 容易看乱。",
+            killKey: "令 t=2ˣ 把超越方程变成熟悉的二次方程，解 t 后回代——注意 t>0 自动满足。",
+            mistakes: ["t=2ˣ 必须 t>0，若解出负根要舍", "4ˣ=(2ˣ)² 不是 2·2ˣ", "回代别忘了求 x"],
+            type: .multipleChoice,
+            options: ["x=0 或 x=1", "x=1 或 x=2", "x=0 或 x=2", "x=±1"]
+        ),
+
+        // 55 ── 正难则反：至少一次正面
+        skCase(
+            id: "sk_055", weapon: .complement,
+            title: "至少一次正面，算『全反』再用 1 减",
+            source: "概率 · 对立事件（高考选填）",
+            standardMinutes: 4, killSeconds: 18,
+            signal: "『至少一次』正面分 1、2、3 次三类——补集只有『全反』一类。",
+            content: "抛一枚均匀硬币 3 次，求至少出现一次正面的概率。",
+            contentLatex: #"\text{抛硬币 3 次},\ P(\text{至少一次正面})=?"#,
+            answer: "概率为 7/8",
+            difficulty: 0.34, tier: 2,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "正面次数 ~ 二项分布", #"X\sim B(3,\tfrac12)"#),
+                skStep(2, "分别算 1、2、3 次", #"P(X{=}1)=\tfrac38,\ P(X{=}2)=\tfrac38,\ P(X{=}3)=\tfrac18"#),
+                skStep(3, "相加", #"\tfrac38+\tfrac38+\tfrac18=\tfrac78"#)
+            ],
+            killSteps: [
+                skStep(1, "对立事件＝全是反面", #"\overline{A}:\text{三次全反}"#),
+                skStep(2, "1 减补集", #"P(A)=1-\left(\tfrac12\right)^3=1-\tfrac18=\tfrac78"#)
+            ],
+            stdKey: "正面分三类各算一遍，组合数与概率都要乘。",
+            killKey: "『至少一次』的反面是『一次都没有』=全反，只一种情形，1−(1/2)³ 直接出。",
+            mistakes: ["补集是『三次全反』而非『一次反面』", "(1/2)³=1/8 不是 1/6", "P=1−P(补)"],
+            type: .multipleChoice,
+            options: ["7/8", "1/2", "3/8", "5/8"]
+        ),
+
+        // 56 ── 正难则反：至少一个偶数
+        skCase(
+            id: "sk_056", weapon: .complement,
+            title: "至少一个偶数，用『总数 − 全奇』",
+            source: "计数 · 补集法（高考选填）",
+            standardMinutes: 5, killSeconds: 22,
+            signal: "『至少一个偶数』正面分类多——补集『全是奇数』只一类。",
+            content: "从 1~9 这九个数中任取三个不同的数，求至少含一个偶数的取法种数。",
+            contentLatex: #"\text{从}\{1,\dots,9\}\text{取 3 个不同数, 至少 1 个偶数的取法}=?"#,
+            answer: "74 种",
+            difficulty: 0.48, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "按偶数个数分类（1/2/3 个偶）", #"C_4^1C_5^2+C_4^2C_5^1+C_4^3"#),
+                skStep(2, "逐项计算", #"=4\cdot10+6\cdot5+4=40+30+4=74"#)
+            ],
+            killSteps: [
+                skStep(1, "总取法", #"C_9^3=84"#),
+                skStep(2, "补集＝全取奇数（奇数有 5 个）", #"C_5^3=10"#),
+                skStep(3, "相减", #"84-10=74"#)
+            ],
+            stdKey: "分 1/2/3 个偶数三类，三个组合数都要算对。",
+            killKey: "至少一偶的反面是『全奇』，奇数 1,3,5,7,9 共 5 个，84−C(5,3)=74。",
+            mistakes: ["1~9 中偶数 4 个、奇数 5 个", "总数 C(9,3)=84", "补集只算『全奇』"],
+            type: .multipleChoice,
+            options: ["74", "64", "10", "80"]
+        ),
+
+        // 57 ── 三角图象：周期定ω、点定φ
+        skCase(
+            id: "sk_057", weapon: .trigGraph,
+            title: "周期定 ω、过点定 φ，两步锁死解析式",
+            source: "三角函数 · 求 ω,φ（高考选填高频）",
+            standardMinutes: 5, killSeconds: 25,
+            signal: "给周期和一个特殊点求 y=Asin(ωx+φ)——逐个参数击破。",
+            content: "f(x)=2sin(ωx+φ)（ω>0，|φ|<π/2）最小正周期为 π，且 f(0)=1，求 ω 和 φ。",
+            contentLatex: #"f(x)=2\sin(\omega x+\varphi),\ T=\pi,\ f(0)=1,\ \ \omega=?\ \varphi=?"#,
+            answer: "ω=2，φ=π/6",
+            difficulty: 0.46, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "由周期公式求 ω", #"T=\frac{2\pi}{\omega}=\pi\Rightarrow\omega=2"#),
+                skStep(2, "代入 f(0)=1", #"2\sin\varphi=1\Rightarrow\sin\varphi=\tfrac12"#),
+                skStep(3, "结合 |φ|<π/2 定 φ", #"\varphi=\tfrac\pi6"#)
+            ],
+            killSteps: [
+                skStep(1, "ω 只由周期管", #"\omega=\frac{2\pi}{T}=2"#),
+                skStep(2, "φ 只由那个点管", #"2\sin\varphi=1,\ |\varphi|<\tfrac\pi2\Rightarrow\varphi=\tfrac\pi6"#)
+            ],
+            stdKey: "方法本身就对，关键是别把 ω、φ 混在一个方程里联立。",
+            killKey: "ω 归周期、φ 归特殊点，各管各的——周期给 ω=2，f(0)=1 给 sinφ=1/2，范围筛出 φ=π/6。",
+            mistakes: ["ω=2π/T，周期 π 对应 ω=2", "sinφ=1/2 在 |φ|<π/2 内唯一取 π/6（非 5π/6）", "A=2 已给，不必再求"],
+            type: .fillInBlank
+        ),
+
+        // 58 ── 三角图象：平移伸缩求解析式
+        skCase(
+            id: "sk_058", weapon: .trigGraph,
+            title: "先平移后伸缩，φ 不随 ω 变才对",
+            source: "三角函数 · 图象变换（高考选填）",
+            standardMinutes: 4, killSeconds: 22,
+            signal: "图象左右平移+横向伸缩求解析式——盯住变换顺序与 φ。",
+            content: "将 y=sin x 的图象向左平移 π/3 个单位，再把横坐标缩短为原来的一半（纵坐标不变），求所得函数解析式。",
+            contentLatex: #"y=\sin x\xrightarrow{\text{左移}\frac\pi3}\ \xrightarrow{\text{横坐标}\times\frac12}\ y=?"#,
+            answer: "y = sin(2x + π/3)",
+            difficulty: 0.44, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "左移 π/3：x→x+π/3", #"y=\sin\!\left(x+\tfrac\pi3\right)"#),
+                skStep(2, "横坐标缩一半：x→2x", #"y=\sin\!\left(2x+\tfrac\pi3\right)"#)
+            ],
+            killSteps: [
+                skStep(1, "左移加相位", #"\sin x\to\sin\!\left(x+\tfrac\pi3\right)"#),
+                skStep(2, "缩短乘频率（只乘 x，不乘已加的 π/3）", #"\to\sin\!\left(2x+\tfrac\pi3\right)"#)
+            ],
+            stdKey: "本顺序为『先平移后伸缩』，平移量 π/3 不再被 ω 改变。",
+            killKey: "左移先把 +π/3 加好，再把 x 换成 2x——φ=π/3 保持不变；若是『先伸缩后平移』结果会不同。",
+            mistakes: ["先平移后伸缩时，相位 π/3 不乘 2", "横坐标缩一半是 x→2x（频率变 2）", "左移是 +，右移才是 −"],
+            type: .multipleChoice,
+            options: ["sin(2x+π/3)", "sin(2x+2π/3)", "sin(x/2+π/3)", "sin(2x−π/3)"]
+        ),
+
+        // 59 ── 极端位置：圆上点到直线最大距离
+        skCase(
+            id: "sk_059", weapon: .extremePosition,
+            title: "圆上点到直线最远，圆心距加半径直接出",
+            source: "解析几何 · 圆上动点最值（高考选填）",
+            standardMinutes: 5, killSeconds: 22,
+            signal: "圆上动点到定直线的最值——极端在过圆心的垂线上，d±r。",
+            content: "求圆 x²+y²=1 上的点到直线 x+y-4=0 的距离的最大值。",
+            contentLatex: #"\text{圆}\ x^2+y^2=1\ \text{上点到}\ x+y-4=0\ \text{距离最大值}=?"#,
+            answer: "最大值为 2√2 + 1",
+            difficulty: 0.46, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "设点 (cosθ, sinθ)", #"d=\frac{|\cos\theta+\sin\theta-4|}{\sqrt2}"#),
+                skStep(2, "辅助角化简", #"=\frac{|\sqrt2\sin(\theta+\frac\pi4)-4|}{\sqrt2}"#),
+                skStep(3, "取 sin=-1 时最大", #"\frac{\sqrt2+4}{\sqrt2}=1+2\sqrt2"#)
+            ],
+            killSteps: [
+                skStep(1, "圆心到直线距离", #"d=\frac{|0+0-4|}{\sqrt2}=2\sqrt2"#),
+                skStep(2, "极端位置：最远=圆心距+半径", #"d_{\max}=2\sqrt2+1"#)
+            ],
+            stdKey: "参数化+辅助角能算，但要处理绝对值取最值。",
+            killKey: "动点最远必在『圆心→直线的垂线』延长线与圆的交点，结果就是圆心距 2√2 加半径 1。",
+            mistakes: ["最大是 d+r，最小是 |d−r|", "圆心 (0,0)、半径 1", "点到线公式分母 √(1²+1²)=√2"],
+            type: .multipleChoice,
+            options: ["2√2+1", "2√2−1", "2√2", "4"]
+        ),
+
+        // 60 ── 极端位置：椭圆上点到焦点距离范围
+        skCase(
+            id: "sk_060", weapon: .extremePosition,
+            title: "椭圆上点到焦点距离，端点 a±c 直接给范围",
+            source: "解析几何 · 椭圆焦半径（高考选填）",
+            standardMinutes: 5, killSeconds: 20,
+            signal: "椭圆上动点到焦点距离的范围——长轴两端点取到 a+c 与 a−c。",
+            content: "椭圆 x²/4 + y²/3 = 1 上的点到右焦点的距离的取值范围是？",
+            contentLatex: #"\frac{x^2}{4}+\frac{y^2}{3}=1\ \text{上点到右焦点距离范围}=?"#,
+            answer: "[1, 3]",
+            difficulty: 0.48, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "焦半径公式", #"r=a-ex,\ e=\tfrac c a,\ x\in[-a,a]"#),
+                skStep(2, "求 a,c", #"a=2,\ c=\sqrt{4-3}=1,\ e=\tfrac12"#),
+                skStep(3, "x 取 ±2 得端点", #"r=2-\tfrac12 x\in[1,3]"#)
+            ],
+            killSteps: [
+                skStep(1, "读出 a、c", #"a=2,\ c=\sqrt{a^2-b^2}=1"#),
+                skStep(2, "极端位置：近地点 a−c、远地点 a+c", #"[a-c,\ a+c]=[1,3]"#)
+            ],
+            stdKey: "焦半径公式 r=a−ex 也行，但要记公式、定 x 范围。",
+            killKey: "动点沿椭圆走，到焦点最近在同侧顶点 a−c、最远在对侧顶点 a+c，端点直接给区间 [1,3]。",
+            mistakes: ["c²=a²−b²=4−3=1", "最小 a−c=1、最大 a+c=3", "别把 b=√3 当成 c"],
+            type: .multipleChoice,
+            options: ["[1, 3]", "[1, 4]", "[2−√3, 2+√3]", "[√3, 2]"]
+        ),
+
+        // 61 ── 基本不等式：1的代换
+        skCase(
+            id: "sk_061", weapon: .amgmTrick,
+            title: "1/x+4/y 配 x+y=1，乘个『1』再均值",
+            source: "基本不等式 · 1 的代换（高考选填高频）",
+            standardMinutes: 5, killSeconds: 25,
+            signal: "约束 x+y=1 求 1/x+4/y 最小——把约束当『1』乘进去。",
+            content: "已知 x>0，y>0，且 x+y=1，求 1/x + 4/y 的最小值。",
+            contentLatex: #"x,y>0,\ x+y=1,\ \ \frac1x+\frac4y\ \text{的最小值}=?"#,
+            answer: "最小值为 9",
+            difficulty: 0.50, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "用 y=1-x 消元", #"g(x)=\frac1x+\frac4{1-x},\ x\in(0,1)"#),
+                skStep(2, "求导找驻点", #"g'(x)=-\frac1{x^2}+\frac4{(1-x)^2}=0\Rightarrow x=\tfrac13"#),
+                skStep(3, "代回", #"g\!\left(\tfrac13\right)=3+6=9"#)
+            ],
+            killSteps: [
+                skStep(1, "乘以 (x+y)=1", #"\frac1x+\frac4y=\left(\frac1x+\frac4y\right)(x+y)"#),
+                skStep(2, "展开", #"=5+\frac yx+\frac{4x}y"#),
+                skStep(3, "均值取等", #"\ge5+2\sqrt{\tfrac yx\cdot\tfrac{4x}y}=5+4=9"#)
+            ],
+            stdKey: "消元求导能做，但要解方程、验证极小。",
+            killKey: "把 x+y=1 当『1』乘进原式，展开出 y/x+4x/y 用均值压到定值，取等 y=2x 即 x=1/3,y=2/3。",
+            mistakes: ["乘的是 (x+y) 不是别的数", "y/x·4x/y=4，根号得 2，故 2·2=4", "取等需 y/x=4x/y，即 y=2x"],
+            type: .multipleChoice,
+            options: ["9", "8", "6", "5"]
+        ),
+
+        // 62 ── 基本不等式：凑配后取等
+        skCase(
+            id: "sk_062", weapon: .amgmTrick,
+            title: "x+4/(x−1)，先借出一个 1 再凑积定",
+            source: "基本不等式 · 凑配（高考选填）",
+            standardMinutes: 4, killSeconds: 22,
+            signal: "分母是 x−1，就把分子拆出 (x−1)，凑成积为定值。",
+            content: "已知 x>1，求 x + 4/(x-1) 的最小值。",
+            contentLatex: #"x>1,\ \ x+\frac4{x-1}\ \text{的最小值}=?"#,
+            answer: "最小值为 5",
+            difficulty: 0.46, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "求导", #"f'(x)=1-\frac4{(x-1)^2}"#),
+                skStep(2, "令导数为 0", #"(x-1)^2=4\Rightarrow x=3\ (x>1)"#),
+                skStep(3, "代回", #"f(3)=3+2=5"#)
+            ],
+            killSteps: [
+                skStep(1, "拆出 (x−1) 凑配", #"x+\frac4{x-1}=(x-1)+\frac4{x-1}+1"#),
+                skStep(2, "前两项积为定值 4，均值", #"(x-1)+\frac4{x-1}\ge2\sqrt4=4"#),
+                skStep(3, "加上 1", #"\ge4+1=5,\ \text{取等}\ x-1=2,\ x=3"#)
+            ],
+            stdKey: "求导也快，但凑配法连取等点一起给出。",
+            killKey: "把 x 写成 (x−1)+1，让 (x−1) 与 4/(x−1) 积为常数 4，均值得 4，再补回那个 1。",
+            mistakes: ["必须凑出积为定值才能用均值", "x>1 保证 x−1>0", "别忘了补回拆出的 +1"],
+            type: .multipleChoice,
+            options: ["5", "4", "6", "3"]
+        ),
+
+        // 63 ── 坐标化：正方形对角线点乘
+        skCase(
+            id: "sk_063", weapon: .coordinateMethod,
+            title: "正方形里建系，AC·BD 一算就是 0",
+            source: "平面向量 · 建系求点乘（高考选填）",
+            standardMinutes: 4, killSeconds: 18,
+            signal: "正方形/矩形里求向量点乘——建直角系赋坐标，公式直算。",
+            content: "正方形 ABCD 的边长为 1，求向量 AC 与 BD 的数量积 AC·BD。",
+            contentLatex: #"\text{正方形}\ ABCD,\ \text{边长}1,\ \ \vec{AC}\cdot\vec{BD}=?"#,
+            answer: "AC·BD = 0",
+            difficulty: 0.40, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "用基底 AB、AD 表示", #"\vec{AC}=\vec{AB}+\vec{AD},\ \vec{BD}=\vec{AD}-\vec{AB}"#),
+                skStep(2, "点乘展开（AB⊥AD）", #"(\vec{AB}+\vec{AD})\cdot(\vec{AD}-\vec{AB})=|\vec{AD}|^2-|\vec{AB}|^2"#),
+                skStep(3, "等边相消", #"=1-1=0"#)
+            ],
+            killSteps: [
+                skStep(1, "建系赋坐标", #"A(0,0),B(1,0),C(1,1),D(0,1)"#),
+                skStep(2, "写出两向量", #"\vec{AC}=(1,1),\ \vec{BD}=(-1,1)"#),
+                skStep(3, "坐标点乘", #"(1)(-1)+(1)(1)=0"#)
+            ],
+            stdKey: "基底法要小心 BD=AD−AB 的方向和平方差。",
+            killKey: "正方形顶点直接给坐标，AC=(1,1)、BD=(−1,1)，点乘 x₁x₂+y₁y₂=−1+1=0（对角线本就垂直）。",
+            mistakes: ["BD 从 B 指向 D：D−B=(−1,1)", "点乘是对应分量乘积之和", "坐标按 A,B,C,D 逆时针赋值"],
+            type: .multipleChoice,
+            options: ["0", "1", "−1", "2"]
+        ),
+
+        // 64 ── 坐标化：等边三角形向量和的模
+        skCase(
+            id: "sk_064", weapon: .coordinateMethod,
+            title: "等边三角形建系，|AB+AC| 直接量出 2√3",
+            source: "平面向量 · 建系求模长（高考选填）",
+            standardMinutes: 4, killSeconds: 20,
+            signal: "等边三角形里求向量和的模——建系赋坐标，模长公式直算。",
+            content: "等边三角形 ABC 的边长为 2，求 |AB + AC|（向量 AB 与 AC 之和的模）。",
+            contentLatex: #"\text{等边}\triangle ABC,\ \text{边长}2,\ \ |\vec{AB}+\vec{AC}|=?"#,
+            answer: "|AB+AC| = 2√3",
+            difficulty: 0.44, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "模长平方展开", #"|\vec{AB}+\vec{AC}|^2=|\vec{AB}|^2+2\vec{AB}\cdot\vec{AC}+|\vec{AC}|^2"#),
+                skStep(2, "代入夹角 60°", #"=4+2\cdot2\cdot2\cos60^\circ+4=4+4+4=12"#),
+                skStep(3, "开方", #"|\vec{AB}+\vec{AC}|=2\sqrt3"#)
+            ],
+            killSteps: [
+                skStep(1, "建系赋坐标", #"A(0,0),B(2,0),C(1,\sqrt3)"#),
+                skStep(2, "向量相加", #"\vec{AB}+\vec{AC}=(2,0)+(1,\sqrt3)=(3,\sqrt3)"#),
+                skStep(3, "模长公式", #"\sqrt{3^2+(\sqrt3)^2}=\sqrt{12}=2\sqrt3"#)
+            ],
+            stdKey: "数量积法要记 |a+b|²公式与夹角 60°。",
+            killKey: "把 A 放原点、B 放 x 轴，C=(1,√3)，两向量相加得 (3,√3)，模长 √12=2√3，全程纯算术。",
+            mistakes: ["等边三角形顶点 C=(1,√3)（高为 √3）", "模长是各分量平方和再开方", "√12=2√3"],
+            type: .multipleChoice,
+            options: ["2√3", "2", "4", "√3"]
+        ),
+
+        // 65 ── 同构法：xeˣ 与 x+lnx+1 凑 e^t≥t+1
+        skCase(
+            id: "sk_065", weapon: .homomorphism,
+            title: "xeˣ≥x+lnx+1，凑 e^t≥t+1 一步证完",
+            source: "函数与导数 · 指对同构（高考压轴高频）",
+            standardMinutes: 10, killSeconds: 50,
+            signal: "eˣ 与 lnx 混在一起，且 xeˣ 可写成 e^{x+lnx}——同构成同一函数。",
+            content: "求证：当 x>0 时，xeˣ ≥ x + ln x + 1。",
+            contentLatex: #"x>0\ \text{时},\ xe^{x}\ge x+\ln x+1"#,
+            answer: "得证（取等 xeˣ=1，即 x+ln x=0）",
+            difficulty: 0.78, tier: 5,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "构造作差函数", #"h(x)=xe^{x}-x-\ln x-1"#),
+                skStep(2, "求导并因式分解", #"h'(x)=(x+1)e^{x}-1-\tfrac1x=(x+1)\!\left(e^{x}-\tfrac1x\right)"#),
+                skStep(3, "导数零点仍需虚设", #"x>0:\ x+1>0,\ e^{x}-\tfrac1x\nearrow,\ \exists!\,x_0:\ e^{x_0}=\tfrac1{x_0}"#),
+                skStep(4, "整体代入得最小值", #"h(x_0)=1-x_0-\ln x_0-1=-(x_0+\ln x_0)=0\Rightarrow h\ge0"#)
+            ],
+            killSteps: [
+                skStep(1, "凑同构：xeˣ=e^{x+lnx}", #"xe^{x}=e^{\ln x}\cdot e^{x}=e^{x+\ln x},\ \text{令}\ t=x+\ln x"#),
+                skStep(2, "两边化为同一函数", #"\text{原式}\iff e^{t}\ge t+1\quad(\text{右边}=x+\ln x+1=t+1)"#),
+                skStep(3, "套切线不等式", #"e^{t}\ge t+1\ \text{对一切}\ t\ \text{成立, 得证, 取等}\ t=0"#)
+            ],
+            stdKey: "构造函数求导后，零点还要虚设 x₀ 整体代换，步骤长。",
+            killKey: "看出 xeˣ=e^{x+lnx}，令 t=x+lnx，两边正好变成 eᵗ 与 t+1，直接套 eᵗ≥t+1。",
+            mistakes: ["x=e^{ln x} 仅对 x>0 成立", "右边 x+ln x+1 恰是 t+1", "eᵗ≥t+1 取等于 t=0"],
+            type: .proof
+        ),
+
+        // 66 ── 同构法：含参 a·e^{ax}≥lnx 求 a_min
+        skCase(
+            id: "sk_066", weapon: .homomorphism,
+            title: "a·e^{ax}≥lnx 恒成立，乘个 x 凑 te^t 同构",
+            source: "函数与导数 · 同构求参（高考压轴）",
+            standardMinutes: 12, killSeconds: 60,
+            signal: "两边乘 x 后出现 (ax)e^{ax} 与 (lnx)e^{lnx}——都是 f(t)=teᵗ。",
+            content: "已知 a>0，且对任意 x>0 恒有 a·e^{ax} ≥ ln x，求 a 的最小值。",
+            contentLatex: #"a>0,\ \forall x>0:\ a\,e^{ax}\ge\ln x,\ \ a_{\min}=?"#,
+            answer: "a 的最小值为 1/e",
+            difficulty: 0.82, tier: 5,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "分离参数困难，转构造", #"\text{直接分离 }a\text{ 不可解，需借助单调性}"#),
+                skStep(2, "两边乘 x 整理", #"ax\,e^{ax}\ge x\ln x=\ln x\cdot e^{\ln x}"#),
+                skStep(3, "据 f(t)=teᵗ 单调性归结", #"ax\ge\ln x\ (\text{当}\ \ln x>0),\ \text{即}\ a\ge\tfrac{\ln x}{x}"#),
+                skStep(4, "求右边最大值", #"\left(\tfrac{\ln x}{x}\right)_{\max}=\tfrac1e\ (x=e)\Rightarrow a\ge\tfrac1e"#)
+            ],
+            killSteps: [
+                skStep(1, "两边乘 x>0 凑同构", #"ax\cdot e^{ax}\ge \ln x\cdot e^{\ln x}"#),
+                skStep(2, "f(t)=teᵗ 在 t≥0 递增", #"f(ax)\ge f(\ln x)\Rightarrow ax\ge\ln x\ (\ln x\le0\text{ 时自然成立})"#),
+                skStep(3, "分离并取最值", #"a\ge\frac{\ln x}{x}\ \forall x>0\Rightarrow a\ge\max\frac{\ln x}{x}=\frac1e"#)
+            ],
+            stdKey: "不凑同构就只能死磕双变量，极难分离。",
+            killKey: "乘 x 后两边都是 t·eᵗ 形，令 f(t)=teᵗ 用单调性脱壳得 ax≥lnx，再分离参数取 max(lnx/x)=1/e。",
+            mistakes: ["乘 x 是为了把右边 xlnx 写成 (lnx)e^{lnx}", "f(t)=teᵗ 在 t≥0 单调递增", "max(lnx/x)=1/e 在 x=e 取得"],
+            type: .fillInBlank
+        ),
+
+        // 67 ── 参数分离：eˣ≥ax 求 a_max
+        skCase(
+            id: "sk_067", weapon: .paramSeparation,
+            title: "eˣ≥ax 恒成立，参数下台变 a≤eˣ/x",
+            source: "函数与导数 · 恒成立求参（高考高频）",
+            standardMinutes: 8, killSeconds: 40,
+            signal: "含参 eˣ≥ax 恒成立，a 可整体除到一边——分离后求最值。",
+            content: "若当 x>0 时，不等式 eˣ ≥ a x 恒成立，求实数 a 的最大值。",
+            contentLatex: #"x>0\ \text{时}\ e^{x}\ge ax\ \text{恒成立},\ \ a_{\max}=?"#,
+            answer: "a 的最大值为 e",
+            difficulty: 0.62, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "构造 g(x)=eˣ-ax 讨论 a", #"g(x)=e^{x}-ax,\ g'(x)=e^{x}-a"#),
+                skStep(2, "按 a 的正负分类", #"a\le0\ \text{显然成立};\ a>0\ \text{时极小在}\ x=\ln a"#),
+                skStep(3, "令极小值≥0", #"g(\ln a)=a-a\ln a\ge0\Rightarrow\ln a\le1\Rightarrow a\le e"#)
+            ],
+            killSteps: [
+                skStep(1, "x>0，两边除以 x 分离参数", #"a\le\frac{e^{x}}{x}"#),
+                skStep(2, "求 g(x)=eˣ/x 的最小值", #"g'(x)=\frac{e^{x}(x-1)}{x^{2}},\ x=1\ \text{处最小}"#),
+                skStep(3, "代入得界", #"g(1)=e\Rightarrow a\le e,\ a_{\max}=e"#)
+            ],
+            stdKey: "不分离就要对 a 正负、极值点 x=lna 分类，麻烦。",
+            killKey: "除以 x>0 把 a 单独分离，问题变成求 eˣ/x 的最小值（x=1 处 =e），恒成立取 a≤min。",
+            mistakes: ["除以 x>0 不变号", "eˣ/x 最小值在 x=1 取 e", "a≤g(x) 恒成立 ⟺ a≤g(x) 最小值"],
+            type: .fillInBlank
+        ),
+
+        // 68 ── 参数分离：lnx≤ax 求 a_min
+        skCase(
+            id: "sk_068", weapon: .paramSeparation,
+            title: "lnx≤ax 在[1,e]，分离成 a≥lnx/x 求最大",
+            source: "函数与导数 · 恒成立求参（高考高频）",
+            standardMinutes: 7, killSeconds: 35,
+            signal: "含参 lnx≤ax 在闭区间恒成立——除以 x 分离，求 lnx/x 的最大值。",
+            content: "若对任意 x∈[1, e]，不等式 ln x ≤ a x 恒成立，求实数 a 的最小值。",
+            contentLatex: #"\forall x\in[1,e]:\ \ln x\le ax,\ \ a_{\min}=?"#,
+            answer: "a 的最小值为 1/e",
+            difficulty: 0.58, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "构造 g(x)=lnx-ax", #"g(x)=\ln x-ax\le0\ \text{在}\ [1,e]"#),
+                skStep(2, "讨论 a 与单调性", #"g'(x)=\tfrac1x-a,\ \text{按}\ a\ \text{大小分类最大值位置}"#),
+                skStep(3, "令最大值≤0解出 a", #"\text{综合得}\ a\ge\tfrac1e"#)
+            ],
+            killSteps: [
+                skStep(1, "x>0，除以 x 分离", #"a\ge\frac{\ln x}{x}"#),
+                skStep(2, "求 h(x)=lnx/x 在[1,e]最大", #"h'(x)=\frac{1-\ln x}{x^{2}}\ge0\ \text{在}\ [1,e],\ \text{递增}"#),
+                skStep(3, "最大在 x=e", #"h(e)=\frac1e\Rightarrow a\ge\frac1e,\ a_{\min}=\frac1e"#)
+            ],
+            stdKey: "直接讨论 g(x)=lnx−ax 的最大值要按 a 分好几类。",
+            killKey: "除以 x 分离成 a≥lnx/x，在[1,e]上 lnx/x 递增，最大值 h(e)=1/e，恒成立取 a≥max。",
+            mistakes: ["[1,e] 上 1−lnx≥0 故 h 递增", "最大值在右端点 x=e 取 1/e", "a≥g(x) 恒成立 ⟺ a≥g(x) 最大值"],
+            type: .fillInBlank
+        ),
+
+        // 69 ── 隐零点：eˣ-lnx>2 虚设零点
+        skCase(
+            id: "sk_069", weapon: .hiddenZero,
+            title: "eˣ-lnx>2，导数零点解不出就虚设它",
+            source: "函数与导数 · 虚设零点（高考压轴高频）",
+            standardMinutes: 10, killSeconds: 55,
+            signal: "f'(x)=eˣ-1/x=0 解不出初等根——设 x₀ 满足它，整体代换。",
+            content: "求证：当 x>0 时，eˣ - ln x > 2。",
+            contentLatex: #"x>0\ \text{时},\ e^{x}-\ln x>2"#,
+            answer: "得证（最小值 = x₀+1/x₀ > 2）",
+            difficulty: 0.80, tier: 5,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "设 f(x)=eˣ-lnx，求导", #"f'(x)=e^{x}-\tfrac1x"#),
+                skStep(2, "证 f' 递增且有唯一零点", #"f'\nearrow,\ f'(\tfrac12)<0,\ f'(1)>0\Rightarrow\exists!\,x_0\in(\tfrac12,1)"#),
+                skStep(3, "x₀ 满足", #"e^{x_0}=\tfrac1{x_0}"#),
+                skStep(4, "尝试估计最小值 f(x₀)", #"f(x_0)=e^{x_0}-\ln x_0\ \text{需进一步化简}"#)
+            ],
+            killSteps: [
+                skStep(1, "虚设零点 x₀: f'(x₀)=0", #"e^{x_0}=\tfrac1{x_0}\ (x_0\in(\tfrac12,1))"#),
+                skStep(2, "取对数得关系", #"x_0=-\ln x_0\Rightarrow\ln x_0=-x_0"#),
+                skStep(3, "整体代入最小值", #"f(x_0)=\tfrac1{x_0}-(-x_0)=x_0+\tfrac1{x_0}\ge2,\ x_0\ne1\Rightarrow>2"#)
+            ],
+            stdKey: "求出零点是奢望，卡在 f(x₀) 化简上。",
+            killKey: "设 x₀ 满足 e^{x₀}=1/x₀，取对数得 lnx₀=−x₀，代进 f(x₀) 消去超越项变成 x₀+1/x₀≥2。",
+            mistakes: ["e^{x₀}=1/x₀ 取对数得 lnx₀=−x₀", "f(x₀)=1/x₀+x₀ 用均值≥2", "x₀≠1 故严格大于 2"],
+            type: .proof
+        ),
+
+        // 70 ── 隐零点：最小值落区间（估算）
+        skCase(
+            id: "sk_070", weapon: .hiddenZero,
+            title: "eˣ-lnx 最小值 m 落在哪？虚设零点+单调夹",
+            source: "函数与导数 · 虚设零点估值（高考压轴）",
+            standardMinutes: 9, killSeconds: 45,
+            signal: "最小值用 x₀ 表示成 x₀+1/x₀，再用 x₀ 的范围把 m 夹住。",
+            content: "设 f(x)=eˣ - ln x（x>0）的最小值为 m，则 m 的取值范围是（ ）。",
+            contentLatex: #"f(x)=e^{x}-\ln x\ \text{的最小值}\ m\in?"#,
+            answer: "2 < m < 5/2",
+            difficulty: 0.76, tier: 5,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "导数零点 x₀ 满足", #"e^{x_0}=\tfrac1{x_0},\ \ln x_0=-x_0"#),
+                skStep(2, "最小值化简", #"m=f(x_0)=x_0+\tfrac1{x_0}"#),
+                skStep(3, "数值逼近 x₀≈0.567", #"m\approx2.33\ (\text{但需严格区间})"#)
+            ],
+            killSteps: [
+                skStep(1, "虚设零点定范围", #"f'(\tfrac12)<0,\ f'(1)>0\Rightarrow x_0\in(\tfrac12,1)"#),
+                skStep(2, "m=x₀+1/x₀，g 在(0,1)递减", #"g(x)=x+\tfrac1x\searrow\ \text{on}\ (0,1)"#),
+                skStep(3, "端点代入夹住", #"m=g(x_0)\in(g(1),g(\tfrac12))=(2,\tfrac52)"#)
+            ],
+            stdKey: "想求精确值要数值解超越方程，选择题没必要。",
+            killKey: "m=x₀+1/x₀，而 x₀∈(1/2,1)；g(x)=x+1/x 在(0,1)递减，端点 g(1)=2、g(1/2)=5/2 把 m 夹在 (2, 5/2)。",
+            mistakes: ["x₀∈(1/2,1) 由 f'(1/2)<0、f'(1)>0 定", "g(x)=x+1/x 在 (0,1) 递减故大小反夹", "g(1/2)=1/2+2=5/2"],
+            type: .multipleChoice,
+            options: ["2 < m < 5/2", "5/2 < m < 3", "m = 2", "1 < m < 2"]
+        ),
+
+        // 71 ── 点差法：椭圆中点弦斜率
+        skCase(
+            id: "sk_071", weapon: .pointDifference,
+            title: "椭圆中点弦，两点代入一减斜率自己跳出来",
+            source: "解析几何 · 中点弦（高考高频）",
+            standardMinutes: 7, killSeconds: 30,
+            signal: "椭圆给出弦的中点求斜率——两端点代入作差，免联立。",
+            content: "椭圆 x²/4 + y²/2 = 1 的一条弦 AB 的中点为 M(1, 1)，求直线 AB 的斜率。",
+            contentLatex: #"\frac{x^2}{4}+\frac{y^2}{2}=1,\ \text{弦}\ AB\ \text{中点}\ M(1,1),\ k_{AB}=?"#,
+            answer: "斜率 k = -1/2",
+            difficulty: 0.56, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "设 AB: y=k(x-1)+1 代入椭圆", #"\frac{x^2}{4}+\frac{(k(x-1)+1)^2}{2}=1"#),
+                skStep(2, "整理成二次用韦达", #"x_1+x_2=\dots,\ \text{令}\ \frac{x_1+x_2}{2}=1"#),
+                skStep(3, "解出 k", #"\text{解方程得}\ k=-\tfrac12"#)
+            ],
+            killSteps: [
+                skStep(1, "A,B 代入椭圆方程相减", #"\frac{x_1^2-x_2^2}{4}+\frac{y_1^2-y_2^2}{2}=0"#),
+                skStep(2, "提取中点与斜率", #"\frac{(x_1+x_2)}{4}+\frac{(y_1+y_2)}{2}\cdot k=0"#),
+                skStep(3, "代中点 (1,1)", #"\frac{2}{4}+\frac{2}{2}k=0\Rightarrow k=-\tfrac12"#)
+            ],
+            stdKey: "联立直线椭圆再用韦达，要解含 k 的方程。",
+            killKey: "两点代入作差，平方差自动拆出 (x₁+x₂)、(y₁+y₂) 和斜率；中点给 x₁+x₂=2、y₁+y₂=2，一步得 k=−1/2。",
+            mistakes: ["相减后除以 (x₁−x₂) 得到斜率 k", "中点坐标提供 x₁+x₂=2、y₁+y₂=2", "公式 k=−b²x₀/(a²y₀)=−2·1/(4·1)"],
+            type: .fillInBlank
+        ),
+
+        // 72 ── 点差法：抛物线中点弦斜率
+        skCase(
+            id: "sk_072", weapon: .pointDifference,
+            title: "抛物线中点弦，纵坐标和 = 斜率的分母",
+            source: "解析几何 · 中点弦（高考高频）",
+            standardMinutes: 6, killSeconds: 28,
+            signal: "抛物线 y²=4x 给弦中点求斜率——两点代入相减，k=4/(y₁+y₂)。",
+            content: "抛物线 y² = 4x 的一条弦 AB 的中点为 (2, 1)，求直线 AB 的斜率。",
+            contentLatex: #"y^2=4x,\ \text{弦}\ AB\ \text{中点}\ (2,1),\ k_{AB}=?"#,
+            answer: "斜率 k = 2",
+            difficulty: 0.52, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "设 AB: x=m(y-1)+2 代入", #"y^2=4(m(y-1)+2)"#),
+                skStep(2, "二次用韦达定中点", #"y_1+y_2=4m,\ \text{令}=2"#),
+                skStep(3, "解出斜率", #"m=\tfrac12\Rightarrow k=\tfrac1m=2"#)
+            ],
+            killSteps: [
+                skStep(1, "A,B 代入 y²=4x 相减", #"y_1^2-y_2^2=4(x_1-x_2)"#),
+                skStep(2, "因式分解出斜率", #"(y_1+y_2)(y_1-y_2)=4(x_1-x_2)\Rightarrow k=\frac{4}{y_1+y_2}"#),
+                skStep(3, "代中点纵坐标和", #"y_1+y_2=2\Rightarrow k=\frac42=2"#)
+            ],
+            stdKey: "联立设 x=my+c 再用韦达，绕一圈。",
+            killKey: "两点代入 y²=4x 相减，立得 k=4/(y₁+y₂)；中点纵坐标 1 给出 y₁+y₂=2，故 k=2。",
+            mistakes: ["抛物线点差得 k=2p/(y₁+y₂)，此处 2p=4", "中点纵坐标 1 对应 y₁+y₂=2", "别把中点横坐标拿来算斜率"],
+            type: .fillInBlank
+        ),
+
+        // 73 ── 构造函数比大小：e^π 与 π^e
+        skCase(
+            id: "sk_073", weapon: .constructCompare,
+            title: "e^π 与 π^e 谁大？构造 lnx/x 单调一锤定",
+            source: "函数 · 构造比大小（高考选填高频）",
+            standardMinutes: 6, killSeconds: 25,
+            signal: "底与指数互换的幂比大小——取对数化成 lnx/x，比单调。",
+            content: "比较 e^π 与 π^e 的大小（e 为自然对数底，π≈3.14）。",
+            contentLatex: #"e^{\pi}\ \text{与}\ \pi^{e}\ \text{的大小}=?"#,
+            answer: "e^π > π^e",
+            difficulty: 0.54, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "两边取对数", #"\ln(e^{\pi})=\pi,\ \ln(\pi^{e})=e\ln\pi"#),
+                skStep(2, "比较 π 与 e·lnπ", #"\text{即比}\ \frac{\ln e}{e}\ \text{与}\ \frac{\ln\pi}{\pi}"#),
+                skStep(3, "数值估算验证", #"\frac1e\approx0.368>\frac{\ln\pi}{\pi}\approx0.364"#)
+            ],
+            killSteps: [
+                skStep(1, "化成同构造 lnx/x", #"\text{比}\ e^{\pi},\pi^{e}\iff\text{比}\ \frac{\ln e}{e},\frac{\ln\pi}{\pi}"#),
+                skStep(2, "f(x)=lnx/x 在 x>e 递减", #"f'(x)=\frac{1-\ln x}{x^{2}}<0\ (x>e)"#),
+                skStep(3, "e<π 代入定序", #"f(e)>f(\pi)\Rightarrow\frac1e>\frac{\ln\pi}{\pi}\Rightarrow e^{\pi}>\pi^{e}"#)
+            ],
+            stdKey: "靠数值估算不严谨，考场也怕算错。",
+            killKey: "取对数把两者化成 lne/e 与 lnπ/π，构造 f(x)=lnx/x 在 x>e 递减，e<π 故 f(e)>f(π)，反推 e^π>π^e。",
+            mistakes: ["f(x)=lnx/x 在 (e,+∞) 递减", "e<π 都在递减区间，自变量大者函数小", "对数保序：lnA>lnB ⟺ A>B"],
+            type: .multipleChoice,
+            options: ["e^π > π^e", "e^π < π^e", "e^π = π^e", "无法确定"]
+        ),
+
+        // 74 ── 构造函数比大小：三数 lnx/x
+        skCase(
+            id: "sk_074", weapon: .constructCompare,
+            title: "ln3/3、ln4/4、ln5/5 排序，全在递减区间",
+            source: "函数 · 构造比大小（高考选填）",
+            standardMinutes: 5, killSeconds: 22,
+            signal: "三个数都形如 lnx/x，且自变量都大于 e——同一函数比单调。",
+            content: "设 a = ln3/3，b = ln4/4，c = ln5/5，比较 a、b、c 的大小。",
+            contentLatex: #"a=\frac{\ln3}{3},\ b=\frac{\ln4}{4},\ c=\frac{\ln5}{5},\ \text{大小关系}=?"#,
+            answer: "a > b > c",
+            difficulty: 0.50, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "通分/估值逐个算", #"a\approx0.366,\ b\approx0.347,\ c\approx0.322"#),
+                skStep(2, "比较得序", #"a>b>c"#)
+            ],
+            killSteps: [
+                skStep(1, "三数同形，构造 f(x)=lnx/x", #"a=f(3),\ b=f(4),\ c=f(5)"#),
+                skStep(2, "x>e 时 f 递减", #"f'(x)=\frac{1-\ln x}{x^{2}}<0\ (x>e\approx2.72)"#),
+                skStep(3, "3<4<5 全在递减段", #"f(3)>f(4)>f(5)\Rightarrow a>b>c"#)
+            ],
+            stdKey: "逐个取近似值比较，慢且易错。",
+            killKey: "三数都是 f(x)=lnx/x 的函数值，3、4、5 全大于 e 落在递减区间，自变量越大值越小，直接 a>b>c。",
+            mistakes: ["3、4、5 都大于 e≈2.72，同在递减区间", "递减区间自变量大则函数值小", "构造同一函数是关键"],
+            type: .multipleChoice,
+            options: ["a > b > c", "c > b > a", "b > a > c", "a > c > b"]
+        ),
+
+        // 75 ── 极化恒等式：三角形中线型
+        skCase(
+            id: "sk_075", weapon: .polarization,
+            title: "只给底边和中线，AB·AC 用极化一步出",
+            source: "平面向量 · 极化恒等式（高考选填）",
+            standardMinutes: 6, killSeconds: 20,
+            signal: "三角形给中线长与底边长求 AB·AC——极化中线型 AM²−(BC/2)²。",
+            content: "在△ABC 中，BC = 4，BC 边上的中线 AM = 3（M 为 BC 中点），求 AB · AC。",
+            contentLatex: #"\triangle ABC,\ BC=4,\ \text{中线}\ AM=3,\ \ \vec{AB}\cdot\vec{AC}=?"#,
+            answer: "AB·AC = 5",
+            difficulty: 0.52, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "用基底 AM、MB 表示", #"\vec{AB}=\vec{AM}+\vec{MB},\ \vec{AC}=\vec{AM}-\vec{MB}"#),
+                skStep(2, "点乘展开", #"\vec{AB}\cdot\vec{AC}=|\vec{AM}|^2-|\vec{MB}|^2"#),
+                skStep(3, "代入", #"=3^2-2^2=9-4=5"#)
+            ],
+            killSteps: [
+                skStep(1, "极化中线型直接套", #"\vec{AB}\cdot\vec{AC}=AM^{2}-\left(\tfrac{BC}{2}\right)^{2}"#),
+                skStep(2, "代入 AM=3、BC=4", #"=9-2^{2}=5"#)
+            ],
+            stdKey: "基底展开虽不难，但要现推 (AM+MB)(AM−MB)。",
+            killKey: "极化中线型 AB·AC=AM²−(BC/2)²，记住公式直接代 9−4=5，秒杀。",
+            mistakes: ["BC/2=2，要平方成 4", "M 必须是 BC 的中点才成立", "公式是中线²减半底²"],
+            type: .multipleChoice,
+            options: ["5", "13", "−5", "7"]
+        ),
+
+        // 76 ── 极化恒等式：和差模长型
+        skCase(
+            id: "sk_076", weapon: .polarization,
+            title: "只给 |a+b| 与 |a−b|，点乘=平方差的四分之一",
+            source: "平面向量 · 极化恒等式（高考选填）",
+            standardMinutes: 5, killSeconds: 18,
+            signal: "给 |a+b| 与 |a−b| 求 a·b——极化恒等式 ¼(|a+b|²−|a−b|²)。",
+            content: "已知平面向量 a、b 满足 |a + b| = 4，|a − b| = 2，求 a · b。",
+            contentLatex: #"|\vec a+\vec b|=4,\ |\vec a-\vec b|=2,\ \ \vec a\cdot\vec b=?"#,
+            answer: "a·b = 3",
+            difficulty: 0.46, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "两式平方展开", #"|\vec a+\vec b|^2=|\vec a|^2+2\vec a\!\cdot\!\vec b+|\vec b|^2=16"#),
+                skStep(2, "另一式", #"|\vec a-\vec b|^2=|\vec a|^2-2\vec a\!\cdot\!\vec b+|\vec b|^2=4"#),
+                skStep(3, "相减", #"4\vec a\!\cdot\!\vec b=12\Rightarrow\vec a\!\cdot\!\vec b=3"#)
+            ],
+            killSteps: [
+                skStep(1, "极化恒等式直接套", #"\vec a\cdot\vec b=\tfrac14\!\left(|\vec a+\vec b|^2-|\vec a-\vec b|^2\right)"#),
+                skStep(2, "代入", #"=\tfrac14(16-4)=3"#)
+            ],
+            stdKey: "两次平方再相减也快，但要写两行展开。",
+            killKey: "极化恒等式 a·b=¼(|a+b|²−|a−b|²)，直接 ¼(16−4)=3，一行出。",
+            mistakes: ["公式系数是 1/4", "先各自平方再相减", "|a+b|²=16、|a−b|²=4"],
+            type: .multipleChoice,
+            options: ["3", "5", "6", "12"]
+        ),
+
+        // 77 ── 必要性探路：相切点定参数
+        skCase(
+            id: "sk_077", weapon: .necessityProbe,
+            title: "eˣ≥ax+1 恒成立，取等点 x=0 处导数相等定 a",
+            source: "函数与导数 · 端点效应（高考选填）",
+            standardMinutes: 7, killSeconds: 30,
+            signal: "x=0 两边都等于 1（取等点）——它是差函数最小值点，导数为 0。",
+            content: "若对任意 x∈ℝ，不等式 eˣ ≥ a x + 1 恒成立，求实数 a 的值。",
+            contentLatex: #"\forall x\in\mathbb R:\ e^{x}\ge ax+1,\ \ a=?"#,
+            answer: "a = 1",
+            difficulty: 0.58, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "构造 g(x)=eˣ-ax-1", #"g(x)\ge0\ \forall x,\ g(0)=0"#),
+                skStep(2, "分类讨论 g 的最小值", #"g'(x)=e^{x}-a,\ \text{按}\ a\le0\ \text{与}\ a>0\ \text{讨论}"#),
+                skStep(3, "综合得唯一 a", #"\text{仅}\ a=1\ \text{时恒成立}"#)
+            ],
+            killSteps: [
+                skStep(1, "x=0 取等，是最小值点", #"g(x)=e^{x}-ax-1,\ g(0)=0\ \text{为最小}"#),
+                skStep(2, "必要条件 g'(0)=0", #"g'(0)=1-a=0\Rightarrow a=1"#),
+                skStep(3, "充分性验证", #"a=1:\ e^{x}\ge x+1\ \text{恒成立}\ \checkmark"#)
+            ],
+            stdKey: "正面讨论要对 a 的正负分类，绕。",
+            killKey: "x=0 处两边都为 1，是差函数 g 的最小值点，必有 g'(0)=0 解出 a=1，再验 eˣ≥x+1 即可。",
+            mistakes: ["取等点 x=0 处 g 取最小，故 g'(0)=0", "g'(0)=1−a", "必要性求出后仍要验充分性"],
+            type: .fillInBlank
+        ),
+
+        // 78 ── 必要性探路：二阶导端点定参数范围
+        skCase(
+            id: "sk_078", weapon: .necessityProbe,
+            title: "ln(1+x)≥x−ax² 恒成立，端点二阶导卡出 a 范围",
+            source: "函数与导数 · 端点效应（高考压轴）",
+            standardMinutes: 9, killSeconds: 40,
+            signal: "x=0 处 g=g'=0（取等点），用 g''(0)≥0 抢出参数必要条件。",
+            content: "若当 x≥0 时，不等式 ln(1+x) ≥ x − a x² 恒成立，求实数 a 的最小值。",
+            contentLatex: #"x\ge0\ \text{时}\ \ln(1+x)\ge x-ax^{2}\ \text{恒成立},\ \ a_{\min}=?"#,
+            answer: "a 的最小值为 1/2",
+            difficulty: 0.74, tier: 5,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "构造 g(x)=ln(1+x)-x+ax²", #"g(0)=0,\ g(x)\ge0\ \text{在}\ x\ge0"#),
+                skStep(2, "逐阶求导分析", #"g'(x)=\tfrac1{1+x}-1+2ax,\ g'(0)=0"#),
+                skStep(3, "讨论 a 保证 g≥0", #"\text{综合得}\ a\ge\tfrac12"#)
+            ],
+            killSteps: [
+                skStep(1, "x=0 取等，g(0)=g'(0)=0", #"g(x)=\ln(1+x)-x+ax^{2}"#),
+                skStep(2, "必要 g''(0)≥0", #"g''(x)=-\tfrac1{(1+x)^2}+2a,\ g''(0)=-1+2a\ge0\Rightarrow a\ge\tfrac12"#),
+                skStep(3, "充分性", #"a=\tfrac12:\ \ln(1+x)\ge x-\tfrac{x^2}2\ \text{成立}\Rightarrow a_{\min}=\tfrac12"#)
+            ],
+            stdKey: "直接讨论 g≥0 要反复求导分类，路长。",
+            killKey: "x=0 是取等点故 g(0)=g'(0)=0，要 g 在 0 附近不下穿就得 g''(0)≥0，即 −1+2a≥0 抢出 a≥1/2。",
+            mistakes: ["g''(x)=−1/(1+x)²+2a，g''(0)=−1+2a", "取等点处 g(0)=g'(0)=0 是前提", "必要条件后要补充分性"],
+            type: .fillInBlank
+        ),
+
+        // 79 ── 数列周期：分式递推求 a_2024
+        skCase(
+            id: "sk_079", weapon: .sequencePeriod,
+            title: "aₙ₊₁=1−1/aₙ，算三项就回头，周期 3",
+            source: "数列 · 周期性（高考选填高频）",
+            standardMinutes: 5, killSeconds: 22,
+            signal: "分式递推 aₙ₊₁=1−1/aₙ——算几项发现循环，对下标取余。",
+            content: "数列 {aₙ} 满足 a₁ = 2，aₙ₊₁ = 1 − 1/aₙ，求 a₂₀₂₄。",
+            contentLatex: #"a_1=2,\ a_{n+1}=1-\tfrac1{a_n},\ \ a_{2024}=?"#,
+            answer: "a₂₀₂₄ = 1/2",
+            difficulty: 0.48, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "尝试求通项", #"\text{分式递推通项不易直接求}"#),
+                skStep(2, "逐项递推到很后面", #"\text{需要算到第 2024 项, 不现实}"#)
+            ],
+            killSteps: [
+                skStep(1, "算前几项找周期", #"a_1=2,\ a_2=\tfrac12,\ a_3=-1,\ a_4=2=a_1"#),
+                skStep(2, "周期为 3", #"a_{n+3}=a_n"#),
+                skStep(3, "下标取余", #"2024=3\times674+2\Rightarrow a_{2024}=a_2=\tfrac12"#)
+            ],
+            stdKey: "想求通项公式做不出，硬递推 2024 项更不可能。",
+            killKey: "算 a₁=2、a₂=1/2、a₃=−1、a₄=2 发现周期 3；2024 除以 3 余 2，故 a₂₀₂₄=a₂=1/2。",
+            mistakes: ["周期是 3（a₄ 回到 a₁）", "2024=3×674+2，余 2 对应 a₂", "项号从 a₁ 起算"],
+            type: .multipleChoice,
+            options: ["1/2", "2", "−1", "1"]
+        ),
+
+        // 80 ── 数列周期：二阶递推求前2024项和
+        skCase(
+            id: "sk_080", weapon: .sequencePeriod,
+            title: "aₙ₊₂=aₙ₊₁−aₙ，周期 6 且一圈和为 0",
+            source: "数列 · 周期求和（高考选填）",
+            standardMinutes: 6, killSeconds: 28,
+            signal: "二阶递推 aₙ₊₂=aₙ₊₁−aₙ——周期 6，一个周期内的和为 0。",
+            content: "数列 {aₙ} 满足 a₁ = 1，a₂ = 2，aₙ₊₂ = aₙ₊₁ − aₙ，求前 2024 项之和 S₂₀₂₄。",
+            contentLatex: #"a_1=1,\ a_2=2,\ a_{n+2}=a_{n+1}-a_n,\ \ S_{2024}=?"#,
+            answer: "S₂₀₂₄ = 3",
+            difficulty: 0.54, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "特征根法求通项", #"x^2=x-1\ \text{复根, 通项含三角, 繁琐}"#),
+                skStep(2, "再求和", #"\text{对复数通项求和极易出错}"#)
+            ],
+            killSteps: [
+                skStep(1, "算一个周期的项", #"1,2,1,-1,-2,-1,\ \underbrace{1,2}_{=a_1,a_2}\Rightarrow T=6"#),
+                skStep(2, "一周期和为 0", #"1+2+1-1-2-1=0"#),
+                skStep(3, "2024=6×337+2", #"S_{2024}=337\times0+(a_1+a_2)=0+3=3"#)
+            ],
+            stdKey: "特征方程是复根，通项带三角函数，求和极麻烦。",
+            killKey: "递推算出周期 6，一个周期六项之和为 0；2024=6×337+2，余下 a₁+a₂=3，故 S₂₀₂₄=3。",
+            mistakes: ["周期为 6（a₇=a₁,a₈=a₂）", "一周期六项和=0", "余数 2 补加 a₁+a₂=1+2=3"],
+            type: .fillInBlank
+        ),
+
+        // 81 ── 裂项相消：1/[k(k+1)]
+        skCase(
+            id: "sk_081", weapon: .telescoping,
+            title: "1/[k(k+1)] 求和，拆成 1/k−1/(k+1) 首尾对消",
+            source: "数列 · 裂项求和（高考高频）",
+            standardMinutes: 6, killSeconds: 25,
+            signal: "通项是相邻整数之积的倒数 1/[k(k+1)]——拆成两项差，望远镜相消。",
+            content: "求和 Sₙ = 1/(1·2) + 1/(2·3) + … + 1/[n(n+1)]。",
+            contentLatex: #"S_n=\sum_{k=1}^{n}\frac1{k(k+1)}=?"#,
+            answer: "Sₙ = n/(n+1)",
+            difficulty: 0.46, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "算前几项找规律", #"S_1=\tfrac12,\ S_2=\tfrac23,\ S_3=\tfrac34"#),
+                skStep(2, "猜想并归纳证明", #"\text{猜}\ S_n=\tfrac{n}{n+1},\ \text{再用数学归纳法证}"#)
+            ],
+            killSteps: [
+                skStep(1, "裂项", #"\frac1{k(k+1)}=\frac1k-\frac1{k+1}"#),
+                skStep(2, "求和相消", #"S_n=\left(1-\tfrac12\right)+\left(\tfrac12-\tfrac13\right)+\dots+\left(\tfrac1n-\tfrac1{n+1}\right)"#),
+                skStep(3, "剩首尾", #"=1-\frac1{n+1}=\frac{n}{n+1}"#)
+            ],
+            stdKey: "猜规律还要归纳法补证，绕一大圈。",
+            killKey: "1/[k(k+1)]=1/k−1/(k+1)，相邻项首尾相消，只剩 1−1/(n+1)。",
+            mistakes: ["裂项 1/[k(k+1)]=1/k−1/(k+1)", "相消后剩首项 1 与末项 −1/(n+1)", "通分 1−1/(n+1)=n/(n+1)"],
+            type: .fillInBlank
+        ),
+
+        // 82 ── 裂项相消：1/[(2k−1)(2k+1)]
+        skCase(
+            id: "sk_082", weapon: .telescoping,
+            title: "奇数积倒数求和，裂项要带 1/2 系数",
+            source: "数列 · 裂项求和（高考高频）",
+            standardMinutes: 6, killSeconds: 28,
+            signal: "分母是相邻奇数之积 (2k−1)(2k+1)——裂项系数为 1/2。",
+            content: "求和 Sₙ = 1/(1·3) + 1/(3·5) + … + 1/[(2n−1)(2n+1)]。",
+            contentLatex: #"S_n=\sum_{k=1}^{n}\frac1{(2k-1)(2k+1)}=?"#,
+            answer: "Sₙ = n/(2n+1)",
+            difficulty: 0.50, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "算前几项", #"S_1=\tfrac13,\ S_2=\tfrac25,\ S_3=\tfrac37"#),
+                skStep(2, "猜想归纳", #"\text{猜}\ S_n=\tfrac{n}{2n+1}\ \text{再证}"#)
+            ],
+            killSteps: [
+                skStep(1, "裂项（系数 1/2）", #"\frac1{(2k-1)(2k+1)}=\frac12\!\left(\frac1{2k-1}-\frac1{2k+1}\right)"#),
+                skStep(2, "求和相消", #"S_n=\frac12\!\left(1-\frac13+\frac13-\dots-\frac1{2n+1}\right)"#),
+                skStep(3, "剩首尾", #"=\frac12\!\left(1-\frac1{2n+1}\right)=\frac{n}{2n+1}"#)
+            ],
+            stdKey: "猜规律 + 归纳，且分母规律不如偶数明显。",
+            killKey: "裂成 ½(1/(2k−1)−1/(2k+1))，相消后 ½(1−1/(2n+1))=n/(2n+1)；关键别漏 1/2 系数。",
+            mistakes: ["裂项系数是 1/2（分母差为 2）", "相消后剩 ½(1−1/(2n+1))", "化简 ½·2n/(2n+1)=n/(2n+1)"],
+            type: .fillInBlank
+        ),
+
+        // 83 ── 放缩法：Σ1/k² < 2
+        skCase(
+            id: "sk_083", weapon: .scaling,
+            title: "Σ1/k² 求不出？放缩成 1/(k−1)−1/k 再相消",
+            source: "数列 · 放缩证不等式（高考压轴高频）",
+            standardMinutes: 9, killSeconds: 45,
+            signal: "证 Σ1/k² 的上界，但平方和无法精确求——放缩成可裂项的形式。",
+            content: "求证：对任意正整数 n，有 1/1² + 1/2² + … + 1/n² < 2。",
+            contentLatex: #"\sum_{k=1}^{n}\frac1{k^{2}}<2"#,
+            answer: "得证（和 < 2 − 1/n < 2）",
+            difficulty: 0.76, tier: 5,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "平方和无封闭初等表达", #"\sum\frac1{k^2}\ \text{无法精确求和}"#),
+                skStep(2, "尝试归纳但右边是常数难推", #"\text{直接归纳}\ <2\ \text{递推步不易接}"#)
+            ],
+            killSteps: [
+                skStep(1, "首项留下，k≥2 放缩", #"\frac1{k^{2}}<\frac1{k(k-1)}=\frac1{k-1}-\frac1k\ (k\ge2)"#),
+                skStep(2, "求和裂项相消", #"\sum_{k=2}^{n}\frac1{k^2}<\sum_{k=2}^{n}\!\left(\frac1{k-1}-\frac1k\right)=1-\frac1n"#),
+                skStep(3, "加回首项", #"\sum_{k=1}^{n}\frac1{k^2}<1+\left(1-\frac1n\right)=2-\frac1n<2"#)
+            ],
+            stdKey: "平方和没有初等求和公式，硬归纳也难接上。",
+            killKey: "把 1/k²（k≥2）放大成 1/[k(k−1)] 再裂项相消，得 <2−1/n；首项 1 单独留。",
+            mistakes: ["放缩 1/k²<1/[k(k−1)] 仅对 k≥2", "首项 1/1² 要单独保留", "相消后是 1−1/n，总和 2−1/n<2"],
+            type: .proof
+        ),
+
+        // 84 ── 放缩法：Σ1/√k 的下界
+        skCase(
+            id: "sk_084", weapon: .scaling,
+            title: "Σ1/√k 下界，分母有理化放成 √ 的差",
+            source: "数列 · 放缩证不等式（高考压轴）",
+            standardMinutes: 9, killSeconds: 45,
+            signal: "证 Σ1/√k 的下界——把 1/√k 缩小成 2(√(k+1)−√k) 再相消。",
+            content: "求证：对任意正整数 n，有 1/√1 + 1/√2 + … + 1/√n > 2(√(n+1) − 1)。",
+            contentLatex: #"\sum_{k=1}^{n}\frac1{\sqrt k}>2\left(\sqrt{n+1}-1\right)"#,
+            answer: "得证",
+            difficulty: 0.78, tier: 5,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "根式和无封闭式", #"\sum\frac1{\sqrt k}\ \text{无法精确求}"#),
+                skStep(2, "归纳右边带根号难处理", #"\text{递推步要比较}\ \sqrt{n+2}\ \text{等, 繁琐}"#)
+            ],
+            killSteps: [
+                skStep(1, "缩小并有理化", #"\frac1{\sqrt k}>\frac2{\sqrt k+\sqrt{k+1}}=2\left(\sqrt{k+1}-\sqrt k\right)"#),
+                skStep(2, "求和相消", #"\sum_{k=1}^{n}\frac1{\sqrt k}>2\sum_{k=1}^{n}\!\left(\sqrt{k+1}-\sqrt k\right)"#),
+                skStep(3, "望远镜相消", #"=2\left(\sqrt{n+1}-1\right)"#)
+            ],
+            stdKey: "根式和无公式，归纳法处理 √ 既繁又易错。",
+            killKey: "1/√k 缩成 2(√(k+1)−√k)（分母有理化），相消只剩 2(√(n+1)−√1)。",
+            mistakes: ["1/√k>2/(√k+√(k+1)) 因 √(k+1)>√k", "有理化得 2(√(k+1)−√k)", "相消后首项 √1=1"],
+            type: .proof
+        ),
+
+        // 85 ── 设而不求：椭圆弦长
+        skCase(
+            id: "sk_085", weapon: .conicVieta,
+            title: "直线截椭圆求弦长，交点不解，韦达整体代",
+            source: "解析几何 · 弦长（高考高频）",
+            standardMinutes: 8, killSeconds: 40,
+            signal: "直线交椭圆求 |AB|——联立得二次，用 x₁+x₂、x₁x₂ 整体代入。",
+            content: "直线 y = x + 1 与椭圆 x²/4 + y²/2 = 1 交于 A、B 两点，求弦长 |AB|。",
+            contentLatex: #"y=x+1\ \text{交}\ \frac{x^2}{4}+\frac{y^2}{2}=1\ \text{于}\ A,B,\ |AB|=?"#,
+            answer: "|AB| = 4√5/3",
+            difficulty: 0.62, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "联立解出交点坐标", #"\text{解}\ 3x^2+4x-2=0\ \text{得}\ x=\frac{-2\pm\sqrt{10}}3"#),
+                skStep(2, "求两点坐标再算距离", #"\text{代回}\ y,\ \text{两点距离公式, 含根号繁琐}"#)
+            ],
+            killSteps: [
+                skStep(1, "联立得二次（设而不求）", #"\frac{x^2}{4}+\frac{(x+1)^2}{2}=1\Rightarrow 3x^2+4x-2=0,\ \Delta>0"#),
+                skStep(2, "韦达整体写出", #"x_1+x_2=-\tfrac43,\ x_1x_2=-\tfrac23"#),
+                skStep(3, "弦长公式代入", #"|AB|=\sqrt{1+k^2}\sqrt{(x_1+x_2)^2-4x_1x_2}=\sqrt2\cdot\sqrt{\tfrac{40}9}=\frac{4\sqrt5}3"#)
+            ],
+            stdKey: "真去解带根号的交点坐标再求距离，又长又易错。",
+            killKey: "联立得 3x²+4x−2=0，不解根，用韦达 x₁+x₂、x₁x₂ 直接代弦长公式 |AB|=√(1+k²)·√((x₁+x₂)²−4x₁x₂)。",
+            mistakes: ["弦长 |AB|=√(1+k²)|x₁−x₂|", "|x₁−x₂|²=(x₁+x₂)²−4x₁x₂=16/9+8/3=40/9", "先验 Δ>0 保证相交"],
+            type: .fillInBlank
+        ),
+
+        // 86 ── 设而不求：抛物线焦点弦
+        skCase(
+            id: "sk_086", weapon: .conicVieta,
+            title: "抛物线焦点弦长，|AB|=x₁+x₂+p 一步到",
+            source: "解析几何 · 焦点弦（高考高频）",
+            standardMinutes: 7, killSeconds: 32,
+            signal: "过焦点的弦求长——韦达求 x₁+x₂，焦点弦长 = x₁+x₂+p。",
+            content: "过抛物线 y² = 4x 的焦点 F(1, 0) 作斜率为 1 的直线，交抛物线于 A、B，求 |AB|。",
+            contentLatex: #"y^2=4x,\ \text{过}\ F(1,0)\ \text{斜率}1\ \text{的弦}\ |AB|=?"#,
+            answer: "|AB| = 8",
+            difficulty: 0.58, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "联立解交点", #"\text{解}\ x^2-6x+1=0\ \text{得}\ x=3\pm2\sqrt2"#),
+                skStep(2, "两点距离公式", #"\text{代回求}\ y,\ \text{两点距离, 含根号}"#)
+            ],
+            killSteps: [
+                skStep(1, "联立得二次（设而不求）", #"y=x-1,\ (x-1)^2=4x\Rightarrow x^2-6x+1=0,\ \Delta>0"#),
+                skStep(2, "韦达", #"x_1+x_2=6"#),
+                skStep(3, "焦点弦长公式", #"|AB|=x_1+x_2+p=6+2=8"#)
+            ],
+            stdKey: "解出 3±2√2 再两点距离，绕远。",
+            killKey: "y²=4x 准线 x=−1，焦半径=x+1，焦点弦 |AB|=(x₁+1)+(x₂+1)=x₁+x₂+2；韦达给 x₁+x₂=6，故 8。",
+            mistakes: ["焦点弦 |AB|=x₁+x₂+p，此处 p=2", "联立得 x²−6x+1=0 故 x₁+x₂=6", "用焦半径公式比两点距离快"],
+            type: .fillInBlank
+        ),
+
+        // 87 ── 数学归纳法：整除
+        skCase(
+            id: "sk_087", weapon: .induction,
+            title: "n³+5n 被 6 整除，奠基+递推两步搞定",
+            source: "数列/整除 · 数学归纳法（高考选修）",
+            standardMinutes: 8, killSeconds: 45,
+            signal: "证对一切正整数 n 的整除命题——归纳法，递推步凑出归纳假设。",
+            content: "求证：对任意正整数 n，n³ + 5n 能被 6 整除。",
+            contentLatex: #"6\mid (n^{3}+5n),\ \forall n\in\mathbb N^{*}"#,
+            answer: "得证",
+            difficulty: 0.66, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "尝试因式分解", #"n^3+5n=n(n^2+5)=n(n^2-1)+6n=(n-1)n(n+1)+6n"#),
+                skStep(2, "说明两部分均被 6 整除", #"\text{连续三整数积被 6 整除}+6n\ \text{被 6 整除}"#)
+            ],
+            killSteps: [
+                skStep(1, "奠基 n=1", #"1+5=6\ \text{能被 6 整除}"#),
+                skStep(2, "假设 n=k 成立", #"k^{3}+5k=6m\ (m\in\mathbb Z)"#),
+                skStep(3, "递推 n=k+1", #"(k+1)^3+5(k+1)=(k^3+5k)+3k(k+1)+6=6m+3k(k+1)+6"#),
+                skStep(4, "凑整除", #"k(k+1)\text{为偶数}\Rightarrow 3k(k+1)\ \text{被 6 整除}\Rightarrow\text{整体被 6 整除}"#)
+            ],
+            stdKey: "因式分解法也行，但要看出 (n−1)n(n+1)+6n 这一步不直观。",
+            killKey: "归纳：n=1 得 6；设 k³+5k=6m，则 (k+1)³+5(k+1) 多出 3k(k+1)+6，而 k(k+1) 偶故被 6 整除。",
+            mistakes: ["递推步必须用上归纳假设 k³+5k=6m", "3k(k+1) 中 k(k+1) 为偶，故被 6 整除", "奠基、递推两步缺一不可"],
+            type: .proof
+        ),
+
+        // 88 ── 数学归纳法：不等式
+        skCase(
+            id: "sk_088", weapon: .induction,
+            title: "2ⁿ>n²（n≥5），递推步用 2k²≥(k+1)²",
+            source: "不等式 · 数学归纳法（高考选修）",
+            standardMinutes: 8, killSeconds: 45,
+            signal: "证 2ⁿ 与 n² 的大小对 n≥5 成立——归纳，递推用假设翻倍。",
+            content: "求证：当 n ≥ 5（n 为正整数）时，2ⁿ > n²。",
+            contentLatex: #"n\ge5\ \text{时},\ 2^{n}>n^{2}"#,
+            answer: "得证",
+            difficulty: 0.70, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "作差构造函数估计", #"\text{令}\ f(x)=2^{x}-x^{2},\ \text{讨论导数与单调, 较繁}"#),
+                skStep(2, "需说明 x≥5 后恒正", #"\text{连续化处理对整数命题略绕}"#)
+            ],
+            killSteps: [
+                skStep(1, "奠基 n=5", #"2^{5}=32>25=5^{2}"#),
+                skStep(2, "假设 n=k(k≥5)", #"2^{k}>k^{2}"#),
+                skStep(3, "递推 n=k+1", #"2^{k+1}=2\cdot2^{k}>2k^{2}"#),
+                skStep(4, "再证 2k²≥(k+1)²", #"2k^2-(k+1)^2=k^2-2k-1>0\ (k\ge5)\Rightarrow 2^{k+1}>(k+1)^2"#)
+            ],
+            stdKey: "用函数+导数处理整数不等式，要把离散转连续，反而绕。",
+            killKey: "归纳：n=5 得 32>25；设 2ᵏ>k²，则 2^{k+1}=2·2ᵏ>2k²，再用 k≥5 时 2k²≥(k+1)² 收口。",
+            mistakes: ["奠基从 n=5 起（n<5 不成立）", "递推用假设得 2·2ᵏ>2k²", "补证 k²−2k−1>0 当 k≥5"],
+            type: .proof
+        ),
+
+        // 89 ── 奇偶构造：ln(√(x²+1)+x) 型
+        skCase(
+            id: "sk_089", weapon: .oddConstruct,
+            title: "f(x)=ln(√(x²+1)+x)+2，剥奇函数 f(5)+f(−5)=4",
+            source: "函数 · 奇偶构造（高考选填）",
+            standardMinutes: 6, killSeconds: 22,
+            signal: "求 f(a)+f(−a)，f 是『奇函数 + 常数』——剥常数答案即 2b。",
+            content: "已知 f(x) = ln(√(x²+1) + x) + 2，求 f(5) + f(−5)。",
+            contentLatex: #"f(x)=\ln\!\left(\sqrt{x^2+1}+x\right)+2,\ \ f(5)+f(-5)=?"#,
+            answer: "f(5) + f(−5) = 4",
+            difficulty: 0.50, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "直接代入两点", #"f(5)=\ln(\sqrt{26}+5)+2,\ f(-5)=\ln(\sqrt{26}-5)+2"#),
+                skStep(2, "相加并化简对数", #"\ln[(\sqrt{26}+5)(\sqrt{26}-5)]+4=\ln1+4=4"#)
+            ],
+            killSteps: [
+                skStep(1, "剥出常数", #"f(x)=g(x)+2,\ g(x)=\ln\!\left(\sqrt{x^2+1}+x\right)"#),
+                skStep(2, "g 为奇函数", #"g(-x)=\ln\!\left(\sqrt{x^2+1}-x\right)=-g(x)\ (\text{两括号积}=1)"#),
+                skStep(3, "对称和", #"f(5)+f(-5)=g(5)+g(-5)+4=0+4=4"#)
+            ],
+            stdKey: "硬代要算 ln 的乘积 (√26+5)(√26−5)=1，多一步。",
+            killKey: "f=g+2，g(x)=ln(√(x²+1)+x) 是奇函数（因两共轭括号积为 1），故 f(5)+f(−5)=2×2=4。",
+            mistakes: ["(√(x²+1)+x)(√(x²+1)−x)=1 故 g 奇", "f(a)+f(−a)=2b（b 为常数项）", "常数项是 2，答案 2×2=4"],
+            type: .fillInBlank
+        ),
+
+        // 90 ── 奇偶构造：对称区间最大+最小
+        skCase(
+            id: "sk_090", weapon: .oddConstruct,
+            title: "x³+sinx+1 在[−2,2]，最大+最小=2",
+            source: "函数 · 奇偶构造（高考选填）",
+            standardMinutes: 6, killSeconds: 22,
+            signal: "对称区间求『最大值+最小值』，f 是奇函数加常数——M+m=2b。",
+            content: "设 f(x) = x³ + sin x + 1 在区间 [−2, 2] 上的最大值为 M、最小值为 m，求 M + m。",
+            contentLatex: #"f(x)=x^3+\sin x+1,\ x\in[-2,2],\ M+m=?"#,
+            answer: "M + m = 2",
+            difficulty: 0.52, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "求导找极值", #"f'(x)=3x^2+\cos x>0\Rightarrow f\ \text{在}[-2,2]\nearrow"#),
+                skStep(2, "端点取最值相加", #"M=f(2),\ m=f(-2),\ M+m=f(2)+f(-2)=2"#)
+            ],
+            killSteps: [
+                skStep(1, "剥常数", #"f(x)=g(x)+1,\ g(x)=x^3+\sin x\ \text{为奇函数}"#),
+                skStep(2, "对称区间奇函数最值互为相反", #"g_{\max}+g_{\min}=0"#),
+                skStep(3, "加回常数", #"M+m=(g_{\max}+1)+(g_{\min}+1)=2"#)
+            ],
+            stdKey: "求导判单调再代端点也行，但要确认单调性。",
+            killKey: "f=g+1，g=x³+sinx 奇；对称区间上奇函数 g_max+g_min=0，故 M+m=0+2×1=2，与具体区间无关。",
+            mistakes: ["g(x)=x³+sinx 是奇函数（常数剥到外面）", "对称区间奇函数 g_max=−g_min", "M+m=2b，b=1"],
+            type: .fillInBlank
+        ),
+
+        // 91 ── 线性规划：求最大值
+        skCase(
+            id: "sk_091", weapon: .linearProgramming,
+            title: "z=2x+y 最大值，只看三个顶点比一比",
+            source: "不等式 · 线性规划（高考选填高频）",
+            standardMinutes: 5, killSeconds: 22,
+            signal: "线性约束求线性目标最大——最优必在可行域顶点，代入比较。",
+            content: "设变量 x、y 满足约束 x + y ≤ 4，x ≥ 1，y ≥ 1，求 z = 2x + y 的最大值。",
+            contentLatex: #"\begin{cases}x+y\le4\\x\ge1\\y\ge1\end{cases}\ z=2x+y\ \text{的最大值}=?"#,
+            answer: "z 的最大值为 7",
+            difficulty: 0.46, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "画可行域", #"\text{三条直线围成三角形}"#),
+                skStep(2, "平移目标直线找最优", #"z=2x+y\Rightarrow y=-2x+z,\ \text{截距最大处}"#)
+            ],
+            killSteps: [
+                skStep(1, "求三个顶点", #"(1,1),\ (1,3),\ (3,1)"#),
+                skStep(2, "代入目标比较", #"z=2x+y:\ 3,\ 5,\ 7"#),
+                skStep(3, "取最大", #"z_{\max}=7\ \text{在}\ (3,1)"#)
+            ],
+            stdKey: "平移目标直线找最优截距，要画图判断方向。",
+            killKey: "线性目标最优必在顶点，三顶点 (1,1),(1,3),(3,1) 代入得 3,5,7，最大 7。",
+            mistakes: ["顶点由约束边界两两相交求得", "最优一定在顶点，代入比较即可", "目标值最大对应 (3,1)"],
+            type: .multipleChoice,
+            options: ["7", "5", "6", "8"]
+        ),
+
+        // 92 ── 线性规划：求最小值
+        skCase(
+            id: "sk_092", weapon: .linearProgramming,
+            title: "z=x+2y 最小值，顶点 (1,1) 处取 3",
+            source: "不等式 · 线性规划（高考选填）",
+            standardMinutes: 5, killSeconds: 22,
+            signal: "线性约束求线性目标最小——同样落在可行域顶点。",
+            content: "设变量 x、y 满足约束 x ≥ 1，y ≥ x，x + y ≤ 6，求 z = x + 2y 的最小值。",
+            contentLatex: #"\begin{cases}x\ge1\\y\ge x\\x+y\le6\end{cases}\ z=x+2y\ \text{的最小值}=?"#,
+            answer: "z 的最小值为 3",
+            difficulty: 0.50, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "画可行域定形状", #"\text{三直线}\ x=1,\ y=x,\ x+y=6\ \text{围成三角形}"#),
+                skStep(2, "平移目标找最小截距", #"y=-\tfrac12x+\tfrac z2"#)
+            ],
+            killSteps: [
+                skStep(1, "求三顶点", #"(1,1),\ (1,5),\ (3,3)"#),
+                skStep(2, "代入目标", #"z=x+2y:\ 3,\ 11,\ 9"#),
+                skStep(3, "取最小", #"z_{\min}=3\ \text{在}\ (1,1)"#)
+            ],
+            stdKey: "平移目标直线判最小截距，需小心方向与斜率。",
+            killKey: "顶点 (1,1),(1,5),(3,3) 代入 z=x+2y 得 3,11,9，最小 3。",
+            mistakes: ["顶点：x=1∩y=x→(1,1)，x=1∩x+y=6→(1,5)，y=x∩x+y=6→(3,3)", "验证顶点满足全部约束", "最小值在 (1,1)"],
+            type: .multipleChoice,
+            options: ["3", "9", "11", "5"]
+        ),
+
+        // 93 ── 基本量法：等差
+        skCase(
+            id: "sk_093", weapon: .basicQuantity,
+            title: "等差只设 a₁、d，两条件两方程一解到底",
+            source: "数列 · 基本量法（高考选填高频）",
+            standardMinutes: 5, killSeconds: 22,
+            signal: "等差数列给两项求另一项——设 a₁、d 列方程组。",
+            content: "等差数列 {aₙ} 中，a₃ = 7，a₇ = 15，求 a₁₀。",
+            contentLatex: #"\text{等差}\{a_n\},\ a_3=7,\ a_7=15,\ a_{10}=?"#,
+            answer: "a₁₀ = 21",
+            difficulty: 0.42, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "用等差中项/性质凑", #"a_7-a_3=4d=8\Rightarrow d=2,\ \text{再逐项推}"#),
+                skStep(2, "从 a₇ 往后推 3 项", #"a_{10}=a_7+3d=15+6=21"#)
+            ],
+            killSteps: [
+                skStep(1, "设基本量列方程", #"a_1+2d=7,\ a_1+6d=15"#),
+                skStep(2, "解出 a₁、d", #"4d=8\Rightarrow d=2,\ a_1=3"#),
+                skStep(3, "求目标项", #"a_{10}=a_1+9d=3+18=21"#)
+            ],
+            stdKey: "用性质凑也快，但换个问法（如求 Sₙ）就需要 a₁、d。",
+            killKey: "等差完全由 a₁、d 定，两条件列两方程解出 a₁=3、d=2，任何项任何和都能算。",
+            mistakes: ["aₙ=a₁+(n−1)d", "两式相减消 a₁ 求 d", "a₁₀=a₁+9d（不是 10d）"],
+            type: .fillInBlank
+        ),
+
+        // 94 ── 基本量法：等比
+        skCase(
+            id: "sk_094", weapon: .basicQuantity,
+            title: "等比设 a₁、q，相除先得公比再回代",
+            source: "数列 · 基本量法（高考选填高频）",
+            standardMinutes: 5, killSeconds: 24,
+            signal: "等比数列给两项求另一项——设 a₁、q，两式相除得 q。",
+            content: "等比数列 {aₙ} 中，a₂ = 6，a₅ = 48，求 a₄。",
+            contentLatex: #"\text{等比}\{a_n\},\ a_2=6,\ a_5=48,\ a_4=?"#,
+            answer: "a₄ = 24",
+            difficulty: 0.46, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "用等比性质", #"a_5=a_2\cdot q^{3}\Rightarrow q^3=8\Rightarrow q=2"#),
+                skStep(2, "逐项推", #"a_4=a_5/q=48/2=24"#)
+            ],
+            killSteps: [
+                skStep(1, "设基本量列方程", #"a_1q=6,\ a_1q^{4}=48"#),
+                skStep(2, "相除得公比", #"q^{3}=8\Rightarrow q=2,\ a_1=3"#),
+                skStep(3, "求目标项", #"a_4=a_1q^{3}=3\cdot8=24"#)
+            ],
+            stdKey: "用性质 a₅=a₂q³ 也行，但基本量法对求 a₁、Sₙ 更通用。",
+            killKey: "等比由 a₁、q 定，两式相除消 a₁ 得 q³=8→q=2、a₁=3，目标项 a₄=a₁q³=24。",
+            mistakes: ["aₙ=a₁qⁿ⁻¹", "两式相除消 a₁ 得 q³（下标差 3）", "留意 q 的取值（本题 q=2 实根）"],
+            type: .fillInBlank
+        ),
+
+        // 95 ── 复数运算：分式的模
+        skCase(
+            id: "sk_095", weapon: .complexNumber,
+            title: "分式复数的模，分子分母各取模相除",
+            source: "复数 · 模的运算（高考选填高频）",
+            standardMinutes: 4, killSeconds: 18,
+            signal: "求分式复数的模——别先化简，用 |z|=|分子|/|分母|。",
+            content: "求复数 z = (3 + 4i)/(1 + i) 的模 |z|。",
+            contentLatex: #"z=\frac{3+4i}{1+i},\ \ |z|=?"#,
+            answer: "|z| = 5√2/2",
+            difficulty: 0.42, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "分母实数化", #"z=\frac{(3+4i)(1-i)}{(1+i)(1-i)}=\frac{7+i}{2}"#),
+                skStep(2, "再求模", #"|z|=\frac{\sqrt{49+1}}{2}=\frac{\sqrt{50}}2=\frac{5\sqrt2}2"#)
+            ],
+            killSteps: [
+                skStep(1, "模的商性质", #"|z|=\frac{|3+4i|}{|1+i|}"#),
+                skStep(2, "分别求模", #"|3+4i|=5,\ |1+i|=\sqrt2"#),
+                skStep(3, "相除", #"|z|=\frac5{\sqrt2}=\frac{5\sqrt2}2"#)
+            ],
+            stdKey: "先分母实数化再求模，要做复数乘法，绕。",
+            killKey: "|z₁/z₂|=|z₁|/|z₂|，直接 |3+4i|=5、|1+i|=√2，相除 5/√2=5√2/2，不必化简。",
+            mistakes: ["|z₁/z₂|=|z₁|/|z₂| 模可分配到分式", "|3+4i|=√(9+16)=5", "5/√2 有理化为 5√2/2"],
+            type: .multipleChoice,
+            options: ["5√2/2", "5", "5/2", "√2"]
+        ),
+
+        // 96 ── 复数运算：i 的幂求和
+        skCase(
+            id: "sk_096", weapon: .complexNumber,
+            title: "i+i²+…+i²⁰²⁴，四个一组和为 0",
+            source: "复数 · i 的周期（高考选填）",
+            standardMinutes: 4, killSeconds: 18,
+            signal: "求 i 的连续幂之和——四次一周期，每组和为 0。",
+            content: "计算 i + i² + i³ + … + i²⁰²⁴（i 为虚数单位）。",
+            contentLatex: #"i+i^2+i^3+\cdots+i^{2024}=?"#,
+            answer: "和为 0",
+            difficulty: 0.40, tier: 2,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "等比数列求和", #"S=\frac{i(1-i^{2024})}{1-i}"#),
+                skStep(2, "代 i²⁰²⁴=1 化简", #"i^{2024}=(i^4)^{506}=1\Rightarrow S=\frac{i\cdot0}{1-i}=0"#)
+            ],
+            killSteps: [
+                skStep(1, "i 四次一周期，每组和 0", #"i+i^2+i^3+i^4=i-1-i+1=0"#),
+                skStep(2, "数项数分组", #"2024=4\times506\ \text{个完整周期}"#),
+                skStep(3, "总和", #"506\times0=0"#)
+            ],
+            stdKey: "套等比求和公式也行，但要算 i^2024 并处理复数分母。",
+            killKey: "i 的幂周期为 4，相邻四项 i+i²+i³+i⁴=0；2024 恰好 506 组，总和 0。",
+            mistakes: ["i 周期 4：i,−1,−i,1", "一个周期四项之和为 0", "2024=4×506 整除，无余项"],
+            type: .multipleChoice,
+            options: ["0", "i", "1", "−1"]
         )
     ]
 
