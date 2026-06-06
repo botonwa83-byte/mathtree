@@ -70,6 +70,17 @@ enum KillWeapon: String, CaseIterable, Identifiable {
     case bundling           // 捆绑法 · 相邻排列
     case partition          // 隔板法 · 正整数分配
     case derangement        // 错位重排 · 不动点公式
+    // ── 第 5 批（数列求和 / 三角 / 系数比较 / 解析几何 / 组合 / 对数 / 函数）──
+    case staggeredSum       // 错位相减法 · 等差×等比
+    case triLaw             // 正余弦定理 · 面积公式
+    case undetermined       // 待定系数 · 比较系数
+    case contactChord       // 切点弦方程 · T=0
+    case pigeonhole         // 鸽巢原理 · 存在性
+    case groupedSum         // 分组分项求和 · 奇偶拆分
+    case logChange          // 换底公式 · 对数链
+    case zeroCount          // 图形数零点 · 方程解个数
+    case vectorBasis        // 向量基底 · 平面分解
+    case absValue           // 绝对值不等式 · 几何距离
 
     var id: String { rawValue }
 
@@ -128,6 +139,16 @@ enum KillWeapon: String, CaseIterable, Identifiable {
         case .bundling:         return "捆绑法 · 相邻"
         case .partition:        return "隔板法 · 整数分配"
         case .derangement:      return "错位重排 · 不动点"
+        case .staggeredSum:     return "错位相减法 · 等差×等比"
+        case .triLaw:           return "正余弦定理 · 面积"
+        case .undetermined:     return "待定系数 · 比较系数"
+        case .contactChord:     return "切点弦方程 · T=0"
+        case .pigeonhole:       return "鸽巢原理 · 存在性"
+        case .groupedSum:       return "分组分项求和"
+        case .logChange:        return "换底公式 · 对数链"
+        case .zeroCount:        return "图形数零点 · 解的个数"
+        case .vectorBasis:      return "向量基底 · 平面分解"
+        case .absValue:         return "绝对值不等式 · 距离"
         }
     }
 
@@ -187,6 +208,16 @@ enum KillWeapon: String, CaseIterable, Identifiable {
         case .bundling:         return "相邻排列：捆成一个整体先排，再乘内部顺序"
         case .partition:        return "n 个相同球放 m 盒每盒至少 1：C(n−1,m−1) 插隔板"
         case .derangement:      return "全部错位的方法数 Dₙ：D₄=9、D₅=44，公式秒报"
+        case .staggeredSum:     return "等差×等比混积数列？错位相减一步拆解"
+        case .triLaw:           return "正余弦定理解三角形，面积公式一键出角"
+        case .undetermined:     return "设好系数代入比较，恒等式一步定全部"
+        case .contactChord:     return "切点弦 T=0 直接写方程，无需联立验证"
+        case .pigeonhole:       return "n+1 个球放 n 个盒，必有两球同盒"
+        case .groupedSum:       return "奇偶项分组，各组等差/等比分别求和"
+        case .logChange:        return "换底公式统一底数，对数链一行出结果"
+        case .zeroCount:        return "图形交点个数即方程实根个数"
+        case .vectorBasis:      return "任意向量用基底线性表出，坐标直接列系数"
+        case .absValue:         return "|x−a|+|x−b|=几何距离，最小值=两点之距"
         }
     }
 
@@ -245,6 +276,16 @@ enum KillWeapon: String, CaseIterable, Identifiable {
         case .bundling:         return "rectangle.compress.vertical"
         case .partition:        return "rectangle.split.3x1"
         case .derangement:      return "shuffle"
+        case .staggeredSum:     return "arrow.left.and.right.text.vertical"
+        case .triLaw:           return "triangle"
+        case .undetermined:     return "equal.square.fill"
+        case .contactChord:     return "pencil.tip"
+        case .pigeonhole:       return "tray.2.fill"
+        case .groupedSum:       return "square.split.2x1.fill"
+        case .logChange:        return "arrow.2.squarepath"
+        case .zeroCount:        return "chart.line.uptrend.xyaxis"
+        case .vectorBasis:      return "arrow.up.right.and.arrow.down.left"
+        case .absValue:         return "ruler"
         }
     }
 
@@ -303,6 +344,16 @@ enum KillWeapon: String, CaseIterable, Identifiable {
         case .bundling:         return .apexGold
         case .partition:        return .rainbowPurple
         case .derangement:      return .rainbowRed
+        case .staggeredSum:     return .apexStarBlue
+        case .triLaw:           return .apexEmerald
+        case .undetermined:     return .rainbowOrange
+        case .contactChord:     return .apexMystery
+        case .pigeonhole:       return .rainbowTeal
+        case .groupedSum:       return .rainbowYellow
+        case .logChange:        return .apexGold
+        case .zeroCount:        return .rainbowBlue
+        case .vectorBasis:      return .rainbowGreen
+        case .absValue:         return .apexLava
         }
     }
 
@@ -319,8 +370,10 @@ enum KillWeapon: String, CaseIterable, Identifiable {
              .oddConstruct, .linearProgramming, .basicQuantity, .complexNumber,
              .normalVector, .circumSphere, .projectionArea, .binomialMoment,
              .totalProbability, .indicatorExpectation,
-             .insertionGap, .bundling, .partition: return true
-        default: return false   // polarization（极化恒等式）、derangement（错位重排公式）超纲
+             .insertionGap, .bundling, .partition,
+             .staggeredSum, .triLaw, .undetermined, .contactChord,
+             .groupedSum, .logChange, .zeroCount, .vectorBasis, .absValue: return true
+        default: return false   // polarization、derangement、pigeonhole 超纲
         }
     }
 
@@ -333,7 +386,8 @@ enum KillWeapon: String, CaseIterable, Identifiable {
              .constructCompare, .polarization, .necessityProbe, .sequencePeriod,
              .oddConstruct, .linearProgramming, .basicQuantity, .complexNumber,
              .circumSphere, .projectionArea, .binomialMoment,
-             .insertionGap, .bundling, .partition, .derangement: return true
+             .insertionGap, .bundling, .partition, .derangement,
+             .triLaw, .undetermined, .logChange, .zeroCount, .absValue: return true
         default: return false
         }
     }
@@ -447,6 +501,26 @@ enum KillWeapon: String, CaseIterable, Identifiable {
             return "把 n 个完全相同的物品分给 m 个不同对象、每对象至少 1 个，等价于在排成一列的 n 个物品的 (n−1) 个间隙里插入 (m−1) 块隔板，方法数 C(n−1, m−1)。这正是方程 x₁+…+xₘ=n 的正整数解组数；若允许为 0，先给每个变量 +1 转化为正整数情形再用隔板。"
         case .derangement:
             return "n 个元素全部不在原位置上的排列称为错位排列，其个数 Dₙ 满足递推 Dₙ=(n−1)(Dₙ₋₁+Dₙ₋₂)，或 Dₙ=n!·(1−1/1!+1/2!−…+(−1)ⁿ/n!)。常用值 D₁=0、D₂=1、D₃=2、D₄=9、D₅=44。遇到『信放错信封』『帽子全拿错』『编号全不对应』这类全错位计数，直接报数。"
+        case .staggeredSum:
+            return "数列每一项为等差数列项与等比数列项之积（如 nqⁿ⁻¹、(2n−1)·3ⁿ），直接求和没有公式可用。错位相减法：令 Sₙ=Σaₙbₙ，再算 q·Sₙ=Σaₙbₙ₊₁（乘公比错一位），两式相减后等差部分消成等差数列之和，等比部分化成普通等比，两者均可求，再除以 (1−q) 即得 Sₙ。"
+        case .triLaw:
+            return "在任意三角形 ABC 中，正弦定理 a/sinA=b/sinB=c/sinC=2R 把三条边与对角统一表示；余弦定理 c²=a²+b²−2ab cosC 把三边与夹角互化。面积公式 S=½ab sinC 把边与角结合。三者配合可解任意三角形：已知两边一角（SSA）用正弦定理出第三边或角，注意钝角二义性；已知三边或两边夹角（SSS/SAS）用余弦定理。"
+        case .undetermined:
+            return "比较系数法（待定系数法）：若两个多项式恒等（对一切 x 成立），则同次项系数必须相等。把待求多项式设为 A + Bx + Cx² + …，代入已知恒等式展开，逐次比较常数项、一次项、二次项…的系数，列方程组解出 A、B、C……。也可取若干个特殊 x 值建立方程（取值法），本质等价。"
+        case .contactChord:
+            return "设椭圆 x²/a²+y²/b²=1 上一点 P(x₀,y₀)，过 P 的切线方程为 xx₀/a²+yy₀/b²=1——形如曲线方程把 x²→xx₀、y²→yy₀。这就是 T=0 形式（切点弦方程）。由曲线外一点 Q 向椭圆作两条切线，两切点连线（切点弦）方程恰好也写成 T=0 形式，即 xXQ/a²+yYQ/b²=1。直接写方程，免去联立求切点的全部过程。"
+        case .pigeonhole:
+            return "鸽巢原理（抽屉原理）：把 n+1 只鸽子放进 n 个巢，至少一个巢有 2 只或以上。精确表述：若 m 个元素分配给 n 个集合，则至少有一个集合含 ⌈m/n⌉ 个元素。用于存在性证明：要证『必然存在两个满足某关系的元素』，构造合适的『巢（等价类）』，元素数超过巢数，结论立得，无需显式找出那两个元素。"
+        case .groupedSum:
+            return "数列 {aₙ} 若按奇偶项、或按某个周期 k 分成若干组，每组内部满足等差或等比，则分组分别求和再相加。常见形式：① aₙ=f(n)+g(n)（一项拆两项，各自求和）；② 奇数项/偶数项各自为等差或等比；③ 含 (−1)ⁿ 因子导致正负交替，配对后每两项之和为常数（配对法）。"
+        case .logChange:
+            return "换底公式：logₐb = log c / log a (c为任意正数≠1)，或 logₐb = 1/logᵦa。把不同底的对数统一到同一底（通常取 10 或 e），再用对数运算法则 log(mn)=logm+logn、log(m/n)=logm−logn、log mⁿ=n·logm。对数链：logₐb · logᵦc · log꜀d = logₐd（中间底消掉），多步换底串联可直接化简。"
+        case .zeroCount:
+            return "方程 f(x)=g(x) 的实数解个数等于曲线 y=f(x) 与 y=g(x) 的交点个数。把方程化为 F(x)=0，实根个数等于 F(x) 穿越零轴的次数（结合单调性与导数分析）。当参数 k 变化时，画出 y=f(x) 和直线 y=kx（或水平线 y=k），直线与曲线的切点是根数发生变化的临界，切线斜率即临界 k 值。"
+        case .vectorBasis:
+            return "平面内两个不共线向量 e₁、e₂ 构成基底：该平面内任意向量 p 可唯一写成 p=xe₁+ye₂，坐标 (x,y) 可由联立方程直接解出。在三角形或平行四边形中，常以两邻边向量 a、b 为基底，把所有向量（中点、重心、分点等）用 a、b 线性表示，再利用 λ+μ=1（三点共线条件）或比例关系列方程。"
+        case .absValue:
+            return "绝对值不等式核心：|x−a| 表示数轴上 x 到 a 的距离。|x−a|+|x−b| 为 x 到两点 a、b 的距离之和，最小值为 |a−b|（x 在 [a,b] 之间时取等）；|x−a|−|x−b| 的范围是 [−|a−b|, |a−b|]（三角不等式）。解含绝对值不等式时分区间讨论（临界点为绝对值内表达式等于 0 处），或用数轴图示直接读出解集。"
         }
     }
 
@@ -559,6 +633,26 @@ enum KillWeapon: String, CaseIterable, Identifiable {
             return "把相同物品分给不同对象（每份至少若干个），或求方程的正整数/非负整数解的组数。"
         case .derangement:
             return "n 个对象与 n 个位置一一对应，要求『没有一个对应正确 / 全部错位』的方法数。"
+        case .staggeredSum:
+            return "数列通项为等差×等比（如 n·qⁿ、(2n+1)·rⁿ），或含 nqⁿ 形式，直接套等差/等比公式无法求和。"
+        case .triLaw:
+            return "三角形中给出两边一对角（SSA）、或两边夹角（SAS）、或要用面积公式 S=½ab sinC 反求角。"
+        case .undetermined:
+            return "要求多项式 f 满足某恒等式（对所有 x 成立），f 的系数待定；或函数方程 f(x+y)=… 里设 f 为二次。"
+        case .contactChord:
+            return "已知椭圆/双曲线/抛物线上一点（或曲线外一点）求切线方程，或由两切线切点求切点弦方程。"
+        case .pigeonhole:
+            return "题目要求『必然存在』两个满足某整除/距离/奇偶关系的元素，而元素数恰好比分组数多一。"
+        case .groupedSum:
+            return "数列含 (−1)ⁿ 因子（正负交替）、或奇偶项分别等差/等比、或通项可拆成两个独立数列之和/差。"
+        case .logChange:
+            return "出现不同底的对数相加减（logₐb + log꜀d 之类），或 logₐb · logᵦc 的连乘，需统一化简。"
+        case .zeroCount:
+            return "求方程关于参数 k 的实根个数随 k 变化，或判断某超越方程（2ˣ=3−x 等）实根个数，直接解析式解不出。"
+        case .vectorBasis:
+            return "平面几何或向量题给出三角形/平行四边形的两边向量 a、b，要用它们表示分点、中线、重心等向量。"
+        case .absValue:
+            return "出现 |x−a|+|x−b|（两点距离和）或 |x−a|−|x−b| 的最值/范围，或解含绝对值的不等式。"
         }
     }
 
@@ -575,8 +669,10 @@ enum KillWeapon: String, CaseIterable, Identifiable {
              .oddConstruct, .linearProgramming, .basicQuantity, .complexNumber,
              .normalVector, .circumSphere, .projectionArea, .binomialMoment,
              .totalProbability, .indicatorExpectation,
-             .insertionGap, .bundling, .partition: return true
-        default: return false   // polarization、derangement 超纲，大题不直接认
+             .insertionGap, .bundling, .partition,
+             .staggeredSum, .triLaw, .undetermined, .contactChord,
+             .groupedSum, .logChange, .zeroCount, .vectorBasis, .absValue: return true
+        default: return false   // polarization、derangement、pigeonhole 超纲，大题不直接认
         }
     }
 
@@ -689,6 +785,26 @@ enum KillWeapon: String, CaseIterable, Identifiable {
             return "✅ 隔板法纲内常用，选填解答均可。注意适用前提：物品必须相同、每份至少 1 个；允许为 0 或有下限时，先做 +1（或减去下限）的变量代换再用。"
         case .derangement:
             return "⚠️ 错位重排公式 Dₙ 与其递推不在考纲，选填可直接报数（牢记 D₃=2、D₄=9、D₅=44）；大题须用枚举、容斥原理或现场建立递推 Dₙ=(n−1)(Dₙ₋₁+Dₙ₋₂) 给出过程。"
+        case .staggeredSum:
+            return "✅ 错位相减法纲内通法，大题可直接书写。务必：① 令 T=q·Sₙ 再用 Sₙ−T；② 写清楚最后一项 q^n 的保留；③ 公比 q=1 时退化为等差，需单独讨论。"
+        case .triLaw:
+            return "✅ 正余弦定理与面积公式均为纲内核心，大题可直接引用。注意：① SSA（已知两边一角）可能有两解（大角对大边），需验证两个角的合法性；② 余弦定理用来判断钝/锐角时先看 c²与 a²+b² 的大小关系。"
+        case .undetermined:
+            return "✅ 比较系数法（待定系数法）纲内，大题可直接书写。须写明『对所有 x 成立，比较各次项系数』；取值法时须取足够多的特殊点（系数个数）保证方程组有唯一解。"
+        case .contactChord:
+            return "✅ 切点弦方程（T=0 形式）是解析几何纲内技巧，大题可用。注意：T=0 对椭圆、抛物线成立（推导略有不同），须先写出具体曲线的切线形式再应用；联立得切点坐标时仍需验证点在曲线上。"
+        case .pigeonhole:
+            return "⚠️ 鸽巢原理高中不在必学考纲，选填中可直接用结论；大题须显式写出『构造 n 个分类（…），共 n+1 个元素，由鸽巢原理至少有两个在同一类中』，并说明同类元素满足结论。"
+        case .groupedSum:
+            return "✅ 分组求和纲内通法，大题可直接书写。须写清楚每组的通项、首项与公比/公差，并核对奇数项个数（n 为奇时末组只有 1 项）；配对法须验证 S₂ₙ 与 S₂ₙ₊₁ 的关系。"
+        case .logChange:
+            return "✅ 换底公式纲内，大题可直接引用 logₐb=lgb/lga。注意底数满足 a>0、a≠1、b>0；比较不同底对数大小时，换底后再用单调性判断；对数链 logₐb·logᵦc=logₐc 可直接用于简化连乘。"
+        case .zeroCount:
+            return "✅ 图形法数零点纲内核心（零点存在定理+单调性），大题可写。须：① 说明 f 在区间内连续且端点函数值异号（或画出导数分析极值点）；② 参数 k 的临界值须由切点处 f'=k 且 f(x₀)=kx₀ 两个方程联立给出，不能凭图估读。"
+        case .vectorBasis:
+            return "✅ 向量基底分解纲内，大题可直接书写。须写明『设 a、b 是不共线向量，故构成基底』，再列系数方程；三点共线条件须显式写出『存在实数 λ 使 OP=OA+λAB』或 λ+μ=1（用基底表示时）。"
+        case .absValue:
+            return "✅ 绝对值不等式纲内，大题可直接书写。分区间讨论时须列出所有临界点并验证端点取等；几何意义法须写明『|x−a| 表示数轴上 x 到 a 的距离』再给出图示结论，不能只写结果。"
         }
     }
 }
@@ -3907,6 +4023,547 @@ extension SampleData {
             killKey: "5 人全拿错即 5 元错位排列，递推 D₅=(5−1)(D₄+D₃)=4·(9+2)=44。",
             mistakes: ["递推系数是 (n−1)：D₅=4(D₄+D₃)", "D₃=2、D₄=9 要记牢"],
             type: .fillInBlank
+        ),
+
+        // 117 ── 错位相减法：nqⁿ 型
+        skCase(
+            id: "sk_117", weapon: .staggeredSum,
+            title: "Σ k·(1/2)^(k-1) 错位相减一步出",
+            source: "数列 · 等差×等比求和（高考压轴高频）",
+            standardMinutes: 8, killSeconds: 50,
+            signal: "通项含 k·(1/2)^(k−1)——等差×等比，错位相减。",
+            content: "数列 {aₙ} 中 aₙ = n·(1/2)^(n−1)，求前 n 项和 Sₙ。",
+            contentLatex: #"a_n=n\cdot\!\left(\tfrac12\right)^{n-1},\quad S_n=?"#,
+            answer: "Sₙ = 4 − (n+2)·(1/2)^(n−1)",
+            difficulty: 0.62, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "展开 Sₙ", #"S_n=1+2\cdot\tfrac12+3\cdot\tfrac14+\cdots+n\cdot\!\left(\tfrac12\right)^{n-1}"#),
+                skStep(2, "乘公比 (1/2) 得 (1/2)Sₙ", #"\tfrac12 S_n=1\cdot\tfrac12+2\cdot\tfrac14+\cdots+(n-1)\!\left(\tfrac12\right)^{n-1}+n\!\left(\tfrac12\right)^n"#),
+                skStep(3, "相减消项", #"S_n-\tfrac12 S_n=1+\tfrac12+\tfrac14+\cdots+\!\left(\tfrac12\right)^{n-1}-n\!\left(\tfrac12\right)^n"#),
+                skStep(4, "等比求和", #"\tfrac12 S_n=\frac{1-(1/2)^n}{1-1/2}-n\!\left(\tfrac12\right)^n=2\!\left(1-\!\left(\tfrac12\right)^n\right)-n\!\left(\tfrac12\right)^n"#),
+                skStep(5, "整理", #"S_n=4-(n+2)\!\left(\tfrac12\right)^{n-1}"#)
+            ],
+            killSteps: [
+                skStep(1, "令 T=(1/2)·Sₙ 错位", #"\text{Sₙ 各项乘 (1/2) 后指数+1，与 Sₙ 相差一位}"#),
+                skStep(2, "做差 Sₙ−T", #"\tfrac12 S_n=\text{首项}+(1/2+1/4+\cdots)-n\!\left(\tfrac12\right)^n"#),
+                skStep(3, "等比求和后×2", #"S_n=4-(n+2)\!\left(\tfrac12\right)^{n-1}"#)
+            ],
+            stdKey: "错位相减标准步骤，关键在乘公比对齐下标后相减。",
+            killKey: "认出等差×等比结构即套错位相减，所有步骤机械化，不依赖凑配。",
+            mistakes: ["末项系数对齐：T 多一项 n·(1/2)^n", "最后乘 2 还原 Sₙ 不能忘"]
+        ),
+
+        // 118 ── 错位相减法：(2n-1)·3ⁿ
+        skCase(
+            id: "sk_118", weapon: .staggeredSum,
+            title: "(2n−1)·3ⁿ 求和，错位相减秒定",
+            source: "数列 · 等差×等比（高考/模拟高频）",
+            standardMinutes: 9, killSeconds: 55,
+            signal: "通项 (2n−1)·3ⁿ——等差×等比，公比 q=3。",
+            content: "数列 {aₙ} 的通项 aₙ=(2n−1)·3ⁿ，求前 n 项和 Sₙ。",
+            contentLatex: #"a_n=(2n-1)\cdot 3^n,\quad S_n=?"#,
+            answer: "Sₙ = (n−1)·3^(n+1) + 3",
+            difficulty: 0.65, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "写出 Sₙ", #"S_n=1\cdot3+3\cdot9+5\cdot27+\cdots+(2n-1)\cdot3^n"#),
+                skStep(2, "乘公比 3", #"3S_n=1\cdot9+3\cdot27+\cdots+(2n-3)\cdot3^n+(2n-1)\cdot3^{n+1}"#),
+                skStep(3, "相减 Sₙ−3Sₙ=−2Sₙ", #"-2S_n=3+2\cdot9+2\cdot27+\cdots+2\cdot3^n-(2n-1)\cdot3^{n+1}"#),
+                skStep(4, "等比求和", #"-2S_n=3+2\cdot\frac{9(3^{n-1}-1)}{2}-(2n-1)3^{n+1}"#),
+                skStep(5, "整理", #"S_n=(n-1)\cdot3^{n+1}+3"#)
+            ],
+            killSteps: [
+                skStep(1, "认出结构，令 T=3·Sₙ 错位", #"T\text{ 各项为等差序列偏移一项}"#),
+                skStep(2, "做差 Sₙ−T=−2Sₙ，中间变为等比", #"\text{首项 3，中间 Σ 2·3ᵏ，末项 −(2n−1)·3ⁿ⁺¹}"#),
+                skStep(3, "等比求和整理", #"S_n=(n-1)\cdot3^{n+1}+3"#)
+            ],
+            stdKey: "乘公比对齐后做差，中间化为等比数列之和。",
+            killKey: "公比 q=3，令 T=3Sₙ，错位做差后中部为等比，套公式即出。",
+            mistakes: ["做差符号：Sₙ−3Sₙ=−2Sₙ，最后除以−2", "末项保留 −(2n−1)·3^(n+1)"]
+        ),
+
+        // 119 ── 正余弦定理：SSA 解三角形
+        skCase(
+            id: "sk_119", weapon: .triLaw,
+            title: "已知两边一角，正弦定理秒判钝锐",
+            source: "三角形 · 正弦定理（高考选填高频）",
+            standardMinutes: 6, killSeconds: 35,
+            signal: "已知 a、b、A，求 B——正弦定理 sinB=b·sinA/a，再判唯一性。",
+            content: "△ABC 中，a=√2，b=1，A=45°，求角 B。",
+            contentLatex: #"\triangle ABC:\ a=\sqrt{2},\ b=1,\ A=45°,\ B=?"#,
+            answer: "B = 30°",
+            difficulty: 0.55, tier: 3,
+            formulaIds: ["sine_rule"],
+            stdSteps: [
+                skStep(1, "正弦定理", #"\frac{a}{\sin A}=\frac{b}{\sin B}"#),
+                skStep(2, "解出 sinB", #"\sin B=\frac{b\sin A}{a}=\frac{1\cdot\frac{\sqrt2}{2}}{\sqrt2}=\frac12"#),
+                skStep(3, "B=30° 或 150°", #"B=30°\ \text{或}\ 150°"#),
+                skStep(4, "排除 150°", #"A+B=45°+150°=195°>180°\ \text{矛盾，故} B=30°"#)
+            ],
+            killSteps: [
+                skStep(1, "正弦定理代入", #"\sin B=\frac{b}{a}\sin A=\frac{1}{\sqrt2}\cdot\frac{\sqrt2}{2}=\frac12"#),
+                skStep(2, "B=30° 或 150°，检查 A+B<180°", #"150°+45°>180°\text{，排除}\ B=30°"#)
+            ],
+            stdKey: "正弦定理出 sinB，须验证大角可能有两解。",
+            killKey: "sinB=½→B=30°或150°；45°+150°>180° 立即排除，1步定论。",
+            mistakes: ["忘检查钝角情形是否超过 180°", "a、b 与对应角 A、B 对应关系写错"]
+        ),
+
+        // 120 ── 正余弦定理：面积公式反求角
+        skCase(
+            id: "sk_120", weapon: .triLaw,
+            title: "面积公式 S=½ab sinC 反求夹角",
+            source: "三角形 · 面积公式（高考选填常见）",
+            standardMinutes: 5, killSeconds: 25,
+            signal: "已知两边与面积，求夹角——S=½ab sinC 直接反解。",
+            content: "△ABC 中，b=4，c=3，面积 S=3√3，求角 A（A 为 b、c 的夹角）。",
+            contentLatex: #"\triangle ABC:\ b=4,\ c=3,\ S=3\sqrt{3},\ A=?"#,
+            answer: "A = 60° 或 120°",
+            difficulty: 0.50, tier: 3,
+            formulaIds: ["triangle_area"],
+            stdSteps: [
+                skStep(1, "面积公式", #"S=\tfrac12 bc\sin A"#),
+                skStep(2, "代入", #"3\sqrt3=\tfrac12\cdot4\cdot3\cdot\sin A\Rightarrow\sin A=\tfrac{\sqrt3}{2}"#),
+                skStep(3, "结论", #"A=60°\ \text{或}\ 120°"#)
+            ],
+            killSteps: [
+                skStep(1, "直接套公式", #"\sin A=\frac{2S}{bc}=\frac{6\sqrt3}{12}=\frac{\sqrt3}{2}"#),
+                skStep(2, "两解均合法", #"A=60°\text{ 或 }120°"#)
+            ],
+            stdKey: "面积公式一步得 sinA，两个角均可能合法时须两个答案。",
+            killKey: "S=½bc sinA → sinA=√3/2 → 60°或120°（题目未给其他边长，不能排除）。",
+            mistakes: ["A 是 b、c 的夹角，不能随意写成 B 或 C", "两解须都写出"]
+        ),
+
+        // 121 ── 待定系数：函数方程
+        skCase(
+            id: "sk_121", weapon: .undetermined,
+            title: "f(x)+f(x−1)=x² 待定系数秒出 f",
+            source: "函数 · 函数方程与待定系数（高考/竞赛）",
+            standardMinutes: 7, killSeconds: 40,
+            signal: "f(x)+f(x−1)=x²——设 f 为二次，比较系数。",
+            content: "已知函数 f(x) 满足 f(x) + f(x−1) = x²，且 f 为二次函数，求 f(x)。",
+            contentLatex: #"f(x)+f(x-1)=x^2,\ f\text{ 为二次，求 }f(x)"#,
+            answer: "f(x) = x(x+1)/2 = (x²+x)/2",
+            difficulty: 0.60, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "设 f(x)=ax²+bx+c", #"f(x-1)=a(x-1)^2+b(x-1)+c=ax^2-(2a-b)x+(a-b+c)"#),
+                skStep(2, "相加", #"(2a)x^2+(-2a+2b+b)x\cdots = x^2\Rightarrow 2a=1"#),
+                skStep(3, "比较系数", #"2a=1,\ b+b-2a+b=0\Rightarrow b=\tfrac12,\ c=0"#),
+                skStep(4, "结论", #"f(x)=\tfrac{x^2+x}{2}"#)
+            ],
+            killSteps: [
+                skStep(1, "设 f=ax²+bx+c，代入方程", #"(2a)x^2+\cdots=x^2+0x+0"#),
+                skStep(2, "比较 x²、x¹、x⁰ 系数", #"a=\tfrac12,\ b=\tfrac12,\ c=0"#),
+                skStep(3, "得 f(x)=(x²+x)/2", #"f(x)=\tfrac{x(x+1)}{2}"#)
+            ],
+            stdKey: "设二次函数代入展开，逐次比较系数列方程组，解出 a、b、c。",
+            killKey: "待定系数直接列系数方程：2a=1、(b−2a)+b=0、(a−b+c)+c=0，机械解出。",
+            mistakes: ["f(x−1) 展开时 (x−1)² 不要漏 −2x", "c 项要单独比较"]
+        ),
+
+        // 122 ── 待定系数：多项式恒等
+        skCase(
+            id: "sk_122", weapon: .undetermined,
+            title: "多项式恒等：比较系数定 A、B、C",
+            source: "代数 · 恒等式比较系数（高考选填常见）",
+            standardMinutes: 5, killSeconds: 20,
+            signal: "x³+px+q 能被 (x−r)² 整除——比较系数。",
+            content: "若 x³ + px + q 能被 (x−2)² 整除，求实数 p、q 的值。",
+            contentLatex: #"x^3+px+q=(x-2)^2\cdot(x+a),\ \text{求}\ p,q"#,
+            answer: "p = −12，q = 16",
+            difficulty: 0.52, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "设商式", #"x^3+px+q=(x-2)^2(x+a)"#),
+                skStep(2, "展开右边", #"=(x^2-4x+4)(x+a)=x^3+(a-4)x^2+(4-4a)x+4a"#),
+                skStep(3, "比较 x² 系数", #"a-4=0\Rightarrow a=4"#),
+                skStep(4, "比较 x¹ 系数", #"p=4-4\times4=-12"#),
+                skStep(5, "比较常数项", #"q=4\times4=16"#)
+            ],
+            killSteps: [
+                skStep(1, "设 (x−2)²(x+a) 展开比系数", #"x^2\text{ 系数}: a=4"#),
+                skStep(2, "直接代入", #"p=4-16=-12,\ q=16"#)
+            ],
+            stdKey: "展开后逐次比较各次系数，联立方程解出参数。",
+            killKey: "比较系数法：x² 项定 a，再逐次代入得 p、q，三步完成。",
+            mistakes: ["展开 (x−2)²(x+a) 时 x 项系数为 (4−4a) 而非 −4a", "q=4a 而非 a·(−2)²"]
+        ),
+
+        // 123 ── 切点弦：椭圆切线
+        skCase(
+            id: "sk_123", weapon: .contactChord,
+            title: "椭圆切线 T=0 直接写，不必联立",
+            source: "解析几何 · 椭圆切线（高考压轴高频）",
+            standardMinutes: 7, killSeconds: 30,
+            signal: "椭圆上一点的切线——直接写 xx₀/a²+yy₀/b²=1，T=0。",
+            content: "椭圆 x²/4+y²/3=1 上点 P(1,3/2) 处的切线方程。",
+            contentLatex: #"\text{椭圆}\ \tfrac{x^2}{4}+\tfrac{y^2}{3}=1\ \text{上点}\ P\!\left(1,\tfrac32\right)\text{的切线方程}"#,
+            answer: "x/4 + y/2 = 1，即 x + 2y − 4 = 0",
+            difficulty: 0.58, tier: 4,
+            formulaIds: ["ellipse_tangent"],
+            stdSteps: [
+                skStep(1, "隐函数求导", #"\tfrac{2x}{4}+\tfrac{2y}{3}\cdot y'=0\Rightarrow y'=-\tfrac{3x}{4y}"#),
+                skStep(2, "代入点 P(1,3/2)", #"y'|_P=-\tfrac{3\cdot1}{4\cdot\frac32}=-\tfrac12"#),
+                skStep(3, "点斜式", #"y-\tfrac32=-\tfrac12(x-1)\Rightarrow x+2y-4=0"#)
+            ],
+            killSteps: [
+                skStep(1, "T=0 公式直接写", #"\frac{x\cdot1}{4}+\frac{y\cdot\frac32}{3}=1\Rightarrow\frac x4+\frac y2=1"#),
+                skStep(2, "整理", #"x+2y-4=0"#)
+            ],
+            stdKey: "隐函数求导得斜率，再写点斜式——两步求导、一步写方程。",
+            killKey: "T=0：把曲线方程 x²/4+y²/3=1 里 x²→xx₀、y²→yy₀，直接得切线，无需求导。",
+            mistakes: ["T=0 中 x₀=1、y₀=3/2 须代正确坐标", "验证 P 在椭圆上：1/4+9/4/3=1 ✓"]
+        ),
+
+        // 124 ── 切点弦：中点弦方程
+        skCase(
+            id: "sk_124", weapon: .contactChord,
+            title: "中点给定，点差法秒出弦方程",
+            source: "解析几何 · 椭圆中点弦（高考压轴经典）",
+            standardMinutes: 8, killSeconds: 40,
+            signal: "弦的中点已知，点差法求弦所在直线——等价于 T=S 形式。",
+            content: "椭圆 3x²+4y²=12 的弦中点为 M(1,1)，求弦所在直线方程。",
+            contentLatex: #"3x^2+4y^2=12,\ \text{弦中点}\ M(1,1),\ \text{弦方程}=?"#,
+            answer: "3x + 4y − 7 = 0",
+            difficulty: 0.62, tier: 4,
+            formulaIds: ["point_difference"],
+            stdSteps: [
+                skStep(1, "设两端点", #"(x_1,y_1),(x_2,y_2)\text{ 在椭圆上}"#),
+                skStep(2, "两方程相减", #"3(x_1^2-x_2^2)+4(y_1^2-y_2^2)=0"#),
+                skStep(3, "因式分解提斜率", #"\frac{y_1-y_2}{x_1-x_2}=-\frac{3(x_1+x_2)}{4(y_1+y_2)}"#),
+                skStep(4, "代中点 (1,1)", #"k=-\frac{3\cdot2}{4\cdot2}=-\frac34"#),
+                skStep(5, "点斜式", #"y-1=-\frac34(x-1)\Rightarrow3x+4y-7=0"#)
+            ],
+            killSteps: [
+                skStep(1, "点差法直接写斜率", #"k=-\frac{3x_0}{4y_0}=-\frac34\quad(x_0=1,y_0=1)"#),
+                skStep(2, "过中点写方程", #"3(x-1)+4(y-1)=0\Rightarrow3x+4y-7=0"#)
+            ],
+            stdKey: "联立两端点方程相减，提公因式得斜率，点斜式写方程。",
+            killKey: "椭圆 Ax²+By²=C，中点 (x₀,y₀)，弦斜率 k=−Ax₀/(By₀)，代入点斜式一步完成。",
+            mistakes: ["分母是 4y₀ 不是 4（已代入 y₀=1）", "最后方程须通分检验"]
+        ),
+
+        // 125 ── 鸽巢原理：整除存在性
+        skCase(
+            id: "sk_125", weapon: .pigeonhole,
+            title: "5 个整数中必有 2 个差能被 4 整除",
+            source: "组合 · 鸽巢原理（高考/竞赛常见）",
+            standardMinutes: 6, killSeconds: 25,
+            signal: "5 个整数，4 个余数类——鸽巢原理必有两数同余。",
+            content: "任意 5 个整数中，必有两个整数之差能被 4 整除。请证明。",
+            contentLatex: #"\text{任意}5\text{个整数，必有两个之差能被}4\text{整除}"#,
+            answer: "由鸽巢原理，5 个整数除以 4 的余数只有 0、1、2、3 四类，5>4，必有两数同余，其差被 4 整除。",
+            difficulty: 0.58, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "分类余数", #"\text{整数除以 4 余数为 }0,1,2,3\text{（共 4 类）}"#),
+                skStep(2, "正面枚举", #"\text{5 个数，4 种余数，若每种至多一个则只有 4 个数，矛盾}"#),
+                skStep(3, "结论", #"\text{必有两数余数相同，其差}=4k,\ k\in\mathbb{Z}"#)
+            ],
+            killSteps: [
+                skStep(1, "构造 4 个巢（余数类）", #"\{0\},\{1\},\{2\},\{3\}\text{（模 4 的余数）}"#),
+                skStep(2, "5 鸽 4 巢，鸽巢原理", #"\text{必有两数在同一巢中，即同余 mod 4}"#),
+                skStep(3, "同余差整除", #"a\equiv b\pmod4\Rightarrow 4\mid(a-b)"#)
+            ],
+            stdKey: "枚举所有余数类，反证或正面推理必有两数同类。",
+            killKey: "4 余数类为 4 个巢，5 个整数为 5 只鸽，一句鸽巢原理即证。",
+            mistakes: ["大题须写明巢的构造", "『必有』二字来自鸽巢原理，不能只说『可能』"]
+        ),
+
+        // 126 ── 鸽巢原理：平面距离
+        skCase(
+            id: "sk_126", weapon: .pigeonhole,
+            title: "单位正方形 5 点必有 2 点距离 ≤ √2/2",
+            source: "组合 · 几何鸽巢（竞赛常见）",
+            standardMinutes: 8, killSeconds: 30,
+            signal: "5 个点在单位正方形内——四等分成 4 个小正方形，鸽巢。",
+            content: "单位正方形内（含边界）有 5 个点，证明其中至少有 2 个点之间的距离不超过 √2/2。",
+            contentLatex: #"\text{5 点在单位正方形，至少 2 点距离}\le\tfrac{\sqrt2}{2}"#,
+            answer: "将正方形四等分为 4 个边长 1/2 的小正方形，5 点放入 4 个小正方形，必有一个小正方形含 2 点，其距离 ≤ 小正方形对角线 = √2/2。",
+            difficulty: 0.65, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "构造四等分", #"\text{将单位正方形分成 4 个边长 }\tfrac12\text{ 的小正方形}"#),
+                skStep(2, "鸽巢", #"5\text{ 点放入 4 个小正方形，由鸽巢原理必有 1 个含}\ge2\text{ 点}"#),
+                skStep(3, "最大距离", #"\text{小正方形对角线}=\sqrt{(1/2)^2+(1/2)^2}=\tfrac{\sqrt2}{2}"#),
+                skStep(4, "结论", #"\text{该 2 点距离}\le\tfrac{\sqrt2}{2}"#)
+            ],
+            killSteps: [
+                skStep(1, "4 个小正方形=4 巢，5 点=5 鸽", #"\text{必有 1 巢含 2 点}"#),
+                skStep(2, "小正方形对角线即最大距离", #"\tfrac{\sqrt2}{2}"#)
+            ],
+            stdKey: "划分四个小正方形，正式计算对角线长度，给出严格上界。",
+            killKey: "『5 点 4 巢』一句定存在，再算对角线 √2/2 即证。",
+            mistakes: ["须说明巢的构造（四等分），不能跳过", "含边界：端点在两个小正方形上，归任一均可"]
+        ),
+
+        // 127 ── 分组求和：奇偶配对
+        skCase(
+            id: "sk_127", weapon: .groupedSum,
+            title: "aₙ=(−1)ⁿ·n，奇偶配对求 S₂₀",
+            source: "数列 · 奇偶配对求和（高考选填高频）",
+            standardMinutes: 5, killSeconds: 20,
+            signal: "通项含 (−1)ⁿ·n——奇偶项配对，每对之和为常数。",
+            content: "数列 aₙ=(−1)ⁿ·n，求 S₂₀。",
+            contentLatex: #"a_n=(-1)^n\cdot n,\quad S_{20}=?"#,
+            answer: "S₂₀ = 10",
+            difficulty: 0.48, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "奇偶项分写", #"\text{奇数项}：a_1=-1,a_3=-3,\ldots\quad\text{偶数项}：a_2=2,a_4=4,\ldots"#),
+                skStep(2, "配对", #"a_{2k-1}+a_{2k}=-(2k-1)+2k=1"#),
+                skStep(3, "20 项共 10 对", #"S_{20}=10\times1=10"#)
+            ],
+            killSteps: [
+                skStep(1, "配对：a_{2k−1}+a_{2k}=1", #"\text{直接认出}：-( 2k-1)+2k=1"#),
+                skStep(2, "S₂₀=10×1=10", #"\text{20 项=10 对，每对和为 1}"#)
+            ],
+            stdKey: "分奇偶两列分别求等差和后相加。",
+            killKey: "相邻两项配对，每对之和为 1，20 项=10 对，直接报 10。",
+            mistakes: ["配对下标：(a₁+a₂)+(a₃+a₄)+…而非 a_{2k}+a_{2k+1}", "n 为奇数时须单独加末项"]
+        ),
+
+        // 128 ── 分组求和：aₙ=2ⁿ+3n
+        skCase(
+            id: "sk_128", weapon: .groupedSum,
+            title: "aₙ=2ⁿ+3n，拆项分别求和",
+            source: "数列 · 分项求和（高考常见）",
+            standardMinutes: 5, killSeconds: 18,
+            signal: "通项可拆成等比+等差两部分——分别求和后相加。",
+            content: "数列 {aₙ} 的通项 aₙ=2ⁿ+3n，求前 n 项和 Sₙ。",
+            contentLatex: #"a_n=2^n+3n,\quad S_n=?"#,
+            answer: "Sₙ = 2^(n+1) − 2 + 3n(n+1)/2",
+            difficulty: 0.44, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "拆分", #"S_n=\sum_{k=1}^n 2^k+\sum_{k=1}^n 3k"#),
+                skStep(2, "等比部分", #"\sum_{k=1}^n 2^k=2^{n+1}-2"#),
+                skStep(3, "等差部分", #"\sum_{k=1}^n 3k=3\cdot\frac{n(n+1)}{2}"#),
+                skStep(4, "合并", #"S_n=2^{n+1}-2+\frac{3n(n+1)}{2}"#)
+            ],
+            killSteps: [
+                skStep(1, "等比和", #"2+4+\cdots+2^n=2(2^n-1)=2^{n+1}-2"#),
+                skStep(2, "等差和", #"3(1+2+\cdots+n)=\frac{3n(n+1)}{2}"#),
+                skStep(3, "直接合并", #"S_n=2^{n+1}-2+\frac{3n(n+1)}{2}"#)
+            ],
+            stdKey: "拆分后两部分独立求和，等比公式+等差公式各用一次。",
+            killKey: "认出拆项结构即套公式，无需其他技巧，两行完成。",
+            mistakes: ["等比首项是 2¹=2，求和结果是 2^(n+1)−2 而非 2^n−1", "3n 系数别漏"]
+        ),
+
+        // 129 ── 换底公式：混合底对数化简
+        skCase(
+            id: "sk_129", weapon: .logChange,
+            title: "log₄8 + log₈4，换底公式统一底数",
+            source: "对数 · 换底化简（高考选填高频）",
+            standardMinutes: 4, killSeconds: 15,
+            signal: "不同底对数相加——换底到公共底（2 或 10），再合并。",
+            content: "计算 log₄8 + log₈4。",
+            contentLatex: #"\log_4 8+\log_8 4=?"#,
+            answer: "13/6",
+            difficulty: 0.46, tier: 3,
+            formulaIds: ["log_change_base"],
+            stdSteps: [
+                skStep(1, "换底到 2", #"\log_4 8=\frac{\log_2 8}{\log_2 4}=\frac{3}{2}"#),
+                skStep(2, "换底", #"\log_8 4=\frac{\log_2 4}{\log_2 8}=\frac{2}{3}"#),
+                skStep(3, "相加", #"\frac32+\frac23=\frac{9+4}{6}=\frac{13}{6}"#)
+            ],
+            killSteps: [
+                skStep(1, "认出 4=2²、8=2³", #"\log_4 8=\frac32,\quad\log_8 4=\frac23"#),
+                skStep(2, "直接加", #"\frac32+\frac23=\frac{13}{6}"#)
+            ],
+            stdKey: "两次换底（都换到底 2），分别化简后相加。",
+            killKey: "4=2²、8=2³，心算：log₄8=3/2，log₈4=2/3，加起来 13/6。",
+            mistakes: ["log₄8=log₂8/log₂4=3/2（分子分母对应正确）", "分数加法通分"]
+        ),
+
+        // 130 ── 换底公式：对数不等式
+        skCase(
+            id: "sk_130", weapon: .logChange,
+            title: "log₂x > log₃x，换底比斜率",
+            source: "对数 · 不等式（高考选填常见）",
+            standardMinutes: 5, killSeconds: 22,
+            signal: "两个不同底对数不等式——换底到同一底后比较系数符号。",
+            content: "解不等式 log₂x > log₃x（x > 0）。",
+            contentLatex: #"\log_2 x>\log_3 x,\quad x>0"#,
+            answer: "x > 1（即 x ∈ (1, +∞)）",
+            difficulty: 0.54, tier: 3,
+            formulaIds: ["log_change_base"],
+            stdSteps: [
+                skStep(1, "换底到 ln", #"\frac{\ln x}{\ln 2}>\frac{\ln x}{\ln 3}"#),
+                skStep(2, "移项", #"\ln x\!\left(\frac{1}{\ln2}-\frac{1}{\ln3}\right)>0"#),
+                skStep(3, "符号分析", #"\frac{1}{\ln2}>\frac{1}{\ln3}>0\ (\ln2<\ln3)\Rightarrow\text{括号}>0"#),
+                skStep(4, "结论", #"\ln x>0\Rightarrow x>1"#)
+            ],
+            killSteps: [
+                skStep(1, "换底后提取 lnx", #"\ln x\left(\tfrac{1}{\ln2}-\tfrac{1}{\ln3}\right)>0"#),
+                skStep(2, "括号正（ln2<ln3），故 lnx>0", #"x>1"#)
+            ],
+            stdKey: "换底后移项，分析括号的正负决定 lnx 的符号。",
+            killKey: "换底提 lnx，括号=1/ln2−1/ln3>0（因 ln2<ln3），故 lnx>0 即 x>1。",
+            mistakes: ["换底后是 lnx 乘以括号，不是 lnx 与括号分开讨论", "x>0 定义域不要漏"]
+        ),
+
+        // 131 ── 图形数零点：指数=线性
+        skCase(
+            id: "sk_131", weapon: .zeroCount,
+            title: "2ˣ=3−x 几个根？画图一眼看出",
+            source: "函数 · 零点个数（高考选填高频）",
+            standardMinutes: 4, killSeconds: 15,
+            signal: "方程含指数与线性——画 y=2ˣ 和 y=3−x，数交点。",
+            content: "方程 2ˣ = 3 − x 有几个实数解？",
+            contentLatex: #"2^x=3-x\ \text{有几个实数解}"#,
+            answer: "1 个实数解",
+            difficulty: 0.46, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "构造 f(x)=2ˣ−3+x", #"f'(x)=2^x\ln2+1>0\text{（严格递增）}"#),
+                skStep(2, "确认一零", #"f(0)=-2<0,\ f(2)=3>0\Rightarrow\text{有唯一零点}"#)
+            ],
+            killSteps: [
+                skStep(1, "y=2ˣ（递增凸）与 y=3−x（递减线）", #"\text{一凸一线必有唯一交点}"#),
+                skStep(2, "1 个实数解", #"x\approx1\text{（图示显然）}"#)
+            ],
+            stdKey: "构造差函数证严格单调，再由中间值定理得唯一零点。",
+            killKey: "画图：递增凸曲线与递减直线只能有 1 个交点，结论秒出。",
+            mistakes: ["填空不需严格证明，但解答题须说明导数正（严格单调）", "确认两侧函数值异号保证存在性"]
+        ),
+
+        // 132 ── 图形数零点：对数=kx 根数随 k 变化
+        skCase(
+            id: "sk_132", weapon: .zeroCount,
+            title: "lnx=kx 根的个数，切点为临界 k",
+            source: "函数 · 含参零点个数（高考压轴经典）",
+            standardMinutes: 8, killSeconds: 45,
+            signal: "lnx=kx（k>0），直线 y=kx 与 lnx 的交点数随 k 变化——切点为临界。",
+            content: "讨论方程 ln x = kx（k > 0）实数解的个数。",
+            contentLatex: #"\ln x=kx,\ k>0,\ \text{讨论实数解个数}"#,
+            answer: "0<k<1/e：2个解；k=1/e：1个解；k>1/e：0个解",
+            difficulty: 0.72, tier: 5,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "设 f(x)=lnx−kx，x>0", #"f'(x)=\tfrac1x-k=0\Rightarrow x=\tfrac1k"#),
+                skStep(2, "最大值", #"f\!\left(\tfrac1k\right)=\ln\tfrac1k-1=-\ln k-1"#),
+                skStep(3, "讨论最大值符号", #"-\ln k-1>0\Leftrightarrow k<\tfrac1e"#),
+                skStep(4, "结论", #"0<k<\tfrac1e:2\text{解};\ k=\tfrac1e:1\text{解};\ k>\tfrac1e:0\text{解}"#)
+            ],
+            killSteps: [
+                skStep(1, "y=kx 与 y=lnx，切点处斜率 k=1/x", #"k=\tfrac1{x_0}\Rightarrow x_0=\tfrac1k,\ y_0=\ln\tfrac1k"#),
+                skStep(2, "切线斜率为 k 时 y=kx₀=1", #"切点处 \ln\tfrac1k=1\Rightarrow k=\tfrac1e\text{ 为临界}"#),
+                skStep(3, "k<1/e：直线与曲线 2 交点；k>1/e：不相交", #"0"#)
+            ],
+            stdKey: "f 单峰，最大值符号决定根数，分三段讨论。",
+            killKey: "y=kx 切 lnx 时 k=1/e，几何上直接判断：k 小于临界时 2 根，等于 1 根，大于 0 根。",
+            mistakes: ["x₀=1/k（导数为 0 解出），不是 x₀=k", "k=1/e 是等号（1个根），须单独列出"]
+        ),
+
+        // 133 ── 向量基底：平行四边形
+        skCase(
+            id: "sk_133", weapon: .vectorBasis,
+            title: "平行四边形中 AM 向量用 a⃗、b⃗ 表示",
+            source: "向量 · 基底分解（高考选填高频）",
+            standardMinutes: 4, killSeconds: 18,
+            signal: "平行四边形、以两邻边向量 a、b 为基底，求内部点向量。",
+            content: "平行四边形 ABCD 中，AB⃗=a⃗，AD⃗=b⃗，M 为 CD 中点，用 a⃗、b⃗ 表示 AM⃗。",
+            contentLatex: #"\text{平行四边形}ABCD:\ \vec{AB}=\vec{a},\ \vec{AD}=\vec{b},\ M\text{ 为 }CD\text{ 中点},\ \vec{AM}=?"#,
+            answer: "AM⃗ = a⃗ + b⃗/2",
+            difficulty: 0.48, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "路径分解", #"\vec{AM}=\vec{AB}+\vec{BM}"#),
+                skStep(2, "BM 路径", #"\vec{BM}=\vec{BC}+\vec{CM}=\vec{AD}+\tfrac12\vec{DC}"#),
+                skStep(3, "DC⃗ = −a⃗，整理", #"\vec{BM}=\vec{b}+\tfrac12(-\vec{a})\text{……}"#),
+                skStep(4, "合并", #"\vec{AM}=\vec{a}+\vec{b}+\tfrac12(-\vec{a})=\vec{a}+\tfrac{\vec{b}}{2}+\cdots"#)
+            ],
+            killSteps: [
+                skStep(1, "直接路径 A→D→M", #"\vec{AM}=\vec{AD}+\vec{DM}=\vec{b}+\tfrac12\vec{DC}"#),
+                skStep(2, "DC⃗=AB⃗=a⃗", #"\vec{AM}=\vec{b}+\tfrac12\vec{a}=\vec{a}+\tfrac{\vec{b}}{2}"#)
+            ],
+            stdKey: "逐步分解路径，每段用已知基底 a、b 表示。",
+            killKey: "路径 A→D→M：AD⃗=b⃗，DM⃗=½DC⃗=½a⃗，直接合并得 a⃗+b⃗/2。",
+            mistakes: ["DC⃗=AB⃗=a⃗（平行四边形对边），不是 −a⃗", "M 为 CD 中点：DM⃗=½DC⃗"]
+        ),
+
+        // 134 ── 向量基底：三点共线条件
+        skCase(
+            id: "sk_134", weapon: .vectorBasis,
+            title: "三点共线 ↔ OP⃗=λOA⃗+μOB⃗ 且 λ+μ=1",
+            source: "向量 · 共线条件（高考选填常见）",
+            standardMinutes: 5, killSeconds: 22,
+            signal: "P 在直线 AB 上——OP=OA+t·AB，或 λ+μ=1 条件。",
+            content: "已知点 O、A、B，P 在直线 AB 上且 OP⃗=λOA⃗+μOB⃗，求 λ+μ 的值。",
+            contentLatex: #"P\text{ 在直线}AB\text{上},\ \vec{OP}=\lambda\vec{OA}+\mu\vec{OB},\ \lambda+\mu=?"#,
+            answer: "λ + μ = 1",
+            difficulty: 0.50, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "三点共线", #"P\text{ 在 }AB\text{ 上}\Rightarrow\vec{AP}=t\vec{AB}"#),
+                skStep(2, "展开", #"\vec{OP}-\vec{OA}=t(\vec{OB}-\vec{OA})"#),
+                skStep(3, "整理", #"\vec{OP}=(1-t)\vec{OA}+t\vec{OB}\Rightarrow\lambda=1-t,\ \mu=t"#),
+                skStep(4, "结论", #"\lambda+\mu=1"#)
+            ],
+            killSteps: [
+                skStep(1, "共线 ↔ AP=t·AB 展开", #"\vec{OP}=(1-t)\vec{OA}+t\vec{OB}"#),
+                skStep(2, "直接读出 λ+μ=1", #"\text{系数之和恒为 1}"#)
+            ],
+            stdKey: "由三点共线写参数方程，对应系数得 λ+μ=1。",
+            killKey: "P 在 AB 上等价于 OP⃗ 用 OA⃗、OB⃗ 表示时系数和为 1，直接写结论。",
+            mistakes: ["OA、OB 不共线时系数唯一，共线条件才能限制 λ+μ", "t 可取任意实数，不限于 [0,1]"]
+        ),
+
+        // 135 ── 绝对值不等式：两点距离和
+        skCase(
+            id: "sk_135", weapon: .absValue,
+            title: "|x−1|+|x+2|≥5，数轴几何秒解",
+            source: "不等式 · 绝对值（高考选填高频）",
+            standardMinutes: 5, killSeconds: 20,
+            signal: "|x−a|+|x−b| 形——数轴几何：两点距离和 ≥ 5，解集就是两端点外侧。",
+            content: "解不等式 |x−1| + |x+2| ≥ 5。",
+            contentLatex: #"|x-1|+|x+2|\ge5"#,
+            answer: "x ≥ 2 或 x ≤ −3",
+            difficulty: 0.50, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "分三段讨论", #"x<-2,\ -2\le x\le1,\ x>1"#),
+                skStep(2, "x<−2 段", #"(-x+1)+(-x-2)=-2x-1\ge5\Rightarrow x\le-3"#),
+                skStep(3, "中间段", #"(-x+1)+(x+2)=3<5\text{，无解}"#),
+                skStep(4, "x>1 段", #"(x-1)+(x+2)=2x+1\ge5\Rightarrow x\ge2"#)
+            ],
+            killSteps: [
+                skStep(1, "几何：x 到 1 和到 −2 的距离之和 ≥ 5", #"\text{两点相距 3，需额外延伸 1}，\text{即}x\le-3\text{ 或 }x\ge2"#),
+                skStep(2, "直接写解集", #"x\le-3\ \text{或}\ x\ge2"#)
+            ],
+            stdKey: "三段分区间去绝对值，各段列一次不等式，合并解集。",
+            killKey: "|x−1|+|x+2| 几何意义：x 到 1、到 −2 距离和。两点距离=3，要和≥5，还需各向外延伸 1，故 x≤−3 或 x≥2。",
+            mistakes: ["中间段 [−2,1] 绝对值恒等于 3，无满足 ≥5 的解", "端点 x=2 和 x=−3 取等号需验证（均满足）"]
+        ),
+
+        // 136 ── 绝对值不等式：最小值
+        skCase(
+            id: "sk_136", weapon: .absValue,
+            title: "|x−3|+|x+1| 最小值=两点距离=4",
+            source: "不等式 · 绝对值最小值（高考选填常见）",
+            standardMinutes: 4, killSeconds: 12,
+            signal: "|x−a|+|x−b| 最小值——两点之距，x∈[min(a,b), max(a,b)] 时取等。",
+            content: "求 |x−3|+|x+1| 的最小值及取等条件。",
+            contentLatex: #"|x-3|+|x+1|\ \text{的最小值}"#,
+            answer: "最小值为 4，当 −1 ≤ x ≤ 3 时取等",
+            difficulty: 0.44, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "三角不等式", #"|x-3|+|x+1|\ge|(x-3)-(x+1)|=|-4|=4"#),
+                skStep(2, "取等条件", #"(x-3)(x+1)\le0\Rightarrow-1\le x\le3"#)
+            ],
+            killSteps: [
+                skStep(1, "几何：x 到 3 和到 −1 的距离和", #"\text{最小值=两点距离}=3-(-1)=4"#),
+                skStep(2, "取等：x 在 [−1,3] 之间", #"-1\le x\le3"#)
+            ],
+            stdKey: "三角不等式放缩到两数差的绝对值，验证取等条件。",
+            killKey: "几何：−1 到 3 距离=4，x 夹在中间时恰好取到最小，一句话完成。",
+            mistakes: ["|a|+|b|≥|a−b|（注意是差），而非 a+b 的绝对值", "取等须验证 x∈[−1,3]，不能只写等号"]
         )
     ]
 
