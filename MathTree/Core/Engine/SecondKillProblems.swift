@@ -59,6 +59,17 @@ enum KillWeapon: String, CaseIterable, Identifiable {
     case linearProgramming  // 线性规划 · 可行域顶点
     case basicQuantity      // 基本量法 · 等差等比
     case complexNumber      // 复数运算 · 模与共轭
+    // ── 立体几何 · 概率统计 · 排列组合（高频选填速杀）──
+    case normalVector       // 法向量法 · 空间角/距离秒算
+    case circumSphere       // 外接球 · 补形 / 球心定位
+    case projectionArea     // 射影面积法 · 二面角
+    case binomialMoment     // 二项分布 · 期望方差直出
+    case totalProbability   // 全概率 / 贝叶斯
+    case indicatorExpectation // 示性变量 · 期望线性性
+    case insertionGap       // 插空法 · 不相邻排列
+    case bundling           // 捆绑法 · 相邻排列
+    case partition          // 隔板法 · 正整数分配
+    case derangement        // 错位重排 · 不动点公式
 
     var id: String { rawValue }
 
@@ -107,6 +118,16 @@ enum KillWeapon: String, CaseIterable, Identifiable {
         case .linearProgramming: return "线性规划 · 可行域顶点"
         case .basicQuantity:    return "基本量法 · 等差等比"
         case .complexNumber:    return "复数运算 · 模与共轭"
+        case .normalVector:     return "法向量法 · 空间角"
+        case .circumSphere:     return "外接球 · 补形定心"
+        case .projectionArea:   return "射影面积法 · 二面角"
+        case .binomialMoment:   return "二项分布 · 期望方差"
+        case .totalProbability: return "全概率 · 贝叶斯"
+        case .indicatorExpectation: return "示性变量 · 期望线性"
+        case .insertionGap:     return "插空法 · 不相邻"
+        case .bundling:         return "捆绑法 · 相邻"
+        case .partition:        return "隔板法 · 整数分配"
+        case .derangement:      return "错位重排 · 不动点"
         }
     }
 
@@ -156,6 +177,16 @@ enum KillWeapon: String, CaseIterable, Identifiable {
         case .linearProgramming: return "目标 z=ax+by 的最值，必在可行域顶点取到"
         case .basicQuantity:    return "等差设 a₁,d；等比设 a₁,q，条件列方程一解到底"
         case .complexNumber:    return "i 四次一循环、|z₁z₂|=|z₁||z₂|、共轭对称速算"
+        case .normalVector:     return "建系给法向量，二面角/线面角/点面距全退化成点乘"
+        case .circumSphere:     return "三棱锥补成长方体，体对角线一半就是外接球半径"
+        case .projectionArea:   return "cosθ=S射影/S原，二面角不必在棱上找垂线"
+        case .binomialMoment:   return "X~B(n,p)：E=np、D=np(1−p)，公式直出免列分布列"
+        case .totalProbability: return "拆成几条互斥路径，P=ΣP(Bᵢ)P(A|Bᵢ) 一行加完"
+        case .indicatorExpectation: return "复杂计数的期望？拆成 0-1 示性变量逐个概率相加"
+        case .insertionGap:     return "不相邻排列：先排其余，再把它们插进空位里"
+        case .bundling:         return "相邻排列：捆成一个整体先排，再乘内部顺序"
+        case .partition:        return "n 个相同球放 m 盒每盒至少 1：C(n−1,m−1) 插隔板"
+        case .derangement:      return "全部错位的方法数 Dₙ：D₄=9、D₅=44，公式秒报"
         }
     }
 
@@ -204,6 +235,16 @@ enum KillWeapon: String, CaseIterable, Identifiable {
         case .linearProgramming: return "pentagon.fill"
         case .basicQuantity:    return "number.square"
         case .complexNumber:    return "i.circle.fill"
+        case .normalVector:     return "cube"
+        case .circumSphere:     return "circle.circle"
+        case .projectionArea:   return "square.on.square.dashed"
+        case .binomialMoment:   return "chart.bar.fill"
+        case .totalProbability: return "arrow.triangle.branch"
+        case .indicatorExpectation: return "plus.forwardslash.minus"
+        case .insertionGap:     return "text.insert"
+        case .bundling:         return "rectangle.compress.vertical"
+        case .partition:        return "rectangle.split.3x1"
+        case .derangement:      return "shuffle"
         }
     }
 
@@ -252,6 +293,16 @@ enum KillWeapon: String, CaseIterable, Identifiable {
         case .linearProgramming: return .apexEmerald
         case .basicQuantity:    return .rainbowYellow
         case .complexNumber:    return .rainbowTeal
+        case .normalVector:     return .rainbowBlue
+        case .circumSphere:     return .rainbowIndigo
+        case .projectionArea:   return .apexStarBlue
+        case .binomialMoment:   return .rainbowGreen
+        case .totalProbability: return .rainbowTeal
+        case .indicatorExpectation: return .apexEmerald
+        case .insertionGap:     return .rainbowOrange
+        case .bundling:         return .apexGold
+        case .partition:        return .rainbowPurple
+        case .derangement:      return .rainbowRed
         }
     }
 
@@ -265,8 +316,11 @@ enum KillWeapon: String, CaseIterable, Identifiable {
              .homomorphism, .paramSeparation, .hiddenZero, .pointDifference,
              .constructCompare, .necessityProbe, .sequencePeriod,
              .telescoping, .scaling, .conicVieta, .induction,
-             .oddConstruct, .linearProgramming, .basicQuantity, .complexNumber: return true
-        default: return false   // polarization（极化恒等式）超纲
+             .oddConstruct, .linearProgramming, .basicQuantity, .complexNumber,
+             .normalVector, .circumSphere, .projectionArea, .binomialMoment,
+             .totalProbability, .indicatorExpectation,
+             .insertionGap, .bundling, .partition: return true
+        default: return false   // polarization（极化恒等式）、derangement（错位重排公式）超纲
         }
     }
 
@@ -277,7 +331,9 @@ enum KillWeapon: String, CaseIterable, Identifiable {
              .symmetryPeriod, .vieta, .substitution, .complement, .trigGraph,
              .extremePosition, .amgmTrick, .coordinateMethod,
              .constructCompare, .polarization, .necessityProbe, .sequencePeriod,
-             .oddConstruct, .linearProgramming, .basicQuantity, .complexNumber: return true
+             .oddConstruct, .linearProgramming, .basicQuantity, .complexNumber,
+             .circumSphere, .projectionArea, .binomialMoment,
+             .insertionGap, .bundling, .partition, .derangement: return true
         default: return false
         }
     }
@@ -371,6 +427,26 @@ enum KillWeapon: String, CaseIterable, Identifiable {
             return "等差数列由首项 a₁ 与公差 d 完全确定，等比数列由首项 a₁ 与公比 q 完全确定（aₙ、Sₙ 都是它们的式子）。把题目条件统统翻译成关于这两个『基本量』的方程，联立一解，整个数列就定了——无需找规律或凑通项。"
         case .complexNumber:
             return "复数三件套：① i 的幂四次一周期 i,−1,−i,1；② 模的乘除性 |z₁z₂|=|z₁|·|z₂|、|z₁/z₂|=|z₁|/|z₂|，比逐个算实虚部快得多；③ 共轭 z·z̄=|z|²、z+z̄=2Re(z)。算复数的模、高次幂、共轭表达式时，用这三条绕开暴力展开。"
+        case .normalVector:
+            return "在空间直角坐标系里，平面的方向由它的法向量 n 完全刻画。于是空间角与距离全部退化成点乘：二面角 cosθ=±(n₁·n₂)/(|n₁||n₂|)（正负由图形开口判断）；线面角 sinφ=|a·n|/(|a||n|)；点到平面距离 d=|AP·n|/|n|（A 为面内任一点）。一旦建系，『找垂足、作辅助线』的空间想象全变成坐标的加减与点乘。"
+        case .circumSphere:
+            return "外接球球心到各顶点等距，两条捷径定心：① 补形——三条两两垂直的棱可补成长方体，外接球即长方体外接球，直径=体对角线，R=½√(a²+b²+c²)；② 球心定位——球心必在底面外接圆圆心正上方，设高为 h，由『到顶点距离相等』列一个方程得 R²=r²+h²（r 为底面外接圆半径）。免去纯几何找球心。"
+        case .projectionArea:
+            return "射影面积定理：平面图形（面积 S）在另一平面上的正射影面积 S′=S·cosθ，θ 为两平面所成二面角，故 cosθ=S射影/S原。求二面角时不必在棱上找公垂线、作平面角再解三角形，只要算出原图形与它投影的面积相除即得余弦——投影恰为规则图形时极快。"
+        case .binomialMoment:
+            return "若 X 服从二项分布 B(n,p)（n 次独立重复试验中成功概率为 p 的成功次数），则期望 E(X)=np、方差 D(X)=np(1−p) 有现成公式，无需写出整张分布列再求 Σk·P(X=k)。再配线性性质 E(aX+b)=aE(X)+b、D(aX+b)=a²D(X)，任意线性变换的期望方差一并秒出。"
+        case .totalProbability:
+            return "全概率公式：若 B₁,…,Bₙ 两两互斥且并为全集（完备事件组），则 P(A)=ΣP(Bᵢ)P(A|Bᵢ)——把 A 按发生前提拆成几条互斥路径，各路径概率相加。反过来由结果 A 反推某前提 Bᵢ 用贝叶斯 P(Bᵢ|A)=P(Bᵢ)P(A|Bᵢ)/P(A)。两式把多步条件概率化成一次代入。"
+        case .indicatorExpectation:
+            return "期望的线性性 E(X₁+…+Xₙ)=E(X₁)+…+E(Xₙ) 对任意随机变量都成立，不要求独立。于是把复杂的计数型变量 X 拆成若干『示性变量（0-1 变量）』之和 X=ΣXᵢ，其中 Xᵢ=1 表示第 i 个事件发生，则 E(Xᵢ)=P(第 i 个事件发生)。只需算每个简单事件概率再相加，绕开求 X 的整张分布列。"
+        case .insertionGap:
+            return "排列中要求某几个元素两两不相邻时用『插空法』：先把其余元素排好（A 种），它们之间及两端共形成若干『空位』，再把要求不相邻的元素逐个插进不同空位。先排后插，自动保证不相邻，避免正面分类或反面容斥的繁琐。"
+        case .bundling:
+            return "排列中要求某几个元素必须相邻时用『捆绑法』：先把这几个相邻元素看成一个『大整体』与其余元素一起排列，再乘上整体内部各元素的排列数。先捆后排，把『相邻』约束一次性消化掉。"
+        case .partition:
+            return "把 n 个完全相同的物品分给 m 个不同对象、每对象至少 1 个，等价于在排成一列的 n 个物品的 (n−1) 个间隙里插入 (m−1) 块隔板，方法数 C(n−1, m−1)。这正是方程 x₁+…+xₘ=n 的正整数解组数；若允许为 0，先给每个变量 +1 转化为正整数情形再用隔板。"
+        case .derangement:
+            return "n 个元素全部不在原位置上的排列称为错位排列，其个数 Dₙ 满足递推 Dₙ=(n−1)(Dₙ₋₁+Dₙ₋₂)，或 Dₙ=n!·(1−1/1!+1/2!−…+(−1)ⁿ/n!)。常用值 D₁=0、D₂=1、D₃=2、D₄=9、D₅=44。遇到『信放错信封』『帽子全拿错』『编号全不对应』这类全错位计数，直接报数。"
         }
     }
 
@@ -463,6 +539,26 @@ enum KillWeapon: String, CaseIterable, Identifiable {
             return "等差/等比数列给出若干项或前 n 项和的条件，求某项、公差公比、通项或另一个和。"
         case .complexNumber:
             return "求复数的模 |z|、高次幂 iⁿ 或 zⁿ、共轭 z̄ 相关表达式，尤其分式 |z|=|分子|/|分母| 型。"
+        case .normalVector:
+            return "立体几何求二面角、线面角、点到平面距离，且图形便于建立直角坐标系（有两两垂直的棱或可补出）。"
+        case .circumSphere:
+            return "求三棱锥/四棱锥/直棱柱的外接球半径、表面积或体积，尤其出现『两两垂直的棱』或『一条棱垂直底面』。"
+        case .projectionArea:
+            return "求二面角的余弦，且其中一个面或它的投影是容易算面积的规则图形。"
+        case .binomialMoment:
+            return "n 次独立重复试验求成功次数的期望/方差，或已知 E、D 反求 n、p，或求其线性变换的期望方差。"
+        case .totalProbability:
+            return "概率分几种互斥前提（不同机器/不同盒子/分两步抽取）求最终事件概率；或已知结果反求来自某前提的概率。"
+        case .indicatorExpectation:
+            return "求『满足某条件的个数』的期望（匹配数、空盒数、不同元素数），直接列分布列很繁。"
+        case .insertionGap:
+            return "排列计数中出现『某几个元素互不相邻 / 两两不相邻』的限制。"
+        case .bundling:
+            return "排列计数中出现『某几个元素必须相邻 / 排在一起』的限制。"
+        case .partition:
+            return "把相同物品分给不同对象（每份至少若干个），或求方程的正整数/非负整数解的组数。"
+        case .derangement:
+            return "n 个对象与 n 个位置一一对应，要求『没有一个对应正确 / 全部错位』的方法数。"
         }
     }
 
@@ -476,8 +572,11 @@ enum KillWeapon: String, CaseIterable, Identifiable {
              .homomorphism, .paramSeparation, .hiddenZero, .pointDifference,
              .constructCompare, .necessityProbe, .sequencePeriod,
              .telescoping, .scaling, .conicVieta, .induction,
-             .oddConstruct, .linearProgramming, .basicQuantity, .complexNumber: return true
-        default: return false   // polarization（极化恒等式）超纲，大题不直接认
+             .oddConstruct, .linearProgramming, .basicQuantity, .complexNumber,
+             .normalVector, .circumSphere, .projectionArea, .binomialMoment,
+             .totalProbability, .indicatorExpectation,
+             .insertionGap, .bundling, .partition: return true
+        default: return false   // polarization、derangement 超纲，大题不直接认
         }
     }
 
@@ -570,6 +669,26 @@ enum KillWeapon: String, CaseIterable, Identifiable {
             return "✅ 基本量法是数列纲内根本方法，选填解答都能用。注意等比数列要留意 q=1 的特殊情形与 q≠0 的隐含条件。"
         case .complexNumber:
             return "✅ 复数运算纲内，选填解答都能用。模的乘除性、i 的周期、z·z̄=|z|² 是最常用的三个加速点。"
+        case .normalVector:
+            return "✅ 空间向量法是新课标立体几何主流解法，大题可直接书写。务必写清坐标系的建立、各点坐标与法向量的求法；二面角是锐角还是钝角需结合图形再判定符号。"
+        case .circumSphere:
+            return "✅ 补形法与球心定位均为纲内常用手段，选填解答都能用。大题须说明球心位置的几何依据（到各顶点等距），再列方程求 R。"
+        case .projectionArea:
+            return "⚠️ 射影面积公式 S′=S·cosθ 结论常用但不在必学定理之列，选填可直接套；大题建议改用法向量或定义法作出二面角，或先证明该射影关系再使用。"
+        case .binomialMoment:
+            return "✅ 二项分布的 E=np、D=np(1−p) 是纲内公式，选填解答均可直接引用。注意先确认确为『独立重复试验』（有放回 / 每次概率不变）才是二项分布。"
+        case .totalProbability:
+            return "✅ 全概率公式与贝叶斯公式已入新课标，大题可直接书写。务必写明所分的几个前提两两互斥且穷尽（构成完备事件组）。"
+        case .indicatorExpectation:
+            return "✅ 期望的线性性纲内成立，大题可用。须显式写出『令 Xᵢ 为第 i 个事件的示性变量，X=ΣXᵢ』并说明 E(Xᵢ)=P(事件 i)，再求和——不能跳步直接报数。"
+        case .insertionGap:
+            return "✅ 插空法是排列组合纲内通法，选填解答都能用。注意空位含两端、插入通常有序（用排列数 A）；要求不相邻的元素若有 k 个，空位数须不少于 k。"
+        case .bundling:
+            return "✅ 捆绑法纲内通法，可直接书写。切记最后要乘上被捆元素的内部排列数；若整体内部有顺序限制（如甲在乙左），则内部不再全排。"
+        case .partition:
+            return "✅ 隔板法纲内常用，选填解答均可。注意适用前提：物品必须相同、每份至少 1 个；允许为 0 或有下限时，先做 +1（或减去下限）的变量代换再用。"
+        case .derangement:
+            return "⚠️ 错位重排公式 Dₙ 与其递推不在考纲，选填可直接报数（牢记 D₃=2、D₄=9、D₅=44）；大题须用枚举、容斥原理或现场建立递推 Dₙ=(n−1)(Dₙ₋₁+Dₙ₋₂) 给出过程。"
         }
     }
 }
@@ -3223,6 +3342,571 @@ extension SampleData {
             mistakes: ["i 周期 4：i,−1,−i,1", "一个周期四项之和为 0", "2024=4×506 整除，无余项"],
             type: .multipleChoice,
             options: ["0", "i", "1", "−1"]
+        ),
+
+        // ════════ 立体几何 · 概率统计 · 排列组合（第 4 批扩充）════════
+
+        // 97 ── 法向量法：二面角
+        skCase(
+            id: "sk_097", weapon: .normalVector,
+            title: "二面角不用找垂线，两个法向量点乘一除",
+            source: "立体几何 · 二面角（高考解答高频）",
+            standardMinutes: 8, killSeconds: 60,
+            signal: "正方体里求二面角 A₁-BD-C₁——建系给法向量最稳。",
+            content: "正方体 ABCD-A₁B₁C₁D₁ 棱长为 1，求二面角 A₁-BD-C₁ 的余弦值。",
+            contentLatex: #"\text{正方体棱长 }1,\ \text{二面角 }A_1\text{-}BD\text{-}C_1\ \text{的余弦}=?"#,
+            answer: "1/3",
+            difficulty: 0.55, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "取 BD 中点 M，作平面角", #"M=\text{BD 中点},\ MA_1\perp BD,\ MC_1\perp BD"#),
+                skStep(2, "∠A₁MC₁ 即为二面角", #"MA_1=MC_1=\sqrt{\tfrac12+1}=\tfrac{\sqrt6}{2},\ A_1C_1=\sqrt2"#),
+                skStep(3, "余弦定理", #"\cos\angle A_1MC_1=\frac{MA_1^2+MC_1^2-A_1C_1^2}{2\,MA_1\,MC_1}=\frac{\tfrac32+\tfrac32-2}{2\cdot\tfrac32}=\frac13"#)
+            ],
+            killSteps: [
+                skStep(1, "建系赋坐标", #"B(1,0,0),D(0,1,0),A_1(0,0,1),C_1(1,1,1)"#),
+                skStep(2, "求两面法向量", #"\vec n_1=(1,1,1)\ (\perp A_1BD),\quad \vec n_2=(1,1,-1)\ (\perp C_1BD)"#),
+                skStep(3, "法向量夹角即得", #"\cos\langle\vec n_1,\vec n_2\rangle=\frac{1+1-1}{\sqrt3\cdot\sqrt3}=\frac13"#)
+            ],
+            stdKey: "定义法：取棱中点 M 作两条垂线得平面角，再用余弦定理——找对垂线是难点。",
+            killKey: "建系后两面法向量 (1,1,1) 与 (1,1,−1) 点乘除以模长积，直接得 1/3。",
+            mistakes: ["法向量夹角的余弦正负需对照图形判断二面角是锐是钝", "本题二面角为锐角，取正值 1/3"],
+            type: .fillInBlank
+        ),
+
+        // 98 ── 法向量法：点到平面距离
+        skCase(
+            id: "sk_098", weapon: .normalVector,
+            title: "点到面距离不找垂足，d=|AP·n|/|n| 一步",
+            source: "立体几何 · 点面距（高考解答高频）",
+            standardMinutes: 9, killSeconds: 50,
+            signal: "求 C₁ 到平面 A₁BD 的距离——法向量投影公式秒杀找垂足。",
+            content: "正方体 ABCD-A₁B₁C₁D₁ 棱长为 1，求点 C₁ 到平面 A₁BD 的距离。",
+            contentLatex: #"\text{正方体棱长 }1,\ C_1\ \text{到平面 }A_1BD\ \text{的距离}=?"#,
+            answer: "2√3/3",
+            difficulty: 0.58, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "等体积法转移", #"V_{C_1\text{-}A_1BD}=V_{A_1\text{-}BDC_1}=\tfrac13"#),
+                skStep(2, "求底面积", #"\triangle A_1BD\ \text{为边长}\sqrt2\text{的正三角形},\ S=\tfrac{\sqrt3}{4}(\sqrt2)^2=\tfrac{\sqrt3}{2}"#),
+                skStep(3, "由 V=⅓S·d 反解", #"d=\frac{3V}{S}=\frac{3\cdot\tfrac13}{\tfrac{\sqrt3}{2}}=\frac{2}{\sqrt3}=\frac{2\sqrt3}{3}"#)
+            ],
+            killSteps: [
+                skStep(1, "建系，取面法向量", #"\vec n=(1,1,1)\perp\text{平面 }A_1BD,\ \text{过 }B(1,0,0)"#),
+                skStep(2, "面内一点指向 C₁", #"\overrightarrow{BC_1}=(0,1,1)"#),
+                skStep(3, "投影公式直接得", #"d=\frac{|\overrightarrow{BC_1}\cdot\vec n|}{|\vec n|}=\frac{|0+1+1|}{\sqrt3}=\frac{2\sqrt3}{3}"#)
+            ],
+            stdKey: "等体积法要算两个体积与三角形面积，再反解 d——步骤多。",
+            killKey: "法向量 n=(1,1,1)，面内点到 C₁ 的向量在 n 上的投影长 |BC₁·n|/|n| 即距离。",
+            mistakes: ["BP 取面内任一点到目标点的向量即可", "分母是 |n| 不是 |n|²"],
+            type: .fillInBlank
+        ),
+
+        // 99 ── 外接球：补形成长方体
+        skCase(
+            id: "sk_099", weapon: .circumSphere,
+            title: "三棱锥三棱两两垂直，补成长方体对角线即直径",
+            source: "立体几何 · 外接球（高考选填高频）",
+            standardMinutes: 7, killSeconds: 35,
+            signal: "PA、PB、PC 两两垂直——直接补成长方体，体对角线 = 2R。",
+            content: "三棱锥 P-ABC 中，PA、PB、PC 两两垂直，PA=1，PB=2，PC=3，求其外接球的表面积。",
+            contentLatex: #"PA,PB,PC\ \text{两两垂直},\ PA=1,PB=2,PC=3,\ S_{球}=?"#,
+            answer: "14π",
+            difficulty: 0.48, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "设球心坐标列方程", #"P\text{ 为原点},\ A(1,0,0),B(0,2,0),C(0,0,3),\ O(x,y,z)"#),
+                skStep(2, "到四顶点距离相等", #"x=\tfrac12,y=1,z=\tfrac32"#),
+                skStep(3, "求半径与表面积", #"R^2=\tfrac14+1+\tfrac94=\tfrac{14}{4},\ S=4\pi R^2=14\pi"#)
+            ],
+            killSteps: [
+                skStep(1, "补形：三棱即长方体三棱", #"\text{以 }PA,PB,PC\text{ 为长宽高补成长方体}"#),
+                skStep(2, "外接球 = 长方体外接球", #"2R=\sqrt{1^2+2^2+3^2}=\sqrt{14}"#),
+                skStep(3, "表面积", #"R^2=\tfrac{14}{4},\ S=4\pi R^2=14\pi"#)
+            ],
+            stdKey: "设球心坐标、列到四顶点等距方程组求解，再算表面积。",
+            killKey: "两两垂直的三棱补成长方体，外接球直径就是体对角线 √14，S=4πR²=14π。",
+            mistakes: ["补形条件是三棱两两垂直", "直径=体对角线，半径要再除以 2"],
+            type: .multipleChoice,
+            options: ["14π", "√14·π", "56π", "28π"]
+        ),
+
+        // 100 ── 外接球：侧棱垂直底面，球心定位
+        skCase(
+            id: "sk_100", weapon: .circumSphere,
+            title: "侧棱垂直底面，球心在外心正上方 h=PA/2",
+            source: "立体几何 · 外接球（高考选填高频）",
+            standardMinutes: 9, killSeconds: 50,
+            signal: "PA⊥底面——球心在底面外心正上方，R²=r²+(PA/2)²。",
+            content: "三棱锥 P-ABC 中，PA⊥平面 ABC，PA=2，AB=AC，BC=2√3，∠BAC=120°，求其外接球半径。",
+            contentLatex: #"PA\perp\text{底},\ PA=2,\ BC=2\sqrt3,\ \angle BAC=120^\circ,\ R=?"#,
+            answer: "√5",
+            difficulty: 0.60, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "底面外接圆半径（正弦定理）", #"2r=\frac{BC}{\sin\angle BAC}=\frac{2\sqrt3}{\sin120^\circ}=4\Rightarrow r=2"#),
+                skStep(2, "设球心高 h，列距离相等", #"r^2+h^2=r^2+(PA-h)^2\Rightarrow h=\tfrac{PA}{2}=1"#),
+                skStep(3, "求半径", #"R=\sqrt{r^2+h^2}=\sqrt{4+1}=\sqrt5"#)
+            ],
+            killSteps: [
+                skStep(1, "底面外接圆半径", #"2r=\frac{BC}{\sin\angle BAC}=4\Rightarrow r=2"#),
+                skStep(2, "球心模型一步套", #"PA\perp\text{底}\Rightarrow R^2=r^2+\Big(\tfrac{PA}{2}\Big)^2"#),
+                skStep(3, "代入", #"R^2=4+1=5\Rightarrow R=\sqrt5"#)
+            ],
+            stdKey: "先用正弦定理求底面外接圆半径 r，再设球心高列方程解出 R。",
+            killKey: "侧棱垂直底面时球心在外心正上方且高为 PA/2，R²=r²+(PA/2)²=4+1=5。",
+            mistakes: ["BC 对的是 120° 角，正弦定理用 BC/sin∠BAC", "球心高是 PA 的一半，不是 PA"],
+            type: .fillInBlank
+        ),
+
+        // 101 ── 射影面积法：二面角余弦
+        skCase(
+            id: "sk_101", weapon: .projectionArea,
+            title: "斜面与底面夹角，cosθ=投影面积/原面积",
+            source: "立体几何 · 二面角（选填速判）",
+            standardMinutes: 7, killSeconds: 40,
+            signal: "求截面 AB₁C 与底面的二面角——投影恰为 △ABC，面积比即余弦。",
+            content: "正方体 ABCD-A₁B₁C₁D₁ 棱长为 1，求平面 AB₁C 与底面 ABCD 所成二面角的余弦值。",
+            contentLatex: #"\text{正方体棱长 }1,\ \text{平面 }AB_1C\ \text{与底面夹角余弦}=?"#,
+            answer: "√3/3",
+            difficulty: 0.52, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "建系求两面法向量", #"\vec n_1=(1,-1,-1)\ (\perp AB_1C),\ \vec n_2=(0,0,1)\ (\text{底面})"#),
+                skStep(2, "法向量夹角", #"\cos=\frac{|\vec n_1\cdot\vec n_2|}{|\vec n_1||\vec n_2|}=\frac{1}{\sqrt3}"#),
+                skStep(3, "化简", #"=\frac{\sqrt3}{3}"#)
+            ],
+            killSteps: [
+                skStep(1, "△AB₁C 在底面的投影", #"\text{投影为 }\triangle ABC,\ S'=\tfrac12"#),
+                skStep(2, "原三角形面积", #"\triangle AB_1C\ \text{三边 }\sqrt2,\ S=\tfrac{\sqrt3}{4}(\sqrt2)^2=\tfrac{\sqrt3}{2}"#),
+                skStep(3, "射影面积公式", #"\cos\theta=\frac{S'}{S}=\frac{\tfrac12}{\tfrac{\sqrt3}{2}}=\frac{\sqrt3}{3}"#)
+            ],
+            stdKey: "建系求两面法向量再算夹角余弦，需要算法向量。",
+            killKey: "斜截面 AB₁C 在底面的投影是 △ABC，cosθ=S投影/S原=(1/2)/(√3/2)=√3/3。",
+            mistakes: ["投影面是哪个三角形要看清", "射影面积公式 cosθ=S射影/S原，别倒过来"],
+            type: .fillInBlank
+        ),
+
+        // 102 ── 射影面积法：正四面体相邻面
+        skCase(
+            id: "sk_102", weapon: .projectionArea,
+            title: "正四面体两面夹角，顶点投影到重心给 1/3",
+            source: "立体几何 · 二面角（经典结论）",
+            standardMinutes: 8, killSeconds: 45,
+            signal: "正四面体侧面与底面夹角——侧面投影到底面是 1/3 的小三角。",
+            content: "棱长为 1 的正四面体 ABCD，求侧面 ABD 与底面 ABC 所成二面角的余弦值。",
+            contentLatex: #"\text{正四面体棱长 }1,\ \text{面 }ABD\ \text{与面 }ABC\ \text{夹角余弦}=?"#,
+            answer: "1/3",
+            difficulty: 0.56, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "取 AB 中点 M 作平面角", #"DM\perp AB,\ CM\perp AB\Rightarrow \angle DMC\ \text{为二面角}"#),
+                skStep(2, "求三边", #"DM=CM=\tfrac{\sqrt3}{2},\ CD=1"#),
+                skStep(3, "余弦定理", #"\cos\angle DMC=\frac{\tfrac34+\tfrac34-1}{2\cdot\tfrac34}=\frac13"#)
+            ],
+            killSteps: [
+                skStep(1, "顶点 D 投影到底面重心 O", #"\triangle ABD\ \text{投影为}\triangle ABO,\ O\ \text{为}\triangle ABC\text{重心}"#),
+                skStep(2, "重心使投影面积 = 1/3", #"S_{\triangle ABO}=\tfrac13 S_{\triangle ABC}=\tfrac13 S_{\triangle ABD}"#),
+                skStep(3, "射影面积公式", #"\cos\theta=\frac{S_{\triangle ABO}}{S_{\triangle ABD}}=\frac13"#)
+            ],
+            stdKey: "取棱中点作两条中线得平面角 ∠DMC，再余弦定理——要算三条长度。",
+            killKey: "顶点 D 投影到底面重心 O，△ABD 的投影 △ABO 面积恰是其 1/3，cosθ=1/3。",
+            mistakes: ["正四面体顶点投影落在底面重心", "重心到边距离是顶点到边距离的 1/3"],
+            type: .fillInBlank
+        ),
+
+        // 103 ── 二项分布：期望方差 + 线性变换
+        skCase(
+            id: "sk_103", weapon: .binomialMoment,
+            title: "射击 10 次命中数，E=np、D=np(1−p) 直出",
+            source: "概率统计 · 二项分布（高考必考）",
+            standardMinutes: 7, killSeconds: 30,
+            signal: "独立重复 n 次、每次概率 p——直接套 E=np、D=np(1−p)。",
+            content: "射手每次命中概率 0.8，独立射击 10 次，命中次数为 X。求 E(X)、D(X)，及 E(2X+1)、D(2X+1)。",
+            contentLatex: #"X\sim B(10,0.8),\ E(X),D(X),E(2X+1),D(2X+1)=?"#,
+            answer: "E(X)=8，D(X)=1.6，E(2X+1)=17，D(2X+1)=6.4",
+            difficulty: 0.45, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "写出分布列", #"P(X=k)=C_{10}^k0.8^k0.2^{10-k},\ k=0,\dots,10"#),
+                skStep(2, "定义求期望（繁）", #"E(X)=\sum_{k=0}^{10}k\,C_{10}^k0.8^k0.2^{10-k}=8"#),
+                skStep(3, "再求方差", #"D(X)=E(X^2)-[E(X)]^2=1.6"#)
+            ],
+            killSteps: [
+                skStep(1, "二项分布公式直出", #"E(X)=np=10\times0.8=8,\ D(X)=np(1-p)=10\times0.8\times0.2=1.6"#),
+                skStep(2, "线性变换性质", #"E(2X+1)=2E(X)+1=17"#),
+                skStep(3, "方差的平方系数", #"D(2X+1)=2^2D(X)=4\times1.6=6.4"#)
+            ],
+            stdKey: "写整张分布列再按定义 Σk·P 求期望、Σ(k−E)²P 求方差，计算量大。",
+            killKey: "X~B(n,p) 直接 E=np=8、D=np(1−p)=1.6；线性变换用 E(aX+b)=aE+b、D(aX+b)=a²D。",
+            mistakes: ["方差的系数要平方：D(2X+1)=4D(X)", "常数项 +1 不影响方差"],
+            type: .fillInBlank
+        ),
+
+        // 104 ── 二项分布：识别有放回模型
+        skCase(
+            id: "sk_104", weapon: .binomialMoment,
+            title: "有放回摸球认出 B(3, 3/5)，期望方差秒得",
+            source: "概率统计 · 二项分布识别（高考高频）",
+            standardMinutes: 8, killSeconds: 35,
+            signal: "有放回、每次概率不变——是二项分布，别去列分布列。",
+            content: "袋中有 3 个红球、2 个白球，有放回地摸 3 次，记 X 为摸到红球的次数。求 E(X) 与 D(X)。",
+            contentLatex: #"\text{有放回摸 }3\text{ 次},\ p_{红}=\tfrac35,\ E(X),D(X)=?"#,
+            answer: "E(X)=9/5，D(X)=18/25",
+            difficulty: 0.46, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "逐值算分布列", #"P(X=0)=(\tfrac25)^3,\dots,P(X=3)=(\tfrac35)^3"#),
+                skStep(2, "定义求期望", #"E(X)=\sum k\,P(X=k)=\tfrac95"#),
+                skStep(3, "定义求方差", #"D(X)=\sum (k-E)^2P(X=k)=\tfrac{18}{25}"#)
+            ],
+            killSteps: [
+                skStep(1, "识别为二项分布", #"\text{有放回}\Rightarrow\text{每次 }p=\tfrac35\text{ 不变},\ X\sim B(3,\tfrac35)"#),
+                skStep(2, "期望", #"E(X)=np=3\times\tfrac35=\tfrac95"#),
+                skStep(3, "方差", #"D(X)=np(1-p)=3\times\tfrac35\times\tfrac25=\tfrac{18}{25}"#)
+            ],
+            stdKey: "把 X=0,1,2,3 的概率逐个算出列成分布列，再按定义求期望方差。",
+            killKey: "有放回摸球每次红球概率恒为 3/5，X~B(3,3/5)，E=np=9/5、D=np(1−p)=18/25。",
+            mistakes: ["有放回才是二项分布；不放回则是超几何分布", "超几何的期望仍 np，但方差公式不同"],
+            type: .fillInBlank
+        ),
+
+        // 105 ── 全概率公式
+        skCase(
+            id: "sk_105", weapon: .totalProbability,
+            title: "两台机器混产，次品率用全概率一行加完",
+            source: "概率统计 · 全概率（新课标）",
+            standardMinutes: 6, killSeconds: 35,
+            signal: "产品分两种来源、各有次品率——全概率公式拆路径。",
+            content: "某车间甲机器生产 60%、次品率 2%，乙机器生产 40%、次品率 3%。从全部产品中随机取一件，求它是次品的概率。",
+            contentLatex: #"P(甲)=0.6,P(次|甲)=0.02;\ P(乙)=0.4,P(次|乙)=0.03;\ P(次)=?"#,
+            answer: "0.024",
+            difficulty: 0.42, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "枚举两条互斥路径", #"\text{甲且次}\ \cup\ \text{乙且次}"#),
+                skStep(2, "分别算路径概率", #"P(甲\cap次)=0.6\times0.02=0.012,\ P(乙\cap次)=0.4\times0.03=0.012"#),
+                skStep(3, "相加", #"P(次)=0.012+0.012=0.024"#)
+            ],
+            killSteps: [
+                skStep(1, "完备事件组 = 甲、乙", #"\text{甲、乙两两互斥且穷尽全部产品}"#),
+                skStep(2, "全概率公式", #"P(次)=P(甲)P(次|甲)+P(乙)P(次|乙)"#),
+                skStep(3, "代入", #"=0.6\times0.02+0.4\times0.03=0.024"#)
+            ],
+            stdKey: "把『次品』按来源拆成两条互斥路径，分别算概率再相加。",
+            killKey: "全概率公式 P(次)=ΣP(机器)P(次|机器)=0.6·0.02+0.4·0.03=0.024，一行算完。",
+            mistakes: ["前提（甲、乙）必须互斥且穷尽", "条件概率 P(次|甲) 与联合概率 P(甲∩次) 别混"],
+            type: .fillInBlank
+        ),
+
+        // 106 ── 贝叶斯逆概率
+        skCase(
+            id: "sk_106", weapon: .totalProbability,
+            title: "已知取到次品，反推它来自甲的概率",
+            source: "概率统计 · 贝叶斯（新课标）",
+            standardMinutes: 7, killSeconds: 40,
+            signal: "已知结果反求原因——贝叶斯公式 P(甲|次)=P(甲∩次)/P(次)。",
+            content: "条件同上（甲产 60% 次品率 2%，乙产 40% 次品率 3%）。已知取到的一件是次品，求它来自甲机器的概率。",
+            contentLatex: #"\text{已知是次品},\ P(甲|次)=?"#,
+            answer: "1/2",
+            difficulty: 0.50, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "缩小样本空间到『次品』", #"\text{只在次品里看甲的比例}"#),
+                skStep(2, "数出两类次品『份额』", #"\text{甲次}=0.012,\ \text{乙次}=0.012,\ \text{合计}=0.024"#),
+                skStep(3, "求比例", #"P(甲|次)=\frac{0.012}{0.024}=\frac12"#)
+            ],
+            killSteps: [
+                skStep(1, "贝叶斯公式", #"P(甲|次)=\frac{P(甲)P(次|甲)}{P(次)}"#),
+                skStep(2, "分母用全概率", #"P(次)=0.024\ (\text{上题})"#),
+                skStep(3, "代入", #"=\frac{0.6\times0.02}{0.024}=\frac{0.012}{0.024}=\frac12"#)
+            ],
+            stdKey: "在『次品』这个缩小的样本空间里，甲贡献的次品占总次品的比例即为所求。",
+            killKey: "贝叶斯 P(甲|次)=P(甲)P(次|甲)/P(次)，分母用全概率得 0.024，结果 1/2。",
+            mistakes: ["分母是全概率 P(次)，不是 P(甲)", "P(甲|次) 与 P(次|甲) 方向相反，别用错"],
+            type: .fillInBlank
+        ),
+
+        // 107 ── 示性变量：匹配期望
+        skCase(
+            id: "sk_107", weapon: .indicatorExpectation,
+            title: "n 人随机抽自己贺卡，期望恰好是 1（与 n 无关）",
+            source: "概率统计 · 期望线性性（竞赛/压轴改编）",
+            standardMinutes: 10, killSeconds: 45,
+            signal: "求『拿到自己东西的人数』期望——示性变量拆开，每人 1/n。",
+            content: "n 个人各写一张贺卡放在一起随机重新分发（每人恰得一张），记 X 为拿到自己那张贺卡的人数。求 E(X)。",
+            contentLatex: #"n\ \text{人随机分发贺卡},\ X=\text{拿到自己的人数},\ E(X)=?"#,
+            answer: "1",
+            difficulty: 0.62, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "X 的分布与错位排列有关", #"P(X=k)\ \text{含错位数 }D_{n-k},\ \text{推导繁}"#),
+                skStep(2, "按定义求和", #"E(X)=\sum_k k\,P(X=k)\ (\text{需错位排列计数})"#),
+                skStep(3, "化简才得", #"E(X)=1"#)
+            ],
+            killSteps: [
+                skStep(1, "设示性变量", #"X_i=1\ \text{表示第 }i\text{ 人拿到自己},\ X=\sum_{i=1}^nX_i"#),
+                skStep(2, "单个概率", #"E(X_i)=P(X_i=1)=\tfrac1n"#),
+                skStep(3, "期望线性性求和", #"E(X)=\sum_{i=1}^nE(X_i)=n\cdot\tfrac1n=1"#)
+            ],
+            stdKey: "X 的分布列牵涉错位排列计数，按定义求 E(X) 要先求出整张分布列，相当繁。",
+            killKey: "拆成示性变量 X=ΣXᵢ，每人拿到自己的概率 1/n，由期望线性性 E(X)=n·(1/n)=1。",
+            mistakes: ["示性变量不需独立，期望线性性照样成立", "答案与 n 无关，恒为 1"],
+            type: .multipleChoice,
+            options: ["1", "1/n", "n", "0"]
+        ),
+
+        // 108 ── 示性变量：空盒期望
+        skCase(
+            id: "sk_108", weapon: .indicatorExpectation,
+            title: "4 球随机入 4 盒，空盒数期望 81/64",
+            source: "概率统计 · 期望线性性（占用问题）",
+            standardMinutes: 9, killSeconds: 45,
+            signal: "求空盒个数期望——对每个盒子设示性变量，空概率 (3/4)⁴。",
+            content: "将 4 个不同的球随机放入 4 个不同的盒子（每球等可能放入任一盒），记 X 为空盒的个数。求 E(X)。",
+            contentLatex: #"4\ \text{球随机入 }4\text{ 盒},\ X=\text{空盒数},\ E(X)=?"#,
+            answer: "81/64",
+            difficulty: 0.60, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "X 取值 0,1,2,3", #"\text{需数各情形的放法（含容斥）}"#),
+                skStep(2, "逐一算概率", #"P(X=k)=\frac{C_4^k\cdot(\text{恰 }k\text{ 空的放法})}{4^4}"#),
+                skStep(3, "按定义求和", #"E(X)=\sum k\,P(X=k)=\tfrac{81}{64}"#)
+            ],
+            killSteps: [
+                skStep(1, "对每个盒设示性变量", #"X_j=1\ \text{表示第 }j\text{ 盒为空},\ X=\sum_{j=1}^4X_j"#),
+                skStep(2, "单盒为空概率", #"E(X_j)=P(X_j=1)=\Big(\tfrac34\Big)^4=\tfrac{81}{256}"#),
+                skStep(3, "求和", #"E(X)=4\cdot\tfrac{81}{256}=\tfrac{81}{64}"#)
+            ],
+            stdKey: "直接求空盒数分布列需要容斥数各情形放法，再按定义求期望，很繁。",
+            killKey: "每个盒子为空的概率是 (3/4)⁴=81/256，4 个盒子用示性变量求和 E(X)=4·81/256=81/64。",
+            mistakes: ["每球独立等可能落入 4 盒，单盒被避开概率 3/4", "示性变量法不必管盒子之间是否独立"],
+            type: .fillInBlank
+        ),
+
+        // 109 ── 插空法：女生不相邻
+        skCase(
+            id: "sk_109", weapon: .insertionGap,
+            title: "女生两两不相邻，先排男生再插空",
+            source: "排列组合 · 不相邻排列（高考高频）",
+            standardMinutes: 6, killSeconds: 30,
+            signal: "出现『两两不相邻』——先排其余，再插空。",
+            content: "5 个男生和 3 个女生排成一排，要求任何两个女生都不相邻，共有多少种不同的排法？",
+            contentLatex: #"5\text{ 男 }3\text{ 女排一排},\ \text{女生两两不相邻},\ \text{排法数}=?"#,
+            answer: "14400",
+            difficulty: 0.50, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "正面分类极繁", #"\text{按女生具体位置分类，情形众多}"#),
+                skStep(2, "或用容斥", #"\text{总}-\text{至少两女相邻}\ (\text{需多次容斥})"#),
+                skStep(3, "得", #"=14400"#)
+            ],
+            killSteps: [
+                skStep(1, "先排 5 个男生", #"A_5^5=120,\ \text{形成 }6\text{ 个空位（含两端）}"#),
+                skStep(2, "3 女插入不同空位", #"A_6^3=6\times5\times4=120"#),
+                skStep(3, "乘法原理", #"120\times120=14400"#)
+            ],
+            stdKey: "正面按女生位置分类或反面容斥都要处理大量情形，易漏易重。",
+            killKey: "先排 5 男（A₅⁵=120）产生 6 个空，3 女插入不同空（A₆³=120），相乘得 14400。",
+            mistakes: ["空位包含队伍两端，5 人产生 6 个空", "插空用排列数 A（女生有序）"],
+            type: .fillInBlank
+        ),
+
+        // 110 ── 插空法：节目插入
+        skCase(
+            id: "sk_110", weapon: .insertionGap,
+            title: "原序固定插 3 个新节目，互不相邻 A₇³=210",
+            source: "排列组合 · 不相邻排列（高考改编）",
+            standardMinutes: 5, killSeconds: 25,
+            signal: "原节目顺序不变、新节目互不相邻——7 个空里插 3 个。",
+            content: "一台晚会原有 6 个节目，顺序已定且保持不变。现要插入 3 个新节目，要求任意两个新节目都不相邻，共有多少种插法？",
+            contentLatex: #"6\ \text{节目定序},\ \text{插 }3\ \text{新且互不相邻},\ \text{方法数}=?"#,
+            answer: "210",
+            difficulty: 0.46, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "逐个插入并保持不相邻", #"\text{第一个新节目 7 个位置，之后位置随之变化，易算错}"#),
+                skStep(2, "分步累乘", #"\text{需小心每步可用空位数}"#),
+                skStep(3, "得", #"=210"#)
+            ],
+            killSteps: [
+                skStep(1, "6 个原节目形成 7 个空", #"\text{含首尾共 }6+1=7\text{ 个空位}"#),
+                skStep(2, "3 个新节目插入不同空", #"A_7^3=7\times6\times5=210"#),
+                skStep(3, "结论", #"=210"#)
+            ],
+            stdKey: "逐个插入时每步可用空位数在变，直接累乘容易数错。",
+            killKey: "6 个定序节目形成 7 个空位，3 个新节目插入不同空位 A₇³=7·6·5=210。",
+            mistakes: ["原节目顺序固定，不再乘 6! ", "n 个元素形成 n+1 个空位（含两端）"],
+            type: .fillInBlank
+        ),
+
+        // 111 ── 捆绑法：女生相邻
+        skCase(
+            id: "sk_111", weapon: .bundling,
+            title: "3 个女生必须相邻，捆成整体再排",
+            source: "排列组合 · 相邻排列（高考高频）",
+            standardMinutes: 6, killSeconds: 28,
+            signal: "出现『必须相邻 / 排在一起』——捆绑成整体。",
+            content: "4 个男生和 3 个女生排成一排，要求 3 个女生必须相邻，共有多少种不同的排法？",
+            contentLatex: #"4\text{ 男 }3\text{ 女排一排},\ 3\text{ 女相邻},\ \text{排法数}=?"#,
+            answer: "720",
+            difficulty: 0.46, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "按女生整体所在位置分类", #"\text{女生块可在第 1\sim5 个起始位，逐类讨论}"#),
+                skStep(2, "每类再排内部", #"\text{情形多、易遗漏}"#),
+                skStep(3, "汇总", #"=720"#)
+            ],
+            killSteps: [
+                skStep(1, "3 女捆成一个整体", #"\text{内部排列 }A_3^3=6"#),
+                skStep(2, "整体与 4 男共 5 个元素排", #"A_5^5=120"#),
+                skStep(3, "乘法原理", #"6\times120=720"#)
+            ],
+            stdKey: "按女生整体的起始位置分类讨论，情形多、容易漏算。",
+            killKey: "3 女捆成 1 个整体（内部 3!=6）后与 4 男共 5 个元素全排（5!=120），共 720。",
+            mistakes: ["别忘乘整体内部排列 3!", "捆绑后元素总数变为 4+1=5"],
+            type: .fillInBlank
+        ),
+
+        // 112 ── 捆绑法：三人站一起
+        skCase(
+            id: "sk_112", weapon: .bundling,
+            title: "5 人中指定 3 人站一起，3!·3!=36",
+            source: "排列组合 · 相邻排列（高考改编）",
+            standardMinutes: 5, killSeconds: 25,
+            signal: "指定几人『站在一起』——捆成整体，内部再排。",
+            content: "甲、乙、丙、丁、戊 5 人排成一排，其中甲、乙、丙 3 人必须站在一起，共有多少种排法？",
+            contentLatex: #"5\ \text{人排队},\ \text{甲乙丙相邻},\ \text{排法数}=?"#,
+            answer: "36",
+            difficulty: 0.42, tier: 2,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "枚举三人块位置", #"\text{块起始位 }1\sim3,\ \text{逐类排其余}"#),
+                skStep(2, "每类乘内部顺序", #"\text{易漏}"#),
+                skStep(3, "汇总", #"=36"#)
+            ],
+            killSteps: [
+                skStep(1, "甲乙丙捆成整体", #"\text{内部 }A_3^3=6"#),
+                skStep(2, "整体与丁戊共 3 个元素排", #"A_3^3=6"#),
+                skStep(3, "相乘", #"6\times6=36"#)
+            ],
+            stdKey: "按三人块的位置枚举再排其余，情形虽少但仍需小心内部顺序。",
+            killKey: "甲乙丙捆成 1 个整体（内部 3!=6），与丁、戊共 3 个元素全排（3!=6），共 36。",
+            mistakes: ["捆绑后是 3 个元素全排，不是 5", "内部 3 人仍要全排序"],
+            type: .fillInBlank
+        ),
+
+        // 113 ── 隔板法：每盒至少 1
+        skCase(
+            id: "sk_113", weapon: .partition,
+            title: "10 个相同球放 3 盒每盒至少 1，C(9,2)=36",
+            source: "排列组合 · 隔板法（高考高频）",
+            standardMinutes: 6, killSeconds: 25,
+            signal: "相同物品分给不同对象、每份至少 1——隔板法。",
+            content: "把 10 个完全相同的小球放入 3 个不同的盒子，要求每个盒子至少放 1 个，共有多少种不同的放法？",
+            contentLatex: #"10\ \text{个相同球放 }3\ \text{盒，每盒}\ge1,\ \text{放法数}=?"#,
+            answer: "36",
+            difficulty: 0.44, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "等价于正整数解组数", #"x+y+z=10,\ x,y,z\ge1"#),
+                skStep(2, "枚举或分类", #"\text{逐一数 (x,y,z) 组合，繁}"#),
+                skStep(3, "得", #"=36"#)
+            ],
+            killSteps: [
+                skStep(1, "10 球排成一排，9 个间隙", #"\circ\,\circ\,\circ\dots\circ\ \Rightarrow\ 9\ \text{个空隙}"#),
+                skStep(2, "插 2 块隔板分成 3 份", #"C_9^2"#),
+                skStep(3, "求值", #"C_9^2=36"#)
+            ],
+            stdKey: "等价于方程 x+y+z=10 的正整数解组数，直接枚举费时。",
+            killKey: "10 个球的 9 个间隙里插 2 块隔板分成 3 段，C(9,2)=36。",
+            mistakes: ["n 个球有 n−1 个间隙", "分成 m 份用 m−1 块隔板"],
+            type: .fillInBlank
+        ),
+
+        // 114 ── 隔板法：非负整数解（先 +1）
+        skCase(
+            id: "sk_114", weapon: .partition,
+            title: "非负整数解先各加 1，转成隔板 C(10,2)=45",
+            source: "排列组合 · 隔板法变形（高考改编）",
+            standardMinutes: 6, killSeconds: 30,
+            signal: "允许为 0 的整数解——先给每个变量 +1 转成正整数再隔板。",
+            content: "求方程 x + y + z = 8 的非负整数解的组数。",
+            contentLatex: #"x+y+z=8,\ x,y,z\ge0,\ \text{解的组数}=?"#,
+            answer: "45",
+            difficulty: 0.48, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "按 x 取值分层", #"x=0,1,\dots,8,\ \text{每层数 }y+z\text{ 的解}"#),
+                skStep(2, "逐层求和", #"\sum_{x=0}^8(9-x)=9+8+\dots+1"#),
+                skStep(3, "求和", #"=45"#)
+            ],
+            killSteps: [
+                skStep(1, "变量代换去掉『可为 0』", #"x'=x+1,y'=y+1,z'=z+1\Rightarrow x'+y'+z'=11,\ \ge1"#),
+                skStep(2, "正整数解用隔板", #"C_{11-1}^{3-1}=C_{10}^2"#),
+                skStep(3, "求值", #"C_{10}^2=45"#)
+            ],
+            stdKey: "按某个变量取值分层、逐层数解再求和，是等差求和但步骤多。",
+            killKey: "每个变量 +1 化为 x'+y'+z'=11 的正整数解，隔板 C(10,2)=45。",
+            mistakes: ["允许为 0 不能直接隔板，需先 +1 转正整数", "代换后总和变为 8+3=11"],
+            type: .fillInBlank
+        ),
+
+        // 115 ── 错位重排：4 封信
+        skCase(
+            id: "sk_115", weapon: .derangement,
+            title: "4 封信全放错信封，错位数 D₄=9",
+            source: "排列组合 · 错位排列（高考/竞赛高频）",
+            standardMinutes: 7, killSeconds: 25,
+            signal: "『每封信都不放进对应信封』——全错位，D₄=9。",
+            content: "编号 1~4 的 4 封信放入编号 1~4 的 4 个信封，每封信都不放入与其编号相同的信封，共有多少种放法？",
+            contentLatex: #"4\ \text{封信全错位},\ D_4=?"#,
+            answer: "9",
+            difficulty: 0.50, tier: 3,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "容斥原理", #"D_4=4!\Big(1-\tfrac1{1!}+\tfrac1{2!}-\tfrac1{3!}+\tfrac1{4!}\Big)"#),
+                skStep(2, "代入计算", #"=24\Big(1-1+\tfrac12-\tfrac16+\tfrac1{24}\Big)"#),
+                skStep(3, "化简", #"=24\times\tfrac9{24}=9"#)
+            ],
+            killSteps: [
+                skStep(1, "认出是 4 元错位排列", #"\text{全部不在原位}\Rightarrow D_4"#),
+                skStep(2, "套常用值", #"D_1=0,D_2=1,D_3=2,D_4=9"#),
+                skStep(3, "结论", #"D_4=9"#)
+            ],
+            stdKey: "用容斥公式 Dₙ=n!Σ(−1)ᵏ/k! 现算，需仔细处理交错求和。",
+            killKey: "4 封信全部放错就是 4 元错位排列，记住常用值 D₄=9，直接报数。",
+            mistakes: ["错位排列要求『无一在原位』", "D₄=9，别和 4!=24 混"],
+            type: .multipleChoice,
+            options: ["9", "6", "12", "44"]
+        ),
+
+        // 116 ── 错位重排：5 顶帽子
+        skCase(
+            id: "sk_116", weapon: .derangement,
+            title: "5 人帽子全拿错，递推 D₅=4(D₄+D₃)=44",
+            source: "排列组合 · 错位排列（高考/竞赛高频）",
+            standardMinutes: 8, killSeconds: 30,
+            signal: "『没有人拿到自己的帽子』——5 元全错位 D₅=44。",
+            content: "5 个人各有一顶帽子，打乱后重新分配，恰好没有任何人拿到自己原来那顶帽子的分配方法有多少种？",
+            contentLatex: #"5\ \text{人帽子全错位},\ D_5=?"#,
+            answer: "44",
+            difficulty: 0.54, tier: 4,
+            formulaIds: [],
+            stdSteps: [
+                skStep(1, "容斥原理", #"D_5=5!\sum_{k=0}^5\frac{(-1)^k}{k!}"#),
+                skStep(2, "代入", #"=120\Big(\tfrac12-\tfrac16+\tfrac1{24}-\tfrac1{120}\Big)"#),
+                skStep(3, "化简", #"=120\times\tfrac{44}{120}=44"#)
+            ],
+            killSteps: [
+                skStep(1, "认出 5 元错位排列", #"\text{全拿错}\Rightarrow D_5"#),
+                skStep(2, "用递推 Dₙ=(n−1)(Dₙ₋₁+Dₙ₋₂)", #"D_5=4\,(D_4+D_3)=4(9+2)"#),
+                skStep(3, "求值", #"=4\times11=44"#)
+            ],
+            stdKey: "容斥公式现算交错求和，项数多、易算错。",
+            killKey: "5 人全拿错即 5 元错位排列，递推 D₅=(5−1)(D₄+D₃)=4·(9+2)=44。",
+            mistakes: ["递推系数是 (n−1)：D₅=4(D₄+D₃)", "D₃=2、D₄=9 要记牢"],
+            type: .fillInBlank
         )
     ]
 
