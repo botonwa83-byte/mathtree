@@ -234,6 +234,7 @@ struct LegalView: View {
 
 struct ProfileView: View {
     @ObservedObject private var auth = AuthManager.shared
+    @ObservedObject private var appearance = AppearanceManager.shared
     @State private var showLogin = false
     @State private var legal: LegalKind?
     @State private var showLogoutConfirm = false
@@ -269,6 +270,21 @@ struct ProfileView: View {
                         }
                     }
                 }
+            }
+
+            Section {
+                Picker(selection: $appearance.preference) {
+                    ForEach(AppearancePreference.allCases) { pref in
+                        Text(pref.label).tag(pref)
+                    }
+                } label: {
+                    Label("深色模式", systemImage: "moon.circle.fill").foregroundColor(.primary)
+                }
+                .pickerStyle(.segmented)
+            } header: {
+                Text("外观")
+            } footer: {
+                Text("「跟随系统」会随 iOS 设置里的深色/浅色自动切换；也可在此手动锁定。")
             }
 
             Section("法律条款") {

@@ -36,6 +36,8 @@
 		A10036 /* StreakManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10036 /* StreakManager.swift */; };
 		A10100 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10100 /* AuthManager.swift */; };
 		A10101 /* AuthViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10101 /* AuthViews.swift */; };
+		A10102 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10102 /* PurchaseManager.swift */; };
+		A10103 /* SKPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10103 /* SKPaywallView.swift */; };
 		A10040 /* FunctionProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10040 /* FunctionProblems.swift */; };
 		A10041 /* SequenceProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10041 /* SequenceProblems.swift */; };
 		A10042 /* ConicProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10042 /* ConicProblems.swift */; };
@@ -108,6 +110,8 @@
 		B10036 /* StreakManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakManager.swift; sourceTree = "<group>"; };
 		B10100 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		B10101 /* AuthViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViews.swift; sourceTree = "<group>"; };
+		B10102 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		B10103 /* SKPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPaywallView.swift; sourceTree = "<group>"; };
 		B10040 /* FunctionProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionProblems.swift; sourceTree = "<group>"; };
 		B10041 /* SequenceProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceProblems.swift; sourceTree = "<group>"; };
 		B10042 /* ConicProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConicProblems.swift; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 				B10036 /* StreakManager.swift */,
 				B10063 /* ViewAdaptation.swift */,
 				B10100 /* AuthManager.swift */,
+				B10102 /* PurchaseManager.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				B10066 /* SecondKillView.swift */,
+				B10103 /* SKPaywallView.swift */,
 			);
 			path = SecondKill;
 			sourceTree = "<group>";
@@ -533,6 +539,8 @@
 				A10036 /* StreakManager.swift in Sources */,
 				A10100 /* AuthManager.swift in Sources */,
 				A10101 /* AuthViews.swift in Sources */,
+				A10102 /* PurchaseManager.swift in Sources */,
+				A10103 /* SKPaywallView.swift in Sources */,
 				A10063 /* ViewAdaptation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

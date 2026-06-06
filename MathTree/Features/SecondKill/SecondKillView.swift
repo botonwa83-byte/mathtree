@@ -5,6 +5,9 @@ import SwiftUI
 // 自身不包裹 NavigationStack（由调用方的 NavigationStack 提供导航）。
 
 struct SecondKillView: View {
+    @StateObject private var purchase = PurchaseManager.shared
+    @State private var showPaywall = false
+
     private var cases: [SecondKillCase] { SampleData.secondKillCases }
 
     private var weapons: [KillWeapon] {
@@ -14,6 +17,15 @@ struct SecondKillView: View {
             guard !seen.contains(c.weapon.id) else { return nil }
             seen.insert(c.weapon.id); return c.weapon
         }
+    }
+
+    /// 前 N 把武器免费（稳定 Set，不随刷新变化）
+    private var freeWeaponIDs: Set<String> {
+        Set(weapons.prefix(PurchaseManager.freeWeaponCount).map(\.id))
+    }
+
+    private func isLocked(_ weapon: KillWeapon) -> Bool {
+        !purchase.isUnlocked && !freeWeaponIDs.contains(weapon.id)
     }
 
     private func cases(for weapon: KillWeapon) -> [SecondKillCase] {
@@ -42,6 +54,7 @@ struct SecondKillView: View {
         .background(Color.apexBackground)
         .navigationTitle("降维打击")
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showPaywall) { SKPaywallView() }
     }
 
     // MARK: 英雄区
@@ -140,12 +153,21 @@ struct SecondKillView: View {
             }
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
                 ForEach(weapons) { weapon in
-                    NavigationLink {
-                        KillWeaponDetailView(weapon: weapon, cases: cases(for: weapon))
-                    } label: {
-                        SKWeaponCard(weapon: weapon, count: cases(for: weapon).count)
+                    if isLocked(weapon) {
+                        // 已锁：显示加锁卡片，点击弹出付费墙
+                        Button { showPaywall = true } label: {
+                            SKWeaponCard(weapon: weapon, count: cases(for: weapon).count, locked: true)
+                        }
+                        .buttonStyle(.plain)
+                    } else {
+                        // 已解锁：正常进入详情
+                        NavigationLink {
+                            KillWeaponDetailView(weapon: weapon, cases: cases(for: weapon))
+                        } label: {
+                            SKWeaponCard(weapon: weapon, count: cases(for: weapon).count, locked: false)
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
                 }
             }
         }
@@ -217,44 +239,56 @@ struct SecondKillView: View {
 private struct SKWeaponCard: View {
     let weapon: KillWeapon
     let count: Int
+    var locked: Bool = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(weapon.tint.opacity(0.15))
-                        .frame(width: 40, height: 40)
-                    Image(systemName: weapon.icon)
-                        .font(.title3)
-                        .foregroundColor(weapon.tint)
+        ZStack(alignment: .topTrailing) {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(weapon.tint.opacity(locked ? 0.08 : 0.15))
+                            .frame(width: 40, height: 40)
+                        Image(systemName: weapon.icon)
+                            .font(.title3)
+                            .foregroundColor(weapon.tint.opacity(locked ? 0.4 : 1))
+                    }
+                    Spacer()
+                    if locked {
+                        Image(systemName: "lock.fill")
+                            .font(.caption)
+                            .foregroundColor(.secondary.opacity(0.7))
+                            .padding(.horizontal, 6).padding(.vertical, 2)
+                            .background(Color.secondary.opacity(0.08))
+                            .cornerRadius(5)
+                    } else {
+                        Text(weapon.inSyllabus ? "纲内" : "超纲")
+                            .font(.system(size: 9, weight: .bold))
+                            .foregroundColor(weapon.inSyllabus ? .apexEmerald : .apexMystery)
+                            .padding(.horizontal, 6).padding(.vertical, 2)
+                            .background((weapon.inSyllabus ? Color.apexEmerald : Color.apexMystery).opacity(0.12))
+                            .cornerRadius(5)
+                    }
                 }
-                Spacer()
-                Text(weapon.inSyllabus ? "纲内" : "超纲")
-                    .font(.system(size: 9, weight: .bold))
-                    .foregroundColor(weapon.inSyllabus ? .apexEmerald : .apexMystery)
-                    .padding(.horizontal, 6).padding(.vertical, 2)
-                    .background((weapon.inSyllabus ? Color.apexEmerald : Color.apexMystery).opacity(0.12))
-                    .cornerRadius(5)
+                Text(weapon.displayName)
+                    .font(.subheadline).fontWeight(.bold)
+                    .foregroundColor(locked ? .secondary : .primary)
+                    .lineLimit(1).minimumScaleFactor(0.8)
+                Text(locked ? "解锁后可查看" : weapon.tagline)
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                    .lineLimit(2)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text("\(count) 道战例")
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundColor(locked ? .secondary.opacity(0.5) : weapon.tint)
             }
-            Text(weapon.displayName)
-                .font(.subheadline).fontWeight(.bold)
-                .foregroundColor(.primary)
-                .lineLimit(1).minimumScaleFactor(0.8)
-            Text(weapon.tagline)
-                .font(.caption2)
-                .foregroundColor(.secondary)
-                .lineLimit(2)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("\(count) 道战例")
-                .font(.system(size: 10, weight: .semibold))
-                .foregroundColor(weapon.tint)
+            .padding(14)
+            .frame(maxWidth: .infinity, minHeight: 130, alignment: .topLeading)
+            .background(Color.apexCardSurface.opacity(locked ? 0.6 : 1))
+            .cornerRadius(16)
+            .shadow(color: .black.opacity(locked ? 0.02 : 0.05), radius: 6, y: 3)
         }
-        .padding(14)
-        .frame(maxWidth: .infinity, minHeight: 130, alignment: .topLeading)
-        .background(Color.apexCardSurface)
-        .cornerRadius(16)
-        .shadow(color: .black.opacity(0.05), radius: 6, y: 3)
     }
 }
 

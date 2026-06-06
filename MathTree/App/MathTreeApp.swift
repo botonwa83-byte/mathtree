@@ -15,6 +15,7 @@ struct MathTreeApp: App {
 /// 启动流程：宣传页 → 登录页（可跳过）→ 主界面。
 struct RootView: View {
     @StateObject private var auth = AuthManager.shared
+    @StateObject private var appearance = AppearanceManager.shared
     @State private var passedPromo = false
 
     var body: some View {
@@ -33,6 +34,8 @@ struct RootView: View {
             }
         }
         .animation(.easeInOut(duration: 0.35), value: auth.hasPassedGate)
+        // 用户外观偏好覆盖整个窗口（含弹出的 sheet）；.system 时为 nil 不覆盖。
+        .preferredColorScheme(appearance.colorScheme)
     }
 }
 

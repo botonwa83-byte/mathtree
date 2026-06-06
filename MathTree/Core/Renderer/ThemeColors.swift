@@ -138,6 +138,59 @@ extension UIColor {
     }
 }
 
+// MARK: - 外观偏好（跟随系统 / 浅色 / 深色）
+
+/// 用户的外观选择。`.system` 表示交还给 iOS 系统设置。
+enum AppearancePreference: String, CaseIterable, Identifiable {
+    case system, light, dark
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .system: return "跟随系统"
+        case .light:  return "浅色"
+        case .dark:   return "深色"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .system: return "circle.lefthalf.filled"
+        case .light:  return "sun.max.fill"
+        case .dark:   return "moon.fill"
+        }
+    }
+
+    /// 传给 `.preferredColorScheme(_:)`；`.system` 为 nil（不覆盖系统）。
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .system: return nil
+        case .light:  return .light
+        case .dark:   return .dark
+        }
+    }
+}
+
+/// 全局外观偏好，存 UserDefaults（隐私清单已用 CA92.1 声明 UserDefaults，无需改动）。
+final class AppearanceManager: ObservableObject {
+    static let shared = AppearanceManager()
+
+    private let storageKey = "appearance_preference"
+
+    @Published var preference: AppearancePreference {
+        didSet { UserDefaults.standard.set(preference.rawValue, forKey: storageKey) }
+    }
+
+    /// 当前应施加的配色（nil = 跟随系统）。
+    var colorScheme: ColorScheme? { preference.colorScheme }
+
+    private init() {
+        let raw = UserDefaults.standard.string(forKey: storageKey) ?? ""
+        preference = AppearancePreference(rawValue: raw) ?? .system
+    }
+}
+
 struct DescendAnimationView: View {
     let title: String
     let subtitle: String
