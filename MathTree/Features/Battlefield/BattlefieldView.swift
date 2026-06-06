@@ -49,6 +49,8 @@ struct BattlefieldView: View {
     @Environment(\.horizontalSizeClass) private var sizeClass
     @StateObject private var masteryManager = ProblemMasteryManager.shared
     @StateObject private var practiceManager = PracticeManager.shared
+    @ObservedObject private var purchase = PurchaseManager.shared
+    @State private var showPaywall = false
     @StateObject private var reviewScheduler = ReviewScheduler.shared
     @State private var problems: [Problem] = SampleData.problems
     @State private var currentIndex = 0
@@ -173,6 +175,9 @@ struct BattlefieldView: View {
             .sheet(isPresented: $showErrorBook) {
                 ErrorBookView()
             }
+            .sheet(isPresented: $showPaywall) {
+                SKPaywallView()
+            }
             .onAppear { startTimer() }
             .onDisappear { stopTimer() }
         }
@@ -202,9 +207,17 @@ struct BattlefieldView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     ForEach(DifficultyFilter.allCases, id: \.self) { filter in
-                        DifficultyChip(title: filter.rawValue, isSelected: selectedDifficulty == filter) {
-                            selectedDifficulty = filter
-                            currentIndex = 0
+                        DifficultyChip(
+                            title: filter.rawValue,
+                            isSelected: selectedDifficulty == filter,
+                            locked: filter == .hard && !purchase.isUnlocked
+                        ) {
+                            if filter == .hard && !purchase.isUnlocked {
+                                showPaywall = true
+                            } else {
+                                selectedDifficulty = filter
+                                currentIndex = 0
+                            }
                         }
                     }
                 }
@@ -291,7 +304,13 @@ struct BattlefieldView: View {
     }
 
     private func problemListRow(problem: Problem, index: Int?, isMastered: Bool) -> some View {
-        Button {
+        let isHardLocked = problem.difficulty >= 0.7 && !purchase.isUnlocked
+        return Button {
+            if isHardLocked {
+                showProblemList = false
+                showPaywall = true
+                return
+            }
             if let idx = index {
                 currentIndex = idx
             } else {
@@ -331,15 +350,24 @@ struct BattlefieldView: View {
                         .lineLimit(2)
                     HStack(spacing: 8) {
                         DifficultyBar(level: problem.difficulty, compact: true)
-                        if let year = problem.gaokaoYear {
-                            Text("\(year)")
-                                .font(.caption)
+                        if isHardLocked {
+                            Label("解锁后可练", systemImage: "lock.fill")
+                                .font(.system(size: 9, weight: .semibold))
                                 .foregroundColor(.apexLava)
-                        }
-                        if problem.dualSolution != nil {
-                            Image(systemName: "bolt.fill")
-                                .font(.caption2)
-                                .foregroundColor(.apexLava)
+                                .padding(.horizontal, 5).padding(.vertical, 2)
+                                .background(Color.apexLava.opacity(0.1))
+                                .cornerRadius(4)
+                        } else {
+                            if let year = problem.gaokaoYear {
+                                Text("\(year)")
+                                    .font(.caption)
+                                    .foregroundColor(.apexLava)
+                            }
+                            if problem.dualSolution != nil {
+                                Image(systemName: "bolt.fill")
+                                    .font(.caption2)
+                                    .foregroundColor(.apexLava)
+                            }
                         }
                     }
                 }
@@ -689,7 +717,10 @@ struct BattlefieldView: View {
 
     private var problemCard: some View {
         let problem = filteredProblems[safeCurrentIndex]
-        return VStack(alignment: .leading, spacing: 14) {
+        let isHardLocked = problem.difficulty >= 0.7 && !purchase.isUnlocked
+        return ZStack {
+            hardLockedOverlay(isLocked: isHardLocked)
+            VStack(alignment: .leading, spacing: 14) {
             // Difficulty + timer + year tag row
             HStack {
                 DifficultyBar(level: problem.difficulty)
@@ -877,10 +908,53 @@ struct BattlefieldView: View {
                 .cornerRadius(12)
             }
         }
-        .padding(cardPadding)
-        .background(Color.apexCardSurface)
-        .cornerRadius(16)
-        .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
+            .padding(cardPadding)
+            .background(Color.apexCardSurface)
+            .cornerRadius(16)
+            .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
+            .blur(radius: isHardLocked ? 4 : 0)
+            .allowsHitTesting(!isHardLocked)
+        }
+    }
+
+    @ViewBuilder
+    private func hardLockedOverlay(isLocked: Bool) -> some View {
+        if isLocked {
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color.apexBackground.opacity(0.85))
+                VStack(spacing: 16) {
+                    Image(systemName: "lock.fill")
+                        .font(.system(size: 36))
+                        .foregroundColor(.apexLava)
+                    VStack(spacing: 6) {
+                        Text("困难题已锁定")
+                            .font(.headline).fontWeight(.bold)
+                            .foregroundColor(.primary)
+                        Text("解锁武器库后可练习全部困难题")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
+                    Button {
+                        showPaywall = true
+                    } label: {
+                        Text("立即解锁 ¥18")
+                            .font(.subheadline).fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 28)
+                            .padding(.vertical, 12)
+                            .background(
+                                LinearGradient(colors: [Color.apexLava, Color.apexMystery],
+                                               startPoint: .leading, endPoint: .trailing)
+                            )
+                            .cornerRadius(12)
+                    }
+                }
+                .padding(24)
+            }
+            .zIndex(1)
+        }
     }
 
     // MARK: - Unified Solution Section
@@ -1488,18 +1562,29 @@ struct TopicChip: View {
 struct DifficultyChip: View {
     let title: String
     let isSelected: Bool
+    var locked: Bool = false
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            Text(title)
-                .font(.caption)
-                .fontWeight(isSelected ? .bold : .regular)
-                .foregroundColor(isSelected ? .white : .secondary)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .background(isSelected ? Color.apexGold : Color.apexCardSurface)
-                .cornerRadius(12)
+            HStack(spacing: 4) {
+                if locked {
+                    Image(systemName: "lock.fill")
+                        .font(.system(size: 9))
+                }
+                Text(title)
+                    .font(.caption)
+                    .fontWeight(isSelected ? .bold : .regular)
+            }
+            .foregroundColor(isSelected ? .white : (locked ? .apexLava : .secondary))
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .background(isSelected ? Color.apexGold : (locked ? Color.apexLava.opacity(0.08) : Color.apexCardSurface))
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(locked ? Color.apexLava.opacity(0.3) : Color.clear, lineWidth: 1)
+            )
         }
     }
 }
