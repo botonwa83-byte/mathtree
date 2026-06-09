@@ -1,10 +1,13 @@
 import SwiftUI
 
 struct MysteryDetailView: View {
+    @Environment(\.horizontalSizeClass) private var sizeClass
     let mystery: MathMystery
     @State private var userVote: Bool?
     @State private var expandedArgIndex: Int?
     @State private var showProof = false
+
+    private var isIPad: Bool { sizeClass == .regular }
 
     var body: some View {
         ScrollView {
@@ -21,9 +24,11 @@ struct MysteryDetailView: View {
                 votingSection
                 historySection
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, isIPad ? 32 : 20)
             .padding(.top, 12)
             .padding(.bottom, 40)
+            .frame(maxWidth: isIPad ? 800 : .infinity)
+            .frame(maxWidth: .infinity)
         }
         .background(Color.mysteryBackground)
         .navigationBarTitleDisplayMode(.inline)
