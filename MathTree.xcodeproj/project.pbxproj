@@ -688,7 +688,7 @@
 				DEVELOPMENT_TEAM = Z7F8BY55DS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "数学制高点";
+				INFOPLIST_KEY_CFBundleDisplayName = "MathApex";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -701,7 +701,7 @@
 				);
 				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mathtree.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MathApex;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -720,7 +720,7 @@
 				DEVELOPMENT_TEAM = Z7F8BY55DS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "数学制高点";
+				INFOPLIST_KEY_CFBundleDisplayName = "MathApex";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -733,7 +733,7 @@
 				);
 				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mathtree.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MathApex;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -757,7 +757,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MathTree.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MathTree";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MathApex.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MathApex";
 			};
 			name = Debug;
 		};
@@ -776,7 +776,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MathTree.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MathTree";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MathApex.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MathApex";
 			};
 			name = Release;
 		};

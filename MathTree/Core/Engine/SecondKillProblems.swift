@@ -830,7 +830,10 @@ struct SecondKillCase: Identifiable {
 
 extension SampleData {
 
-    static let secondKillCases: [SecondKillCase] = [
+    // ⚠️ 拆段说明：原本是一个 136 元素的巨型数组字面量，单表达式类型检查耗时 ~11s，
+    // 在 Release(-O + 全模块优化) 下被优化器放大，会让 Xcode Archive 卡死数分钟。
+    // 拆成 4 段各自的小数组（独立快速类型检查），文件末尾用 + 拼回 secondKillCases。
+    private static let secondKillCasesA: [SecondKillCase] = [
 
         // 1 ── 泰勒展开：恒成立求参
         skCase(
@@ -1745,6 +1748,10 @@ extension SampleData {
             killKey: "矩阵 [[5,2],[2,8]]：迹 13、行列式 36，特征值 9、4 即为最大最小值。",
             mistakes: ["特征方程 λ²−(迹)λ+(行列式)=0", "行列式 5·8−2²=36"]
         ),
+
+    ]
+
+    private static let secondKillCasesB: [SecondKillCase] = [
 
         // 35 ── SOS 配方：对称二次不等式
         skCase(
@@ -2683,6 +2690,10 @@ extension SampleData {
             mistakes: ["[1,e] 上 1−lnx≥0 故 h 递增", "最大值在右端点 x=e 取 1/e", "a≥g(x) 恒成立 ⟺ a≥g(x) 最大值"],
             type: .fillInBlank
         ),
+
+    ]
+
+    private static let secondKillCasesC: [SecondKillCase] = [
 
         // 69 ── 隐零点：eˣ-lnx>2 虚设零点
         skCase(
@@ -3631,6 +3642,10 @@ extension SampleData {
             type: .fillInBlank
         ),
 
+    ]
+
+    private static let secondKillCasesD: [SecondKillCase] = [
+
         // 103 ── 二项分布：期望方差 + 线性变换
         skCase(
             id: "sk_103", weapon: .binomialMoment,
@@ -4566,6 +4581,10 @@ extension SampleData {
             mistakes: ["|a|+|b|≥|a−b|（注意是差），而非 a+b 的绝对值", "取等须验证 x∈[−1,3]，不能只写等号"]
         )
     ]
+
+    /// 4 段拼回（见上方拆段说明）。对外仍是同一个 secondKillCases，引用处无需改动。
+    static let secondKillCases: [SecondKillCase] =
+        secondKillCasesA + secondKillCasesB + secondKillCasesC + secondKillCasesD
 
     // 战例对应题目也并入题库（可在练习/复习中再遇到）
     static let secondKillProblems: [Problem] = secondKillCases.map(\.problem)
