@@ -68,10 +68,18 @@
 		A20001 /* MathTreeDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20001 /* MathTreeDataTests.swift */; };
 		A20002 /* ContentReviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20002 /* ContentReviewTests.swift */; };
 		A20003 /* ModelLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20003 /* ModelLogicTests.swift */; };
+		A30001 /* DeleteAccountFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30001 /* DeleteAccountFlowUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		J10001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = H10001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F10001;
+			remoteInfo = MathTree;
+		};
+		J30001 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = H10001 /* Project object */;
 			proxyType = 1;
@@ -144,6 +152,8 @@
 		B20003 /* ModelLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLogicTests.swift; sourceTree = "<group>"; };
 		C10001 /* MathTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C20001 /* MathTreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathTreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B30001 /* DeleteAccountFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountFlowUITests.swift; sourceTree = "<group>"; };
+		C30001 /* MathTreeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathTreeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +171,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D30001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -169,6 +186,7 @@
 			children = (
 				E10002 /* MathTree */,
 				E20001 /* MathTreeTests */,
+				E30001 /* MathTreeUITests */,
 				E10020 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -369,6 +387,7 @@
 			children = (
 				C10001 /* MathTree.app */,
 				C20001 /* MathTreeTests.xctest */,
+				C30001 /* MathTreeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -391,6 +410,14 @@
 				B20003 /* ModelLogicTests.swift */,
 			);
 			path = MathTreeTests;
+			sourceTree = "<group>";
+		};
+		E30001 /* MathTreeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B30001 /* DeleteAccountFlowUITests.swift */,
+			);
+			path = MathTreeUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,6 +457,23 @@
 			productReference = C20001 /* MathTreeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		F30001 /* MathTreeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = G30001 /* Build configuration list for PBXNativeTarget "MathTreeUITests" */;
+			buildPhases = (
+				F30002 /* Sources */,
+				D30001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				K30001 /* PBXTargetDependency */,
+			);
+			name = MathTreeUITests;
+			productName = MathTreeUITests;
+			productReference = C30001 /* MathTreeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -444,6 +488,10 @@
 						CreatedOnToolsVersion = 16.0;
 					};
 					F20001 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = F10001;
+					};
+					F30001 = {
 						CreatedOnToolsVersion = 16.0;
 						TestTargetID = F10001;
 					};
@@ -465,6 +513,7 @@
 			targets = (
 				F10001 /* MathTree */,
 				F20001 /* MathTreeTests */,
+				F30001 /* MathTreeUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -555,6 +604,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F30002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A30001 /* DeleteAccountFlowUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -562,6 +619,11 @@
 			isa = PBXTargetDependency;
 			target = F10001 /* MathTree */;
 			targetProxy = J10001 /* PBXContainerItemProxy */;
+		};
+		K30001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F10001 /* MathTree */;
+			targetProxy = J30001 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -780,6 +842,42 @@
 			};
 			name = Release;
 		};
+		G30002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mathtree.app.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MathTree;
+			};
+			name = Debug;
+		};
+		G30003 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mathtree.app.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MathTree;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -806,6 +904,15 @@
 			buildConfigurations = (
 				G20002 /* Debug */,
 				G20003 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		G30001 /* Build configuration list for PBXNativeTarget "MathTreeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G30002 /* Debug */,
+				G30003 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
