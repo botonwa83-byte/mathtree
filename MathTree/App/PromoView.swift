@@ -128,7 +128,7 @@ struct PromoView: View {
 
                     // 版权
                     VStack(spacing: 4) {
-                        Text("APEX · 数学制高点  v1.1.1")
+                        Text("APEX · 数学制高点  v1.1.2")
                             .font(.system(size: 12)).foregroundColor(.secondary.opacity(0.8))
                         Text("© 2024-2026 Top King. All rights reserved.")
                             .font(.system(size: 11)).foregroundColor(.secondary.opacity(0.6))

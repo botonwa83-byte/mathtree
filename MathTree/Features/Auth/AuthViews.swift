@@ -217,7 +217,7 @@ struct LegalView: View {
         ("二、信息存储", "您的手机号保存在系统钥匙串（Keychain），学习进度、错题、复习计划等数据保存在应用本地沙盒内，均仅存储于您的设备本地，不会通过网络传输或存储到云端。卸载应用后，所有本地数据将被清除。"),
         ("三、信息共享", "本应用不会与任何第三方共享您的个人信息。我们不使用任何第三方分析、广告或追踪服务。"),
         ("四、数据安全", "我们采用设备本地存储的方式保护您的数据安全。由于数据不离开您的设备，因此不存在网络传输中的安全风险。"),
-        ("五、您的权利", "您可以随时在“我的”页面退出登录或重置学习进度，以清除本地存储的个人数据。"),
+        ("五、您的权利", "您可以随时在“我的”页面退出登录，或使用“删除账户”永久删除账户及关联的手机号（不可恢复）。学习进度等匿名数据可通过卸载应用清除。"),
         ("六、政策更新", "本隐私政策可能会不时更新。更新后的政策将在应用内公布，建议您定期查阅。")
     ]
 
@@ -238,6 +238,8 @@ struct ProfileView: View {
     @State private var showLogin = false
     @State private var legal: LegalKind?
     @State private var showLogoutConfirm = false
+    @State private var showDeleteConfirm = false
+    @State private var showDeleteDone = false
 
     var body: some View {
         List {
@@ -301,6 +303,16 @@ struct ProfileView: View {
                     Button(role: .destructive) { showLogoutConfirm = true } label: {
                         Text("退出登录").frame(maxWidth: .infinity)
                     }
+                } footer: {
+                    Text("退出登录仅清除本机保存的手机号，学习进度保留。")
+                }
+
+                Section {
+                    Button(role: .destructive) { showDeleteConfirm = true } label: {
+                        Text("删除账户").frame(maxWidth: .infinity)
+                    }
+                } footer: {
+                    Text("永久删除账户及关联的手机号，此操作不可恢复。")
                 }
             }
         }
@@ -313,6 +325,20 @@ struct ProfileView: View {
             Button("取消", role: .cancel) {}
         } message: {
             Text("退出后将清除本地保存的手机号；学习进度仍保留在本机。")
+        }
+        .confirmationDialog("确定永久删除账户？", isPresented: $showDeleteConfirm, titleVisibility: .visible) {
+            Button("永久删除账户", role: .destructive) {
+                auth.deleteAccount()
+                showDeleteDone = true
+            }
+            Button("取消", role: .cancel) {}
+        } message: {
+            Text("将永久删除您的账户及保存在本机钥匙串中的手机号，此操作不可恢复。学习进度等匿名数据仍保留在本机，可通过卸载应用清除。")
+        }
+        .alert("账户已删除", isPresented: $showDeleteDone) {
+            Button("好", role: .cancel) {}
+        } message: {
+            Text("您的账户及手机号已从本机永久删除。您可以继续以游客身份使用，或随时重新注册。")
         }
     }
 }

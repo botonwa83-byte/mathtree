@@ -158,6 +158,17 @@ final class AuthManager: ObservableObject {
         currentUser = nil
     }
 
+    /// 删除账户（App Store 审核指南 5.1.1(v) 要求）。
+    /// 账户为纯本地身份，手机号是账户关联的唯一个人数据；
+    /// 从钥匙串中移除即为永久删除，不可恢复。
+    func deleteAccount() {
+        KeychainStore.remove(authKey)
+        currentUser = nil
+        // 删除后以游客身份留在应用内，不强制回到登录门槛
+        didSkipLogin = true
+        UserDefaults.standard.set(true, forKey: skipKey)
+    }
+
     private func persist(_ user: AuthUser) {
         if let data = try? JSONEncoder().encode(user),
            let json = String(data: data, encoding: .utf8) {
