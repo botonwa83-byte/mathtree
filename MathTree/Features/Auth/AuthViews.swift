@@ -235,7 +235,9 @@ struct LegalView: View {
 struct ProfileView: View {
     @ObservedObject private var auth = AuthManager.shared
     @ObservedObject private var appearance = AppearanceManager.shared
+    @ObservedObject private var purchase = PurchaseManager.shared
     @State private var showLogin = false
+    @State private var showPaywall = false
     @State private var legal: LegalKind?
     @State private var showLogoutConfirm = false
     @State private var showDeleteConfirm = false
@@ -272,6 +274,37 @@ struct ProfileView: View {
                         }
                     }
                 }
+            }
+
+            Section {
+                if purchase.isUnlocked {
+                    HStack {
+                        Label("完整版", systemImage: "crown.fill").foregroundColor(.apexGold)
+                        Spacer()
+                        Text("已解锁").font(.subheadline).foregroundColor(.apexEmerald)
+                        Image(systemName: "checkmark.seal.fill").foregroundColor(.apexEmerald)
+                    }
+                } else {
+                    Button { showPaywall = true } label: {
+                        HStack {
+                            Label("解锁完整版", systemImage: "crown.fill").foregroundColor(.primary)
+                            Spacer()
+                            Text(purchase.product?.displayPrice ?? "¥18")
+                                .font(.subheadline).fontWeight(.semibold).foregroundColor(.apexLava)
+                            Image(systemName: "chevron.right").font(.caption).foregroundColor(.secondary)
+                        }
+                    }
+                    Button { Task { await purchase.restore() } } label: {
+                        Label("恢复购买", systemImage: "arrow.clockwise").foregroundColor(.primary)
+                    }
+                    .disabled(purchase.isPurchasing)
+                }
+            } header: {
+                Text("完整版")
+            } footer: {
+                Text(purchase.isUnlocked
+                     ? "感谢支持，全部降维武器与压轴战例已为你开放。"
+                     : "一次买断、永久使用，解锁全部降维武器与压轴战例。换机后可用「恢复购买」找回。")
             }
 
             Section {
@@ -319,6 +352,7 @@ struct ProfileView: View {
         .navigationTitle("我的")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showLogin) { LoginView(onDone: { showLogin = false }) }
+        .sheet(isPresented: $showPaywall) { SKPaywallView() }
         .sheet(item: $legal) { LegalView(kind: $0) }
         .confirmationDialog("确定退出登录？", isPresented: $showLogoutConfirm, titleVisibility: .visible) {
             Button("退出登录", role: .destructive) { auth.logout() }
