@@ -83,6 +83,10 @@ struct SKPaywallView: View {
             }
         }
         .background(Color.apexBackground.ignoresSafeArea())
+        .task {
+            // 付费墙每次出现都重试拉取产品（启动时那一次可能因网络/沙盒未就绪而失败）
+            if purchase.product == nil { await purchase.loadProduct() }
+        }
         .onChange(of: purchase.isUnlocked) { unlocked in
             if unlocked { dismiss() }
         }

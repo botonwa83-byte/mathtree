@@ -4,6 +4,8 @@ struct CommandCenterView: View {
     @EnvironmentObject var profile: StudentProfile
     @Binding var selectedTab: Int
     @StateObject private var streakManager = StreakManager.shared
+    @ObservedObject private var purchase = PurchaseManager.shared
+    @State private var showPaywall = false
     @State private var showDailyStrike = false
     @State private var showReview = false
     @State private var showDatePicker = false
@@ -16,6 +18,11 @@ struct CommandCenterView: View {
                 VStack(spacing: Spacing.xl) {
                     // 品牌入口
                     secondKillHero
+
+                    // 完整版解锁入口（未解锁时显示）
+                    if !purchase.isUnlocked {
+                        unlockCard
+                    }
 
                     // 今日 — 行动区
                     sectionHeader("今日")
@@ -43,6 +50,9 @@ struct CommandCenterView: View {
             }
             .background(Color.apexBackground)
             .navigationTitle("MathTree")
+            .sheet(isPresented: $showPaywall) {
+                SKPaywallView()
+            }
             .sheet(isPresented: $showDailyStrike) {
                 DailyStrikeView()
             }
@@ -120,6 +130,48 @@ struct CommandCenterView: View {
             )
             .cornerRadius(Radius.hero)
             .shadow(color: Color.apexLava.opacity(0.3), radius: 14, y: 8)
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: - 完整版解锁入口
+
+    private var unlockCard: some View {
+        Button {
+            showPaywall = true
+        } label: {
+            HStack(spacing: 14) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.apexGold.opacity(0.15))
+                        .frame(width: 46, height: 46)
+                    Image(systemName: "crown.fill")
+                        .font(.title3)
+                        .foregroundColor(.apexGold)
+                }
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("解锁完整版")
+                        .font(.headline).foregroundColor(.primary)
+                    Text("一次买断 · 全部 \(SampleData.secondKillCases.count) 道压轴战例与降维武器")
+                        .font(.caption).foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer()
+                HStack(spacing: 4) {
+                    Text(purchase.product?.displayPrice ?? "¥18")
+                        .font(.subheadline).fontWeight(.bold).foregroundColor(.apexLava)
+                    Image(systemName: "chevron.right")
+                        .font(.caption).foregroundColor(.secondary)
+                }
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity)
+            .background(Color.apexCardSurface)
+            .cornerRadius(Radius.card)
+            .overlay(
+                RoundedRectangle(cornerRadius: Radius.card)
+                    .stroke(Color.apexGold.opacity(0.35), lineWidth: 1)
+            )
         }
         .buttonStyle(.plain)
     }
