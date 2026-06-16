@@ -3,7 +3,7 @@ import SwiftUI
 
 // MARK: - 完整版解锁 IAP（StoreKit 2 · 一次性买断，非订阅）
 //
-// 产品 ID：com.mathtree.app.arsenal_unlock
+// 产品 ID：com.mathtree.app.fullunlock
 // ASC 展示名：完整版永久解锁　|　定价：¥18（苹果价格档 Tier 2）
 //
 // ── 这一个内购解锁哪些内容（全 App 仅此一处付费墙 SKPaywallView）──
@@ -35,7 +35,8 @@ final class PurchaseManager: ObservableObject {
     static let shared = PurchaseManager()
 
     /// App Store Connect 里配置的产品 ID，必须与 ASC 保持一致。
-    let productID = "com.mathtree.app.arsenal_unlock"
+    /// 注：旧 ID com.mathtree.app.arsenal_unlock 已在 ASC 删除、不可复用，换用新 ID。
+    let productID = "com.mathtree.app.fullunlock"
 
     /// 免费开放的武器数量（武器库列表里的前 N 把）。
     static let freeWeaponCount = 10
