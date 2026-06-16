@@ -1,12 +1,34 @@
 import StoreKit
 import SwiftUI
 
-// MARK: - 武器库解锁 IAP（StoreKit 2 · 一次性买断）
+// MARK: - 完整版解锁 IAP（StoreKit 2 · 一次性买断，非订阅）
 //
 // 产品 ID：com.mathtree.app.arsenal_unlock
-// 定价在 App Store Connect 配置：¥18（对应苹果价格档 Price Tier 2）。
-// 前 10 把武器免费，购买后全解锁；本地用 UserDefaults 缓存，
-// 启动时通过 Transaction.currentEntitlements 重新核验（防清数据破解）。
+// ASC 展示名：完整版永久解锁　|　定价：¥18（苹果价格档 Tier 2）
+//
+// ── 这一个内购解锁哪些内容（全 App 仅此一处付费墙 SKPaywallView）──
+//
+//   ① 秒杀殿堂 · 武器库（SecondKillView）
+//      · 免费：按战例出场顺序的前 freeWeaponCount(=10) 把武器及其全部战例
+//      · 加锁：第 11 把起的其余武器（约 53/63）及其 KillDuelView 双解对决
+//      · 表现：锁卡显示 lock 图标 + "解锁后可查看"，点击 → 付费墙
+//        判定见 SecondKillView.isLocked(_:)
+//
+//   ② 练习 · 困难题（BattlefieldView）
+//      · 免费：简单 / 中等难度题（difficulty < 0.7）
+//      · 加锁：困难难度（difficulty >= 0.7）的全部题目，以及「困难」筛选 chip
+//      · 表现：选「困难」或点开困难题 → 付费墙
+//        判定见 BattlefieldView 的 isHardLocked / filter == .hard
+//
+//   其余内容（公式宇宙、错题本、数学发现、英雄录、每日打卡等）一律免费。
+//
+// ── 解锁后的行为 ──
+//   购买成功置 isUnlocked = true 并写入 UserDefaults 缓存（即时刷新 UI）；
+//   每次启动再通过 Transaction.currentEntitlements 重新核验权益
+//   （防"清数据 / 改 UserDefaults"绕过破解），并支持 AppStore.sync() 恢复购买。
+//
+// ⚠️ 改动免费/加锁边界时，需同步更新：本说明、freeWeaponCount、
+//    SecondKillView.isLocked、BattlefieldView 的 0.7 难度阈值与 .hard 判定。
 
 final class PurchaseManager: ObservableObject {
 
